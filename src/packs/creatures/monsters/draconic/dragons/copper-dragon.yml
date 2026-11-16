@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -66,7 +66,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -335,7 +335,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -378,7 +378,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -2225,13 +2225,13 @@ items:
         system:
           automations:
             - _id: QL5Jv2BwFmqzum5O
-              activeQualifier: "@status.hidden"
+              activeQualifier: "@condition.hidden"
               key: system.boosts.damage
               qualifier: "@interaction.attack"
               type: childChange
               value: "1"
             - _id: o8IjZIB7i2W94fEC
-              activeQualifier: "@status.hidden"
+              activeQualifier: "@condition.hidden"
               key: system.boosts.damage
               qualifier: "@dmg"
               target: armament
@@ -2247,9 +2247,9 @@ items:
                 - competenceProficient
                 - resultsAlt
                 - resultsAltCrit
-              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact))
+              localQualifier: and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact))
               overrideData: true
-              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
               triggers:
                 - executeAbility
               type: useDocuments
@@ -2262,9 +2262,11 @@ items:
                 - competenceNone
                 - resultsAlt
                 - resultsAltCrit
-              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact, @class.thief))
+              localQualifier: >-
+                and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact,
+                @class.thief))
               overrideData: true
-              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
               triggers:
                 - executeAbility
               type: useDocuments

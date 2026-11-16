@@ -24,7 +24,7 @@ effects:
           angle: "@angle.dragon"
           attachToToken: false
           expandWithToken: false
-          radius: "@source.range + 5 * @h"
+          radius: "@exec.range + 5 * @h"
           regionType: cone
           restriction:
             enabled: true
@@ -475,7 +475,7 @@ effects:
             - revive
           type: common
         - _id: iCn9pFDIGFJWxm6H
-          activeQualifier: and(not(@status.burned), not(@status.frozen))
+          activeQualifier: and(not(@condition.burned), not(@condition.frozen))
           consumeStatDice: false
           triggers:
             - turnStart
@@ -558,7 +558,7 @@ effects:
             - resultsAlt
             - resultsAltCrit
           key: system.bv.bonus
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: "1"
@@ -570,7 +570,7 @@ effects:
             - resultsAlt
             - resultsAltCrit
           key: system.bv.bonus
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: "2"
@@ -582,7 +582,7 @@ effects:
             - resultsAlt
             - resultsAltCrit
           key: system.bv.bonus
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: "3"
@@ -633,7 +633,7 @@ effects:
             - resultsAltCrit
           key: system.damage.*
           priority: 10
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: 1d4
@@ -646,7 +646,7 @@ effects:
             - resultsAltCrit
           key: system.damage.*
           priority: 10
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: 1d6
@@ -659,7 +659,7 @@ effects:
             - resultsAltCrit
           key: system.damage.*
           priority: 10
-          qualifier: "@prop.handy"
+          qualifier: "@property.handy"
           target: armament
           type: childChange
           value: 1d8

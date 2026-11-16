@@ -10,14 +10,14 @@ system:
     - _id: 91S92WlJDYRf1HsJ
       relation: apply
       status: slowed
-      triggerQualifier: not(@status.slowed)
+      triggerQualifier: not(@condition.slowed)
       triggers:
         - turnStart
       type: status
     - _id: T2m5C4ht03LnKk2e
       relation: apply
       status: immobilized
-      triggerQualifier: and(@status.slowed, not(@status.immobilized))
+      triggerQualifier: and(@condition.slowed, not(@condition.immobilized))
       triggers:
         - turnStart
       type: status

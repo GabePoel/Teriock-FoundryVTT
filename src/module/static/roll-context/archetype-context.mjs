@@ -3,8 +3,8 @@ import usableContext from "./usable-context.mjs";
 
 const archetypeContext = {
   ...usableContext,
-  archetype: "TYPES.Item.archetype",
   "av.max": "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
+  "type.archetype": "TYPES.Item.archetype",
 };
 
 export default archetypeContext;

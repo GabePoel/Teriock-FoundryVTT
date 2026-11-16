@@ -4,9 +4,9 @@ import usableContext from "./usable-context.mjs";
 
 const consequenceContext = {
   ...usableContext,
-  consequence: "TYPES.ActiveEffect.consequence",
   transformation: "TERIOCK.SCHEMA.Transformation.enabled.label",
   "transformation.primary": "TERIOCK.ROLL_CONTEXT.Transformation.primary",
+  "type.consequence": "TYPES.ActiveEffect.consequence",
 };
 
 export default consequenceContext;

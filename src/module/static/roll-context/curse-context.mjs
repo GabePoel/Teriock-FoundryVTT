@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import simpleContext from "./simple-context.mjs";
 
-const curseContext = { curse: "TYPES.Item.curse" };
+const curseContext = { "type.curse": "TYPES.Item.curse" };
 
 export default curseContext;
 

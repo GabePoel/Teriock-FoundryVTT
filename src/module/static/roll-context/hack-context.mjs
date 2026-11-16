@@ -2,7 +2,7 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
-const hackContext = { ...usableContext, hack: "TYPES.ActiveEffect.hack" };
+const hackContext = { ...usableContext, "type.hack": "TYPES.ActiveEffect.hack" };
 
 export default hackContext;
 

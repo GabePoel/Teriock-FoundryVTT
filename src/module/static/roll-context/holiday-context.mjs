@@ -4,9 +4,9 @@ import usableContext from "./usable-context.mjs";
 
 const holidayContext = {
   ...usableContext,
-  holiday: "TYPES.ActiveEffect.holiday",
   transformation: "TERIOCK.SCHEMA.Transformation.enabled.label",
   "transformation.primary": "TERIOCK.ROLL_CONTEXT.Transformation.primary",
+  "type.holiday": "TYPES.ActiveEffect.holiday",
 };
 
 export default holidayContext;

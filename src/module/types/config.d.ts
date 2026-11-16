@@ -155,14 +155,16 @@ declare global {
     };
 
     export type SizeEntry = {
-      /** ID for this size category */
-      category: string;
+      /** Label for this size category */
+      label: string;
       /** Number of tiles wide this size category is on the battlefield */
       length: number;
       /** Maximum size corresponding to this category */
       max: number;
       /** Number of feet this size category can reach for mêlée attacks */
       reach: number;
+      /** Slug for this size category */
+      slug: Slug;
     };
 
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };

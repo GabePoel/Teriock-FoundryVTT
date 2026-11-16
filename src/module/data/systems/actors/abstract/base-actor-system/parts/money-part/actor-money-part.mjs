@@ -129,11 +129,11 @@ export default function ActorMoneyPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
-      for (const k of Object.keys(TERIOCK.CONFIG.currency)) {
-        rollData[`money.${k}`] = this.money[k];
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.currency)) {
+        rollData[`money.currency.${v.code}`] = this.money[k];
       }
       rollData["money.debt"] = this.money.debt;
-      rollData["money.physical"] = this.money.physical;
+      rollData["money.currency"] = this.money.physical;
       rollData.money = this.money.total;
       return rollData;
     }

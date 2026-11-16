@@ -427,7 +427,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.assign(
     rc.execution,
     rc.actor,
-    namespaced({ ...effectLabels, ...itemLabels }, "source", "source"),
+    namespaced({ ...effectLabels, ...itemLabels }, "exec", "exec"),
     namespaced(rc.ability, "ability", "ability"),
     namespaced(rc.armament, "armament", "armament"),
     namespaced(rc.armament, "ammunition", "ammunition"),

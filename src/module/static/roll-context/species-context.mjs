@@ -1,18 +1,14 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
+import stattedContext from "./statted-context.mjs";
 import usableContext from "./usable-context.mjs";
 
 const speciesContext = {
   ...usableContext,
-  species: "TYPES.Item.species",
+  "type.species": "TYPES.Item.species",
 
   br: "TERIOCK.SYSTEMS.Species.FIELDS.br.label",
 
-  hp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.hp.label",
-  "hp.disabled": "TERIOCK.ROLL_CONTEXT.StatDice.hpDisabled",
-  "hp.value": "TERIOCK.ROLL_CONTEXT.StatDice.hpTotal",
-  mp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.mp.label",
-  "mp.disabled": "TERIOCK.ROLL_CONTEXT.StatDice.mpDisabled",
-  "mp.value": "TERIOCK.ROLL_CONTEXT.StatDice.mpTotal",
+  ...stattedContext,
 
   lifespan: "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.max.label",
   "lifespan.adulthood": "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.adulthood.label",
@@ -23,7 +19,6 @@ const speciesContext = {
   "size.max": "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label",
   "size.min": "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label",
   transformation: "TERIOCK.ROLL_CONTEXT.Species.transformation",
-  "transformation.level": "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
   "transformation.primary": "TERIOCK.ROLL_CONTEXT.Species.transformationPrimary",
 };
 

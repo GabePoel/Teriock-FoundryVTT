@@ -2,7 +2,7 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
-const imbuementContext = { ...usableContext, imbuement: "TYPES.ActiveEffect.imbuement" };
+const imbuementContext = { ...usableContext, "type.imbuement": "TYPES.ActiveEffect.imbuement" };
 
 export default imbuementContext;
 

@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -271,7 +271,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -314,7 +314,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -595,7 +595,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -1728,7 +1728,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "1"
@@ -1740,7 +1740,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "2"
@@ -1752,7 +1752,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "3"

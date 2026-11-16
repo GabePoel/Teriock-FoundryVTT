@@ -147,6 +147,6 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {object}
    */
   getRollData() {
-    return Object.assign(super.getRollData(), prefixObject(this._getSourceRollData(), "source"));
+    return Object.assign(super.getRollData(), prefixObject(this._getSourceRollData(), "exec"));
   }
 }

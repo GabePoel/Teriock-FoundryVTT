@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -271,7 +271,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -314,7 +314,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -400,7 +400,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -1732,7 +1732,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "1"
@@ -1744,7 +1744,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "2"
@@ -1756,7 +1756,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "3"
@@ -2448,7 +2448,7 @@ items:
             - _id: JSQ4VFQaY3W9x3gL
               changeType: upgrade
               key: system.av.bonus
-              qualifier: and(@equipment, @class.armor)
+              qualifier: and(@type.equipment, @classification.armor)
               target: armament
               type: childChange
               value: "1"
@@ -2791,7 +2791,7 @@ items:
         system:
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: flags.rollData.braceDieSize
@@ -2982,17 +2982,17 @@ items:
         system:
           affinities:
             - _id: D1qR6LVgmLWXDmwK
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Mediator Tradecrafts (Braced, Fortified, Guard Duty)
               type: resistance
             - _id: HdxWlxaznzSUik7G
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Frightened (Braced, Fortified, Guard Duty)
               type: resistance
             - _id: ZVrfQy0JAj806yDg
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Being Surprised (Braced, Fortified, Guard Duty)
               type: resistance

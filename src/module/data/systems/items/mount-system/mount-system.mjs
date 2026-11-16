@@ -125,7 +125,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), { [`type.${this.mountType}`]: 1, mounted: Number(this.mounted) });
+    return Object.assign(super.getLocalRollData(), { [`mount.${this.mountType}`]: 1, mounted: Number(this.mounted) });
   }
 
   /**

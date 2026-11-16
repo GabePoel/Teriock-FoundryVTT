@@ -332,7 +332,7 @@ items:
             - _id: sgVY1ePMa9tYFypk
               changeType: upgrade
               key: system.av.bonus
-              qualifier: and(@body, @av)
+              qualifier: and(@type.body, @av)
               target: armament
               type: childChange
               value: "1"
@@ -375,7 +375,7 @@ items:
           automations:
             - _id: zdyROdgMEmXDLZXr
               key: system.costs.tweaks.adept
-              qualifier: "@el.necromancy"
+              qualifier: "@element.necromancy"
               type: childChange
               value: "1"
           competence:
@@ -1553,7 +1553,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1568,7 +1568,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1583,7 +1583,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -1810,7 +1810,7 @@ items:
           automations:
             - _id: PKZXkwmO94niPsUb
               interactInExecution: true
-              localQualifier: and(@ability, @time.a1)
+              localQualifier: and(@type.ability, @time.a1)
               type: useDocuments
           competence:
             raw: 1

@@ -56,7 +56,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -179,7 +179,7 @@ items:
             - _id: sgVY1ePMa9tYFypk
               changeType: upgrade
               key: system.av.bonus
-              qualifier: and(@body, @av)
+              qualifier: and(@type.body, @av)
               target: armament
               type: childChange
               value: "1"

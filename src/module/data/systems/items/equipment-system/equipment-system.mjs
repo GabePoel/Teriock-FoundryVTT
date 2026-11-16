@@ -181,6 +181,6 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), { [`type.${this.equipmentType}`]: 1 });
+    return Object.assign(super.getLocalRollData(), { [`equipment.${this.equipmentType}`]: 1 });
   }
 }

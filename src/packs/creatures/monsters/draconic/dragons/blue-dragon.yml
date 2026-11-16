@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -69,7 +69,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -346,7 +346,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -389,7 +389,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -2338,7 +2338,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -2353,7 +2353,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -2368,7 +2368,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -2912,7 +2912,7 @@ items:
             - _id: R7rIJDoFAEvz00wl
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+              localQualifier: and(@type.ability, @spell, @time.a1, not(@delivery.item))
               type: useDocuments
           competence:
             raw: 1
@@ -3416,14 +3416,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.storm)
+              qualifier: and(@type.ability, @spell, @element.storm)
               stats:
                 - mp
               type: consumption
             - _id: yPQvz9jWUji5quFr
               display:
                 label: Cast Storm Spell
-              localQualifier: and(@ability, @spell, @el.storm)
+              localQualifier: and(@type.ability, @spell, @element.storm)
               type: useDocuments
           competence:
             raw: 1
@@ -3505,7 +3505,7 @@ items:
             - _id: EsjRyEkKeq9Pli2C
               display:
                 label: Cast Storm Spell
-              localQualifier: and(@ability, @spell, @el.storm)
+              localQualifier: and(@type.ability, @spell, @element.storm)
               type: useDocuments
           competence:
             raw: 1
@@ -3694,7 +3694,7 @@ items:
                   "attackPenalty": "0"
                 }
               interactInExecution: true
-              localQualifier: and(@spell, @delivery.missile, @pro)
+              localQualifier: and(@spell, @delivery.missile, @proficient)
               overrideData: true
               type: useDocuments
           competence:

@@ -113,7 +113,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -362,7 +362,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -405,7 +405,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -690,7 +690,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -2309,7 +2309,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -2324,7 +2324,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -2339,7 +2339,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -3046,7 +3046,7 @@ items:
             @Identifier[keyword:warded]{warded} by [[lookup name]].</p>
           expirations:
             - _id: wlQFNbMQfPC7oxJ9
-              triggerQualifier: and(@source.interaction.attack, @this.armament)
+              triggerQualifier: and(@exec.interaction.attack, @this.armament)
               triggers:
                 - executeAbility
               type: trigger
@@ -3258,7 +3258,7 @@ items:
                         "invoked": 1
                       }
                     }
-                  localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
+                  localQualifier: and(@type.ability, @spell, not(@es), @delivery.ray)
                   multi: false
                   overrideData: true
                   random: false
@@ -3589,14 +3589,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.life)
+              qualifier: and(@type.ability, @spell, @element.life)
               stats:
                 - mp
               type: consumption
             - _id: beccxuReL7aZdvkN
               display:
                 label: Cast Life Spell
-              localQualifier: and(@ability, @spell, @el.life)
+              localQualifier: and(@type.ability, @spell, @element.life)
               type: useDocuments
           competence:
             raw: 1
@@ -3620,7 +3620,7 @@ items:
             - _id: HeyBF3KxuHVI6712
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1)
+              localQualifier: and(@type.ability, @spell, @time.a1)
               type: useDocuments
           competence:
             raw: 1
@@ -3672,7 +3672,7 @@ items:
             - _id: Cm1wA5DGUaEfbFJ6
               display:
                 label: Cast Life Spell
-              localQualifier: and(@ability, @spell, @el.life)
+              localQualifier: and(@type.ability, @spell, @element.life)
               type: useDocuments
           competence:
             raw: 1
@@ -3853,7 +3853,7 @@ items:
                   "attackPenalty": "0"
                 }
               interactInExecution: true
-              localQualifier: and(@spell, @delivery.missile, @pro)
+              localQualifier: and(@spell, @delivery.missile, @proficient)
               overrideData: true
               type: useDocuments
           competence:

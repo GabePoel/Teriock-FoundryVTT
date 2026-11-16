@@ -392,14 +392,14 @@ export default function ArmamentSystemMixin(Base) {
         "range.melee": Number(this.range.melee),
         "range.ranged": Number(this.range.ranged),
         "range.short": this.range.short.rollValue,
-        spellTurning: Number(this.spellTurning),
+        "spell-turning": Number(this.spellTurning),
         vitals: Number(this.vitals),
       });
       if (this.style) { data[`style.${this.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
-      for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
+      for (const p of this.props || new Set()) { data[`property.${p}`] = 1; }
       for (const command of this.commands) { data[`command.${TERIOCK.CONFIG.command[command].slug}`] = 1; }
-      for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
+      for (const equipmentClass of this.equipmentClasses) { data[`classification.${equipmentClass}`] = 1; }
       return data;
     }
 

@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import contractContext from "./contract-context.mjs";
 
-const pactContext = { pact: "TYPES.Item.pact" };
+const pactContext = { "type.pact": "TYPES.Item.pact" };
 
 export default pactContext;
 

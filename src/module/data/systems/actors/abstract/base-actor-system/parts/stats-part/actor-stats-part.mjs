@@ -194,9 +194,18 @@ export default function ActorStatsPart(Base) {
           pres: this.presence.max,
           "pres.unused": this.attributes.unp.score,
           "pres.used": this.presence.value,
-          usp: this.presence.value,
         }),
       );
+      for (const stat of ["hp", "mp"]) {
+        const dice = this[stat].dice?.contents ?? [];
+        const faces = dice.filter(d => !d.spent).map(d => d.faces);
+        Object.assign(rollData, {
+          [`${stat}.dice.largest`]: faces.length ? Math.max(...faces) : 0,
+          [`${stat}.dice.max`]: dice.length,
+          [`${stat}.dice.smallest`]: faces.length ? Math.min(...faces) : 0,
+          [`${stat}.dice`]: faces.length,
+        });
+      }
       return rollData;
     }
 

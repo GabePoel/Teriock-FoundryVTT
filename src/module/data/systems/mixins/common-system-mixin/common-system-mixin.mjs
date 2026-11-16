@@ -214,12 +214,20 @@ export default function CommonSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      const rollData = { [`identifier.${this.slug}`]: 1, [`type.${this.parent.type}`]: 1, [this.parent.type]: 1 };
+      const [type, slug] = this.parent.identifier.split(":");
+      const rollData = { [`identifier.${type}.${slug}`]: 1, [`slug.${slug}`]: 1, [`type.${type}`]: 1 };
       if (this.metadata.tags.armament) { rollData.armament = 1; }
       if (!foundry.utils.isEmpty(this.parent.flags.rollData)) {
         Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
       }
-      if (this.parent.parent?.type) { rollData[`parent.${this.parent.parent.type}`] = 1; }
+      if (this.parent.parent?.identifier) {
+        const [parentType, parentSlug] = this.parent.parent.identifier.split(":");
+        Object.assign(rollData, {
+          [`parent.identifier.${parentType}.${parentSlug}`]: 1,
+          [`parent.slug.${parentSlug}`]: 1,
+          [`parent.type.${parentType}`]: 1,
+        });
+      }
       const actor = this.actor;
       if (actor) { Object.assign(rollData, actor.system.getScalingRollData()); }
       return Object.assign(super.getLocalRollData(), rollData);

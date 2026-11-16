@@ -52,10 +52,10 @@ export default function ActorScalingPart(Base) {
       const data = {};
       const ranks = this.parent.previewedTypes.rank;
       for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
-        data[`rank.${c}`] = ranks.filter(r => r.system.class === c).length;
+        data[`ranks.class.${c}`] = ranks.filter(r => r.system.class === c).length;
       }
       for (const a of Object.keys(TERIOCK.CONFIG.class.archetypes)) {
-        data[`rank.${a}`] = ranks.filter(r => r.system.archetype === a).length;
+        data[`ranks.archetype.${a}`] = ranks.filter(r => r.system.archetype === a).length;
       }
       return data;
     }

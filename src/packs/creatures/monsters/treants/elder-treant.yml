@@ -112,7 +112,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -643,7 +643,7 @@ items:
             - _id: JSQ4VFQaY3W9x3gL
               changeType: upgrade
               key: system.av.bonus
-              qualifier: and(@equipment, @class.armor)
+              qualifier: and(@type.equipment, @classification.armor)
               target: armament
               type: childChange
               value: "1"
@@ -735,7 +735,7 @@ items:
             @Identifier[keyword:warded]{warded} by [[lookup name]].</p>
           expirations:
             - _id: wlQFNbMQfPC7oxJ9
-              triggerQualifier: and(@source.interaction.attack, @this.armament)
+              triggerQualifier: and(@exec.interaction.attack, @this.armament)
               triggers:
                 - executeAbility
               type: trigger

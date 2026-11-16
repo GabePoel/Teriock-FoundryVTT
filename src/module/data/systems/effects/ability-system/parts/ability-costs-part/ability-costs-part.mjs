@@ -121,14 +121,14 @@ export default function AbilityCostsPart(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
-        ...Object.fromEntries(Object.entries(this.costs.tweaks).map(([k, v]) => [`tweaks.${k}`, v])),
+        ...Object.fromEntries(Object.entries(this.costs.tweaks).map(([k, v]) => [`tweak.${k}`, v])),
         ...Object.fromEntries(
-          Object.entries(this.costs.components).map(([k, v]) => [`components.${k}`, Number(Boolean(v.type))]),
+          Object.entries(this.costs.components).map(([k, v]) => [`component.${k}`, Number(Boolean(v.type))]),
         ),
         ...Object.fromEntries(
           Object.entries(this.costs.primary).map((
             [k, v],
-          ) => [`costs.${k}`, v.type === "formula" ? (v.formula || 0) : v.type === "description" ? "x" : 0]),
+          ) => [`cost.${k}`, v.type === "formula" ? (v.formula || 0) : v.type === "description" ? "x" : 0]),
         ),
       });
     }

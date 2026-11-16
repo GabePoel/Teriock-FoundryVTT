@@ -95,6 +95,7 @@ export default function ActorCapacitiesPart(Base) {
       const rollData = super.getRollData();
       const weightCarried = this.weight.carried || 0;
       Object.assign(rollData, {
+        carry: weightCarried,
         "carry.factor": this.carryingCapacity.factor,
         "carry.heavy": this.carryingCapacity.heavy,
         "carry.heavy.hit": Number(weightCarried >= this.carryingCapacity.heavy),
@@ -103,6 +104,7 @@ export default function ActorCapacitiesPart(Base) {
         "carry.max": this.carryingCapacity.max,
         "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
         size: this.size.value,
+        "size.reach": this.size.reach,
         weight: this.weight.self.rollValue,
       });
       return rollData;

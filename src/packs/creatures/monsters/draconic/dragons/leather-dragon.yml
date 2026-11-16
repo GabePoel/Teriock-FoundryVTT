@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -271,7 +271,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -314,7 +314,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -372,7 +372,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -2393,7 +2393,7 @@ items:
             - _id: BQohDqBprjA3UVR3
               changeType: upgrade
               key: system.spellTurning
-              qualifier: "@prop.weapon"
+              qualifier: "@property.weapon"
               target: armament
               type: childChange
               value: "true"
@@ -2676,13 +2676,13 @@ items:
         system:
           automations:
             - _id: 1728b3a84ea27844
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               common:
                 - bag
                 - revive
               type: common
             - _id: 2aMxINqwqega0QYr
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               consumeStatDice: false
               type: heal
           competence:
@@ -2723,7 +2723,7 @@ items:
           _sup: 8RRx8dARLkx6GKLI
           affinities:
             - _id: gjIgfQGCKmQqN50n
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               category: effect
               slug: damaging
               type: takeDeboost
@@ -2804,7 +2804,7 @@ items:
           _sup: 8RRx8dARLkx6GKLI
           affinities:
             - _id: suLYYH4S6R39pqk6
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Dropping From Negative MP
               type: resistance

@@ -13,7 +13,7 @@ effects:
     system:
       automations:
         - _id: gp0ZMcHc8kdMAYs1
-          activeQualifier: not(@this.item.class.magelore-equipment)
+          activeQualifier: not(@this.item.classification.magelore-equipment)
           changes:
             - applyIfSuppressed: true
               key: system.price
@@ -45,7 +45,7 @@ effects:
     system:
       automations:
         - _id: l4rM5VwfWLCUKVDc
-          formula: (@this.effect.max / 4)d4
+          formula: (@this.effect.quantity.max / 4)d4
           triggers:
             - dawn
           type: changeQuantity

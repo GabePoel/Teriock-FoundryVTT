@@ -1,15 +1,13 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
+import consumableContext from "./consumable-context.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
 const resourceContext = {
+  ...consumableContext,
   ...usableContext,
-  resource: "TYPES.ActiveEffect.resource",
+  "type.resource": "TYPES.ActiveEffect.resource",
 
-  consumable: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumption.enabled.label",
-  max: "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label",
-  quantity: "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label",
-  "quantity.max": "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label",
   revealed: "TERIOCK.SYSTEMS.Revealable.FIELDS.revealed.label",
 };
 

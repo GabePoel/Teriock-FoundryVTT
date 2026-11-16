@@ -286,7 +286,7 @@ items:
         system:
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: "@status.ethereal"
+              activeQualifier: "@condition.ethereal"
               changes:
                 - applyIfSuppressed: false
                   key: system.defense.av.natural
@@ -1268,7 +1268,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "1"
@@ -1280,7 +1280,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "2"
@@ -1292,7 +1292,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "3"
@@ -1488,7 +1488,9 @@ items:
                   auto: false
                   competence:
                     raw: 0
-                  localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+                  localQualifier: >-
+                    and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank,
+                    1))
                   multi: false
                   overrideData: false
                   random: false
@@ -1508,7 +1510,9 @@ items:
                   auto: false
                   competence:
                     raw: 0
-                  localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
+                  localQualifier: >-
+                    and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank,
+                    1 + @p))
                   multi: false
                   overrideData: false
                   random: false
@@ -1528,7 +1532,9 @@ items:
                   auto: false
                   competence:
                     raw: 0
-                  localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
+                  localQualifier: >-
+                    and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank,
+                    1 + @f))
                   multi: false
                   overrideData: false
                   random: false
@@ -1636,7 +1642,7 @@ items:
               changeType: upgrade
               key: system.piercing.raw
               priority: 10
-              qualifier: "@prop.thrown"
+              qualifier: "@property.thrown"
               target: armament
               type: childChange
               value: "1"
@@ -1653,7 +1659,7 @@ items:
               localIdentifiers:
                 - ability:interact
               overrideData: true
-              triggerQualifier: and(@armament.prop.thrown, @source.interaction.attack, @source.delivery.item)
+              triggerQualifier: and(@armament.property.thrown, @exec.interaction.attack, @exec.delivery.item)
               triggers:
                 - executeAbility
               type: useDocuments
@@ -3309,7 +3315,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -3324,7 +3330,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -3339,7 +3345,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -3566,7 +3572,7 @@ items:
           automations:
             - _id: PKZXkwmO94niPsUb
               interactInExecution: true
-              localQualifier: and(@ability, @time.a1)
+              localQualifier: and(@type.ability, @time.a1)
               type: useDocuments
           competence:
             raw: 1
@@ -3999,7 +4005,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -4014,7 +4020,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -4029,7 +4035,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -4573,7 +4579,7 @@ items:
             - _id: R7rIJDoFAEvz00wl
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+              localQualifier: and(@type.ability, @spell, @time.a1, not(@delivery.item))
               type: useDocuments
           competence:
             raw: 1
@@ -4697,13 +4703,13 @@ items:
         system:
           automations:
             - _id: QL5Jv2BwFmqzum5O
-              activeQualifier: "@status.hidden"
+              activeQualifier: "@condition.hidden"
               key: system.boosts.damage
               qualifier: "@interaction.attack"
               type: childChange
               value: "1"
             - _id: o8IjZIB7i2W94fEC
-              activeQualifier: "@status.hidden"
+              activeQualifier: "@condition.hidden"
               key: system.boosts.damage
               qualifier: "@dmg"
               target: armament
@@ -4719,9 +4725,9 @@ items:
                 - competenceProficient
                 - resultsAlt
                 - resultsAltCrit
-              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact))
+              localQualifier: and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact))
               overrideData: true
-              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
               triggers:
                 - executeAbility
               type: useDocuments
@@ -4734,9 +4740,11 @@ items:
                 - competenceNone
                 - resultsAlt
                 - resultsAltCrit
-              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact, @class.thief))
+              localQualifier: >-
+                and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact,
+                @class.thief))
               overrideData: true
-              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
               triggers:
                 - executeAbility
               type: useDocuments

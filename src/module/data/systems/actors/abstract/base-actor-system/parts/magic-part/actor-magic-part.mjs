@@ -67,6 +67,16 @@ export default function ActorMagicPart(Base) {
     }
 
     /** @inheritDoc */
+    getRollData() {
+      return Object.assign(super.getRollData(), {
+        curses: this.curses.value,
+        "curses.max": this.curses.max,
+        rotators: this.rotators.value,
+        "rotators.max": this.rotators.max,
+      });
+    }
+
+    /** @inheritDoc */
     prepareCleanupData() {
       super.prepareCleanupData();
       this.curses.value = this.curseDocuments.filter(c => c.active).length;

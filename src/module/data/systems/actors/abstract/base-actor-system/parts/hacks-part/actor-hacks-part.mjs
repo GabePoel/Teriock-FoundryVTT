@@ -31,7 +31,7 @@ export default function ActorHacksPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
-      for (const [k, v] of Object.entries(this.hacks || {})) { rollData[`hack.${k}`] = v.value; }
+      for (const [k, v] of Object.entries(this.hacks || {})) { rollData[`hacks.${k}`] = v.value; }
       return rollData;
     }
   }

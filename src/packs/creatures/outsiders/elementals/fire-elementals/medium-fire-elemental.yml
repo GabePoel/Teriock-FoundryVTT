@@ -183,7 +183,7 @@ items:
         system:
           affinities:
             - _id: ZgdEWsaZXTJJECz8
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: element
               slug: flame
               type: hexseal
@@ -262,7 +262,7 @@ items:
                 - revive
               type: common
             - _id: 7OuG6efyOs2VWpp3
-              activeQualifier: not(@status.frozen)
+              activeQualifier: not(@condition.frozen)
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -967,7 +967,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -982,7 +982,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -997,7 +997,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient

@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import contractContext from "./contract-context.mjs";
 
-const familiarContext = { familiar: "TYPES.Item.familiar" };
+const familiarContext = { "type.familiar": "TYPES.Item.familiar" };
 
 export default familiarContext;
 

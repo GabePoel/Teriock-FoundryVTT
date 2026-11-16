@@ -3,7 +3,7 @@ import usableContext from "./usable-context.mjs";
 
 const attunementContext = {
   ...usableContext,
-  attunement: "TYPES.ActiveEffect.attunement",
+  "type.attunement": "TYPES.ActiveEffect.attunement",
 
   target: "TERIOCK.SYSTEMS.Attunement.FIELDS.target.label",
   tier: "TERIOCK.SYSTEMS.Attunement.FIELDS.tier.label",

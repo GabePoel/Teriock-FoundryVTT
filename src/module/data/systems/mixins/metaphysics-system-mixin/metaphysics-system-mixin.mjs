@@ -114,13 +114,11 @@ export default function MetaphysicsSystemMixin(Base) {
     getLocalRollData() {
       const data = super.getLocalRollData();
       // Add power sources
-      for (const powerSource of this.powerSources) { data[`ps.${powerSource}`] = 1; }
+      for (const powerSource of this.powerSources) { data[`source.${powerSource}`] = 1; }
       // Add elements
-      for (const element of this.elements) {
-        data[`el.${element}`] = 1;
-      }
+      for (const element of this.elements) { data[`element.${element}`] = 1; }
       // Add effect types
-      for (const effectType of this.effectTypes) { data[`et.${effectType}`] = 1; }
+      for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
       return data;
     }
 

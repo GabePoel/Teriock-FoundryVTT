@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import simpleContext from "./simple-context.mjs";
 
-const scarContext = { scar: "TYPES.Item.scar" };
+const scarContext = { "type.scar": "TYPES.Item.scar" };
 
 export default scarContext;
 

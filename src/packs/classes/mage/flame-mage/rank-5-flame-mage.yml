@@ -332,14 +332,14 @@ effects:
             - longRest
           type: changeQuantity
         - _id: consumptionStats
-          qualifier: and(@ability, @spell, @el.flame)
+          qualifier: and(@type.ability, @spell, @element.flame)
           stats:
             - mp
           type: consumption
         - _id: ZOHIECMcEBWcCAXb
           display:
             label: Cast Flame Spell
-          localQualifier: and(@ability, @spell, @el.flame)
+          localQualifier: and(@type.ability, @spell, @element.flame)
           type: useDocuments
       competence:
         raw: 1
@@ -464,7 +464,7 @@ effects:
         - _id: No8rcTbJLQ4l4Orv
           display:
             label: Cast Flame Spell
-          localQualifier: and(@ability, @spell, @el.flame)
+          localQualifier: and(@type.ability, @spell, @element.flame)
           type: useDocuments
       competence:
         raw: 1
@@ -539,7 +539,7 @@ effects:
                     }
                   }
                 }
-              localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
+              localQualifier: and(@type.ability, @spell, not(@es), @delivery.ray)
               multi: false
               overrideData: true
               random: false
@@ -642,7 +642,7 @@ effects:
               "attackPenalty": "0"
             }
           interactInExecution: true
-          localQualifier: and(@spell, @delivery.missile, @pro)
+          localQualifier: and(@spell, @delivery.missile, @proficient)
           overrideData: true
           type: useDocuments
       competence:
@@ -684,7 +684,7 @@ effects:
         - _id: VX8HRH0mBRK2ACXr
           auto: false
           interactInExecution: true
-          localQualifier: and(@ability, @spell, @time.a1)
+          localQualifier: and(@type.ability, @spell, @time.a1)
           type: useDocuments
       competence:
         raw: 1

@@ -8,13 +8,20 @@ import BasePseudoDocument from "../base-pseudo-document/base-pseudo-document.mjs
 const { fields } = foundry.data;
 
 /**
- * Scope keys whose string values become `@<key>.<value>` flags in fire roll data.
+ * Scope keys whose string values become `@trigger.<prefix>.<value>` flags in fire roll data.
  * @todo Move this into `fireTrigger` maybe?
  */
-const SCOPE_FLAG_KEYS = ["attribute", "mode", "part", "tradecraft"];
+const SCOPE_FLAG_PREFIXES = { attribute: "feat", mode: "mode", part: "hack", tradecraft: "tradecraft" };
 
-/** Scope keys whose documents are compared against this mechanic's own as `@this.<key>` flags. */
-const SCOPE_RELATION_KEYS = ["ability", "actor", "armament", "effect", "item", "source"];
+/** Scope keys whose documents are compared against this mechanic's own as `@this.<relation>` flags. */
+const SCOPE_RELATIONS = {
+  ability: "ability",
+  actor: "actor",
+  armament: "armament",
+  effect: "effect",
+  item: "item",
+  source: "exec",
+};
 
 /**
  * @extends {BasePseudoDocument}
@@ -153,19 +160,23 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * The roll data used to evaluate a fired trigger. The event is under `@source` and this mechanic is under `@this`.
+   * The roll data used to evaluate a fired trigger. The event is under `@exec` and this mechanic is under `@this`.
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {object}
    */
   _getFireRollData(scope = {}) {
     const rollData = { ...(scope.execution?.getRollData() ?? (scope.actor ?? this.actor)?.getRollData() ?? {}) };
     if (!scope.execution && scope.source?.system?.getLocalRollData) {
-      Object.assign(rollData, prefixObject(scope.source.system.getLocalRollData(), "source"));
+      Object.assign(rollData, prefixObject(scope.source.system.getLocalRollData(), "exec"));
     }
-    rollData.amount = scope.amount ?? 0;
-    for (const key of SCOPE_FLAG_KEYS) { if (scope[key]) { rollData[`${key}.${scope[key]}`] = 1; } }
+    rollData["trigger.amount"] = scope.amount ?? 0;
+    for (const [key, prefix] of Object.entries(SCOPE_FLAG_PREFIXES)) {
+      if (scope[key]) { rollData[`trigger.${prefix}.${scope[key]}`] = 1; }
+    }
     Object.assign(rollData, this._getOwnRollData());
-    for (const key of SCOPE_RELATION_KEYS) { rollData[`this.${key}`] = Number(this.isOwnDocument(scope[key])); }
+    for (const [key, relation] of Object.entries(SCOPE_RELATIONS)) {
+      rollData[`this.${relation}`] = Number(this.isOwnDocument(scope[key]));
+    }
     return rollData;
   }
 

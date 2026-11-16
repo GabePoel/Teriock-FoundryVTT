@@ -22,7 +22,7 @@ items:
           automations:
             - _id: insnA3UruLUet7RD
               key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
+              qualifier: "@identifier.ability.battle-cry-aura"
               type: childChange
               value: "1"
           competence:
@@ -311,7 +311,7 @@ items:
         system:
           automations:
             - _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.burned), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -354,7 +354,7 @@ items:
         system:
           automations:
             - _id: T0uGlilXyRymTD1v
-              activeQualifier: and(not(@status.dead), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), not(@condition.frozen))
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -413,7 +413,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@source.range + 5 * @h"
+              radius: "@exec.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -1736,7 +1736,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "1"
@@ -1748,7 +1748,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "2"
@@ -1760,7 +1760,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
               key: system.bv.bonus
-              qualifier: "@prop.handy"
+              qualifier: "@property.handy"
               target: armament
               type: childChange
               value: "3"
@@ -2086,7 +2086,7 @@ items:
                 label: Apply Executor Effect
               type: addDocuments
             - _id: FyGy4uoglXanPjex
-              activeQualifier: "@status.dueling"
+              activeQualifier: "@condition.dueling"
               changeType: upgrade
               key: system.piercing.raw
               qualifier: "@style.gladiator"
@@ -2284,13 +2284,13 @@ items:
         system:
           affinities:
             - _id: IBmHOLtkQZqJ33hc
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Being Surprised (Outside Towns)
               type: resistance
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: system.tradecrafts.tracker.score
@@ -2339,7 +2339,7 @@ items:
         system:
           affinities:
             - _id: DJbz2qen0LiY6ZNs
-              activeQualifier: not(@status.dead)
+              activeQualifier: not(@condition.dead)
               category: other
               name: Conjured Missile Spells
               type: resistance
@@ -2378,7 +2378,7 @@ items:
         system:
           affinities:
             - _id: xAwRqwHAvNRxhW5d
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: property
               slug: ranged
               type: resistance
@@ -2418,7 +2418,7 @@ items:
           _sup: jAcbSBjatu1DaLuI
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: system.senses.smell
@@ -2524,7 +2524,7 @@ items:
         system:
           automations:
             - _id: 8QOdQYnnSxyi3PA8
-              activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.frozen))
+              activeQualifier: and(not(@condition.dead), @condition.hacked, not(@condition.burned), not(@condition.frozen))
               noStatDice: true
               triggers:
                 - turnStart
@@ -2911,7 +2911,7 @@ items:
         system:
           affinities:
             - _id: TvGlbqdqbeSBADzw
-              activeQualifier: not(@status.dead)
+              activeQualifier: not(@condition.dead)
               category: other
               name: Non-Self Conjured Spells
               type: resistance

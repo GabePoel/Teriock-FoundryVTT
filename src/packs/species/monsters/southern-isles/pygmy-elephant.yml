@@ -279,7 +279,7 @@ effects:
         - _id: mpiq8HL9P5y0qme5
           changeType: upgrade
           key: system.piercing.raw
-          qualifier: "@class.@choice.ec"
+          qualifier: "@classification.@choice.ec"
           target: armament
           type: childChange
           value: "1"
@@ -302,11 +302,11 @@ effects:
             - competenceProficient
             - resultsAlt
             - resultsAltCrit
-          localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
+          localQualifier: and(@type.ability, @basic, @time.a1, not(@interaction.attack))
           overrideData: true
           triggerQualifier: >-
-            and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
-            @armament.class.@choice.ec)
+            and(@this.effect.type.consequence, @exec.interaction.attack, @exec.time.a1, @exec.delivery.item,
+            @armament.classification.@choice.ec)
           triggers:
             - executeAbility
           type: useDocuments
@@ -319,11 +319,11 @@ effects:
             - competenceNone
             - resultsAlt
             - resultsAltCrit
-          localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
+          localQualifier: and(@type.ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
           overrideData: true
           triggerQualifier: >-
-            and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
-            @armament.class.@choice.ec)
+            and(@this.effect.type.consequence, @exec.interaction.attack, @exec.time.a1, @exec.delivery.item,
+            @armament.classification.@choice.ec)
           triggers:
             - executeAbility
           type: useDocuments

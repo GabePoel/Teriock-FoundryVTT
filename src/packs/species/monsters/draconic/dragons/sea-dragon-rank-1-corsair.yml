@@ -54,7 +54,7 @@ effects:
               auto: false
               competence:
                 raw: 0
-              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              localQualifier: and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank, 1))
               multi: false
               overrideData: false
               random: false
@@ -74,7 +74,9 @@ effects:
               auto: false
               competence:
                 raw: 0
-              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
+              localQualifier: >-
+                and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank, 1 +
+                @p))
               multi: false
               overrideData: false
               random: false
@@ -94,7 +96,9 @@ effects:
               auto: false
               competence:
                 raw: 0
-              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
+              localQualifier: >-
+                and(@type.ability, @parent.type.rank, not(@es), not(@effect.contract), @proficient, lte(@class.rank, 1 +
+                @f))
               multi: false
               overrideData: false
               random: false
@@ -202,7 +206,7 @@ effects:
           changeType: upgrade
           key: system.piercing.raw
           priority: 10
-          qualifier: "@prop.thrown"
+          qualifier: "@property.thrown"
           target: armament
           type: childChange
           value: "1"
@@ -219,7 +223,7 @@ effects:
           localIdentifiers:
             - ability:interact
           overrideData: true
-          triggerQualifier: and(@armament.prop.thrown, @source.interaction.attack, @source.delivery.item)
+          triggerQualifier: and(@armament.property.thrown, @exec.interaction.attack, @exec.delivery.item)
           triggers:
             - executeAbility
           type: useDocuments

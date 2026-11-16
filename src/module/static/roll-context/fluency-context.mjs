@@ -3,8 +3,8 @@ import usableContext from "./usable-context.mjs";
 
 const fluencyContext = {
   ...usableContext,
-  fluency: "TYPES.ActiveEffect.fluency",
   revealed: "TERIOCK.SYSTEMS.Revealable.FIELDS.revealed.label",
+  "type.fluency": "TYPES.ActiveEffect.fluency",
 };
 
 export default fluencyContext;

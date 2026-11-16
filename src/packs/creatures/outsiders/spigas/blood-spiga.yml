@@ -159,7 +159,7 @@ items:
           automations:
             - _id: ZkR5pZwt5ewC31z2
               key: system.costs.tweaks.adept
-              qualifier: "@el.flame"
+              qualifier: "@element.flame"
               type: childChange
               value: "1"
           competence:
@@ -283,7 +283,7 @@ items:
             - _id: sgVY1ePMa9tYFypk
               changeType: upgrade
               key: system.av.bonus
-              qualifier: and(@body, @av)
+              qualifier: and(@type.body, @av)
               target: armament
               type: childChange
               value: "1"
@@ -1639,7 +1639,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1654,7 +1654,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1669,7 +1669,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -2521,7 +2521,7 @@ items:
                         }
                       }
                     }
-                  localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
+                  localQualifier: and(@type.ability, @spell, not(@es), @delivery.ray)
                   multi: false
                   overrideData: true
                   random: false

@@ -89,7 +89,7 @@ export default function ActorConditionsPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const data = super.getRollData();
-      for (const s of this.parent.statuses) { data[`status.${toSlug(s)}`] = 1; }
+      for (const s of this.parent.statuses) { data[`condition.${toSlug(s)}`] = 1; }
       return data;
     }
 

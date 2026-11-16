@@ -118,8 +118,8 @@ export default function ConsumableSystemMixin(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
-        consumable: Number(this.consumption.enabled),
-        max: safeInf(this.quantity.max),
+        consumption: Number(this.consumption.enabled),
+        "consumption.amount": this.consumption.amount,
         quantity: this.quantity.value,
         "quantity.max": safeInf(this.quantity.max),
       });

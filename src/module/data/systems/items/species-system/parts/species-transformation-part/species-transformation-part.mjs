@@ -185,11 +185,12 @@ export default function SpeciesTransformationPart(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       const data = super.getLocalRollData();
+      const level = this.transformationEffect?.system.transformation.level;
       Object.assign(data, {
         transformation: Number(this.isTransformation),
-        ["transformation.level"]: this.transformationEffect?.system.transformation.level || 0,
         "transformation.primary": Number(this.isPrimaryTransformation),
       });
+      if (level) { data[`transformation.level.${level}`] = 1; }
       return data;
     }
 

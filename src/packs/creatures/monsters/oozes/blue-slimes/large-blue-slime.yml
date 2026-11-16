@@ -553,7 +553,7 @@ items:
           _sup: POFMqxBvzffzXxvM
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: system.senses.smell
@@ -1109,7 +1109,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1124,7 +1124,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1139,7 +1139,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -1683,7 +1683,7 @@ items:
             - _id: R7rIJDoFAEvz00wl
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+              localQualifier: and(@type.ability, @spell, @time.a1, not(@delivery.item))
               type: useDocuments
           competence:
             raw: 1
@@ -2187,14 +2187,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.storm)
+              qualifier: and(@type.ability, @spell, @element.storm)
               stats:
                 - mp
               type: consumption
             - _id: yPQvz9jWUji5quFr
               display:
                 label: Cast Storm Spell
-              localQualifier: and(@ability, @spell, @el.storm)
+              localQualifier: and(@type.ability, @spell, @element.storm)
               type: useDocuments
           competence:
             raw: 1
@@ -2276,7 +2276,7 @@ items:
             - _id: EsjRyEkKeq9Pli2C
               display:
                 label: Cast Storm Spell
-              localQualifier: and(@ability, @spell, @el.storm)
+              localQualifier: and(@type.ability, @spell, @element.storm)
               type: useDocuments
           competence:
             raw: 1

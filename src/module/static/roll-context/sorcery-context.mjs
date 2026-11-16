@@ -4,7 +4,7 @@ import usableContext from "./usable-context.mjs";
 
 const sorceryContext = {
   ...usableContext,
-  sorcery: "TYPES.Item.sorcery",
+  "type.sorcery": "TYPES.Item.sorcery",
 
   "av.max": "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
 };

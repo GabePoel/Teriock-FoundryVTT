@@ -4,7 +4,7 @@ import usableContext from "./usable-context.mjs";
 
 const propertyContext = {
   ...usableContext,
-  property: "TYPES.ActiveEffect.property",
+  "type.property": "TYPES.ActiveEffect.property",
 
   "dmg.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
 };

@@ -28,6 +28,11 @@ export default class InitiativeModifierModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
+  getLocalRollData() {
+    return omit(super.getLocalRollData(), ["score"]);
+  }
+
+  /** @inheritDoc */
   async use(options) {
     const roller = this.actor.defaultCombatant;
     if (!roller) { return; }

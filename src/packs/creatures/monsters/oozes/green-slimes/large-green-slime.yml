@@ -553,7 +553,7 @@ items:
           _sup: KXuwxejlAM1UwgCU
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: system.senses.smell
@@ -1107,7 +1107,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1122,7 +1122,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1137,7 +1137,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -2181,14 +2181,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.nature)
+              qualifier: and(@type.ability, @spell, @element.nature)
               stats:
                 - mp
               type: consumption
             - _id: U6Sgg4XOIERmShjR
               display:
                 label: Cast Nature Spell
-              localQualifier: and(@ability, @spell, @el.nature)
+              localQualifier: and(@type.ability, @spell, @element.nature)
               type: useDocuments
           competence:
             raw: 1
@@ -2266,7 +2266,7 @@ items:
             - _id: IS0fZKlMCpQ9kVEX
               display:
                 label: Cast Nature Spell
-              localQualifier: and(@ability, @spell, @el.nature)
+              localQualifier: and(@type.ability, @spell, @element.nature)
               type: useDocuments
           competence:
             raw: 1
@@ -2290,7 +2290,7 @@ items:
             - _id: 4ReYeDgqGQpnJFk3
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1)
+              localQualifier: and(@type.ability, @spell, @time.a1)
               type: useDocuments
           competence:
             raw: 1

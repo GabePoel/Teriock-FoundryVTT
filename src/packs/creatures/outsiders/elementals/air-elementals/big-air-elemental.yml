@@ -90,7 +90,7 @@ items:
         system:
           affinities:
             - _id: 3Ek9P1OLigJEFmkk
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: element
               slug: life
               type: hexseal
@@ -169,7 +169,7 @@ items:
                 - revive
               type: common
             - _id: 7OuG6efyOs2VWpp3
-              activeQualifier: not(@status.frozen)
+              activeQualifier: not(@condition.frozen)
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -959,7 +959,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -974,7 +974,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -989,7 +989,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -1696,7 +1696,7 @@ items:
             @Identifier[keyword:warded]{warded} by [[lookup name]].</p>
           expirations:
             - _id: wlQFNbMQfPC7oxJ9
-              triggerQualifier: and(@source.interaction.attack, @this.armament)
+              triggerQualifier: and(@exec.interaction.attack, @this.armament)
               triggers:
                 - executeAbility
               type: trigger
@@ -1908,7 +1908,7 @@ items:
                         "invoked": 1
                       }
                     }
-                  localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
+                  localQualifier: and(@type.ability, @spell, not(@es), @delivery.ray)
                   multi: false
                   overrideData: true
                   random: false

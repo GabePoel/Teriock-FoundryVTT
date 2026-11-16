@@ -3,9 +3,9 @@ import usableContext from "./usable-context.mjs";
 
 const conditionContext = {
   ...usableContext,
-  condition: "TYPES.ActiveEffect.condition",
   transformation: "TERIOCK.SCHEMA.Transformation.enabled.label",
   "transformation.primary": "TERIOCK.ROLL_CONTEXT.Transformation.primary",
+  "type.condition": "TYPES.ActiveEffect.condition",
 };
 
 export default conditionContext;

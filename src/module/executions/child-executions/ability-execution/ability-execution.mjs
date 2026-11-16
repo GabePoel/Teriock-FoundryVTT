@@ -4,13 +4,7 @@ import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import {
-  formatDynamicSelectOptions,
-  mixClasses,
-  objectMap,
-  omit,
-  prefixObject,
-} from "../../../utils/_module.mjs";
+import { formatDynamicSelectOptions, mixClasses, objectMap, omit, prefixObject } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
 

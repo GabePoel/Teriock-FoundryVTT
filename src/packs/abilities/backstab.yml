@@ -5,13 +5,13 @@ name: Backstab
 system:
   automations:
     - _id: QL5Jv2BwFmqzum5O
-      activeQualifier: "@status.hidden"
+      activeQualifier: "@condition.hidden"
       key: system.boosts.damage
       qualifier: "@interaction.attack"
       type: childChange
       value: "1"
     - _id: o8IjZIB7i2W94fEC
-      activeQualifier: "@status.hidden"
+      activeQualifier: "@condition.hidden"
       key: system.boosts.damage
       qualifier: "@dmg"
       target: armament
@@ -27,9 +27,9 @@ system:
         - competenceProficient
         - resultsAlt
         - resultsAltCrit
-      localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact))
+      localQualifier: and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact))
       overrideData: true
-      triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+      triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
       triggers:
         - executeAbility
       type: useDocuments
@@ -42,9 +42,9 @@ system:
         - competenceNone
         - resultsAlt
         - resultsAltCrit
-      localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact, @class.thief))
+      localQualifier: and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact, @class.thief))
       overrideData: true
-      triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+      triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
       triggers:
         - executeAbility
       type: useDocuments

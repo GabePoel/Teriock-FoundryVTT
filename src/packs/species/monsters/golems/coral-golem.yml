@@ -204,17 +204,17 @@ effects:
     system:
       automations:
         - _id: 1728b3a84ea27844
-          activeQualifier: "@status.down"
+          activeQualifier: "@condition.down"
           common:
             - bag
             - revive
           type: common
         - _id: 8HKmB76Ft338yIWV
-          activeQualifier: "@status.down"
+          activeQualifier: "@condition.down"
           consumeStatDice: false
           type: heal
         - _id: JBf8TF0QndAYSO6i
-          activeQualifier: "@status.down"
+          activeQualifier: "@condition.down"
           consumeStatDice: false
           type: revitalize
       competence:
@@ -300,7 +300,7 @@ effects:
         - _id: sgVY1ePMa9tYFypk
           changeType: upgrade
           key: system.av.bonus
-          qualifier: and(@body, @av)
+          qualifier: and(@type.body, @av)
           target: armament
           type: childChange
           value: "1"
@@ -395,7 +395,7 @@ effects:
             - revive
           type: common
         - _id: iCn9pFDIGFJWxm6H
-          activeQualifier: and(not(@status.burned), not(@status.frozen))
+          activeQualifier: and(not(@condition.burned), not(@condition.frozen))
           consumeStatDice: false
           triggers:
             - turnStart
@@ -481,7 +481,7 @@ effects:
     system:
       affinities:
         - _id: WCOWPl5PVXo46Bmp
-          activeQualifier: not(@status.down)
+          activeQualifier: not(@condition.down)
           category: other
           name: Spells
           type: immunity

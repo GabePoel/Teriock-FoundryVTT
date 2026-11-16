@@ -1,4 +1,5 @@
 import { ThresholdRoll } from "../../../../../../../dice/rolls/_module.mjs";
+import { prefixObject } from "../../../../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../../models/_module.mjs";
@@ -125,7 +126,11 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
-      Object.assign(rollData, { ...this.#getDefenseRollData(), ...this.#getOffenseRollData() });
+      Object.assign(rollData, {
+        ...this.#getDefenseRollData(),
+        ...this.#getOffenseRollData(),
+        ...prefixObject(this.initiative.getLocalRollData(), "initiative"),
+      });
       return rollData;
     }
 

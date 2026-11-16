@@ -208,11 +208,11 @@ export default function AbilityUsagePart(Base) {
       data["delivery.ray"] = Number(this.isRay);
       data["delivery.strike"] = Number(this.isStrike);
       data["delivery.touch"] = Number(this.isTouch);
-      if (this.interaction === "feat") { data[`attr.${this.featSaveAttribute}`] = 1; }
+      if (this.interaction === "feat") { data[`feat.${this.featSaveAttribute}`] = 1; }
       if (this.expansion.type) {
         Object.assign(data, {
           [`expansion.${this.expansion.type}`]: 1,
-          [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
+          [`expansion.feat.${this.expansion.featSaveAttribute}`]: 1,
           ["expansion.range"]: this.expansion.range.rollValue,
         });
       }

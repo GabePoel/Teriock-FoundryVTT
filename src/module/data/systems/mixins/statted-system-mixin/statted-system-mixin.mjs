@@ -120,17 +120,21 @@ export default function StattedSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(
-        super.getLocalRollData(),
-        Object.fromEntries(
-          POOL_STATS.flatMap(
-            k => [[k, this.statDice[k].formula || 0], [`${k}.disabled`, Number(this.statDice[k].disabled)], [
-              `${k}.value`,
-              Number(this.statDice[k].value),
-            ]]
-          ),
-        ),
-      );
+      const data = super.getLocalRollData();
+      for (const stat of POOL_STATS) {
+        const pool = this.statDice[stat];
+        const faces = pool.dice.filter(d => !d.spent).map(d => d.faces);
+        Object.assign(data, {
+          [`${stat}.dice.largest`]: faces.length ? Math.max(...faces) : 0,
+          [`${stat}.dice.max`]: pool.dice.size,
+          [`${stat}.dice.smallest`]: faces.length ? Math.min(...faces) : 0,
+          [`${stat}.dice`]: faces.length,
+          [`${stat}.disabled`]: Number(pool.disabled),
+          [`${stat}.formula`]: pool.formula || 0,
+          [stat]: pool.value,
+        });
+      }
+      return data;
     }
 
     /** @inheritDoc */

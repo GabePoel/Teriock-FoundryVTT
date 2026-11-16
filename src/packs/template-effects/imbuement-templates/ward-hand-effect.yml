@@ -14,7 +14,7 @@ system:
     - _id: kFO9JycS17x7ZrNe
       changeType: upgrade
       key: system.warded
-      qualifier: and(@source.spell, or(@source.delivery.hand, @source.delivery.missile))
+      qualifier: and(@exec.spell, or(@exec.delivery.hand, @exec.delivery.missile))
       type: childChange
       value: "true"
   elements:
@@ -22,8 +22,8 @@ system:
   expirations:
     - _id: LNS8PY2JRJTFcGB8
       triggerQualifier: >-
-        or(and(@source.interaction.attack, @this.armament), and(@source.spell, or(@source.delivery.hand,
-        @source.delivery.missile)))
+        or(and(@exec.interaction.attack, @this.armament), and(@exec.spell, or(@exec.delivery.hand,
+        @exec.delivery.missile)))
       triggers:
         - executeAbility
       type: trigger

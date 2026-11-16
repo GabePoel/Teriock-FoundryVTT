@@ -84,7 +84,9 @@ export default class ShortRestExecution extends DocumentExecution {
       all: false,
       auto: false,
       interactInExecution: true,
-      localQualifier: `and(@ability, @time.${TERIOCK.CONFIG.ability.maneuver.slow.executionTimes[this.executionTime].slug})`,
+      localQualifier: `and(@type.ability, @time.${
+        TERIOCK.CONFIG.ability.maneuver.slow.executionTimes[this.executionTime].slug
+      })`,
       multi: true,
       type: "useDocuments",
       useInExecution: true,

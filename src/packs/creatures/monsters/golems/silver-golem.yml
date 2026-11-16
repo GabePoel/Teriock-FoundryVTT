@@ -162,17 +162,17 @@ items:
         system:
           automations:
             - _id: 1728b3a84ea27844
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               common:
                 - bag
                 - revive
               type: common
             - _id: 8HKmB76Ft338yIWV
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               consumeStatDice: false
               type: heal
             - _id: JBf8TF0QndAYSO6i
-              activeQualifier: "@status.down"
+              activeQualifier: "@condition.down"
               consumeStatDice: false
               type: revitalize
           competence:
@@ -351,7 +351,7 @@ items:
             - _id: nrgR5jjTBxRzPswX
               changeType: typeAdd
               key: system.damage.*
-              qualifier: and(@body, @dmg)
+              qualifier: and(@type.body, @dmg)
               target: armament
               type: childChange
               value: silver
@@ -387,7 +387,7 @@ items:
         system:
           affinities:
             - _id: WCOWPl5PVXo46Bmp
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: other
               name: Spells
               type: immunity

@@ -708,7 +708,7 @@ items:
           _sup: znHCqJp6Cbnuktef
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               changes:
                 - applyIfSuppressed: false
                   key: system.senses.smell
@@ -1114,7 +1114,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1129,7 +1129,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1144,7 +1144,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -1371,7 +1371,7 @@ items:
           automations:
             - _id: PKZXkwmO94niPsUb
               interactInExecution: true
-              localQualifier: and(@ability, @time.a1)
+              localQualifier: and(@type.ability, @time.a1)
               type: useDocuments
           competence:
             raw: 1
@@ -2184,14 +2184,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.necromancy)
+              qualifier: and(@type.ability, @spell, @element.necromancy)
               stats:
                 - mp
               type: consumption
             - _id: PQQ9ijKDakNiYpl1
               display:
                 label: Cast Necromancy Spell
-              localQualifier: and(@ability, @spell, @el.necromancy)
+              localQualifier: and(@type.ability, @spell, @element.necromancy)
               type: useDocuments
           competence:
             raw: 1
@@ -2227,7 +2227,7 @@ items:
             - _id: AG53h8UCxrEffEYL
               display:
                 label: Cast Necromancy Spell
-              localQualifier: and(@ability, @spell, @el.necromancy)
+              localQualifier: and(@type.ability, @spell, @element.necromancy)
               type: useDocuments
           competence:
             raw: 1
@@ -2450,7 +2450,7 @@ items:
                   "attackPenalty": "0"
                 }
               interactInExecution: true
-              localQualifier: and(@spell, @delivery.missile, @pro)
+              localQualifier: and(@spell, @delivery.missile, @proficient)
               overrideData: true
               type: useDocuments
           competence:

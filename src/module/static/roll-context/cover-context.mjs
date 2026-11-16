@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
-const coverContext = { ...usableContext, cover: "TYPES.ActiveEffect.cover" };
+const coverContext = { ...usableContext, "type.cover": "TYPES.ActiveEffect.cover" };
 
 export default coverContext;
 

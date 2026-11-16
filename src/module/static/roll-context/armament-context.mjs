@@ -1,11 +1,13 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
+import consumableContext from "./consumable-context.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
+  ...consumableContext,
   ...usableContext,
   armament: "TYPES.Item.armament",
-  body: "TYPES.Item.body",
-  equipment: "TYPES.Item.equipment",
+  "type.body": "TYPES.Item.body",
+  "type.equipment": "TYPES.Item.equipment",
 
   av: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
   bv: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
@@ -20,16 +22,12 @@ const armamentContext = {
   vitals: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
 
   attuned: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
-  consumable: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumption.enabled.label",
   dampened: "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
   destroyed: "TERIOCK.SYSTEMS.Equipment.FIELDS.destroyed.label",
   equipped: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
   glued: "TERIOCK.SYSTEMS.Equipment.FIELDS.glued.label",
   identified: "TERIOCK.SYSTEMS.Equipment.FIELDS.identification.identified.label",
-  max: "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label",
   price: "TERIOCK.SYSTEMS.Equipment.FIELDS.price.label",
-  quantity: "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label",
-  "quantity.max": "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label",
   read: "TERIOCK.ROLL_CONTEXT.Armament.read",
   shattered: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
   stashed: "TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label",
@@ -58,18 +56,16 @@ Hooks.once("teriock.identifiersInit", () => {
     armamentContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.damageType", { name });
   });
   Object.entries(game.teriock.identifiers.getNames("property", { permission: "LIMITED" })).forEach(([k, name]) => {
-    armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
+    armamentContext[`property.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
   Object.values(TERIOCK.CONFIG.command).filter(v => v.numeric).forEach(v => {
-    armamentContext[`command.${v.slug}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", {
-      name: v.label,
-    });
+    armamentContext[`command.${v.slug}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.equipment.equipmentClasses).forEach(([k, v]) => {
-    armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: v.label });
+    armamentContext[`classification.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.classification", { name: v.label });
   });
-  Object.entries(game.teriock.identifiers.getNames("equipment", { permission: "LIMITED" })).forEach(([k, name]) => {
-    armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name });
+  game.teriock.identifiers.equipmentTypes.entries().filter(([, e]) => e.name).forEach(([k, e]) => {
+    armamentContext[`equipment.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.equipment", { name: e.name });
   });
   Object.entries({ ...TERIOCK.CONFIG.equipment.kind, intrinsic: TERIOCK.CONFIG.effect.kind.intrinsic }).forEach(
     ([k, v]) => {

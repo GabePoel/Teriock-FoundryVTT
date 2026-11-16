@@ -56,7 +56,7 @@ items:
         system:
           affinities:
             - _id: ZgdEWsaZXTJJECz8
-              activeQualifier: not(@status.down)
+              activeQualifier: not(@condition.down)
               category: element
               slug: flame
               type: hexseal
@@ -174,7 +174,7 @@ items:
                 - revive
               type: common
             - _id: 7OuG6efyOs2VWpp3
-              activeQualifier: not(@status.frozen)
+              activeQualifier: not(@condition.frozen)
               consumeStatDice: false
               triggers:
                 - turnStart
@@ -1077,7 +1077,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "@rank.mage - 1"
+                  value: "@ranks.archetype.mage - 1"
               disabledToggles:
                 - competenceFluent
                 - competenceProficient
@@ -1092,7 +1092,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1)
+                  value: 2 * (@ranks.archetype.mage - 1)
               disabledToggles:
                 - competenceFluent
                 - competenceNone
@@ -1107,7 +1107,7 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mage - 1) + @p
+                  value: 2 * (@ranks.archetype.mage - 1) + @p
               disabledToggles:
                 - competenceNone
                 - competenceProficient
@@ -1959,7 +1959,7 @@ items:
                         }
                       }
                     }
-                  localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
+                  localQualifier: and(@type.ability, @spell, not(@es), @delivery.ray)
                   multi: false
                   overrideData: true
                   random: false
@@ -2170,14 +2170,14 @@ items:
                 - longRest
               type: changeQuantity
             - _id: consumptionStats
-              qualifier: and(@ability, @spell, @el.flame)
+              qualifier: and(@type.ability, @spell, @element.flame)
               stats:
                 - mp
               type: consumption
             - _id: ZOHIECMcEBWcCAXb
               display:
                 label: Cast Flame Spell
-              localQualifier: and(@ability, @spell, @el.flame)
+              localQualifier: and(@type.ability, @spell, @element.flame)
               type: useDocuments
           competence:
             raw: 1
@@ -2252,7 +2252,7 @@ items:
             - _id: No8rcTbJLQ4l4Orv
               display:
                 label: Cast Flame Spell
-              localQualifier: and(@ability, @spell, @el.flame)
+              localQualifier: and(@type.ability, @spell, @element.flame)
               type: useDocuments
           competence:
             raw: 1
@@ -2276,7 +2276,7 @@ items:
             - _id: VX8HRH0mBRK2ACXr
               auto: false
               interactInExecution: true
-              localQualifier: and(@ability, @spell, @time.a1)
+              localQualifier: and(@type.ability, @spell, @time.a1)
               type: useDocuments
           competence:
             raw: 1

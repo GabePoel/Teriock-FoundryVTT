@@ -42,7 +42,7 @@ export default class StatPoolModel extends BaseDataModel {
    * A collection of all the dice within this pool.
    * @type {Collection<ID<StatDie>, StatDie>}
    */
-  dice;
+  dice = new Collection();
 
   /**
    * Total stat value of all the dice in this pool.
