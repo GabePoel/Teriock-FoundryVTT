@@ -9,9 +9,7 @@ const codeEnricher = {
       ev.stopImmediatePropagation();
       const text = el.textContent.replace(/\p{Cf}/gu, "").trim();
       await game.clipboard.copyPlainText(text);
-      ui.notifications.info("TERIOCK.SHEETS.Common.NOTIFICATIONS.copiedToClipboard", {
-        format: { text },
-      });
+      ui.notifications.info("TERIOCK.SHEETS.Common.NOTIFICATIONS.copiedToClipboard", { format: { text } });
     });
   },
   process: async (inputs) => {
