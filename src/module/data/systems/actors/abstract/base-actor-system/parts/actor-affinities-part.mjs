@@ -32,7 +32,7 @@ export default function ActorAffinitiesPart(Base) {
      */
     _addVirtualAffinity(type, category, value, source, data) {
       const id = toId(`${type}${category}${value}${source}`, { hash: true });
-      const keyed = category === "other" ? { name: value } : { identifier: value };
+      const keyed = category === "other" ? { name: value } : { slug: value };
       const Affinity = TERIOCK.CONFIG.Affinity.dataModels[type];
       const affinity = new Affinity({ _id: id, category, type, ...keyed, ...data }, { parent: this });
       affinity.sourceName = source;

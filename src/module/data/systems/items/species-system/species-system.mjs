@@ -173,7 +173,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get wikiIdentifier() {
-    return `creature:${this.identifier}`;
+    return `creature:${this.slug}`;
   }
 
   /** @inheritDoc */

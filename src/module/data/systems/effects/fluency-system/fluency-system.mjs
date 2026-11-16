@@ -78,7 +78,7 @@ export default class FluencySystem
         tradecraft: tc.name,
         type: "fluency",
       }),
-      system: { field: tc.system.field, tradecraft: tc.system.identifier },
+      system: { field: tc.system.field, tradecraft: tc.system.slug },
       type: "fluency",
     };
   }

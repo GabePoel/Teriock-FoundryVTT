@@ -130,7 +130,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
           }),
         );
       }
-      throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.validationError"));
+      throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType"));
     }
     return [identifier, game.teriock.identifiers.getName(identifier) ?? identifier];
   }

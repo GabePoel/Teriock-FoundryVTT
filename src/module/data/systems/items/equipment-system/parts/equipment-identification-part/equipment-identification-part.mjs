@@ -250,12 +250,11 @@ export default function EquipmentIdentificationPart(Base) {
         const uncheckedPropertySlugs = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
         const reference = await fromIdentifier(`equipment:${this.equipmentType}`);
         if (reference) {
-          uncheckedPropertySlugs.push(...reference.previewedTypes.property.map(p => p.system.identifier));
+          uncheckedPropertySlugs.push(...reference.previewedTypes.property.map(p => p.system.slug));
         }
         const revealed = this.parent.children.documentsByTag.revealable.filter(c => c.system.revealed);
-        const checked = revealed.filter(e =>
-          e.type !== "property" || !uncheckedPropertySlugs.includes(e.system.identifier)
-        ).map(e => e.uuid);
+        const checked = revealed.filter(e => e.type !== "property" || !uncheckedPropertySlugs.includes(e.system.slug))
+          .map(e => e.uuid);
         const toReveal = await DocumentSelector.selectMulti(revealed, {
           checked,
           hint: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.hint"),

@@ -58,7 +58,7 @@ export default class ConditionSystem
     if (yes === false) { return false; }
 
     // If this is a known condition, have it use the static ID.
-    if (data?.system?.identifier && Object.hasOwn(TERIOCK.STATUSES.conditions, data.system.identifier)) {
+    if (data?.system?.slug && Object.hasOwn(TERIOCK.STATUSES.conditions, data.system.slug)) {
       options.keepId = true;
     }
     if (data.disabled === true) { return false; }

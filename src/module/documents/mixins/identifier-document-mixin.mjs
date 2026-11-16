@@ -27,7 +27,7 @@ export default function IdentifierDocumentMixin(Base) {
      * @returns {Slug}
      */
     static getIdentifierSlug(doc) {
-      return foundry.utils.getProperty(doc, "system.identifier") || teriock.utils.toSlug(doc.name);
+      return foundry.utils.getProperty(doc, "system.slug") || teriock.utils.toSlug(doc.name);
     }
 
     /**

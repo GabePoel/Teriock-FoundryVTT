@@ -108,7 +108,8 @@ export function migrateIterables(source, ...fields) {
 export function migratePowerKinds(source) {
   if (source.type !== "power") { return; }
   if (["holiday", "innate", "learned", "traits"].includes(source.system?.kind)) { source.system.kind = "normal"; }
-  const type = POWER_KIND_TYPES[source.system?.kind] ?? POWER_IDENTIFIER_TYPES[source.system?.identifier];
+  const type = POWER_KIND_TYPES[source.system?.kind]
+    ?? POWER_IDENTIFIER_TYPES[source.system?.slug ?? source.system?.identifier];
   if (!type) { return; }
   source.type = type;
   source.system.kind = CONFIG.Item.dataModels[type].metadata.initialKind;

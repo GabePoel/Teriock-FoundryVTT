@@ -155,10 +155,10 @@ export default function AbilityEquipmentPart(Base) {
         system: {
           consumption: { enabled: true },
           description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: effects[0]._id }),
-          identifier: `${equipmentType}-of-${this.identifier}`,
           kind: "enchanted",
           needsAttunement: false,
           quantity: { value: 1 },
+          slug: `${equipmentType}-of-${this.slug}`,
         },
       });
       if (img) { out.img = img; }

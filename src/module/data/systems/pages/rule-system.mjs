@@ -16,7 +16,7 @@ export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMix
 
   /** @inheritDoc */
   get wikiIdentifier() {
-    if (this.parent.parent?.uuid === TERIOCK.CONST.CONDITIONS_JOURNAL_UUID) { return `condition:${this.identifier}`; }
+    if (this.parent.parent?.uuid === TERIOCK.CONST.CONDITIONS_JOURNAL_UUID) { return `condition:${this.slug}`; }
     return super.wikiIdentifier;
   }
 }

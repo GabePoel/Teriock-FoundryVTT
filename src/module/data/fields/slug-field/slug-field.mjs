@@ -48,7 +48,7 @@ export default class SlugField extends StringField {
   /** @inheritDoc */
   _validateType(value) {
     if (!validateSlug(value, { strict: !this.nullable })) {
-      throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.validationError"));
+      throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.slug.validationError"));
     }
     return super._validateType(value);
   }

@@ -94,7 +94,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         fields: [
-          this.#quickField("system.identifier", {
+          this.#quickField("system.slug", {
             placeholder: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
             reset: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
           }),

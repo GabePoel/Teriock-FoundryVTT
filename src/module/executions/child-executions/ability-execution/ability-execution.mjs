@@ -377,11 +377,11 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
     if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
     const weaponPropertySlugs = ["weapon"];
-    if (this.source.system.identifier === "basic-attack") { weaponPropertySlugs.push("bashing"); }
+    if (this.source.system.slug === "basic-attack") { weaponPropertySlugs.push("bashing"); }
     armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertySlugs);
     armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
     const handPropertySlugs = ["handy"];
-    if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.identifier === "staff-touch")) {
+    if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.slug === "staff-touch")) {
       handPropertySlugs.push("magelore");
     }
     armament = this._reselectArmamentForProperties(armament, "hand", handPropertySlugs);
@@ -433,8 +433,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         executor: this.actor?.uuid ?? null,
         expirations: this.expirations.active.filter(applies).map(e => e.getEffectData(this)),
         heightened: this.heightened,
-        identifier: `${this.source.system.identifier}-effect`,
         powerSources: this.source.system.powerSources.toObject(),
+        slug: `${this.source.system.slug}-effect`,
         sustained: this.source.system.sustained,
       },
     };
@@ -545,10 +545,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   _reselectArmamentForProperties(armament, delivery, properties) {
     if (
       this.source.system.delivery === delivery
-      && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.identifier))
+      && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.slug))
     ) {
       armament = this.actor.previewedTags.armament.find((a) =>
-        a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.identifier))
+        a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.slug))
       );
     }
     return armament;

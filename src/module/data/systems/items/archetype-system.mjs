@@ -72,7 +72,7 @@ export default class ArchetypeSystem
    */
   get ranks() {
     if (!this.actor) { return []; }
-    return this.actor.previewedTypes.rank.filter(r => r.system.archetype === this.identifier);
+    return this.actor.previewedTypes.rank.filter(r => r.system.archetype === this.slug);
   }
 
   /** @inheritDoc */

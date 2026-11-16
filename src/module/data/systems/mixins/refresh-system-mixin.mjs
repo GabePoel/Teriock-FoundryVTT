@@ -84,12 +84,7 @@ export default function RefreshSystemMixin(Base) {
           ),
         );
       }
-      promises.push(
-        this._formatRefreshPromise(
-          fromIdentifier(this.parent.identifier),
-          "TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.label",
-        ),
-      );
+      promises.push(this._formatRefreshPromise(fromIdentifier(this.parent.identifier), "TERIOCK.COMMON.Identifier"));
       return promises;
     }
 

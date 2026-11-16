@@ -26,7 +26,7 @@ export default class HarmRoll extends CommandsRoll {
   async _applyDiceStyles() {
     await super._applyDiceStyles();
     const harms = await this.getHarmArray();
-    const harmMap = Object.fromEntries(harms.map(h => [h.system.identifier, h]));
+    const harmMap = Object.fromEntries(harms.map(h => [h.system.slug, h]));
     for (const die of this.dice) {
       const types = die.flavor.split(" ");
       for (const [type, harm] of Object.entries(harmMap)) {

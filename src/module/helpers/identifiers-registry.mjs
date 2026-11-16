@@ -363,7 +363,7 @@ export default class IdentifiersRegistry {
       const index = await pack.getIndex();
       await Promise.all(index.map(d => foundry.utils.fromUuid(d.uuid)));
     } else if (metadata?.track) {
-      const fields = ["name", "system.identifier", "system._sup"];
+      const fields = ["name", "system.slug", "system._sup"];
       if (pack.documentName === "Item") { fields.push(...Object.values(TYPE_FIELDS).map(f => `system.${f}`)); }
       const index = await pack.getIndex({ fields });
       for (const d of index) {
@@ -395,7 +395,7 @@ export default class IdentifiersRegistry {
     const identifier = document.identifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
     const field = TYPE_FIELDS[document.type];
-    const isType = Boolean(field) && document.system?.[field] === document.system?.identifier;
+    const isType = Boolean(field) && document.system?.[field] === document.system?.slug;
     this.track(identifier, uuid, { img: document.img, isType, name: document.name });
   }
 

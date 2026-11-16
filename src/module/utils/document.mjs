@@ -112,7 +112,7 @@ export async function findBestDocument(lookup, relativeTo) {
 export async function fromIdentifierLocal(identifier, relativeTo) {
   if (!identifier || !relativeTo?.previewed?.getContents) { return null; }
   const children = await relativeTo.previewed.getContents();
-  return children.find(c => c?.identifier === identifier || c?.system?.identifier === identifier) ?? null;
+  return children.find(c => c?.identifier === identifier || c?.system?.slug === identifier) ?? null;
 }
 
 /**

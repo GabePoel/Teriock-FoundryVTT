@@ -163,7 +163,7 @@ export default class RankSystem
   #stageArchetypeDeletion() {
     const neededArchetypes = new Set(this.actor.previewedTypes.rank.map(r => r.system.archetype));
     for (const a of this.actor.previewedTypes.archetype) {
-      if (!neededArchetypes.has(a.system.identifier)) { this.actor._staged.itemDeletions.add(a.id); }
+      if (!neededArchetypes.has(a.system.slug)) { this.actor._staged.itemDeletions.add(a.id); }
     }
   }
 
