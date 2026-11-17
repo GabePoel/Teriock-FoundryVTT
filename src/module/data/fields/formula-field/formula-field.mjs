@@ -19,6 +19,8 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   static #processTypes(formula, types, fn) {
+    // Ideally the types should always be an array of slugs (which is a funny image) but a misconfigured change value
+    // could give a number or a string depending on JSON parsing.
     if (["number", "string"].includes(typeof types)) { types = [types.toString()]; }
     if (!FormulaField.exists(formula)) { return formula; }
     types = new Set(types).filter(t => teriock.utils.isSlug(t));
@@ -51,7 +53,7 @@ export default class FormulaField extends StringField {
   }
 
   /**
-   * Add types to a formula that supports them. All types must be identifiers.
+   * Add types to a formula that supports them. All types must be slugs.
    * @param {Teriock.System.FormulaString} formula
    * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
@@ -88,6 +90,8 @@ export default class FormulaField extends StringField {
    * @param {Teriock.System.FormulaString} value - Original formula.
    * @param {Teriock.System.FormulaString} delta - Modification to formula.
    * @returns {Teriock.System.FormulaString}
+   * @remarks We do it this way instead of how D&D5E does it because min(1d6, 1d8) !== 1d6. That's how the
+   * deterministic downgrades work but it's not how probability works. This is at least *closer* to the truth.
    */
   static downgradeIndeterministic(value, delta) {
     if (BaseRoll.meanValue(delta) <= BaseRoll.meanValue(value)) { return delta; }
@@ -118,7 +122,7 @@ export default class FormulaField extends StringField {
   }
 
   /**
-   * Remove types from a formula that supports them. All types must be identifiers.
+   * Remove types from a formula that supports them. All types must be slugs.
    * @param {Teriock.System.FormulaString} formula
    * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
@@ -128,7 +132,7 @@ export default class FormulaField extends StringField {
   }
 
   /**
-   * Set types of a formula that supports them. All types must be identifiers.
+   * Set types of a formula that supports them. All types must be slugs.
    * @param {Teriock.System.FormulaString} formula
    * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
