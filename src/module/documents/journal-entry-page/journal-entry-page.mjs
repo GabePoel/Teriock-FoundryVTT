@@ -1,4 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
+import { BasePageSystem } from "../../data/systems/pages/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, IdentifierDocumentMixin } from "../mixins/_module.mjs";
 
@@ -75,24 +76,17 @@ export default class TeriockJournalEntryPage
   }
 
   /** @inheritDoc */
+  async _embedPanel(config, options = {}) {
+    if (!(this.system instanceof BasePageSystem)) { return null; }
+    return super._embedPanel(config, options);
+  }
+
+  /** @inheritDoc */
   _onClickDocumentLink(event) {
     this.revealedSubpage = true;
     const out = super._onClickDocumentLink(event);
     this.revealedSubpage = false;
     return out;
-  }
-
-  /** @inheritDoc */
-  async getPanelParts() {
-    const parts = await super.getPanelParts();
-    if (this.type !== "text") { return parts; }
-    return {
-      ...parts,
-      blocks: [{
-        text: `@Embed[${this.uuid} description inline]`,
-        title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      }],
-    };
   }
 
   /**
@@ -102,5 +96,11 @@ export default class TeriockJournalEntryPage
   getRollData() {
     if (typeof this.system?.getRollData === "function") { return this.system.getRollData(); }
     return {};
+  }
+
+  /** @inheritDoc */
+  async toTooltip(data = {}, options = {}) {
+    if (!(this.system instanceof BasePageSystem)) { return null; }
+    return super.toTooltip(data, options);
   }
 }

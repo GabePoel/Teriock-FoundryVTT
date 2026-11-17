@@ -55,6 +55,7 @@ const commandEnricher = {
     const entry = TERIOCK.CONFIG.command[key];
     const payload = parsed.arguments.length ? parsed.arguments[0] : "";
     const commandOptions = commands.buildOptions(payload, key);
+    const label = _loc(commands.getValue(key, "label", commandOptions));
     await game.teriock.identifiers.initializing;
     return TeriockTextEditor.createAnchor({
       classes: ["teriock-inline-command"],
@@ -62,12 +63,12 @@ const commandEnricher = {
         action: "executeCommand",
         command: key,
         relativeTo: options?.relativeTo?.uuid,
-        tooltip: commandOptions.apply ? entry.numeric?.take : entry.numeric?.deal,
+        tooltip: (entry.numeric ? (commandOptions.apply ? entry.numeric.take : entry.numeric.deal) : label)
+          || "TERIOCK.COMMANDS.Run",
         ...objectMap(commandOptions, v => typeof v === "string" ? v : JSON.stringify(v)),
       },
       icon: makeIconClass(commands.getValue(key, "icon", commandOptions), "inline"),
-      name: parsed.label
-        ?? (entry.numeric ? commandOptions.formula : _loc(commands.getValue(key, "label", commandOptions))),
+      name: parsed.label ?? (entry.numeric ? commandOptions.formula : label),
     });
   },
 };

@@ -42,9 +42,9 @@ export default class TeriockTooltipManager extends TooltipManager {
     if (!this.#validateUuid(uuid)) { return; }
     const application = foundry.applications.instances.get(element.closest(".application")?.id);
     const doc = await (application?.document?.fetchFromUuid?.(uuid) ?? fromUuid(uuid));
-    if (doc && typeof doc.toTooltip === "function" && doc.isViewer) {
-      element.dataset.tooltipHtml = await doc.toTooltip();
-    } else {
+    const html = doc?.isViewer ? await doc.toTooltip?.() : null;
+    if (html) { element.dataset.tooltipHtml = html; }
+    else {
       delete element.dataset.tooltipClass;
       delete element.dataset.tooltipHtml;
     }
