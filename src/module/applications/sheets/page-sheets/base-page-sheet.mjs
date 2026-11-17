@@ -91,7 +91,28 @@ export default class BasePageSheet
   }
 
   /** @inheritDoc */
+  _initializeApplicationOptions(options) {
+    const applicationOptions = super._initializeApplicationOptions(options);
+    if (applicationOptions.mode === "view") {
+      foundry.utils.setProperty(applicationOptions, "teriock.startLocked", false);
+    }
+    return applicationOptions;
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options) {
-    return Object.assign(await super._prepareContext(options), { imgPath: "system.img" });
+    const context = Object.assign(await super._prepareContext(options), { imgPath: "system.img" });
+    if (this.isView) {
+      // If we don't do this then the description looks weird next to normal text pages.
+      const description = context.displayFields.find(f => f.path === this.document.system.metadata.descriptionPath);
+      if (description) { description.label = ""; }
+    } else {
+      const category = this.document.parent?.categories.get(this.document.category);
+      context.displayTags.unshift({
+        label: category?.name ?? _loc("JOURNAL.Uncategorized"),
+        tooltip: _loc("DOCUMENT.JournalEntryCategory"),
+      });
+    }
+    return context;
   }
 }

@@ -9,6 +9,8 @@ import { makeIconClass } from "../../utils/_module.mjs";
  * @import { ApplicationV2, DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  * @import { ImagePopout } from "@client/applications/apps/_module.mjs";
  * @import { ImagePopoutConfiguration } from "@client/applications/apps/image-popout.mjs";
+ * @import { ProseMirrorDropDownConfig } from "@common/prosemirror/_types.mjs";
+ * @import ProseMirrorMenu from "@common/prosemirror/menu.mjs";
  */
 
 /**
@@ -208,8 +210,22 @@ function createChildHotbarDropMacro(hotbar, data, slot) {
 }
 
 /**
- * Sort the header controls of Teriock applications and of sheets for Teriock documents. This runs on the last hook in
- * the inheritance chain so that every added control is included.
+ * Move note inserts to the top of the format menu.
+ * @param {ProseMirrorMenu} _menu
+ * @param {Record<string, ProseMirrorDropDownConfig>} menus
+ * @see {getProseMirrorMenuDropDowns}
+ */
+function moveNoteInsertsMenu(_menu, menus) {
+  const entries = menus.format?.entries ?? [];
+  const index = entries.findIndex(e => e.action === "custom-inserts");
+  if (index < 0) { return; }
+  const custom = entries[index];
+  const notes = custom.children.findSplice(c => c.action === "teriock.notes");
+  if (notes) { entries.splice(index, custom.children.length ? 0 : 1, notes); }
+}
+
+/**
+ * Sort the document header control document sheets to be alphabetical. Modules might still break this though...
  * @param {ApplicationV2} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
@@ -237,6 +253,7 @@ const applicationHookEntries = [
   ["getHeaderControlsDocumentSheetV2", addWikiOpenToHeader],
   ["getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader],
   ["getHeaderControlsImagePopout", addShareImageToHeader],
+  ["getProseMirrorMenuDropDowns", moveNoteInsertsMenu],
   ["hotbarDrop", createChildHotbarDropMacro],
   ["renderApplicationV2", addDeveloperModeLoggingListener],
   ["renderDocumentSheetV2", addIdentifierClipboardListener],

@@ -46,13 +46,24 @@ export default class BasePageSystem
   /** @inheritDoc */
   get _displayInputs() {
     return [...super._displayInputs, {
-      choices: this.parent
-        ? Object.fromEntries(
-          this.parent.parent?.categories.contents.sort((a, b) => a.sort - b.sort).map(c => [c.id, c.name]),
-        )
-        : {},
+      choices: {
+        "": _loc("JOURNAL.Uncategorized"),
+        ...Object.fromEntries(
+          this.parent.parent?.categories.contents.sort((a, b) => a.sort - b.sort).map(c => [c.id, c.name]) ?? [],
+        ),
+      },
       path: "category",
+    }, {
+      choices: Object.fromEntries(
+        Array.fromRange(3, 1).map(level => [level, _loc("JOURNALENTRYPAGE.Level", { level })]),
+      ),
+      path: "title.level",
     }];
+  }
+
+  /** @inheritDoc */
+  get _displayToggles() {
+    return [...super._displayToggles, "title.show"];
   }
 
   /** @inheritDoc */

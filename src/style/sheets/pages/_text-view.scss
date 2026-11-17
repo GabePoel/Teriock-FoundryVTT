@@ -2,17 +2,26 @@
 
 .teriock-page-header {
   @include mixins.centralize;
+  --page-img-size: 48px;
   display: flex;
   flex-direction: row;
   margin-block: 4px;
   margin-left: 6px;
 
+  &:has(> h2) {
+    --page-img-size: 40px;
+  }
+
+  &:has(> :is(h3, h4, h5, h6)) {
+    --page-img-size: 32px;
+  }
+
   .teriock-page-img {
-    @include mixins.simple-two-layer-image(48px, 6px, 0.5, 5px);
+    @include mixins.simple-two-layer-image(var(--page-img-size), 6px, 0.5, 5px);
     margin-right: 0.8rem;
   }
 
-  h1 {
+  h1, h2, h3, h4, h5, h6 {
     width: 100%;
   }
 }
@@ -23,4 +32,12 @@
   .page-tag {
     @include mixins.tag-style;
   }
+}
+
+:is(.teriock-page-header, .teriock-page-tags) + .journal-page-content {
+  margin-top: 0.75rem;
+}
+
+.journal-page-content .form-group:has(> label:empty) .editor-content > :first-child {
+  margin-top: 0;
 }

@@ -21,18 +21,36 @@
       </div>
       {{{concat "<h" title.level ">" name "</h" title.level ">"}}}
     </header>
+    {{#if (exists displayTags)}}
+      <div class="teriock-page-tags">
+        {{#each displayTags as |tag|}}
+          <span
+            class="page-tag"
+            {{#if (exists tag.tooltip)}}
+            data-tooltip="{{ tag.tooltip }}"
+            {{/if}}
+          >
+            {{tag.label}}
+          </span>
+        {{/each}}
+      </div>
+    {{/if}}
   {{/if}}
-  <div class="teriock-page-tags">
-    {{#each displayTags as |tag|}}
-      <span
-        class="page-tag"
-        {{#if (exists tag.tooltip)}}
-        data-tooltip="{{ tag.tooltip }}"
-        {{/if}}
-      >
-        {{tag.label}}
-      </span>
+  <section class="journal-page-content teriock-text-fields">
+    {{#each displayFields}}
+      <aside class="teriock-sheet-section-container">
+        {{formGroup
+          schema
+          classes=(toClass classes)
+          dataset=(object disable="true")
+          disabled=true
+          enriched=enriched
+          label=label
+          value=value
+          rootId=@root/appId
+          toggled=true
+        }}
+      </aside>
     {{/each}}
-  </div>
-  <section class="journal-page-content">{{{text.enriched}}}</section>
+  </section>
 </div>

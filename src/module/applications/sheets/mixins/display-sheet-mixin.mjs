@@ -108,14 +108,13 @@ export default function DisplaySheetMixin(Base) {
      */
     #prepareMenuSections(emptyFields) {
       const { groups, subgroups } = TERIOCK.CONFIG.display;
-      const text = `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`;
       this.#addOptions = [
         ...emptyFields.filter(f => f.editable).map(f => ({
           group: f.group,
           id: f.path,
           label: f.addLabel || f.label,
           subgroup: f.subgroup,
-          update: { [f.path]: text },
+          update: { [f.path]: `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>` },
         })),
         ...this.document.system._displayAddOptions.map(o => ({ ...o, label: _loc(o.label) })),
       ];

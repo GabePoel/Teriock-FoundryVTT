@@ -1,5 +1,4 @@
 import { fromIdentifier, getName } from "../../../utils/_module.mjs";
-import { TeriockTextEditor } from "../../ux/_module.mjs";
 import BasePageSheet from "./base-page-sheet.mjs";
 
 export default class ClassSheet extends BasePageSheet {
@@ -9,9 +8,6 @@ export default class ClassSheet extends BasePageSheet {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    context.instructions = await TeriockTextEditor.enrichHTML(this.document.system.instructions, {
-      relativeTo: this.document,
-    });
     const archetype = await fromIdentifier(`archetype:${this.document.system.archetype}`);
     if (archetype) {
       const archetypePanel = await archetype?.toPanel();
