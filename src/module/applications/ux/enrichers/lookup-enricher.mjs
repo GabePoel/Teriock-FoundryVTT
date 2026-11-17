@@ -6,7 +6,7 @@ const lookupEnricher = {
   format: { aliases: ["lookup"], hasConfig: true, hasMultipleArguments: true, type: "display" },
   process: async (inputs, options) => {
     let key = inputs.arguments[0];
-    // We don't have any special handling for roll data. But since lots of other systems do, we accomodate "@" prefixes.
+    // We don't have any special handling for roll data. But since other systems do, we accommodate "@" prefixes.
     if (key.startsWith("@")) { key = key.slice(1); }
     let textContent = "";
     const doc = options?.relativeTo;

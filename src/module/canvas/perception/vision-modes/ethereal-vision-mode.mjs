@@ -6,7 +6,7 @@ const { shaders } = foundry.canvas.rendering;
 const DESATURATION = { postProcessingModes: ["SATURATION"], uniforms: { saturation: -0.75, tint: [1, 1, 1] } };
 
 /**
- * Everything is in black and white, and there's an odd emanating haze.
+ * Everything is in black and white and there's an odd emanating haze.
  *
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)

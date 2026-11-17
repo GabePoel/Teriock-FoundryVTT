@@ -22,7 +22,7 @@ export default class TeriockDragDrop extends DragDrop {
    */
   static #onDragEnd(event) {
     TeriockDragDrop.dragStartApplication?._onDragEnd(event);
-    // No drop happened anywhere, so let the application under the release point explain a rejection.
+    // No drop happened anywhere, so let the application the point the released happened try to explain it.
     if (event.dataTransfer.dropEffect === "none") {
       const element = document.elementFromPoint(event.clientX, event.clientY);
       const application = foundry.applications.instances.get(element?.closest?.(".application")?.id);
