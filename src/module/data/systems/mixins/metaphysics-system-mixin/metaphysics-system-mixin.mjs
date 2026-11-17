@@ -47,7 +47,7 @@ export default function MetaphysicsSystemMixin(Base) {
 
     /** @inheritDoc */
     get _formPaths() {
-      return [...super._formPaths, ...this._formPathsMetaphysics];
+      return [...super._formPaths, { legend: "TERIOCK.COMMON.Metaphysics", paths: this._formPathsMetaphysics }];
     }
 
     /**

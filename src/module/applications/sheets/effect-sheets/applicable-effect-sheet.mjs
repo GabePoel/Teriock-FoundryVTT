@@ -103,10 +103,7 @@ export default class ApplicableEffectSheet
 
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
-    if (this.#editorForms) {
-      const disabledGroup = result.details?.querySelector(".form-group:has(.form-fields input[name='disabled'])");
-      if (disabledGroup) { disabledGroup.after(this.#editorForms); }
-    }
+    if (this.#editorForms) { result.details?.append(this.#editorForms); }
     super._replaceHTML(result, content, options);
   }
 }

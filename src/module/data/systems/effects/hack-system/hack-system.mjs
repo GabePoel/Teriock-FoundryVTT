@@ -38,7 +38,7 @@ export default class HackSystem extends ApplicableEffectSystem {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["permanent", "part", "escalation", ...super._formPaths];
+    return [...super._formPaths, { legend: "TERIOCK.COMMON.Hack", paths: ["permanent", "part", "escalation"] }];
   }
 
   /** @inheritDoc */

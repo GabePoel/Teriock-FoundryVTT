@@ -18,13 +18,9 @@ export default class ImbuementSystem extends mixClasses(ExecutedEffectSystem, Gr
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      "applyIfDampened",
-      "applyIfDeattuned",
-      "applyIfDestroyed",
-      "applyIfShattered",
-      "applyIfUnequipped",
-      ...super._formPaths,
-    ];
+    return [...super._formPaths, {
+      legend: "TERIOCK.COMMON.Suppression",
+      paths: ["applyIfDampened", "applyIfDeattuned", "applyIfDestroyed", "applyIfShattered", "applyIfUnequipped"],
+    }];
   }
 }

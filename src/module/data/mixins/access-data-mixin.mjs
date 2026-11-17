@@ -21,7 +21,7 @@ export default function AccessDataMixin(Base) {
 
     /**
      * Paths to forms to display in the editor.
-     * @returns {string[]}
+     * @returns {(string|{ legend: string, paths: string[] })[]}
      */
     get _formPaths() {
       return [];
@@ -97,15 +97,24 @@ export default function AccessDataMixin(Base) {
      * @returns {HTMLElement[]}
      */
     _makeFormGroups(paths, config = {}) {
-      const visiblePaths = paths.filter(p => p === "hr" || checkFieldVisibility(this.getFieldForProperty(p), this));
+      const visiblePaths = paths.filter(p =>
+        typeof p === "object" || p === "hr" || checkFieldVisibility(this.getFieldForProperty(p), this)
+      );
       const cleanedPaths = visiblePaths.filter((p, i) => p !== "hr" || visiblePaths[i - 1] !== "hr").filter((
         p,
         i,
         arr,
       ) => p !== "hr" || (i > 0 && i < arr.length - 1));
-      return cleanedPaths.map(
-        p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p, {}, {}, config))
-      );
+      return cleanedPaths.map(p => {
+        if (p === "hr") { return document.createElement("hr"); }
+        if (typeof p === "string") { return this._makeFormGroup(p, {}, {}, config); }
+        const fieldset = createElement("fieldset", { className: "teriock-full-width teriock-form-container" });
+        fieldset.append(
+          createElement("legend", { textContent: _loc(p.legend) }),
+          ...this._makeFormGroups(p.paths, config),
+        );
+        return fieldset;
+      });
     }
 
     /**
