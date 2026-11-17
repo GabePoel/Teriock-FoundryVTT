@@ -8,21 +8,21 @@ export default function TerrainDocumentMixin(Base) {
   /** @mixin */
   class TerrainDocument extends Base {
     /**
-     * Less specific terrains that don't apply to tokens.
-     * @returns {Set<Teriock.Keys.Terrain>}
+     * How this changes less specific terrains.
+     * @returns {Teriock.Keys.TerrainMode}
      */
-    get removedTerrains() {
-      const terrains = this.getFlag("teriock", "removedTerrains");
-      return new Set(Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain, t)) : []);
+    get terrainMode() {
+      const mode = this.getFlag("teriock", "terrainMode");
+      return Object.hasOwn(TERIOCK.CONFIG.terrain.modes, mode) ? mode : "add";
     }
 
     /**
-     * Terrains to apply to tokens.
+     * Terrains to change.
      * @returns {Set<Teriock.Keys.Terrain>}
      */
     get terrains() {
       const terrains = this.getFlag("teriock", "terrains");
-      return new Set(Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain, t)) : []);
+      return new Set(Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain.terrains, t)) : []);
     }
 
     /** @inheritDoc */

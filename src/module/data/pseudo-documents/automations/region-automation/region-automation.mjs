@@ -53,7 +53,7 @@ export default class RegionAutomation
       "deleteOnTurnChange",
       "hr",
       "setTerrain",
-      ...(this.setTerrain ? ["terrain.difficultTerrain", "terrain.terrains", "terrain.removedTerrains"] : []),
+      ...(this.setTerrain ? ["terrain.difficultTerrain", "terrain.terrainMode", "terrain.terrains"] : []),
       "hr",
       "applyDocuments",
       ...(this.applyDocuments ? this._selectionPaths : []),
@@ -100,11 +100,10 @@ export default class RegionAutomation
       ...this.data,
     });
     if (this.setTerrain) {
-      const { difficultTerrain, removedTerrains, terrains } = this.terrain;
       data.behaviors ??= [];
       data.behaviors.push({
         name: _loc("TYPES.RegionBehavior.terrain"),
-        system: { difficultTerrain, removedTerrains: removedTerrains.toObject(), terrains: terrains.toObject() },
+        system: { ...this.terrain, terrains: this.terrain.terrains.toObject() },
         type: "terrain",
       });
     }

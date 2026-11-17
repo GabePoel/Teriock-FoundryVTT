@@ -9,7 +9,7 @@ export default class TeriockSceneConfig extends SceneConfig {
    * @category Terrain
    */
   _replaceHTML(result, content, options) {
-    const { removedTerrains, terrains } = terrainSchema();
+    const { terrainMode, terrains } = terrainSchema();
     const fieldset = document.createElement("fieldset");
     fieldset.innerHTML = `<legend>${_loc("TERIOCK.SCHEMA.Terrains.label")}</legend>`;
     fieldset.append(
@@ -18,10 +18,10 @@ export default class TeriockSceneConfig extends SceneConfig {
         rootId: this.id,
         value: Array.from(this.document.terrains),
       }),
-      removedTerrains.toFormGroup({ rootId: this.id }, {
-        name: "flags.teriock.removedTerrains",
+      terrainMode.toFormGroup({ rootId: this.id }, {
+        name: "flags.teriock.terrainMode",
         rootId: this.id,
-        value: Array.from(this.document.removedTerrains),
+        value: this.document.terrainMode,
       }),
     );
     result.environment?.prepend(fieldset);

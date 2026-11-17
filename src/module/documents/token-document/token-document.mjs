@@ -142,19 +142,32 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   get terrains() {
     let terrains = game.settings.get("teriock", "terrains");
-    for (const doc of [this.parent, this.parent?.levels.get(this.level)]) {
-      if (doc) { terrains = terrains.difference(doc.removedTerrains).union(doc.terrains); }
-    }
-    const added = new Set();
-    for (const region of this.regions ?? []) {
-      for (const behavior of region.behaviors) {
-        if (behavior.type === "terrain" && behavior.active) {
-          behavior.system.removedTerrains.forEach(t => terrains.delete(t));
-          behavior.system.terrains.forEach(t => added.add(t));
+    const layers = [
+      [this.parent],
+      [this.parent?.levels.get(this.level)],
+      ...Array.from(this.regions ?? [], r => r.behaviors.documentsByType.terrain.filter(b => b.active).map(b => b.system)),
+    ];
+    for (const layer of layers) {
+      let subtracted = new Set();
+      for (const { terrainMode, terrains: changed } of layer.filter(Boolean)) {
+        switch (terrainMode) {
+          case "add":
+            terrains = terrains.union(changed);
+            break;
+          case "subtract":
+            subtracted = subtracted.union(changed);
+            break;
+          case "override":
+            terrains = new Set(changed);
+            subtracted = new Set();
+            break;
+          default:
+            break;
         }
       }
+      terrains = terrains.difference(subtracted);
     }
-    return terrains.union(added);
+    return terrains;
   }
 
   /**

@@ -33,7 +33,8 @@ declare global {
     export type Attribute = keyof typeof CONFIG.attribute;
 
     // Terrain Keys
-    export type Terrain = keyof typeof CONFIG.terrain;
+    export type Terrain = keyof typeof CONFIG.terrain.terrains;
+    export type TerrainMode = keyof typeof CONFIG.terrain.modes;
 
     // Stat Keys
     export type Stat = keyof typeof statConfig;

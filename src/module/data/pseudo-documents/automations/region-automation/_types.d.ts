@@ -5,7 +5,7 @@ declare module "./region-automation.mjs" {
     setTerrain: boolean;
     terrain: {
       difficultTerrain: boolean;
-      removedTerrains: Set<Teriock.Keys.Terrain>;
+      terrainMode: Teriock.Keys.TerrainMode;
       terrains: Set<Teriock.Keys.Terrain>;
     };
     visibility: number;

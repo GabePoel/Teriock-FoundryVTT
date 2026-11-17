@@ -182,6 +182,8 @@ declare global {
 
     export type TerrainEntry = { img: string, label: string };
 
+    export type TerrainModeEntry = { label: string };
+
     export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number, slug: Slug };
 
     export type ManeuverEntry = {

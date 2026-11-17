@@ -189,7 +189,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       context.activeSpeedAdjustments = Object.fromEntries(
         Array.from(this.document.system.activeSpeedAdjustments, k => [k, true]),
       );
-      context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain[t]);
+      context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain.terrains[t]);
       const sourceWeight = this.document.system.weight.self.clone();
       context.weight = {
         data: this.document.system.weight.self.tag,

@@ -437,7 +437,7 @@ export function tradecraftsField(options = {}) {
  * @category Terrain
  */
 export function terrainsField(options = {}) {
-  return new SetField(new StringField({ choices: TERIOCK.CONFIG.terrain }), {
+  return new SetField(new StringField({ choices: TERIOCK.CONFIG.terrain.terrains }), {
     hint: _sloc("TERIOCK.SCHEMA.Terrains.hint"),
     label: _sloc("TERIOCK.SCHEMA.Terrains.label"),
     ...options,
@@ -445,8 +445,8 @@ export function terrainsField(options = {}) {
 }
 
 /**
- * Schema fields for adding and removing terrains.
- * @returns {Record<"difficultTerrain" | "removedTerrains" | "terrains", BooleanField | SetField>}
+ * Schema fields for changing terrains.
+ * @returns {Record<"difficultTerrain" | "terrainMode" | "terrains", BooleanField | SetField | StringField>}
  * @category Terrain
  */
 export function terrainSchema() {
@@ -455,14 +455,14 @@ export function terrainSchema() {
       hint: _sloc("TERIOCK.SCHEMA.DifficultTerrain.hint"),
       label: _sloc("TERIOCK.SCHEMA.DifficultTerrain.label"),
     }),
-    removedTerrains: terrainsField({
-      hint: _sloc("TERIOCK.SCHEMA.RemovedTerrains.hint"),
-      label: _sloc("TERIOCK.SCHEMA.RemovedTerrains.label"),
+    terrainMode: new StringField({
+      choices: objectMap(TERIOCK.CONFIG.terrain.modes, m => m.label, { localize: true }),
+      hint: _sloc("TERIOCK.SCHEMA.TerrainMode.hint"),
+      initial: "add",
+      label: _sloc("TERIOCK.SCHEMA.TerrainMode.label"),
+      required: true,
     }),
-    terrains: terrainsField({
-      hint: _sloc("TERIOCK.SCHEMA.AddedTerrains.hint"),
-      label: _sloc("TERIOCK.SCHEMA.AddedTerrains.label"),
-    }),
+    terrains: terrainsField(),
   };
 }
 

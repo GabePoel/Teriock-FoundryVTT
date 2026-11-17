@@ -146,7 +146,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.character.sense).forEach(([k, v]) => {
     Object.assign(actorContext, { [`sense.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.sense", { name: v.label }) });
   });
-  Object.entries(TERIOCK.CONFIG.terrain).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.terrain.terrains).forEach(([k, v]) => {
     Object.assign(actorContext, { [`terrain.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.terrain", { name: v.label }) });
   });
   Object.entries(TERIOCK.STATUSES.conditions).forEach(([k, v]) => {
