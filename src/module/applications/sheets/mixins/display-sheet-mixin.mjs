@@ -26,7 +26,7 @@ export default function DisplaySheetMixin(Base) {
      * @this {DisplaySheet}
      */
     static async #onAddOption(_event, target) {
-      const option = this.#addOptions.find(o => o.value === target.previousElementSibling.value);
+      const option = this.#addOptions.find(o => o.id === target.previousElementSibling.value);
       if (this.isEditable && option) { await this.document.update(option.update); }
     }
 
@@ -55,7 +55,7 @@ export default function DisplaySheetMixin(Base) {
 
     /** @type {Record<string, HandlebarsTemplatePart>} */
     static MENU_PARTS = {
-      menu: { template: "teriock/sheets/shared/simple-menu", templates: ["templates/generic/tab-navigation.hbs"] },
+      menu: { template: "teriock/sheets/shared/menu", templates: ["templates/generic/tab-navigation.hbs"] },
     };
 
     /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -63,7 +63,7 @@ export default function DisplaySheetMixin(Base) {
 
     /**
      * Options for adding fields and values from the sheet menu.
-     * @type {(Teriock.Display.DisplayButton & { value: string })[]}
+     * @type {Teriock.Display.DisplayAddOption[]}
      */
     #addOptions = [];
 
@@ -112,12 +112,12 @@ export default function DisplaySheetMixin(Base) {
       this.#addOptions = [
         ...emptyFields.filter(f => f.editable).map(f => ({
           group: f.group,
-          label: f.button || f.label,
+          id: f.path,
+          label: f.addLabel || f.label,
           subgroup: f.subgroup,
           update: { [f.path]: text },
-          value: f.path,
         })),
-        ...this.document.system._displayButtons.map(b => ({ ...b, label: _loc(b.label), value: b.button })),
+        ...this.document.system._displayAddOptions.map(o => ({ ...o, label: _loc(o.label) })),
       ];
       const fields = [
         ...this.#expandFields(this.document.system._displayToggles).map(f => ({ ...f, kind: "toggles" })),
@@ -131,7 +131,7 @@ export default function DisplaySheetMixin(Base) {
         group.sort((a, b) => (a.label ?? "").localeCompare(b.label ?? "", game.i18n.lang));
         const { adds = [], inputs, toggles } = Object.groupBy(group, f => f.kind);
         return {
-          adds: adds.map(({ label, subgroup, value }) => ({ group: subgroups[subgroup ?? "overview"], label, value })),
+          adds: adds.map(({ id, label, subgroup }) => ({ group: subgroups[subgroup ?? "overview"], label, value: id })),
           group: "menu",
           id,
           inputs,

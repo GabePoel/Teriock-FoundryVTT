@@ -86,31 +86,31 @@ export default class AbilitySystem
   }
 
   /** @inheritDoc */
-  get _displayButtons() {
-    const buttons = super._displayButtons;
+  get _displayAddOptions() {
+    const options = super._displayAddOptions;
     if (!this.expansion.type) {
-      buttons.push({
-        button: "expansion",
+      options.push({
+        id: "expansion",
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
         subgroup: "activation",
         update: { "system.expansion": "detonate" },
       });
     } else if (!this.expansion.cap) {
-      buttons.push({
-        button: "expansionCap",
+      options.push({
+        id: "expansionCap",
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label",
         subgroup: "activation",
         update: { "system.expansion.cap": "1" },
       });
     }
-    return buttons;
+    return options;
   }
 
   /** @inheritDoc */
   get _displayFieldsContent() {
     const fields = [
       {
-        button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
+        addLabel: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
         classes: [TERIOCK.DISPLAY.panels.styles.elderSorcery],
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", { elements: this.elementString }),
         path: "system.elderSorceryIncant",
@@ -118,7 +118,7 @@ export default class AbilitySystem
       },
       ...Object.entries(TERIOCK.CONFIG.stat).map(([k, v]) => {
         return {
-          button: _loc("TERIOCK.COSTS.Long.description", { key: v.label }),
+          addLabel: _loc("TERIOCK.COSTS.Long.description", { key: v.label }),
           group: "costs",
           path: `system.costs.primary.${k}.description`,
           subgroup: "descriptions",

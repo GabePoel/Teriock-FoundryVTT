@@ -108,13 +108,13 @@ export default function AbilityCostsPart(Base) {
     }
 
     /** @inheritDoc */
-    get _displayButtons() {
-      const buttons = super._displayButtons;
+    get _displayAddOptions() {
+      const options = super._displayAddOptions;
       for (const [k, v] of Object.entries(TERIOCK.CONFIG.stat)) {
         if (!FormulaField.exists(this.costs.primary[k].formula)) {
-          buttons.push({
-            button: `cost${k.capitalize()}`,
+          options.push({
             group: "costs",
+            id: `cost${k.capitalize()}`,
             label: _loc("TERIOCK.COSTS.Long.formula", { key: v.label }),
             subgroup: "formulas",
             update: { [`system.costs.primary.${k}.formula`]: "1" },
@@ -123,16 +123,16 @@ export default function AbilityCostsPart(Base) {
       }
       for (const [k, v] of Object.entries(TERIOCK.CONFIG.cost.tweaks)) {
         if (!this.costs.tweaks[k]) {
-          buttons.push({
-            button: `tweak${k.capitalize()}`,
+          options.push({
             group: "costs",
+            id: `tweak${k.capitalize()}`,
             label: v.label,
             subgroup: "tweaks",
             update: { [`system.costs.tweaks.${k}`]: 1 },
           });
         }
       }
-      return buttons;
+      return options;
     }
 
     /** @inheritDoc */

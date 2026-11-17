@@ -1,0 +1,78 @@
+<div class="teriock-sheet-menu collapsible collapsed" data-collapsible-id="menu">
+  <div
+    class="
+      teriock-sheet-menu-content
+      {{#if wideToggles}}
+        wide-toggles
+      {{/if}}
+    "
+  >
+    {{#if menuSections.[1]}}
+      {{> "templates/generic/tab-navigation.hbs"
+        tabs=menuSections
+        tabClasses="teriock-sheet-menu-tabs"
+      }}
+    {{/if}}
+    {{#each menuSections}}
+      <section class="tab teriock-sheet-menu-section {{ cssClass }}" data-group="menu" data-tab="{{ id }}">
+        {{#if (exists toggles)}}
+          <div class="teriock-sheet-menu-bar">
+            <div class="ttable">
+              {{#each toggles}}
+                {{formGroup
+                  schema
+                  classes=(formClasses @root/document cssClass="tgrid-item" path=path)
+                  dataset=dataset
+                  disabled=(not (and @root/editable editable))
+                  label=label
+                  value=value
+                  rootId=@root/appId
+                }}
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+        {{#if (exists inputs)}}
+          <div class="teriock-sheet-menu-bar">
+            <div class="ttable teriock-sheet-select-grid">
+              {{#each inputs}}
+                <div class="tgrid-item {{formClasses @root/document path=path}}">
+                  <div class="teriock-sheet-multi-select-label standard-form">
+                    <label class="tsubtle" for="{{ @root/appId }}-{{ path }}">{{localize schema.label}}</label>
+                    {{formInput
+                      schema
+                      value=value
+                      model=model
+                      rootId=@root/appId
+                      id=(concat @root/appId "-" path)
+                      disabled=(not @root/editable)
+                      choices=choices
+                    }}
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+        {{#if (exists adds)}}
+          <div class="teriock-sheet-menu-bar">
+            <div class="teriock-sheet-multi-select-label standard-form">
+              <label class="tsubtle" for="{{ @root/appId }}-add-{{ id }}">{{localize "TERIOCK.COMMON.Field"}}</label>
+              <div class="teriock-sheet-add-bar">
+                <select id="{{ @root/appId }}-add-{{ id }}">
+                  {{selectOptions
+                    adds
+                    sort=true
+                  }}
+                </select>
+                <button type="button" data-action="addOption" data-tooltip="TERIOCK.SHEETS.Child.DISPLAY.add">
+                  {{makeIcon @root/TERIOCK.DISPLAY.icons.manifest.ui.add "button"}}
+                </button>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </section>
+    {{/each}}
+  </div>
+</div>

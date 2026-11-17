@@ -108,10 +108,10 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
-     * Custom buttons to activate things from sheet menus. Should not toggle HTML fields.
-     * @returns {Teriock.Display.DisplayButton[]}
+     * Options to add values from the sheet menu that aren't HTML fields from {@link _displayFields}.
+     * @returns {Teriock.Display.DisplayAddOption[]}
      */
-    get _displayButtons() {
+    get _displayAddOptions() {
       return [];
     }
 

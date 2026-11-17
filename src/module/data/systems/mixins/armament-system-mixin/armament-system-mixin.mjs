@@ -145,54 +145,54 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /** @inheritDoc */
-    get _displayButtons() {
-      const buttons = super._displayButtons;
+    get _displayAddOptions() {
+      const options = super._displayAddOptions;
       if (!this.damage.base) {
-        buttons.push({
-          button: "damage",
+        options.push({
           group: "combat",
+          id: "damage",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
           subgroup: "offense",
           update: { "system.damage.base": "1" },
         });
       }
       if (!this.av.raw) {
-        buttons.push({
-          button: "av",
+        options.push({
           group: "combat",
+          id: "av",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
           subgroup: "defense",
           update: { "system.av.raw": "1" },
         });
       }
       if (!this.bv.raw) {
-        buttons.push({
-          button: "bv",
+        options.push({
           group: "combat",
+          id: "bv",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
           subgroup: "defense",
           update: { "system.bv.raw": "1" },
         });
       }
       if (!FormulaField.exists(this.hitBonus)) {
-        buttons.push({
-          button: "hit",
+        options.push({
           group: "combat",
+          id: "hit",
           label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
           subgroup: "offense",
           update: { "system.hitBonus": "1" },
         });
       }
       if (this.range.ranged && !FormulaField.exists(this.range.long.raw)) {
-        buttons.push({
-          button: "range",
+        options.push({
           group: "combat",
+          id: "range",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
           subgroup: "offense",
           update: { "system.range.long.raw": "5" },
         });
       }
-      return buttons;
+      return options;
     }
 
     /** @inheritDoc */

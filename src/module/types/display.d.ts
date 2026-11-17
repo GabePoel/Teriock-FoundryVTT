@@ -3,7 +3,7 @@ import { HTMLField } from "@common/data/fields.mjs";
 declare global {
   namespace Teriock.Display {
     export type FancyDisplayField = {
-      button?: string;
+      addLabel?: string;
       choices?: Record<string, string>;
       classes: string[];
       dataset: Record<string, string>;
@@ -18,9 +18,9 @@ declare global {
 
     export type DisplayField = string | Partial<FancyDisplayField>;
 
-    export type DisplayButton = {
-      button: string;
+    export type DisplayAddOption = {
       group?: string;
+      id: string;
       label: string;
       subgroup?: string;
       update: Record<string, unknown>;
