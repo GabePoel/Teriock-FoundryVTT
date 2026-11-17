@@ -1,5 +1,5 @@
 import { objectMap } from "../../../../utils/_module.mjs";
-import { TernaryField } from "../../../fields/_module.mjs";
+import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import MetaphysicsPreviewModel from "../metaphysics-preview-model/metaphysics-preview-model.mjs";
 
@@ -62,7 +62,10 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
     const costs = document.system.costs;
     const filters = this.filters.costs;
     for (const key of Object.keys(filters.primary)) {
-      if (!this._checkTernaryFilter(filters.primary[key], costs?.primary?.[key]?.type)) { return false; }
+      const cost = costs?.primary?.[key];
+      if (!this._checkTernaryFilter(filters.primary[key], FormulaField.exists(cost?.formula) || cost?.description)) {
+        return false;
+      }
     }
     for (const key of Object.keys(filters.components)) {
       if (!this._checkTernaryFilter(filters.components[key], costs?.components?.[key]?.type)) { return false; }

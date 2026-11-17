@@ -54,7 +54,7 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.score.attribute) { inputs.push("system.upgrades.score.value"); }
       inputs.push("system.upgrades.competence.attribute");
       if (this.upgrades.competence.attribute) { inputs.push("system.upgrades.competence.value"); }
-      return inputs;
+      return inputs.map(path => ({ group: "attributes", path }));
     }
 
     /** @inheritDoc */

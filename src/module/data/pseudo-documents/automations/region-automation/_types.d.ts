@@ -3,11 +3,7 @@ declare module "./region-automation.mjs" {
     applyDocuments: boolean;
     deleteOnTurnChange: boolean;
     setTerrain: boolean;
-    terrain: {
-      difficultTerrain: boolean;
-      terrainMode: Teriock.Keys.TerrainMode;
-      terrains: Set<Teriock.Keys.Terrain>;
-    };
+    terrain: { difficultTerrain: boolean, terrainMode: Teriock.Keys.TerrainMode, terrains: Set<Teriock.Keys.Terrain> };
     visibility: number;
   }
 }

@@ -34,7 +34,10 @@ export default function MetaphysicsSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsMetaphysics() {
-      return ["system.powerSources", "system.elements", "system.effectTypes"];
+      return ["system.powerSources", "system.elements", "system.effectTypes"].map(path => ({
+        group: "metaphysics",
+        path,
+      }));
     }
 
     /** @inheritDoc */

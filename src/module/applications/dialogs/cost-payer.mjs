@@ -99,13 +99,15 @@ export default class CostPayer extends ResolvableDialog {
     Object.assign(this.state.costOptions.tweaks, this.#ability.system.costs.tweaks);
     this.state.sources = {};
     this.#costs = new Set(
-      Object.entries(this.#ability.system.costs.primary).filter(([_k, v]) => v.type).map(([k, _v]) => k),
+      Object.entries(this.#ability.system.costs.primary).filter(([_k, v]) =>
+        FormulaField.exists(v.formula) || v.description
+      ).map(([k, _v]) => k),
     );
     if (this.#execution.canHeighten) { this.#costs.add("mp"); }
     const actor = this.#execution.actor;
     const consumptions = actor?.system.automations.getTypeSync("consumption", { active: true }) ?? [];
     for (const k of this.#costs) {
-      if (this.#ability.system.costs.primary[k].type === "formula") {
+      if (FormulaField.exists(this.#ability.system.costs.primary[k].formula)) {
         this.state.costOptions.primary[k] = this.#ability.system.costs.primary[k].formula;
       }
       this.#sources[k] = actor?.previewed.filter(d =>
@@ -174,7 +176,7 @@ export default class CostPayer extends ResolvableDialog {
   #requiresInteraction() {
     if (this.#execution.canHeighten) { return true; }
     return Object.entries(this.#ability.system.costs.primary).some(([k, v]) =>
-      v.type === "description" && !this.#execution.options[`no${k.capitalize()}`]
+      v.description && !FormulaField.exists(v.formula) && !this.#execution.options[`no${k.capitalize()}`]
     );
   }
 

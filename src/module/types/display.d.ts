@@ -8,15 +8,23 @@ declare global {
       classes: string[];
       dataset: Record<string, string>;
       editable: boolean;
+      group?: string;
       label: string;
       path: string;
+      subgroup?: string;
       value: never;
       visible: boolean;
     };
 
     export type DisplayField = string | Partial<FancyDisplayField>;
 
-    export type DisplayButton = { button: string, label: string, update: Record<string, unknown> };
+    export type DisplayButton = {
+      button: string;
+      group?: string;
+      label: string;
+      subgroup?: string;
+      update: Record<string, unknown>;
+    };
 
     export type FancyDisplayTag = { label: string, tooltip?: string };
 

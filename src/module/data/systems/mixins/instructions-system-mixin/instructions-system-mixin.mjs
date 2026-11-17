@@ -36,10 +36,15 @@ export default function InstructionsSystemMixin(Base) {
 
     /** @inheritDoc */
     get _displayFieldsImportant() {
-      return [{ classes: [TERIOCK.DISPLAY.panels.styles.instructions, "theme-dark"], path: "system.instructions" }, {
-        classes: [TERIOCK.DISPLAY.panels.styles.gmNotes],
-        path: "system.gmNotes",
-      }, ...super._displayFieldsImportant];
+      return [
+        {
+          classes: [TERIOCK.DISPLAY.panels.styles.instructions, "theme-dark"],
+          path: "system.instructions",
+          subgroup: "notes",
+        },
+        { classes: [TERIOCK.DISPLAY.panels.styles.gmNotes], path: "system.gmNotes", subgroup: "notes" },
+        ...super._displayFieldsImportant,
+      ];
     }
   }
 

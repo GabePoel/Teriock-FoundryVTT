@@ -7,8 +7,18 @@
       {{/if}}
     "
   >
-    {{> "teriock/sheets/shared/display-toggles"}}
-    {{> "teriock/sheets/shared/display-inputs"}}
-    {{> "teriock/sheets/shared/display-field-buttons"}}
+    {{#if menuSections.[1]}}
+      {{> "templates/generic/tab-navigation.hbs"
+        tabs=menuSections
+        tabClasses="teriock-sheet-menu-tabs"
+      }}
+    {{/if}}
+    {{#each menuSections}}
+      <section class="tab teriock-sheet-menu-section {{ cssClass }}" data-group="menu" data-tab="{{ id }}">
+        {{> "teriock/sheets/shared/display-toggles"}}
+        {{> "teriock/sheets/shared/display-inputs"}}
+        {{> "teriock/sheets/shared/display-field-buttons"}}
+      </section>
+    {{/each}}
   </div>
 </div>

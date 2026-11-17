@@ -119,9 +119,9 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get _displayFieldsContent() {
     return [
-      ...POOL_STATS.map(k => `system.${k}Increase`),
-      "system.attributeIncrease",
-      "system.innateRanks",
+      ...[...POOL_STATS.map(k => `system.${k}Increase`), "system.attributeIncrease", "system.innateRanks"].map(
+        path => ({ path, subgroup: "upgrades" })
+      ),
       ...super._displayFieldsContent,
     ];
   }

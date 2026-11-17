@@ -1,34 +1,18 @@
-{{#if (or (exists displayFieldButtons) (exists displayButtons))}}
+{{#if (exists adds)}}
   <div class="teriock-sheet-menu-bar">
-    <div class="ttable teriock-sheet-button-grid menu-large-grid">
-      {{#each displayFieldButtons}}
-        <div class="tgrid-item">
-          {{!-- prettier-ignore --}}
-          <button
-            type="button"
-            data-action="populateField"
-            data-path="{{ fieldPath }}"
-          >
-            {{makeIcon ../TERIOCK.DISPLAY.icons.manifest.ui.add "button"}}
-            {{name}}
-          </button>
-        </div>
-      {{/each}}
-      {{#each displayButtons}}
-        <div class="tgrid-item">
-          {{!-- prettier-ignore --}}
-          <button
-            type="button"
-            {{#if button}}
-            data-action="applyButtonUpdate"
-            data-update="{{ button }}"
-            {{/if}}
-          >
-            {{makeIcon ../TERIOCK.DISPLAY.icons.manifest.ui.add "button"}}
-            {{localize label}}
-          </button>
-        </div>
-      {{/each}}
+    <div class="teriock-sheet-multi-select-label standard-form">
+      <label class="tsubtle" for="{{ @root/appId }}-add-{{ id }}">{{localize "TERIOCK.COMMON.Field"}}</label>
+      <div class="teriock-sheet-add-bar">
+        <select id="{{ @root/appId }}-add-{{ id }}">
+          {{selectOptions
+            adds
+            sort=true
+          }}
+        </select>
+        <button type="button" data-action="addOption" data-tooltip="TERIOCK.SHEETS.Child.DISPLAY.add">
+          {{makeIcon @root/TERIOCK.DISPLAY.icons.manifest.ui.add "button"}}
+        </button>
+      </div>
     </div>
   </div>
 {{/if}}

@@ -150,38 +150,45 @@ export default function ArmamentSystemMixin(Base) {
       if (!this.damage.base) {
         buttons.push({
           button: "damage",
+          group: "combat",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+          subgroup: "offense",
           update: { "system.damage.base": "1" },
         });
       }
       if (!this.av.raw) {
         buttons.push({
           button: "av",
+          group: "combat",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
+          subgroup: "defense",
           update: { "system.av.raw": "1" },
         });
       }
       if (!this.bv.raw) {
         buttons.push({
           button: "bv",
+          group: "combat",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
+          subgroup: "defense",
           update: { "system.bv.raw": "1" },
         });
       }
-      if (
-        (FormulaField.exists(this.damage.base) || FormulaField.exists(this.damage.twoHanded))
-        && !FormulaField.exists(this.hitBonus)
-      ) {
+      if (!FormulaField.exists(this.hitBonus)) {
         buttons.push({
           button: "hit",
+          group: "combat",
           label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+          subgroup: "offense",
           update: { "system.hitBonus": "1" },
         });
       }
       if (this.range.ranged && !FormulaField.exists(this.range.long.raw)) {
         buttons.push({
           button: "range",
+          group: "combat",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
+          subgroup: "offense",
           update: { "system.range.long.raw": "5" },
         });
       }
@@ -208,7 +215,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsArmament() {
-      return ["system.style"];
+      return [{ group: "combat", path: "system.style" }];
     }
 
     /** @inheritDoc */

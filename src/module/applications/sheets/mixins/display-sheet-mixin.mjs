@@ -19,6 +19,18 @@ export default function DisplaySheetMixin(Base) {
   /** @mixin */
   class DisplaySheet extends Base {
     /**
+     * Apply the selected add option.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @this {DisplaySheet}
+     */
+    static async #onAddOption(_event, target) {
+      const option = this.#addOptions.find(o => o.value === target.previousElementSibling.value);
+      if (this.isEditable && option) { await this.document.update(option.update); }
+    }
+
+    /**
      * Open the image for this document.
      * @returns {Promise<void>}
      */
@@ -34,11 +46,7 @@ export default function DisplaySheetMixin(Base) {
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: {
-        applyButtonUpdate: this._onApplyButtonUpdate,
-        openImage: this.#onOpenImage,
-        populateField: this._onPopulateField,
-      },
+      actions: { addOption: this.#onAddOption, openImage: this.#onOpenImage },
       classes: ["unpadded"],
     };
 
@@ -46,35 +54,18 @@ export default function DisplaySheetMixin(Base) {
     static HEADER_PARTS = { header: { template: "teriock/sheets/shared/top" } };
 
     /** @type {Record<string, HandlebarsTemplatePart>} */
-    static MENU_PARTS = { menu: { template: "teriock/sheets/shared/simple-menu" } };
+    static MENU_PARTS = {
+      menu: { template: "teriock/sheets/shared/simple-menu", templates: ["templates/generic/tab-navigation.hbs"] },
+    };
 
     /** @type {Record<string, HandlebarsTemplatePart>} */
     static DISPLAY_PARTS = { ...this.HEADER_PARTS, ...this.MENU_PARTS, ...this.CONTENT_PARTS };
 
     /**
-     * Apply a prepared document update from a display button.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     * @this {DisplaySheet}
+     * Options for adding fields and values from the sheet menu.
+     * @type {(Teriock.Display.DisplayButton & { value: string })[]}
      */
-    static async _onApplyButtonUpdate(_event, target) {
-      if (!this.isEditable || !target.dataset.update) { return; }
-      const entry = this.document.system._displayButtons.find(b => b.button === target.dataset.update);
-      if (entry?.update) { await this.document.update(entry.update); }
-    }
-
-    /**
-     * Populate a display field.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     */
-    static async _onPopulateField(_event, target) {
-      await this.document.update({
-        [target.dataset.path]: `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`,
-      });
-    }
+    #addOptions = [];
 
     /**
      * Expand fancy display fields into their schema and value.
@@ -102,14 +93,58 @@ export default function DisplaySheetMixin(Base) {
      * @returns {Teriock.Display.FancyDisplayTag[]}
      */
     #expandTags(tags) {
-      /** @type {Teriock.Display.FancyDisplayTag[]} */
-      const out = [];
       const defaultTooltip = _loc("TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip");
-      tags.forEach(t => {
-        if (typeof t === "string") { out.push({ label: _loc(t), tooltip: defaultTooltip }); }
-        else { out.push({ label: _loc(t.label), tooltip: _loc(t.tooltip) }); }
+      return tags.map(t =>
+        typeof t === "string"
+          ? { label: _loc(t), tooltip: defaultTooltip }
+          : { label: _loc(t.label), tooltip: _loc(t.tooltip) }
+      );
+    }
+
+    /**
+     * Prepare menu toggles, inputs, add options, etc.
+     * @param {Teriock.Display.FancyDisplayField[]} emptyFields - Display fields that can be added.
+     * @returns {object[]}
+     */
+    #prepareMenuSections(emptyFields) {
+      const { groups, subgroups } = TERIOCK.CONFIG.display;
+      const text = `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`;
+      this.#addOptions = [
+        ...emptyFields.filter(f => f.editable).map(f => ({
+          group: f.group,
+          label: f.button || f.label,
+          subgroup: f.subgroup,
+          update: { [f.path]: text },
+          value: f.path,
+        })),
+        ...this.document.system._displayButtons.map(b => ({ ...b, label: _loc(b.label), value: b.button })),
+      ];
+      const fields = [
+        ...this.#expandFields(this.document.system._displayToggles).map(f => ({ ...f, kind: "toggles" })),
+        ...this.#expandFields(this.document.system._displayInputs).map(f => ({ ...f, kind: "inputs" })),
+        ...this.#addOptions.map(o => ({ ...o, kind: "adds" })),
+      ];
+      const order = Object.keys(groups);
+      const sections = [...Map.groupBy(fields, f => f.group ?? "general")].sort(([a], [b]) =>
+        order.indexOf(a) - order.indexOf(b)
+      ).map(([id, group]) => {
+        group.sort((a, b) => (a.label ?? "").localeCompare(b.label ?? "", game.i18n.lang));
+        const { adds = [], inputs, toggles } = Object.groupBy(group, f => f.kind);
+        return {
+          adds: adds.map(({ label, subgroup, value }) => ({ group: subgroups[subgroup ?? "overview"], label, value })),
+          group: "menu",
+          id,
+          inputs,
+          label: groups[id],
+          toggles,
+        };
       });
-      return out;
+      const active = sections.find(s => s.id === this.tabGroups.menu) ?? sections[0];
+      if (active) {
+        active.cssClass = "active";
+        this.tabGroups.menu = active.id;
+      }
+      return sections;
     }
 
     /** @inheritDoc */
@@ -133,12 +168,8 @@ export default function DisplaySheetMixin(Base) {
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       await this._prepareDisplayFields(context);
-      return Object.assign(context, {
-        displayButtons: this.document.system._displayButtons,
-        displayInputs: this.#expandFields(this.document.system._displayInputs),
-        displayTags: this.#expandTags(this.document.system._displayTags),
-        displayToggles: this.#expandFields(this.document.system._displayToggles),
-      });
+      context.displayTags = this.#expandTags(this.document.system._displayTags);
+      return context;
     }
 
     /**
@@ -148,10 +179,8 @@ export default function DisplaySheetMixin(Base) {
      */
     async _prepareDisplayFields(context) {
       const expandedDisplayFields = this.#expandFields(this.document.system._displayFields);
-      const [buttonFields, valueFields] = expandedDisplayFields.partition(f => Boolean(f.value));
-      context.displayFieldButtons = buttonFields.map(f => {
-        return { editable: f.editable, fieldPath: f.path, name: f?.button || f?.label || f.schema?.label };
-      }).filter(b => b.editable !== false);
+      const [emptyFields, valueFields] = expandedDisplayFields.partition(f => Boolean(f.value));
+      context.menuSections = this.#prepareMenuSections(emptyFields);
       context.displayFields = /** @type {Teriock.Display.EnrichedDisplayField[]} */ await Promise.all(
         valueFields.map(async f => {
           return {

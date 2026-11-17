@@ -36,12 +36,14 @@ export function toClass(classes) {
  * @returns {Teriock.Display.FancyDisplayField[]}
  */
 export function fancifyFields(displayFields) {
-  return displayFields.map(f => {
-    const fancy = typeof f === "string" ? { path: f } : f;
-    const { button, choices, classes = [], dataset = {}, editable = true, label = "", path, value, visible = true } =
-      fancy;
-    return { button, choices, classes, dataset, editable, label, path, value, visible };
-  }).filter(f => f.visible);
+  return displayFields.map(f => ({
+    classes: [],
+    dataset: {},
+    editable: true,
+    label: "",
+    visible: true,
+    ...(typeof f === "string" ? { path: f } : f),
+  })).filter(f => f.visible);
 }
 
 /**

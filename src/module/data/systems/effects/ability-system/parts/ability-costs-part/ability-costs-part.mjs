@@ -1,5 +1,6 @@
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { mergeMetadata, objectMap } from "../../../../../../utils/_module.mjs";
+import { FormulaField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
@@ -47,13 +48,6 @@ export default function AbilityCostsPart(Base) {
             return new fields.SchemaField({
               description: new fields.HTMLField({ label }),
               formula: rollableFormulaField({ label }),
-              type: new fields.StringField({
-                blank: true,
-                choices: localizeChoices(TERIOCK.CONFIG.cost.primary.types, { none: true }),
-                initial: null,
-                label,
-                nullable: true,
-              }),
             }, { label });
           })),
           tweaks: new fields.SchemaField(
@@ -62,6 +56,17 @@ export default function AbilityCostsPart(Base) {
           ),
         }),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      for (const cost of Object.values(source.costs?.primary ?? {})) {
+        if (!cost || !("type" in cost)) { continue; }
+        if (cost.type !== "formula") { cost.formula = ""; }
+        if (cost.type !== "description") { cost.description = ""; }
+        delete cost.type;
+      }
+      return super.migrateData(source, options);
     }
 
     /**
@@ -90,16 +95,44 @@ export default function AbilityCostsPart(Base) {
     get _costTagsPrimary() {
       return [
         ...Object.entries(TERIOCK.CONFIG.stat).map(([k, v]) =>
-          this.costs.primary[k].type === "formula"
+          FormulaField.exists(this.costs.primary[k].formula)
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
               cost: v.abbreviation,
               value: this.costs.primary[k].formula,
             })
-            : this.costs.primary[k].type === "description"
+            : this.costs.primary[k].description
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", { cost: v.abbreviation })
             : ""
         ).filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.COMMON.Costs") })),
       ];
+    }
+
+    /** @inheritDoc */
+    get _displayButtons() {
+      const buttons = super._displayButtons;
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.stat)) {
+        if (!FormulaField.exists(this.costs.primary[k].formula)) {
+          buttons.push({
+            button: `cost${k.capitalize()}`,
+            group: "costs",
+            label: _loc("TERIOCK.COSTS.Long.formula", { key: v.label }),
+            subgroup: "formulas",
+            update: { [`system.costs.primary.${k}.formula`]: "1" },
+          });
+        }
+      }
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.cost.tweaks)) {
+        if (!this.costs.tweaks[k]) {
+          buttons.push({
+            button: `tweak${k.capitalize()}`,
+            group: "costs",
+            label: v.label,
+            subgroup: "tweaks",
+            update: { [`system.costs.tweaks.${k}`]: 1 },
+          });
+        }
+      }
+      return buttons;
     }
 
     /** @inheritDoc */
@@ -112,10 +145,10 @@ export default function AbilityCostsPart(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsCosts() {
-      return [
-        ...Object.keys(TERIOCK.CONFIG.stat).map(k => `system.costs.primary.${k}.type`),
-        ...Object.keys(TERIOCK.CONFIG.cost.components.keys).map(k => `system.costs.components.${k}.type`),
-      ];
+      return Object.keys(TERIOCK.CONFIG.cost.components.keys).map(k => ({
+        group: "costs",
+        path: `system.costs.components.${k}.type`,
+      }));
     }
 
     /** @inheritDoc */
@@ -128,7 +161,7 @@ export default function AbilityCostsPart(Base) {
         ...Object.fromEntries(
           Object.entries(this.costs.primary).map((
             [k, v],
-          ) => [`cost.${k}`, v.type === "formula" ? (v.formula || 0) : v.type === "description" ? "x" : 0]),
+          ) => [`cost.${k}`, FormulaField.exists(v.formula) ? v.formula : v.description ? "x" : 0]),
         ),
       });
     }

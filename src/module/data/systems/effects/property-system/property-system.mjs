@@ -61,7 +61,10 @@ export default class PropertySystem
 
   /** @inheritDoc */
   get _displayFieldsContent() {
-    return [...super._displayFieldsContent, ...this.constructor._adjustableTextFields];
+    return [
+      ...super._displayFieldsContent,
+      ...this.constructor._adjustableTextFields.map(path => ({ path, subgroup: "adjustments" })),
+    ];
   }
 
   /** @inheritDoc */

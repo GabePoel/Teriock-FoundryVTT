@@ -22,7 +22,9 @@ export default function TerrainDocumentMixin(Base) {
      */
     get terrains() {
       const terrains = this.getFlag("teriock", "terrains");
-      return new Set(Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain.terrains, t)) : []);
+      return new Set(
+        Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain.terrains, t)) : [],
+      );
     }
 
     /** @inheritDoc */

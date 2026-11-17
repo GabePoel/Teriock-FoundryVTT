@@ -92,33 +92,16 @@ export default class AbilitySystem
       buttons.push({
         button: "expansion",
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+        subgroup: "activation",
         update: { "system.expansion": "detonate" },
       });
     } else if (!this.expansion.cap) {
       buttons.push({
         button: "expansionCap",
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label",
+        subgroup: "activation",
         update: { "system.expansion.cap": "1" },
       });
-    }
-    if (!this.upgrades.score.attribute) {
-      buttons.push({
-        button: "attributeImprovement",
-        label: "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.button",
-        update: { "system.upgrades.score.attribute": "int" },
-      });
-    }
-    if (!this.upgrades.competence.attribute) {
-      buttons.push({
-        button: "featSaveImprovement",
-        label: "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.button",
-        update: { "system.upgrades.competence.attribute": "int", "system.upgrades.competence.value": 1 },
-      });
-    }
-    for (const [k, v] of Object.entries(TERIOCK.CONFIG.cost.tweaks)) {
-      if (!this.costs.tweaks[k]) {
-        buttons.push({ button: `tweak${k.capitalize()}`, label: v.label, update: { [`system.costs.tweaks.${k}`]: 1 } });
-      }
     }
     return buttons;
   }
@@ -133,37 +116,31 @@ export default class AbilitySystem
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },
-      ...Object.keys(TERIOCK.CONFIG.stat).map(k => {
-        return { path: `system.costs.primary.${k}.description`, visible: this.costs.primary[k].type === "description" };
+      ...Object.entries(TERIOCK.CONFIG.stat).map(([k, v]) => {
+        return {
+          button: _loc("TERIOCK.COSTS.Long.description", { key: v.label }),
+          group: "costs",
+          path: `system.costs.primary.${k}.description`,
+          subgroup: "descriptions",
+        };
       }),
       ...Object.keys(TERIOCK.CONFIG.cost.components.keys).map(k => {
         return {
+          group: "costs",
           path: `system.costs.components.${k}.description`,
+          subgroup: "descriptions",
           visible: this.costs.components[k].type === "description",
         };
       }),
-      "system.trigger",
-      "system.requirements",
-      ...this.constructor._adjustableTextFields,
+      { path: "system.trigger", subgroup: "activation" },
+      { path: "system.requirements", subgroup: "activation" },
+      ...this.constructor._adjustableTextFields.map(path => ({ path, subgroup: "adjustments" })),
       "system.overview.base",
     ];
-    if (this.interaction === "attack") {
-      fields.push(...[
-        "system.results.hit",
-        "system.results.critHit",
-        "system.results.miss",
-        "system.results.critMiss",
-      ]);
-    } else if (this.interaction === "feat") {
-      fields.push(...[
-        "system.results.fail",
-        "system.results.critFail",
-        "system.results.save",
-        "system.results.critSave",
-      ]);
-    } else {
-      fields.push(...["system.results.save", "system.results.fail"]);
-    }
+    let results = ["save", "fail"];
+    if (this.interaction === "attack") { results = ["hit", "critHit", "miss", "critMiss"]; }
+    else if (this.interaction === "feat") { results = ["fail", "critFail", "save", "critSave"]; }
+    fields.push(...results.map(k => ({ path: `system.results.${k}`, subgroup: "results" })));
     fields.push(...[{
       classes: this.competence.proficient ? [] : [TERIOCK.DISPLAY.panels.styles.faded],
       path: "system.overview.proficient",
@@ -173,7 +150,7 @@ export default class AbilitySystem
     }]);
     fields.push(...[
       "system.heightened",
-      "system.endCondition",
+      { path: "system.endCondition", subgroup: "activation" },
       { classes: [TERIOCK.DISPLAY.panels.styles.derived], editable: false, path: "system.grantOnlyText" },
       { classes: [TERIOCK.DISPLAY.panels.styles.derived], editable: false, path: "system.grantUseText" },
       { classes: [TERIOCK.DISPLAY.panels.styles.derived], editable: false, path: "system.consumeSourceText" },
@@ -209,21 +186,23 @@ export default class AbilitySystem
   /** @inheritDoc */
   get _displayToggles() {
     return [
-      "system.basic",
-      "system.standard",
-      "system.skill",
-      "system.spell",
-      "system.ritual",
-      "system.rotator",
-      "system.guildmaster",
-      "system.sustained",
-      "system.invoked",
-      "system.elderSorcery",
-      "system.consumption.enabled",
+      ...[
+        "system.basic",
+        "system.guildmaster",
+        "system.invoked",
+        "system.ritual",
+        "system.rotator",
+        "system.skill",
+        "system.spell",
+        "system.standard",
+        "system.sustained",
+        "system.warded",
+      ].map(path => ({ group: "classification", path })),
       "system.consumeSource",
+      "system.consumption.enabled",
+      "system.elderSorcery",
       "system.grantOnly",
       "system.grantUse",
-      "system.warded",
       ...super._displayToggles,
       "system.applyIfDeattuned",
     ];

@@ -1,29 +1,20 @@
 {{#if (or
-  (eq system.costs.primary.gp.type "formula")
-  (eq system.costs.primary.hp.type "formula")
-  (eq system.costs.primary.lp.type "formula")
-  (eq system.costs.primary.mp.type "formula"))
+  (exists system.costs.primary.gp.formula)
+  (exists system.costs.primary.hp.formula)
+  (exists system.costs.primary.lp.formula)
+  (exists system.costs.primary.mp.formula))
 }}
   <div class="teriock-sheet-bar">
     {{#each TERIOCK.CONFIG.stat as |value key|}}
-      {{#if (path @root/system.costs.primary key "type")}}
+      {{#if (exists (path @root/system.costs.primary key "formula"))}}
         {{formUpdater
           @root/document
           abbreviation=value.abbreviation
-          action=(ifThen (eq (path @root/system.costs.primary key "type") "formula") "updatePaths" "")
-          data=(ifThen
-            (eq (path @root/system.costs.primary key "type") "formula")
-            (path @root/system.costs.primary key "formula")
-            @root/TERIOCK.CONFIG.cost.primary.types.description)
           icon=value.icon
           info=value.costIdentifier
           label=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
           path=(concat "system.costs.primary." key ".formula")
           placeholder="0"
-          source=(ifThen
-            (eq (path @root/system._source.costs.primary key "type") "formula")
-            (path @root/system._source.costs.primary key "formula")
-            @root/TERIOCK.CONFIG.cost.primary.types.description)
         }}
       {{/if}}
     {{/each}}

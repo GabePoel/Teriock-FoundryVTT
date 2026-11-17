@@ -328,9 +328,20 @@
   }
 }
 
-.teriock-sheet-check-grid,
-.teriock-sheet-select-grid {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.teriock-sheet-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+
+  &:not(.active) {
+    display: none;
+  }
+}
+
+.teriock-sheet-menu-tabs {
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .teriock-sheet-menu-bar .teriock-form-changed label {
@@ -341,8 +352,17 @@
   align-items: start;
 }
 
-.teriock-sheet-button-grid {
-  grid-template-columns: 1fr 1fr 1fr;
+.teriock-sheet-add-bar {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    aspect-ratio: 1;
+    flex: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @container (max-width: 349px) {
@@ -379,16 +399,6 @@
     .teriock-sheet-bar {
       flex-direction: column;
     }
-  }
-
-  .teriock-sheet-check-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .teriock-sheet-select-grid,
-  .teriock-sheet-button-grid,
-  .menu-large-grid {
-    grid-template-columns: 1fr;
   }
 }
 

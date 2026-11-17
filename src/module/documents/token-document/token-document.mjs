@@ -145,7 +145,10 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     const layers = [
       [this.parent],
       [this.parent?.levels.get(this.level)],
-      ...Array.from(this.regions ?? [], r => r.behaviors.documentsByType.terrain.filter(b => b.active).map(b => b.system)),
+      ...Array.from(
+        this.regions ?? [],
+        r => r.behaviors.documentsByType.terrain.filter(b => b.active).map(b => b.system),
+      ),
     ];
     for (const layer of layers) {
       let subtracted = new Set();

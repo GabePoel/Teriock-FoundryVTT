@@ -15,7 +15,6 @@ export default {
     },
     types: { description: "TERIOCK.COSTS.Types.description", tag: "TERIOCK.COSTS.Types.tag" },
   },
-  primary: { types: { description: "TERIOCK.COSTS.Types.description", formula: "TERIOCK.COSTS.Types.formula" } },
   tweaks: {
     adept: { icon: icons.manifest.form.special, label: "TERIOCK.COSTS.Tweaks.adept", multiplier: -1, primary: "mp" },
     gifted: { icon: icons.manifest.form.gifted, label: "TERIOCK.COSTS.Tweaks.gifted", multiplier: 1, primary: "mp" },
@@ -23,7 +22,6 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.cost.primary.types");
 preLocalizeObject("CONFIG.cost.components.keys");
 preLocalizeObject("CONFIG.cost.components.types");
 preLocalizeObject("CONFIG.cost.tweaks", { key: "label", sort: true });
