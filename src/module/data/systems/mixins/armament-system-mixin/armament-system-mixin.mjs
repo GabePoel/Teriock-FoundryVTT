@@ -380,7 +380,9 @@ export default function ArmamentSystemMixin(Base) {
       });
       if (this.style) { data[`style.${this.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
-      for (const p of this.props || new Set()) { data[`property.${p}`] = 1; }
+      for (const p of this.parent.previewedTypes.property.filter(p => p.active)) {
+        data[`property.${p.system.slug}`] = 1;
+      }
       for (const command of this.commands) { data[`command.${TERIOCK.CONFIG.command[command].slug}`] = 1; }
       for (const equipmentClass of this.equipmentClasses) { data[`classification.${equipmentClass}`] = 1; }
       return data;
@@ -397,8 +399,6 @@ export default function ArmamentSystemMixin(Base) {
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
         e.type === "property"
       );
-      // TODO: Decide if `props` is really the right name for this field. Should it just be `properties`?
-      this.props = new Set(properties.map(p => p.constructor.getIdentifierSlug(p)));
 
       // Propagate damage types
       for (const p of properties.filter(p => p.active)) {

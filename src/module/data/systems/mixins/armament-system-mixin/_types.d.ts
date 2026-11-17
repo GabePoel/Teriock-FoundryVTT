@@ -22,8 +22,6 @@ declare global {
       flaws: string;
       /** <schema> The commands this deals */
       commands: Set<Teriock.Keys.Command>;
-      /** <base> Local property keys that can be modified by changes */
-      props: Set<string>;
       /** <schema> Range (ft) (if ranged) */
       range: {
         /** <schema> Long range (this is the default range) */
