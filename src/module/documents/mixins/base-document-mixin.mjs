@@ -1,5 +1,4 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { checkFieldVisibility, createElement, makeIconClass, mixClasses } from "../../utils/_module.mjs";
 
@@ -230,12 +229,6 @@ export default function BaseDocumentMixin(Base) {
      */
     static getTypeClass(_type) {
       return this;
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateThumbnails(source, "img", "system.img");
-      return super.migrateData(source, options);
     }
 
     /**

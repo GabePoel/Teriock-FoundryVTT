@@ -12,16 +12,6 @@ export default class AddDocumentsActivation
   static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.ui.apply });
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    if (!source.constructionNodes && (source.primary || source.secondary)) {
-      // Activation doesn't need migration. This is just left to avoid data corruption.
-      delete source.primary;
-      delete source.secondary;
-    }
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   get label() {
     if (this.display.label) { return this.display.label; }
     const names = new Set(this.rootNodes.map(n => n.name));

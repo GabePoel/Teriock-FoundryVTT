@@ -1,6 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierSetField } from "../../../fields/_module.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -25,12 +24,6 @@ export default class TransformationAutomation
         types: [...Actor.implementation.TYPES.filter(t => t !== "base"), "species"],
       }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateRename(source, "reset", "resets");
-    return super.migrateData(source, options);
   }
 
   /**

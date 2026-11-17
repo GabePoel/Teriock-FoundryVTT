@@ -1,4 +1,3 @@
-import { migrateThumbnails } from "../../../data/fields/tools/migrations.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../utils/_module.mjs";
 import Booster from "../../booster.mjs";
@@ -172,9 +171,6 @@ export default class BaseRoll extends Roll {
     options.targets = options.targets.map(t => BaseRoll.#parseTarget(t));
     super(formula, data, options);
     this.id = foundry.utils.randomID();
-    for (const t of foundry.utils.getProperty(this, "options.targets") ?? []) {
-      migrateThumbnails(t, "img");
-    }
   }
 
   /** `

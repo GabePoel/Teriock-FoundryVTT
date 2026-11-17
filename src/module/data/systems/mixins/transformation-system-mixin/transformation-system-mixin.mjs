@@ -1,5 +1,4 @@
 import { getSystemClass, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
-import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
@@ -60,14 +59,6 @@ export default function TransformationSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         transformation: new fields.SchemaField(effectTransformationFields()),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateThumbnails(source, "transformation.img", "transformation.ringImg");
-      migrateRename(source, "transformation.reset", "transformation.resets");
-      migrateRename(source, "transformation.uuids", "dependents.globalUuids");
-      return super.migrateData(source, options);
     }
 
     /**

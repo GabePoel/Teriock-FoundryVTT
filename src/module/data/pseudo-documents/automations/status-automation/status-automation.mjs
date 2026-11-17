@@ -1,6 +1,5 @@
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
-import { migrateStatuses } from "../../../fields/tools/migrations.mjs";
 import commandActivations from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -46,12 +45,6 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
       }),
       target: new fields.BooleanField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateStatuses(source, "status");
-    return super.migrateData(source, options);
   }
 
   /** @type {UUID<TeriockTokenDocument|TeriockActor>[]} */

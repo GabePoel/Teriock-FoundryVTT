@@ -1,7 +1,6 @@
 import { Panel } from "../_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { dotJoin, makeIcon, mergeMetadata, mixClasses, objectMap, toId } from "../../../utils/_module.mjs";
-import { migrateStatuses } from "../../fields/tools/migrations.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../mixins/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
@@ -63,12 +62,6 @@ export default class VirtualCondition
         choices: () => objectMap(TERIOCK.STATUSES.conditions, c => c.name, { localize: true }),
       }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateStatuses(source, "status");
-    return super.migrateData(source, options);
   }
 
   /** @type {Set<TeriockDocument>} */

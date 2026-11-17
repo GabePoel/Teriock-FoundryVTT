@@ -1,30 +1,10 @@
-import { dotJoin, makeIcon, mergeMetadata, mixClasses, toCamelCase, toSlug } from "../../../../../utils/_module.mjs";
+import { dotJoin, makeIcon, mergeMetadata, mixClasses, toCamelCase } from "../../../../../utils/_module.mjs";
 import { SlugField } from "../../../../fields/_module.mjs";
-import { migrateRename, migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
-
-/**
- * Affinity categories renamed to their identifier types.
- * @type {Record<string, string>}
- */
-const RENAMED_CATEGORIES = {
-  abilities: "ability",
-  bodyParts: "body",
-  classes: "class",
-  conditions: "condition",
-  damageTypes: "damage",
-  drainTypes: "drain",
-  effectTypes: "effect",
-  elements: "element",
-  powerSources: "source",
-  properties: "property",
-  statuses: "condition",
-  tradecrafts: "tradecraft",
-};
 
 /**
  * An affinity that some effect grants against a specific thing.
@@ -65,19 +45,6 @@ export default class BaseAffinity
       name: new fields.StringField(),
       slug: new SlugField({ blank: true, label: _loc("TERIOCK.COMMON.Slug") }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateThumbnails(source, "img");
-    migrateRename(source, "identifier", "slug");
-    source.category = RENAMED_CATEGORIES[source.category] ?? source.category;
-    if ("value" in source) {
-      if (source.category === "other") { source.name ??= source.value; }
-      else { source.slug ??= toSlug(source.value); }
-      delete source.value;
-    }
-    return super.migrateData(source, options);
   }
 
   /** @type {string|null} */

@@ -23,14 +23,6 @@ export default class ExecutedEffectSystem extends ApplicableEffectSystem {
   }
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    for (const b of source?.blocks ?? []) {
-      if ("gmOnly" in b) { b.gm ??= b.gmOnly; }
-    }
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return ["sustained", ...super._formPaths];
   }

@@ -1,6 +1,5 @@
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import FormulaField from "../../../fields/formula-field/formula-field.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { RollActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -33,13 +32,6 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
       }),
       formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateRename(source, "impact", "command");
-    if (source.command === "other") { source.command = null; }
-    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

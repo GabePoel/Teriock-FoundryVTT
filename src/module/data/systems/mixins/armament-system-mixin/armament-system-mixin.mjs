@@ -1,17 +1,8 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import {
-  dotJoin,
-  getName,
-  makeIcon,
-  mergeMetadata,
-  mixClasses,
-  objectMap,
-  toSlug,
-} from "../../../../utils/_module.mjs";
+import { dotJoin, getName, makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import { migrateIterables, migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeUnitModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -89,17 +80,6 @@ export default function ArmamentSystemMixin(Base) {
         styleDescription: initialText(),
         vitals: new fields.BooleanField(),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      if ("fightingStyle" in source) {
-        source.style ??= source.fightingStyle ? toSlug(source.fightingStyle) : null;
-        delete source.fightingStyle;
-      }
-      migrateIterables(source, "equipmentClasses");
-      migrateRename(source, "impacts", "commands");
-      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

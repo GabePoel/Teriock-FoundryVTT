@@ -1,5 +1,4 @@
 import { SlugField } from "../../../fields/_module.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
@@ -40,12 +39,6 @@ export default function IdentifierSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { slug: new SlugField() });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateRename(source, "identifier", "slug");
-      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

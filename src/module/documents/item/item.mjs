@@ -1,4 +1,3 @@
-import { migrateEquipmentText, migratePowerKinds } from "../../data/fields/tools/migrations.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
@@ -25,13 +24,6 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
       await foundry.documents.modifyBatch(operations);
     }
     await super._onWriteOperation(documents, operation, user);
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migratePowerKinds(source);
-    migrateEquipmentText(source);
-    return super.migrateData(source, options);
   }
 
   /**

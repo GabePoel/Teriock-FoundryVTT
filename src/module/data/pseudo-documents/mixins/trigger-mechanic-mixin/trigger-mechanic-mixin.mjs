@@ -46,16 +46,6 @@ export default function TriggerMechanicMixin(Base) {
       });
     }
 
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      const out = super.migrateData(source, options);
-      if ("trigger" in source) {
-        if (source.trigger) { source.triggers ??= [source.trigger]; }
-        delete source.trigger;
-      }
-      return out;
-    }
-
     /**
      * The current trigger choices.
      * @returns {Record<string, FormSelectOption>}

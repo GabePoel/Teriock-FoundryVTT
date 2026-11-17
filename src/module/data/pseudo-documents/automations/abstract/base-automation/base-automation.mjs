@@ -1,11 +1,7 @@
 import { mergeMetadata } from "../../../../../utils/_module.mjs";
-import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
 
 const { fields } = foundry.data;
-
-/** Legacy trigger keys that are now expressed as {@link BaseAutomation#interactInExecution}. */
-const EXECUTION_TRIGGERS = new Set(["execute", "executeInput", "preExecute"]);
 
 export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
@@ -40,20 +36,6 @@ export default class BaseAutomation extends MechanicPseudoDocument {
     if (this.metadata.tags.interactInExecution) { schema.interactInExecution = new fields.BooleanField(); }
     if (this.metadata.tags.useInExecution) { schema.useInExecution = new fields.BooleanField({ initial: true }); }
     return schema;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateThumbnails(source, "img", "ringImg");
-    if ("selectInExecution" in source) {
-      source.interactInExecution ||= source.selectInExecution;
-      delete source.selectInExecution;
-    }
-    if (EXECUTION_TRIGGERS.has(source.trigger)) {
-      source.interactInExecution = true;
-      delete source.trigger;
-    }
-    return super.migrateData(source, options);
   }
 
   /**

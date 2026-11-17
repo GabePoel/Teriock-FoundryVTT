@@ -1,5 +1,4 @@
 import { slugSetField } from "../../../fields/tools/builders.mjs";
-import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
 /**
@@ -23,12 +22,6 @@ export default function MetaphysicsSystemMixin(Base) {
         elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
         powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateIterables(source, "effectTypes", "elements", "powerSources");
-      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

@@ -1,4 +1,3 @@
-import { migrateStatuses } from "../../data/fields/tools/migrations.mjs";
 import { consolidateWriteOperations, mixClasses } from "../../utils/_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
@@ -100,15 +99,6 @@ export default class TeriockActiveEffect
     const changed = super.applyChange(targetDoc, change, options);
     if (changed[change.key] === undefined) { delete changed[change.key]; }
     return changed;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    const description = foundry.utils.getProperty(source, "system.description");
-    if (description && !source.description) { source.description = description; }
-    foundry.utils.deleteProperty(source, "system.description");
-    migrateStatuses(source, "statuses");
-    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

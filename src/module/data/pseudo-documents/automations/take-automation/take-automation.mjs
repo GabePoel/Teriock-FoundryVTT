@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { TakeActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -30,12 +29,6 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
       morganti: new fields.BooleanField(),
       options: new fields.ObjectField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateRename(source, "impact", "command");
-    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

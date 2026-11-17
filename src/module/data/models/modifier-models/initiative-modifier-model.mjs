@@ -22,12 +22,6 @@ export default class InitiativeModifierModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    if (source.bonus === this.metadata.initialBase) { source.bonus = ""; }
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   getLocalRollData() {
     return omit(super.getLocalRollData(), ["score"]);
   }

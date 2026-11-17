@@ -2,7 +2,6 @@ import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
 import { UnitField } from "../../../../../fields/_module.mjs";
-import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 import { EquipmentWeightUnitModel, StorageMaxWeightUnitModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -45,14 +44,6 @@ export default function EquipmentStoragePart(Base) {
         }),
         weight: new UnitField(EquipmentWeightUnitModel),
       };
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateRename(source, "storage.maxCount", "storage.count.max");
-      migrateRename(source, "storage.maxWeight", "storage.weight.max");
-      migrateRename(source, "storage.weightMultiplier", "storage.weight.multiplier");
-      return super.migrateData(source, options);
     }
 
     /**

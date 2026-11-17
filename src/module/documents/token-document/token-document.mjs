@@ -1,5 +1,4 @@
 import DocumentSelector from "../../applications/dialogs/document-selector.mjs";
-import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
@@ -59,12 +58,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     combat ??= game.combats.viewed;
     const tokenIds = new Set(tokens.map(t => t.id));
     return combat.removeCombatants(combat.combatants.filter(c => tokenIds.has(c.tokenId)));
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateThumbnails(source, "texture.src", "ring.subject.texture");
-    return super.migrateData(source, options);
   }
 
   /**

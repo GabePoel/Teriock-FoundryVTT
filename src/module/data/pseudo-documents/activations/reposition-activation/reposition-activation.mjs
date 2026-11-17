@@ -1,6 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { movementActionField } from "../../../fields/tools/builders.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -25,12 +24,6 @@ export default class RepositionActivation extends BaseActivation {
       x: new fields.NumberField({ initial: null, nullable: true }),
       y: new fields.NumberField({ initial: null, nullable: true }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateRename(source, "token", "originUuid");
-    return super.migrateData(source, options);
   }
 
   /**

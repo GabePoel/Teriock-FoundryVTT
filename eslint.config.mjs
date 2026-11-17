@@ -69,11 +69,9 @@ const globalClient = {
   ui: "readonly",
 };
 
-const globalMacro = { actor: "readonly", event: "readonly", scope: "readonly" };
-
 const globalTeriock = { TERIOCK: "readonly", teriock: "readonly", tm: "readonly" };
 
-const files = ["{src,scripts,macros}/**/*.{mjs,ts}", "eslint.config.mjs"];
+const files = ["{src,scripts}/**/*.{mjs,ts}", "eslint.config.mjs"];
 
 export default tseslint.config(
   { files, ...js.configs.recommended },
@@ -200,9 +198,8 @@ export default tseslint.config(
     settings: { jsdoc: { preferredTypes: { ".<>": "<>", Function: "function", Object: "object" } } },
   },
   {
-    files: ["{foundry,macros,scripts,src}/**/*.{mjs,ts}", "eslint.config.mjs"],
+    files: ["{foundry,scripts,src}/**/*.{mjs,ts}", "eslint.config.mjs"],
     languageOptions: { globals: { ...globals.browser, ...globalDocuments, ...globalHelpers, ...globalClient } },
   },
-  { files: ["{macros,src}/**/*.{mjs,ts}"], languageOptions: { globals: { ...globalTeriock } } },
-  { files: ["macros/**/*.mjs"], languageOptions: { globals: { ...globalMacro } } },
+  { files: ["src/**/*.{mjs,ts}"], languageOptions: { globals: { ...globalTeriock } } },
 );

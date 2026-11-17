@@ -3,7 +3,6 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf } from "../../../../utils/_module.mjs";
 import { slugSetField } from "../../../fields/tools/builders.mjs";
-import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import {
@@ -89,17 +88,6 @@ export default class SpeciesSystem
       }),
       traits: slugSetField(TERIOCK.CONFIG.species.traits),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateIterables(source, "traits");
-    if (
-      ("adult" in source || typeof source.lifespan === "number") && foundry.utils.getType(source.lifespan) !== "Object"
-    ) {
-      source.lifespan = { adulthood: source.adult, enabled: Boolean(source.adult), max: source.lifespan || null };
-    }
-    return super.migrateData(source, options);
   }
 
   /**

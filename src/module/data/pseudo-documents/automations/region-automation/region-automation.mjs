@@ -46,16 +46,6 @@ export default class RegionAutomation
   }
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    if (!options.partial && !("applyDocuments" in source)) {
-      source.applyDocuments = ["globalIdentifiers", "globalUuids", "localIdentifiers", "localUuids"].some(k =>
-        source[k]?.length
-      ) || Boolean(source.localQualifier);
-    }
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,

@@ -25,12 +25,6 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    delete source.trigger;
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return ["add", "remove", "qualifier"];
   }

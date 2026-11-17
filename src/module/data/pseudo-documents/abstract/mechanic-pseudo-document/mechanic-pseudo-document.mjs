@@ -44,28 +44,6 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /** @inheritDoc */
-  static migrateData(source, options) {
-    if (["competencies", "crit", "heighten"].some(k => k in source)) {
-      const disabled = new Set([...(source.disabledToggles ?? []), "resultsAlt", "resultsAltCrit"]);
-      const crit = source.crit ?? [0, 1];
-      if (!crit.includes(0)) { disabled.add("resultsBase"); }
-      if (!crit.includes(1)) { disabled.add("resultsBaseCrit"); }
-      const heighten = source.heighten ?? [0, 1];
-      if (!heighten.includes(0)) { disabled.add("unheightened"); }
-      if (!heighten.includes(1)) { disabled.add("heightened"); }
-      const competencies = source.competencies ?? [0, 1, 2];
-      for (const [level, { toggle }] of Object.entries(TERIOCK.CONFIG.competence.levels)) {
-        if (!competencies.includes(Number(level))) { disabled.add(toggle); }
-      }
-      source.disabledToggles = disabled.toObject();
-      delete source.competencies;
-      delete source.crit;
-      delete source.heighten;
-    }
-    return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
   get _inputContextKey() {
     return "trigger";
   }

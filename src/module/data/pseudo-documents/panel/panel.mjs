@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { createElement, makeIcon, mergeMetadata, toClass, toId } from "../../../utils/_module.mjs";
 import { associationsField, blocksField, nullStringField } from "../../fields/tools/builders.mjs";
-import { migrateThumbnails } from "../../fields/tools/migrations.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -90,23 +89,6 @@ export default class Panel extends BasePseudoDocument {
         { required: false, initial: () => [] },
       ),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateThumbnails(source, "img");
-    for (const b of source?.blocks ?? []) {
-      if ("gmOnly" in b) {
-        b.gm ??= b.gmOnly;
-        delete b.gmOnly;
-      }
-    }
-    for (const a of source?.associations ?? []) {
-      for (const c of a?.cards ?? []) {
-        migrateThumbnails(c, "img");
-      }
-    }
-    return super.migrateData(source, options);
   }
 
   /**

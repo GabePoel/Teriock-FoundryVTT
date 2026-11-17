@@ -17,7 +17,7 @@ export default class MoneyUnitModel extends BaseUnitModel {
   }
 
   /** @inheritDoc */
-  static migrateNumberToUnit(value) {
+  static castNumber(value) {
     const coins = Object.entries(TERIOCK.CONFIG.currency).filter(([_id, c]) => c.equipmentType === "coin").sort((
       [_a, a],
       [_b, b],
@@ -26,6 +26,6 @@ export default class MoneyUnitModel extends BaseUnitModel {
       const count = (value / conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION);
       if (Number.isInteger(count)) { return { raw: count, unit }; }
     }
-    return super.migrateNumberToUnit(value);
+    return super.castNumber(value);
   }
 }

@@ -86,6 +86,17 @@ export default class BaseUnitModel extends BaseDataModel {
     return [];
   }
 
+  /**
+   * Cast a number to unit source data.
+   * @param {number} value
+   * @returns {{ raw: Teriock.System.FormulaString | number, unit: string }}
+   */
+  static castNumber(value) {
+    const entries = this.finiteChoiceEntries;
+    const unit = (entries.find(e => (e.conversion ?? 1) === 1) ?? entries[0]).id;
+    return { raw: this.metadata.formula ? String(value) : value, unit };
+  }
+
   /** @inheritDoc */
   static defineSchema() {
     const { placeholder, ...options } = this.metadata.rawOptions;
@@ -102,17 +113,6 @@ export default class BaseUnitModel extends BaseDataModel {
         ...this.metadata.unitOptions,
       }),
     };
-  }
-
-  /**
-   * Migrate a numerical value to a unit data object.
-   * @param {number} value
-   * @returns {{ raw: Teriock.System.FormulaString | number, unit: string }}
-   */
-  static migrateNumberToUnit(value) {
-    const entries = this.finiteChoiceEntries;
-    const unit = (entries.find(e => (e.conversion ?? 1) === 1) ?? entries[0]).id;
-    return { raw: this.metadata.formula ? String(value) : value, unit };
   }
 
   /**

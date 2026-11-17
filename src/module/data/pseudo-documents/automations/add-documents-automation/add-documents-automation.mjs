@@ -1,6 +1,6 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { deleteProperties, mergeMetadata, mixClasses, toId } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -47,67 +47,6 @@ export default class AddDocumentsAutomation
         required: true,
       }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    const oldProperties = [
-      "attachDocuments",
-      "children",
-      "competence",
-      "data",
-      "globalIdentifiers",
-      "globalUuids",
-      "localIdentifiers",
-      "localQualifier",
-      "localUuids",
-      "overrideData",
-      "separate",
-      "setCompetence",
-    ];
-    if (!options.partial && oldProperties.some(p => p in source)) {
-      const baseIdKey = `${source._id}-addDocuments`;
-      const rootId = toId(`${baseIdKey}-root`, { hash: true });
-      const nodes = {
-        [rootId]: {
-          _id: rootId,
-          all: source.all,
-          auto: source.auto,
-          competence: source.competence,
-          data: source.data,
-          globalIdentifiers: source.globalIdentifiers,
-          globalUuids: source.globalUuids,
-          localIdentifiers: source.localIdentifiers,
-          localQualifier: source.localQualifier,
-          localUuids: source.localUuids,
-          multi: source.multi,
-          overrideData: source.overrideData,
-          parentId: null,
-          setCompetence: source.setCompetence,
-          type: "base",
-        },
-      };
-      if (source.children?.enabled) {
-        const childId = toId(`${baseIdKey}-children`, { hash: true });
-        nodes[childId] = {
-          _id: childId,
-          all: true,
-          auto: true,
-          data: source.children.data,
-          globalIdentifiers: source.children.identifiers,
-          globalUuids: source.children.uuids,
-          multi: true,
-          overrideData: source.children.overrideData,
-          parentId: rootId,
-          type: "base",
-        };
-      }
-      source.constructionNodes = nodes;
-      source.attachToEffect = !source.separate;
-      deleteProperties(source, "all", "auto", "multi");
-    }
-    deleteProperties(source, ...oldProperties);
-    return super.migrateData(source, options);
   }
 
   /** @type {object[]} */

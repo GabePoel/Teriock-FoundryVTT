@@ -1,4 +1,3 @@
-import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import {
   expandDocumentDataArray,
@@ -96,12 +95,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   static getSizeConfig(size) {
     const minCategoryMaxSize = Math.min(...TERIOCK.CONFIG.character.sizes.map(d => d.max).filter(m => m >= size));
     return foundry.utils.deepClone(TERIOCK.CONFIG.character.sizes.find(d => d.max === minCategoryMaxSize));
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateThumbnails(source, "prototypeToken.texture.src", "prototypeToken.ring.subject.texture");
-    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

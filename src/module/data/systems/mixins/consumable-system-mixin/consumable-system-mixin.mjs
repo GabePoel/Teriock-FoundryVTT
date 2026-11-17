@@ -1,7 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { asInf, barClamp, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -41,13 +40,6 @@ export default function ConsumableSystemMixin(Base) {
         }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.consumable),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateRename(source, "consumptionAmount", "consumption.amount");
-      migrateRename(source, "consumable", "consumption.enabled");
-      return super.migrateData(source, options);
     }
 
     /** @returns {Teriock.Panels.PanelBar} */

@@ -1,5 +1,4 @@
 import { mergeMetadata, omit } from "../../../../utils/_module.mjs";
-import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import AttackAutomation from "../../automations/attack-automation/attack-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
@@ -20,12 +19,6 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
       armamentId: new fields.DocumentIdField(),
       threshold: new fields.NumberField({ initial: null, integer: true, nullable: true }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    migrateRename(source, "bonus", "circumstance");
-    return super.migrateData(source, options);
   }
 
   /**

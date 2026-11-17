@@ -2,7 +2,6 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { changeField } from "../../../fields/tools/builders.mjs";
-import { migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -14,16 +13,6 @@ export default class ChangesAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), { changes: new fields.ArrayField(changeField()) });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    for (const change of source.changes ?? []) {
-      migrateThumbnails(change, "value");
-      if (change.key === "system.impacts") { change.key = "system.commands"; }
-      if (["system.damage", "system.range"].includes(change.key)) { change.key += ".*"; }
-    }
-    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

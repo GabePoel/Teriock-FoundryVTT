@@ -1,7 +1,6 @@
 import { getEnsureNoChildrenOperations, makeIcon, mergeMetadata } from "../../../../../../utils/_module.mjs";
 import { equipmentTypeField } from "../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
-import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -53,12 +52,6 @@ export default function EquipmentWieldingPart(Base) {
           required: true,
         }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateRename(source, "ammunition.consumptionAmount", "ammunition.amount");
-      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */
