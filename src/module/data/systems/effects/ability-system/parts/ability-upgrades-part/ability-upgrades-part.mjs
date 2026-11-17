@@ -29,7 +29,7 @@ export default function AbilityUpgradesPart(Base) {
           competence: new fields.SchemaField({
             attribute: attributeField({ nullable: true, unp: true }),
             text: initialText(),
-            value: competenceField(),
+            value: competenceField({ initial: 1 }),
           }),
           score: new fields.SchemaField({
             attribute: attributeField({ nullable: true, unp: false }),
@@ -70,7 +70,7 @@ export default function AbilityUpgradesPart(Base) {
           value: this.upgrades.score.value.toString(),
         });
       }
-      if (this.upgrades.competence.attribute) {
+      if (this.upgrades.competence.attribute && this.upgrades.competence.value) {
         this.changes.push({
           key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
           phase: TERIOCK.CONFIG.ability.attributeChange.phase,
@@ -94,7 +94,7 @@ export default function AbilityUpgradesPart(Base) {
       } else {
         this.upgrades.score.text = "";
       }
-      if (this.upgrades.competence.attribute) {
+      if (this.upgrades.competence.attribute && this.upgrades.competence.value) {
         const attribute = attributeLink(this.upgrades.competence.attribute);
         const amount = this.upgrades.competence.value;
         const identifier = TERIOCK.CONFIG.competence.levels[amount].identifier;
