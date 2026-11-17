@@ -33,30 +33,19 @@ export default function PanelDataMixin(Base) {
       const panel = await this.toPanel({
         _id: toId([options?.relativeTo?.uuid, this.uuid ?? this.id, this.identifier].filterJoin("-"), { hash: true }),
       });
-      options = { ...options, relativeTo: this };
-      const {
-        associations = true,
-        bars = true,
-        blocks = true,
-        collapsed = config.values.includes("collapsed"),
-        documents = options.documents,
-        embeds = options.embeds,
-        links = options.links,
-        rolls = options.rolls,
-        secrets = options.secrets ?? this.isOwner,
-      } = config;
-      foundry.utils.mergeObject(options, {
-        associations,
-        bars,
-        blocks,
-        collapsed,
-        documents,
-        embeds,
-        links,
-        rolls,
-        secrets,
+      return panel.renderElement({
+        ...options,
+        associations: config.associations ?? true,
+        bars: config.bars ?? true,
+        blocks: config.blocks ?? true,
+        collapsed: config.collapsed ?? config.values.includes("collapsed"),
+        documents: config.documents ?? options.documents,
+        embeds: config.embeds ?? options.embeds,
+        links: config.links ?? options.links,
+        relativeTo: this,
+        rolls: config.rolls ?? options.rolls,
+        secrets: config.secrets ?? options.secrets ?? this.isOwner,
       });
-      return panel.renderElement(options);
     }
 
     /**
