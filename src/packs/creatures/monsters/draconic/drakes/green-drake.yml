@@ -151,7 +151,6 @@ items:
             primary:
               mp:
                 formula: "2"
-                type: formula
           delivery: cone
           elements:
             - nature
@@ -384,7 +383,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: aura
           duration:
             raw: "1"
@@ -528,6 +526,10 @@ items:
         intelligence beyond the desire to kill. Drakes can be ridden and are often found as mounts for imperial guards.
         They spawn drakespawn.</p>
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:nature-mage]{Nature Mage}.</p>
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/green-drake.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/green-drake.webp
       size:
         value: 5
       slug: green-drake
@@ -537,10 +539,6 @@ items:
       traits:
         - draconic
         - monstrous
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/green-drake.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/green-drake.webp
     type: species
   - _id: 4a095aaed0254ec3
     _key: "!actors.items!9f811e5f41d3b07d.4a095aaed0254ec3"
@@ -781,7 +779,6 @@ items:
             primary:
               hp:
                 formula: 1d4
-                type: formula
           delivery: missile
           effectTypes:
             - damaging
@@ -863,7 +860,6 @@ items:
             primary:
               mp:
                 formula: "3"
-                type: formula
           delivery: sight
           duration:
             unit: passive
@@ -920,7 +916,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           effectTypes:
             - vision
@@ -970,17 +965,16 @@ items:
         name: Treeform Ball
         system:
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: iB9yugE9ZXYHDeCK
               globalIdentifiers:
                 - species:tree
-              level: minor
               override:
                 - art
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: missile
@@ -1021,6 +1015,7 @@ items:
           slug: treeform-ball
           spell: true
           standard: true
+          transformationLevel: 1
         type: ability
     folder: c2095fb63315614f
     img: systems/teriock/src/assets/thumbnails/rank/rank-1-nature-mage.webp

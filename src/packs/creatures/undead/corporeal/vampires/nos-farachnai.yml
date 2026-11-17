@@ -153,7 +153,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           effectTypes:
             - reanimation
@@ -212,7 +211,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           duration:
             raw: "1"
@@ -900,15 +898,14 @@ items:
         showIcon: 0
         system:
           automations:
-            - _id: 92Epm6ge6lU8mRat
-              status: transformed
-              type: status
             - _id: 13flxTwEEiYDRYAu
               globalIdentifiers:
                 - species:spider
-              level: full
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 92Epm6ge6lU8mRat
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: self
@@ -938,6 +935,7 @@ items:
           standard: true
           targets:
             - self
+          transformationLevel: 2
         type: ability
       - _id: eeCzdEF4Uh1nMbIY
         _key: "!actors.items.effects!c489adeae1c683aa.c489adeae1c683aa.eeCzdEF4Uh1nMbIY"
@@ -984,7 +982,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: bite
           duration:
             unit: unlimited
@@ -1389,13 +1386,11 @@ items:
                 description: >-
                   <p>Creation cost is at least 3 × @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
-                type: description
               mp:
                 description: >-
                   <p>Creation cost is at least 1 @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:elder-sorcery]{OP} of <i>each</i> @Identifier[core:elder-sorcery-words]{word} in the
                   spell plus 3 × @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
-                type: description
           delivery: sight
           elderSorcery: true
           executionTime:
@@ -1954,7 +1949,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: aura
           duration:
             raw: "1"
@@ -2184,7 +2178,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           executionTime:
             base: r1
@@ -2553,6 +2546,10 @@ items:
         <p>Not much is known about [[lookup name style=lc]]. They appear to be some sort of cross between a and a
         @Identifier[creature:noble-vampire]{noble vampire}. It is believed that the original brood was composed of
         twelve [[lookup name style=lc]]. Five male and seven female.</p>
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/nos-farachnai.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/nos-farachnai.webp
       size:
         value: 7
       slug: nos-farachnai
@@ -2564,10 +2561,6 @@ items:
       traits:
         - outsider
         - undead
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/nos-farachnai.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/nos-farachnai.webp
     type: species
   - _id: NHdDpniDo93kj3jn
     _key: "!actors.items!c489adeae1c683aa.NHdDpniDo93kj3jn"

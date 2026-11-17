@@ -432,15 +432,15 @@ items:
       lifespan:
         adulthood: 100
         enabled: true
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/wilde-elf.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/wilde-elf.webp
       size:
         value: 4
       slug: wilde-elf
       traits:
         - humanoid
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/wilde-elf.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/wilde-elf.webp
     type: species
   - _id: qu14he5J81DISsYt
     _key: "!actors.items!77d2398983afa64d.qu14he5J81DISsYt"
@@ -660,7 +660,6 @@ items:
             primary:
               hp:
                 formula: 1d4
-                type: formula
           delivery: missile
           effectTypes:
             - damaging
@@ -742,7 +741,6 @@ items:
             primary:
               mp:
                 formula: "3"
-                type: formula
           delivery: sight
           duration:
             unit: passive
@@ -799,7 +797,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           effectTypes:
             - vision
@@ -849,17 +846,16 @@ items:
         name: Treeform Ball
         system:
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: iB9yugE9ZXYHDeCK
               globalIdentifiers:
                 - species:tree
-              level: minor
               override:
                 - art
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: missile
@@ -900,6 +896,7 @@ items:
           slug: treeform-ball
           spell: true
           standard: true
+          transformationLevel: 1
         type: ability
     folder: de1d9513b900de6e
     img: systems/teriock/src/assets/thumbnails/rank/rank-1-nature-mage.webp
@@ -1189,7 +1186,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           duration:
             raw: "8"
@@ -1278,13 +1274,11 @@ items:
                 description: >-
                   <p>Creation cost is at least 3 × @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
-                type: description
               mp:
                 description: >-
                   <p>Creation cost is at least 1 @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:elder-sorcery]{OP} of <i>each</i> @Identifier[core:elder-sorcery-words]{word} in the
                   spell plus 3 × @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
-                type: description
           delivery: sight
           elderSorcery: true
           executionTime:
@@ -1389,15 +1383,14 @@ items:
         system:
           _sup: Z2r70pjjG6JKLhqd
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: D55WBiqM2QcyO7Vv
               globalUuids:
                 - Compendium.teriock.species.Folder.30f4d11e5e53d332
-              level: full
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           costs:
@@ -1409,7 +1402,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: sight
           duration:
             raw: "1"
@@ -1452,6 +1444,7 @@ items:
           slug: polymorph
           spell: true
           standard: true
+          transformationLevel: 2
         type: ability
       - _id: AR397cvJa3O6KB4k
         _key: "!actors.items.effects!77d2398983afa64d.aSD3QkNWxvQgA1Yj.AR397cvJa3O6KB4k"
@@ -1550,7 +1543,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           effectTypes:
             - destruction
@@ -1606,7 +1598,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           duration:
             raw: "8"

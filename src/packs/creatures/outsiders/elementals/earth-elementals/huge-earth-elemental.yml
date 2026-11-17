@@ -595,7 +595,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           effectTypes:
             - destruction
@@ -656,8 +655,14 @@ items:
         <p>Appear as a mass of earth. This amorphous state is their default form, but elementals can also take a
         humanoid form which resembles a human with an odd skin color.</p>
       br: 26
+      elements:
+        - nature
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5 @Identifier[class:nature-mage]{Nature Mage}.</p>
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/huge-earth-elemental.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/huge-earth-elemental.webp
       size:
         max: 10
         min: 9
@@ -671,10 +676,6 @@ items:
       traits:
         - elemental
         - outsider
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/huge-earth-elemental.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/huge-earth-elemental.webp
     type: species
   - _id: 4a095aaed0254ec3
     _key: "!actors.items!1d182df1ae28dae3.4a095aaed0254ec3"
@@ -859,7 +860,6 @@ items:
             primary:
               hp:
                 formula: 1d4
-                type: formula
           delivery: missile
           effectTypes:
             - damaging
@@ -941,7 +941,6 @@ items:
             primary:
               mp:
                 formula: "3"
-                type: formula
           delivery: sight
           duration:
             unit: passive
@@ -998,7 +997,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           effectTypes:
             - vision
@@ -1048,17 +1046,16 @@ items:
         name: Treeform Ball
         system:
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: iB9yugE9ZXYHDeCK
               globalIdentifiers:
                 - species:tree
-              level: minor
               override:
                 - art
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: missile
@@ -1099,6 +1096,7 @@ items:
           slug: treeform-ball
           spell: true
           standard: true
+          transformationLevel: 1
         type: ability
     folder: 26a3b429ac70d5ab
     img: systems/teriock/src/assets/thumbnails/rank/rank-1-nature-mage.webp
@@ -1388,7 +1386,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           duration:
             raw: "8"
@@ -1477,13 +1474,11 @@ items:
                 description: >-
                   <p>Creation cost is at least 3 × @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
-                type: description
               mp:
                 description: >-
                   <p>Creation cost is at least 1 @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:elder-sorcery]{OP} of <i>each</i> @Identifier[core:elder-sorcery-words]{word} in the
                   spell plus 3 × @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
-                type: description
           delivery: sight
           elderSorcery: true
           executionTime:
@@ -1588,15 +1583,14 @@ items:
         system:
           _sup: Z2r70pjjG6JKLhqd
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: D55WBiqM2QcyO7Vv
               globalUuids:
                 - Compendium.teriock.species.Folder.30f4d11e5e53d332
-              level: full
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           costs:
@@ -1608,7 +1602,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: sight
           duration:
             raw: "1"
@@ -1651,6 +1644,7 @@ items:
           slug: polymorph
           spell: true
           standard: true
+          transformationLevel: 2
         type: ability
       - _id: pHSd59kqZfcFCPSs
         _key: "!actors.items.effects!1d182df1ae28dae3.K1Bh077DumnwHTVj.pHSd59kqZfcFCPSs"
@@ -1749,7 +1743,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           effectTypes:
             - destruction
@@ -1805,7 +1798,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           duration:
             raw: "8"
@@ -1929,7 +1921,7 @@ items:
                 - resultsAltCrit
               identifier: ability:celestial-elder-sorcery-words
               type: changeCompetence
-            - _id: XHmARTWcYHwJsBRx
+            - _id: rQzVhYV3Ofvc6SB8
               choices:
                 OuDfqi2CAcL1J3t4:
                   label: New Word
@@ -1940,7 +1932,7 @@ items:
               name: Type
               namespace: type
               type: choices
-            - _id: gcD1THkboch5hxXf
+            - _id: sznktB76QaRC6S7x
               choiceType: number
               initialNumber: 1
               min: 0
@@ -2020,7 +2012,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           duration:
             raw: "8"
@@ -2077,7 +2068,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           effectTypes:
             - transformation
@@ -2274,7 +2264,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           elements:
             - nature
@@ -2358,7 +2347,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: self
           elements:
             - nature
@@ -2520,7 +2508,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           executionTime:
             base: r0
           interaction: manifest

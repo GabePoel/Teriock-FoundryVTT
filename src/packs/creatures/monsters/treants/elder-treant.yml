@@ -475,7 +475,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
             tweaks:
               adept: 1
           delivery: hand
@@ -531,17 +530,16 @@ items:
         name: Treeform Ball
         system:
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: iB9yugE9ZXYHDeCK
               globalIdentifiers:
                 - species:tree
-              level: minor
               override:
                 - art
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: missile
@@ -582,6 +580,7 @@ items:
           slug: treeform-ball
           spell: true
           standard: true
+          transformationLevel: 1
         type: ability
       - _id: eNKBwpzRSIRPFsoy
         _key: "!actors.items.effects!a5e40f7db5850773.a5e40f7db5850773.eNKBwpzRSIRPFsoy"
@@ -591,17 +590,16 @@ items:
         name: Treeform Self
         system:
           automations:
-            - _id: 9f08fabc1d2bcac2
-              status: transformed
-              type: status
             - _id: AjiJDtn4fs82jWgF
               globalIdentifiers:
                 - species:tree
-              level: minor
               override:
                 - art
               setCompetence: override
-              type: transformation
+              type: morph
+            - _id: 9f08fabc1d2bcac2
+              status: transformed
+              type: status
           competence:
             raw: 1
           delivery: self
@@ -631,6 +629,7 @@ items:
           slug: treeform-self
           targets:
             - self
+          transformationLevel: 1
         type: ability
       - _id: iLIc6KoKYN3askuf
         _key: "!actors.items.effects!a5e40f7db5850773.a5e40f7db5850773.iLIc6KoKYN3askuf"
@@ -1011,13 +1010,11 @@ items:
                 description: >-
                   <p>Creation cost is at least 3 × @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
-                type: description
               mp:
                 description: >-
                   <p>Creation cost is at least 1 @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:elder-sorcery]{OP} of <i>each</i> @Identifier[core:elder-sorcery-words]{word} in the
                   spell plus 3 × @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
-                type: description
           delivery: sight
           elderSorcery: true
           executionTime:
@@ -1208,7 +1205,6 @@ items:
             primary:
               mp:
                 formula: "1"
-                type: formula
           delivery: hand
           effectTypes:
             - destruction
@@ -1276,6 +1272,10 @@ items:
         protects and maintains for hundreds of years.
         @UUID[Compendium.teriock.tables.RollTable.615ff873d830ae70]{Treants} are slow, patient beings, ever on the watch
         for threats to nature and protecting beings who can't protect themselves.</p>
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/elder-treant.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/elder-treant.webp
       size:
         value: 8
       slug: elder-treant
@@ -1286,10 +1286,6 @@ items:
           formula: 3d10
       traits:
         - plant
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/elder-treant.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/elder-treant.webp
     type: species
   - _id: GK2hofY9Uk6fXl9M
     _key: "!actors.items!a5e40f7db5850773.GK2hofY9Uk6fXl9M"

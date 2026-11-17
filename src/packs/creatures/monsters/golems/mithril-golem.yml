@@ -595,6 +595,10 @@ items:
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5.</p>
       instructions: <p>Add the chosen innate @Pack[teriock.classes]{ranks} manually.</p>
+      morph:
+        img: systems/teriock/src/assets/thumbnails/creature/mithril-golem.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/mithril-golem.webp
       size:
         max: 10
         min: 1
@@ -608,10 +612,6 @@ items:
       traits:
         - construct
         - humanoid
-      transformation:
-        img: systems/teriock/src/assets/thumbnails/creature/mithril-golem.webp
-        ring: true
-        ringImg: systems/teriock/src/assets/thumbnails/token/mithril-golem.webp
     type: species
   - _id: Ijl8D1shTJmf7P02
     _key: "!actors.items!e242284f908e8396.Ijl8D1shTJmf7P02"
@@ -759,6 +759,7 @@ items:
         name: Mithril
         system:
           applyIfDampened: true
+          applyIfDeattuned: true
           automations:
             - _id: parameterChanges
               changes:
@@ -769,7 +770,7 @@ items:
                   target: Item
                   type: upgrade
                   value: "1"
-                - applyIfSuppressed: false
+                - applyIfSuppressed: true
                   key: system.weight
                   phase: derived
                   priority: 10
