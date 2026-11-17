@@ -17,6 +17,7 @@ import {
   HealAutomation,
   LightAutomation,
   MacroAutomation,
+  MorphAutomation,
   OverrideAutomation,
   RegionAutomation,
   RepositionAutomation,
@@ -31,7 +32,6 @@ import {
   TargetAutomation,
   ToggleChildrenAutomation,
   TradecraftAutomation,
-  TransformationAutomation,
   UseDocumentsAutomation,
 } from "./_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -56,6 +56,7 @@ declare global {
     heal: HealAutomation;
     light: LightAutomation;
     macro: MacroAutomation;
+    morph: MorphAutomation;
     move: RepositionAutomation;
     override: OverrideAutomation;
     region: RegionAutomation;
@@ -70,7 +71,6 @@ declare global {
     target: TargetAutomation;
     toggleChildren: ToggleChildrenAutomation;
     tradecraft: TradecraftAutomation;
-    transformation: TransformationAutomation;
     useDocuments: UseDocumentsAutomation;
   }
 

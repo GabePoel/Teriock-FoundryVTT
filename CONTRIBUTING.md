@@ -50,13 +50,13 @@ The `@category Hierarchy` tag is similar to `@category Dependents` except it's f
 
 Anything with the `@category Identifiers` tag is related to handling regarding looking up documents by their identifier. This is an analogous pipeline to UUIDs.
 
+### Morph
+
+Anything relating to the specific process by which `Actor` documents can have their species' changed by `ActiveEffect` documents is given the `@category Morph` tag.
+
 ### Perception
 
 We use `@category Perception` for anything relating broadly to token vision.
-
-### Transformation
-
-Anything relating to the specific process by which `Actor` documents can have their species' changed by `ActiveEffect` documents is given the `@category Transformation` tag.
 
 ### Terrain
 

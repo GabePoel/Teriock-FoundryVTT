@@ -11,5 +11,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.metaphysics.powerSources).forEach(([k, v]) => {
     metaphysicsContext[`source.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.powerSource", { name: v.label });
   });
+  metaphysicsContext.illusion = _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.illusionLevel.label");
+  metaphysicsContext.transformation = _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.transformationLevel.label");
   Hooks.call("teriock.metaphysicsContextInit");
 });

@@ -40,6 +40,18 @@ export default function AutomatableSystemMixin(Base) {
         automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),
       });
     }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      for (const a of Object.values(source.automations ?? {})) {
+        if (a?.type === "transformation") { a.type = "morph"; }
+        if (a?.type === "morph" && "level" in a) {
+          source.transformationLevel ||= ["minor", "full", "greater"].indexOf(a.level) + 1;
+          delete a.level;
+        }
+      }
+      return super.migrateData(source, options);
+    }
   }
 
   return AutomatableSystem;

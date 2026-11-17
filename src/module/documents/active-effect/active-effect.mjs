@@ -74,7 +74,7 @@ export default class TeriockActiveEffect
     editable.sort((a, b) => b._stats.createdTime - a._stats.createdTime);
     const operations = editable.flatMap(
       d => [
-        ...(d.system.isTransformation ? d.system.getTransformationOperations(false) : []),
+        ...(d.system.isMorph ? d.system.getMorphOperations(false) : []),
         d.dependents.size ? d.getDeleteDependentDocumentsOperation("Item", d.dependents.map(i => i.id)) : null,
       ]
     );
@@ -85,11 +85,11 @@ export default class TeriockActiveEffect
   static async _onUpdateOperation(documents, operation, user) {
     await super._onUpdateOperation(documents, operation, user);
     const toggled = documents.filter(d =>
-      d.actor && d.checkEditor(user) && d.system.isTransformation
+      d.actor && d.checkEditor(user) && d.system.isMorph
       && foundry.utils.hasProperty(operation.updates.find(u => u._id === d.id) ?? {}, "disabled")
     );
     toggled.sort((a, b) => b._stats.createdTime - a._stats.createdTime);
-    const operations = toggled.flatMap(d => d.system.getTransformationOperations(!d.disabled));
+    const operations = toggled.flatMap(d => d.system.getMorphOperations(!d.disabled));
     if (operations.length) { foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
   }
 
@@ -99,6 +99,12 @@ export default class TeriockActiveEffect
     const changed = super.applyChange(targetDoc, change, options);
     if (changed[change.key] === undefined) { delete changed[change.key]; }
     return changed;
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    this._addDataFieldMigration(source, "flags.teriock.preTransform", "flags.teriock.preMorph");
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */

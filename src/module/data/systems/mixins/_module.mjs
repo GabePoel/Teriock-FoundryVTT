@@ -17,10 +17,10 @@ export { default as HierarchySystemMixin } from "./hierarchy-system-mixin/hierar
 export { default as IdentifierSystemMixin } from "./identifier-system-mixin/identifier-system-mixin.mjs";
 export { default as InstructionsSystemMixin } from "./instructions-system-mixin/instructions-system-mixin.mjs";
 export { default as MetaphysicsSystemMixin } from "./metaphysics-system-mixin/metaphysics-system-mixin.mjs";
+export { default as MorphSystemMixin } from "./morph-system-mixin/morph-system-mixin.mjs";
 export { default as PriceSystemMixin } from "./price-system-mixin/price-system-mixin.mjs";
 export { default as RefreshSystemMixin } from "./refresh-system-mixin.mjs";
 export { default as RevealableSystemMixin } from "./revealable-system-mixin/revealable-system-mixin.mjs";
 export { default as StattedSystemMixin } from "./statted-system-mixin/statted-system-mixin.mjs";
-export { default as TransformationSystemMixin } from "./transformation-system-mixin/transformation-system-mixin.mjs";
 export { default as UncommonSystemMixin } from "./uncommon-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";

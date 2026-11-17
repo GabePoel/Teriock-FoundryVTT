@@ -1,6 +1,6 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 
-/** @category Transformation */
+/** @category Morph */
 const config = {
   changes: {
     attribute: {
@@ -14,16 +14,10 @@ const config = {
     size: { phase: "setup", priority: 5 },
     token: { phase: "initial", priority: 5 },
   },
-  // no sort
-  level: {
-    minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
-    full: "TERIOCK.EFFECTS.TransformationLevel.full",
-    greater: "TERIOCK.EFFECTS.TransformationLevel.greater",
-  },
   multiCheckboxPaths: ["attributes", "override", "resets", "suppress"],
   override: {
-    art: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.art" },
-    size: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.size" },
+    art: { initial: true, label: "TERIOCK.SCHEMA.Morph.override.choices.art" },
+    size: { initial: true, label: "TERIOCK.SCHEMA.Morph.override.choices.size" },
   },
   suppress: {
     attunement: { initial: false, label: "TYPES.ActiveEffect.attunement", path: "disabled" },
@@ -47,6 +41,5 @@ const config = {
 
 export default config;
 
-preLocalizeObject("CONFIG.transformation.level");
-preLocalizeObject("CONFIG.transformation.override", { key: "label" });
-preLocalizeObject("CONFIG.transformation.suppress", { key: "label" });
+preLocalizeObject("CONFIG.morph.override", { key: "label" });
+preLocalizeObject("CONFIG.morph.suppress", { key: "label" });

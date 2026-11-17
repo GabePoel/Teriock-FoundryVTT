@@ -1,14 +1,14 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { associationsField } from "../../../fields/tools/builders.mjs";
-import { TransformationSystemMixin } from "../../mixins/_module.mjs";
+import { MorphSystemMixin } from "../../mixins/_module.mjs";
 import { ExecutedEffectSystem } from "../abstract/_module.mjs";
 
 /**
  * Effect-specific effect data model.
  * @extends {ExecutedEffectSystem}
- * @mixes TransformationSystem
+ * @mixes MorphSystem
  */
-export default class ConsequenceSystem extends mixClasses(ExecutedEffectSystem, TransformationSystemMixin) {
+export default class ConsequenceSystem extends mixClasses(ExecutedEffectSystem, MorphSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: [

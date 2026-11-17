@@ -46,7 +46,7 @@ export default function SpeciesPanelPart(Base) {
         icon: TERIOCK.DISPLAY.icons.manifest.species.traits,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.traits.label"),
         wrappers: Panel.simplifyTags(this._traitTags),
-      }]);
+      }, this._metaphysicsBar]);
       return { ...(await super.getPanelParts()), bars };
     }
   }

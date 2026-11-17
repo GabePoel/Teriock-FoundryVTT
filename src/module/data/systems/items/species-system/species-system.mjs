@@ -8,11 +8,12 @@ import { Panel } from "../../../pseudo-documents/_module.mjs";
 import {
   AppearanceSystemMixin,
   CompetenceDisplaySystemMixin,
+  MetaphysicsSystemMixin,
   StattedSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
-import { SpeciesPanelPart, SpeciesTransformationPart } from "./parts/_module.mjs";
+import { SpeciesMorphPart, SpeciesPanelPart } from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -32,9 +33,10 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * @mixes AppearanceSystem
  * @mixes WikiSystem
  * @mixes CompetenceDisplaySystem
+ * @mixes MetaphysicsSystem
  * @mixes StattedSystem
  * @mixes SpeciesPanelPart
- * @mixes SpeciesTransformationPart
+ * @mixes SpeciesMorphPart
  */
 export default class SpeciesSystem
   extends mixClasses(
@@ -42,9 +44,10 @@ export default class SpeciesSystem
     AppearanceSystemMixin,
     WikiSystemMixin,
     CompetenceDisplaySystemMixin,
+    MetaphysicsSystemMixin,
     StattedSystemMixin,
     SpeciesPanelPart,
-    SpeciesTransformationPart,
+    SpeciesMorphPart,
   )
 {
   /** @inheritDoc */
@@ -91,6 +94,12 @@ export default class SpeciesSystem
   }
 
   /**
+   * Abilities made non-proficient by a minor transformation during data preparation.
+   * @type {TeriockActiveEffect<"ability">[]}
+   */
+  #minorAbilities = [];
+
+  /**
    * Offer to resize the actor to match the size this species specifies.
    * @returns {Promise<void>}
    */
@@ -114,6 +123,12 @@ export default class SpeciesSystem
       },
     });
     if (proceed) { await actor.update({ "system.size.value": this.size.value }); }
+  }
+
+  /** @inheritDoc */
+  get _color() {
+    const color = { 1: "blue", 2: "green", 3: "purple" }[this.transformationLevel];
+    return color ? TERIOCK.DISPLAY.colors.palette[color] : super._color;
   }
 
   /** @inheritDoc */
@@ -213,6 +228,23 @@ export default class SpeciesSystem
   prepareBaseData() {
     if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.CONFIG.system.baseValues.size; }
     super.prepareBaseData();
+    // Abilities from minor transformations are not proficient.
+    this.#minorAbilities = [];
+    if (this.transformationLevel === 1) {
+      for (const a of this.parent.previewed.getTypeSync("ability")) {
+        if (a.system.lockedPaths.has("system.competence.raw")) { continue; }
+        a.system.competence.raw = 0;
+        this.#minorAbilities.push(a);
+      }
+    }
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    for (const a of this.#minorAbilities) {
+      foundry.utils.setProperty(a.overrides, "system.competence.raw", 0);
+    }
   }
 
   /**
@@ -229,7 +261,7 @@ export default class SpeciesSystem
       prototypeToken: {
         height: TeriockActor.getSizeConfig(this.size.value).length,
         name: this.parent.name,
-        ring: { enabled: this.transformation.ring, subject: { texture: this.transformation.ringImg } },
+        ring: { enabled: this.morph.ring, subject: { texture: this.morph.ringImg } },
         texture: { src: this.parent.img },
         width: TeriockActor.getSizeConfig(this.size.value).length,
       },

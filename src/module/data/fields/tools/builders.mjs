@@ -214,6 +214,16 @@ export function competenceField(options = {}) {
 }
 
 /**
+ * For things with none, minor, full, and greater levels.
+ * @param {Record<number, string>} levels
+ * @param {NumberFieldOptions} [options]
+ * @returns {NumberField}
+ */
+export function levelField(levels, options = {}) {
+  return new NumberField({ choices: levels, initial: 0, integer: true, nullable: false, required: false, ...options });
+}
+
+/**
  * Attribute field.
  * @param {StringFieldOptions} [options]
  * @param {boolean} [options.unp]

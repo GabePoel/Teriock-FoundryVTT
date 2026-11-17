@@ -9,7 +9,7 @@ export default {
     combat: "TERIOCK.COMMON.Combat",
     metaphysics: "TERIOCK.COMMON.Metaphysics",
     attributes: "TERIOCK.COMMON.Attributes",
-    transformation: "TERIOCK.COMMON.Transformation",
+    morph: "TERIOCK.COMMON.Morph",
   },
   // no sort
   sizes: {

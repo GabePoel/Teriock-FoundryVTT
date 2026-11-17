@@ -59,10 +59,10 @@ declare global {
       consumable: boolean;
       granted: boolean;
       hierarchy: boolean;
+      morph: boolean;
       revealable: boolean;
       simple: boolean;
       statted: boolean;
-      transformation: boolean;
       triggerable: boolean;
       untrackable: boolean;
       usable: boolean;

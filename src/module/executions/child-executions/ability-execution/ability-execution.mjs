@@ -426,9 +426,11 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         executor: this.actor?.uuid ?? null,
         expirations: this.expirations.active.filter(applies).map(e => e.getEffectData(this)),
         heightened: this.heightened,
+        illusionLevel: this.source.system.illusionLevel,
         powerSources: this.source.system.powerSources.toObject(),
         slug: `${this.source.system.slug}-effect`,
         sustained: this.source.system.sustained,
+        transformationLevel: this.source.system.transformationLevel,
       },
     };
   }

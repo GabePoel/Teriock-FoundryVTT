@@ -1,6 +1,6 @@
 declare module "./species-system.mjs" {
   export default interface SpeciesSystem
-    extends Teriock.Models.SpeciesStatIncreaseFields, Teriock.Models.SpeciesTransformationPartData
+    extends Teriock.Models.SpeciesStatIncreaseFields, Teriock.Models.SpeciesMorphPartData
   {
     /** <schema> Attribute increase */
     attributeIncrease: string;

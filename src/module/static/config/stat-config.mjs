@@ -16,6 +16,7 @@ export default {
     identifier: "core:hit-points-and-mana-points",
     label: "TERIOCK.COSTS.Primary.hp",
     morganti: true,
+    morphReset: { initial: true, update: { "system.hp.value": INF } },
     multiplier: -1,
     pool: {
       enabled: true,
@@ -24,7 +25,6 @@ export default {
       panel: { name: "TERIOCK.MODELS.HpPool.PANELS.name", text: "TERIOCK.MODELS.HpPool.PANELS.text" },
     },
     style: { colorset: "red" },
-    transformationReset: { initial: true, update: { "system.hp.value": INF } },
   },
 
   mp: {
@@ -38,6 +38,7 @@ export default {
     identifier: "core:hit-points-and-mana-points",
     label: "TERIOCK.COSTS.Primary.mp",
     morganti: true,
+    morphReset: { initial: false, update: { "system.mp.value": INF } },
     multiplier: -1,
     pool: {
       enabled: true,
@@ -46,7 +47,6 @@ export default {
       panel: { name: "TERIOCK.MODELS.MpPool.PANELS.name", text: "TERIOCK.MODELS.MpPool.PANELS.text" },
     },
     style: { colorset: "blue" },
-    transformationReset: { initial: false, update: { "system.mp.value": INF } },
   },
 
   lp: {
@@ -58,8 +58,8 @@ export default {
     icon: icons.manifest.stat.lp,
     identifier: "core:aging",
     label: "TERIOCK.COSTS.Primary.lp",
+    morphReset: { initial: false, update: { "system.lp.value": 20 } },
     multiplier: +1,
-    transformationReset: { initial: false, update: { "system.lp.value": 20 } },
   },
 
   gp: {
@@ -68,11 +68,11 @@ export default {
     costIdentifier: "core:costs",
     icon: icons.manifest.stat.gp,
     label: "TERIOCK.COSTS.Primary.gp",
-    multiplier: -1,
-    transformationReset: {
+    morphReset: {
       initial: true,
       update: Object.fromEntries(Object.keys(currencyConfig).map(k => [`system.money.${k}`, 0])),
     },
+    multiplier: -1,
   },
 };
 

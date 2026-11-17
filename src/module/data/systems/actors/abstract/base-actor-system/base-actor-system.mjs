@@ -27,7 +27,7 @@ const { fields } = foundry.data;
  * @mixes ActorStatsPart
  * @mixes ActorTokenPart
  * @mixes ActorTradecraftsPart
- * @mixes ActorTransformationPart
+ * @mixes ActorMorphPart
  * @mixes ActorPseudoDocumentsPart
  */
 export default class BaseActorSystem
@@ -43,7 +43,7 @@ export default class BaseActorSystem
     parts.ActorTradecraftsPart,
     parts.ActorAttributesPart,
     parts.ActorCapacitiesPart,
-    parts.ActorTransformationPart,
+    parts.ActorMorphPart,
     parts.ActorDeathBagPart,
     parts.ActorInformationPart,
     parts.ActorMagicPart,

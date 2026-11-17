@@ -151,12 +151,12 @@ export default {
     immune: "ms-shield",
     interact: "ms-pan-tool-alt",
     kill: "ms-skull",
+    morph: "ms-nature",
     protection: "mdi-shield-half-full",
     resist: "ms-shield",
     revitalize: "ms-water-drop",
     revive: "ms-cardiology",
     sleep: "ms-hotel",
-    transform: "ms-nature",
     wither: "ms-hourglass-disabled",
   },
   equipment: {

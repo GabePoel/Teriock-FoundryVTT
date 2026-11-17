@@ -17,10 +17,10 @@ import documentBehaviorConfig from "./document-behavior-config.mjs";
 import effectConfig from "./effect-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
-import illusionConfig from "./illusion-config.mjs";
 import lengthConfig from "./length-config.mjs";
 import mathConfig from "./math-config.mjs";
 import metaphysicsConfig from "./metaphysics-config.mjs";
+import morphConfig from "./morph-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import speciesConfig from "./species-config.mjs";
 import statConfig from "./stat-config.mjs";
@@ -29,7 +29,6 @@ import terrainConfig from "./terrain-config.mjs";
 import timeConfig from "./time-config.mjs";
 import tipConfig from "./tip-config.mjs";
 import tradecraftConfig from "./tradecraft-config.mjs";
-import transformationConfig from "./transformation-config.mjs";
 import triggerConfig from "./trigger-config.mjs";
 import weightConfig from "./weight-config.mjs";
 import wikiConfig from "./wiki-config.mjs";
@@ -54,10 +53,10 @@ const config = {
   effect: effectConfig,
   equipment: equipmentConfig,
   hack: hackConfig,
-  illusion: illusionConfig,
   length: lengthConfig,
   math: mathConfig,
   metaphysics: metaphysicsConfig,
+  morph: morphConfig,
   piercing: piercingConfig,
   species: speciesConfig,
   stat: statConfig,
@@ -66,7 +65,6 @@ const config = {
   time: timeConfig,
   tip: tipConfig,
   tradecraft: tradecraftConfig,
-  transformation: transformationConfig,
   trigger: triggerConfig,
   weight: weightConfig,
   wiki: wikiConfig,

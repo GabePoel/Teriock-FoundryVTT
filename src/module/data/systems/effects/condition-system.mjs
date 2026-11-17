@@ -1,5 +1,5 @@
 import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
-import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
+import { MorphSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import { ApplicableEffectSystem } from "./abstract/_module.mjs";
 
 /**
@@ -14,11 +14,9 @@ import { ApplicableEffectSystem } from "./abstract/_module.mjs";
  *
  * @extends {ApplicableEffectSystem}
  * @mixes WikiSystem
- * @mixes TransformationSystem
+ * @mixes MorphSystem
  */
-export default class ConditionSystem
-  extends mixClasses(ApplicableEffectSystem, WikiSystemMixin, TransformationSystemMixin)
-{
+export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, WikiSystemMixin, MorphSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["species"],

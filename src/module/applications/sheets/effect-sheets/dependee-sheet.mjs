@@ -18,7 +18,7 @@ export default class DependeeSheet extends ApplicableEffectSheet {
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,
-    transformation: { scrollable: [""], template: "teriock/sheets/effects/consequence/transformation-tab" },
+    morph: { scrollable: [""], template: "teriock/sheets/effects/consequence/morph-tab" },
   };
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
@@ -28,35 +28,35 @@ export default class DependeeSheet extends ApplicableEffectSheet {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
       tabs: [...super.TABS.sheet.tabs, {
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.effect.transform, "solid"),
-        id: "transformation",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.effect.morph, "solid"),
+        id: "morph",
       }],
     },
   };
 
   /**
    * @inheritDoc
-   * @category Transformation
+   * @category Morph
    */
   async _prepareContext(options = {}) {
-    const transformationPaths = ["enabled"];
-    if (this.document.system.transformation.enabled) {
-      transformationPaths.push(...["level", "attributes", "override"]);
-      if (this.document.system.transformation.override.has("art")) {
-        transformationPaths.push(...["ring", "img", "ringImg"]);
+    const morphPaths = ["enabled"];
+    if (this.document.system.morph.enabled) {
+      morphPaths.push(...["attributes", "override"]);
+      if (this.document.system.morph.override.has("art")) {
+        morphPaths.push(...["ring", "img", "ringImg"]);
       }
-      if (this.document.actor) { transformationPaths.push("primary"); }
+      if (this.document.actor) { morphPaths.push("primary"); }
     }
     return Object.assign(await super._prepareContext(options), {
-      transformation: transformationPaths.map(p => {
+      morph: morphPaths.map(p => {
         const entry = {
-          field: this.document.system.schema.getField(`transformation.${p}`),
+          field: this.document.system.schema.getField(`morph.${p}`),
           localize: true,
           model: this.document.system,
-          placeholder: p === "primary" ? undefined : this.document.system.transformation[p],
-          value: this.document.system._source.transformation[p],
+          placeholder: p === "primary" ? undefined : this.document.system.morph[p],
+          value: this.document.system._source.morph[p],
         };
-        if (TERIOCK.CONFIG.transformation.multiCheckboxPaths.includes(p)) {
+        if (TERIOCK.CONFIG.morph.multiCheckboxPaths.includes(p)) {
           entry.input = (field, ic) => {
             ic.choices = field.element.choices;
             foundry.data.fields.StringField._prepareChoiceConfig(ic);

@@ -8,8 +8,12 @@ declare global {
       effectTypes: Set<Teriock.Keys.Effect>;
       /** <schema> Elements of this */
       elements: Set<Teriock.Keys.Element>;
+      /** <schema> Level of illusion this causes */
+      illusionLevel: Teriock.Keys.IllusionLevel;
       /** <schema> Power sources that must be available in order for this to work */
       powerSources: Set<Teriock.Keys.Source>;
+      /** <schema> Level of transformation this causes */
+      transformationLevel: Teriock.Keys.TransformationLevel;
     }
   }
 }

@@ -18,6 +18,7 @@ export { default as HealAutomation } from "./heal-automation/heal-automation.mjs
 export { default as LightAutomation } from "./light-automation/light-automation.mjs";
 export { default as MacroAutomation } from "./macro-automation/macro-automation.mjs";
 export * as mixins from "./mixins/_module.mjs";
+export { default as MorphAutomation } from "./morph-automation/morph-automation.mjs";
 export { default as OverrideAutomation } from "./override-automation/override-automation.mjs";
 export { default as RegionAutomation } from "./region-automation/region-automation.mjs";
 export { default as RepositionAutomation } from "./reposition-automation/reposition-automation.mjs";
@@ -32,5 +33,4 @@ export { default as TakeAutomation } from "./take-automation/take-automation.mjs
 export { default as TargetAutomation } from "./target-automation/target-automation.mjs";
 export { default as ToggleChildrenAutomation } from "./toggle-children-automation/toggle-children-automation.mjs";
 export { default as TradecraftAutomation } from "./tradecraft-automation/tradecraft-automation.mjs";
-export { default as TransformationAutomation } from "./transformation-automation/transformation-automation.mjs";
 export { default as UseDocumentsAutomation } from "./use-documents-automation.mjs";

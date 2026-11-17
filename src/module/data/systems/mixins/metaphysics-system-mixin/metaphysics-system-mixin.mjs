@@ -1,4 +1,4 @@
-import { slugSetField } from "../../../fields/tools/builders.mjs";
+import { levelField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
 /**
@@ -20,7 +20,9 @@ export default function MetaphysicsSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         effectTypes: slugSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
         elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
+        illusionLevel: levelField(TERIOCK.CONFIG.metaphysics.illusionLevels),
         powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
+        transformationLevel: levelField(TERIOCK.CONFIG.metaphysics.transformationLevels),
       });
     }
 
@@ -34,10 +36,13 @@ export default function MetaphysicsSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsMetaphysics() {
-      return ["system.powerSources", "system.elements", "system.effectTypes"].map(path => ({
-        group: "metaphysics",
-        path,
-      }));
+      return [
+        "system.powerSources",
+        "system.elements",
+        "system.effectTypes",
+        "system.illusionLevel",
+        "system.transformationLevel",
+      ].map(path => ({ group: "metaphysics", path }));
     }
 
     /** @inheritDoc */
@@ -55,7 +60,7 @@ export default function MetaphysicsSystemMixin(Base) {
      * @returns {string[]}
      */
     get _formPathsMetaphysics() {
-      return ["powerSources", "elements", "effectTypes"];
+      return ["powerSources", "elements", "effectTypes", "illusionLevel", "transformationLevel"];
     }
 
     /**
@@ -94,6 +99,18 @@ export default function MetaphysicsSystemMixin(Base) {
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
           };
         }),
+        ...(this.illusionLevel
+          ? [{
+            label: TERIOCK.CONFIG.metaphysics.illusionLevels[this.illusionLevel],
+            tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.illusionLevel.label",
+          }]
+          : []),
+        ...(this.transformationLevel
+          ? [{
+            label: TERIOCK.CONFIG.metaphysics.transformationLevels[this.transformationLevel],
+            tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.transformationLevel.label",
+          }]
+          : []),
       ];
     }
 
@@ -115,6 +132,8 @@ export default function MetaphysicsSystemMixin(Base) {
       for (const element of this.elements) { data[`element.${element}`] = 1; }
       // Add effect types
       for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
+      data.illusion = this.illusionLevel;
+      data.transformation = this.transformationLevel;
       return data;
     }
 

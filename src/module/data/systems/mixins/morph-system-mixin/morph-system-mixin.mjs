@@ -1,13 +1,13 @@
 import { getSystemClass, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
-import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
+import { effectMorphFields } from "../../../fields/tools/morph-fields.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
  * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
- * @import { ActorTransformationPart } from "../../actors/abstract/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
- * @import { SpeciesTransformationPart } from "../../items/species-system/parts/species-transformation-part/species-transformation-part.mjs";
+ * @import { ActorMorphPart } from "../../actors/abstract/base-actor-system/parts/morph-part/actor-morph-part.mjs";
+ * @import { SpeciesMorphPart } from "../../items/species-system/parts/species-morph-part/species-morph-part.mjs";
  */
 
 /**
@@ -30,36 +30,44 @@ function disabledStatDiceFlag(stat) {
 }
 
 /**
- * Effect data model that handles transformation behavior.
+ * Effect data model that handles morph behavior.
  *
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
  * @template {MixinBase} T
  * @param {T} Base
- * @see {ActorTransformationPart}
- * @see {SpeciesTransformationPart}
- * @category Transformation
+ * @see {ActorMorphPart}
+ * @see {SpeciesMorphPart}
+ * @category Morph
  */
-export default function TransformationSystemMixin(Base) {
+export default function MorphSystemMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.Models.TransformationSystemData}
+   * @implements {Teriock.Models.MorphSystemData}
    */
-  class TransformationSystem
-    extends /** @type {InitializedDataModel<T, Teriock.Models.TransformationSystemData>} */ (Base)
-  {
+  class MorphSystem extends /** @type {InitializedDataModel<T, Teriock.Models.MorphSystemData>} */ (Base) {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SCHEMA.Transformation"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SCHEMA.Morph"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { transformation: true } });
+    static metadata = mergeMetadata(super.metadata, { tags: { morph: true } });
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        transformation: new fields.SchemaField(effectTransformationFields()),
-      });
+      return Object.assign(super.defineSchema(), { morph: new fields.SchemaField(effectMorphFields()) });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      foundry.abstract.Document._addDataFieldMigration(source, "transformation", "morph");
+      foundry.abstract.Document._addDataFieldMigration(
+        source,
+        "morph.level",
+        "transformationLevel",
+        d => ["minor", "full", "greater"].indexOf(d.morph.level) + 1,
+      );
+      return super.migrateData(source, options);
     }
 
     /**
@@ -67,7 +75,7 @@ export default function TransformationSystemMixin(Base) {
      * @returns {boolean}
      */
     get #inheritImg() {
-      return this.actor && (!this.transformation.img || this.transformation.ring && !this.transformation.ringImg);
+      return this.actor && (!this.morph.img || this.morph.ring && !this.morph.ringImg);
     }
 
     /**
@@ -76,8 +84,8 @@ export default function TransformationSystemMixin(Base) {
      */
     get #resetUpdateData() {
       const updateData = {};
-      for (const r of this.transformation.resets) {
-        Object.assign(updateData, TERIOCK.CONFIG.stat[r].transformationReset.update);
+      for (const r of this.morph.resets) {
+        Object.assign(updateData, TERIOCK.CONFIG.stat[r].morphReset.update);
       }
       return updateData;
     }
@@ -106,7 +114,7 @@ export default function TransformationSystemMixin(Base) {
      * @param {boolean} value
      */
     #addBatchToggle(operations, collection, id, value) {
-      const toggle = TERIOCK.CONFIG.transformation.suppress[collection.get(id)?.type]?.path;
+      const toggle = TERIOCK.CONFIG.morph.suppress[collection.get(id)?.type]?.path;
       if (!toggle) { return; }
       this.#addBatchUpdateDocument(operations, collection, id, { [toggle]: value });
     }
@@ -157,8 +165,7 @@ export default function TransformationSystemMixin(Base) {
      */
     #enabledFilter(docs) {
       return docs.filter(d =>
-        !foundry.utils.getProperty(d, TERIOCK.CONFIG.transformation.suppress[d.type]?.path)
-        && d.dependee !== this.parent
+        !foundry.utils.getProperty(d, TERIOCK.CONFIG.morph.suppress[d.type]?.path) && d.dependee !== this.parent
       );
     }
 
@@ -191,41 +198,41 @@ export default function TransformationSystemMixin(Base) {
     }
 
     /**
-     * Whether this is the primary transformation.
+     * Whether this effect is a morph.
      * @returns {boolean}
      */
-    get isPrimaryTransformation() {
-      if (this.actor) { return this.isTransformation && this.actor.system.transformation.primary === this.parent; }
-      return this.isTransformation;
+    get isMorph() {
+      return this.morph.enabled;
     }
 
     /**
-     * Whether this effect is a transformation.
+     * Whether this is the primary morph.
      * @returns {boolean}
      */
-    get isTransformation() {
-      return this.transformation.enabled;
+    get isPrimaryMorph() {
+      if (this.actor) { return this.isMorph && this.actor.system.morph.primary === this.parent; }
+      return this.isMorph;
     }
 
     /**
-     * The primary species this transforms the actor into.
+     * The primary species this morphs the actor into.
      * @returns {TeriockItem<"species"> | null}
      */
     get primarySpecies() {
-      if (!this.isTransformation) { return null; }
-      return this.transformation.primary ?? this.parent.previewedTypes.species[0] ?? null;
+      if (!this.isMorph) { return null; }
+      return this.morph.primary ?? this.parent.previewedTypes.species[0] ?? null;
     }
 
     /**
-     * Build the flags relevant for applying and undoing this transformation.
+     * Build the flags relevant for applying and undoing this morph.
      * @returns {object}
      */
-    _buildTransformationFlags() {
+    _buildMorphFlags() {
       const disabledEffects = [];
       const disabledItems = [];
       const disabledStatDiceItems = Object.fromEntries(POOL_STATS.map(stat => [stat, []]));
       const typeMap = this.actor.children.documentsByType;
-      for (const t of this.transformation.suppress) {
+      for (const t of this.morph.suppress) {
         const documentName = getSystemClass(t)?.metadata.documentName;
         if (documentName === "ActiveEffect") {
           disabledEffects.push(...this.#enabledFilter(typeMap[t] || []));
@@ -236,14 +243,14 @@ export default function TransformationSystemMixin(Base) {
       }
       const stattedItems = this.actor.items.filter(i => i.system.metadata.tags.statted);
       for (const stat of POOL_STATS) {
-        if (this.transformation.resets.has(stat)) {
+        if (this.morph.resets.has(stat)) {
           disabledStatDiceItems[stat].push(...stattedItems.filter(i => !i.system.statDice[stat].disabled));
         }
       }
-      const preTransform = { attributes: this.actor.system.toObject(false).attributes };
-      for (const r of this.transformation.resets) {
-        const update = TERIOCK.CONFIG.stat[r].transformationReset.update;
-        for (const k of Object.keys(update)) { preTransform[k] = foundry.utils.getProperty(this.actor, k); }
+      const preMorph = { attributes: this.actor.system.toObject(false).attributes };
+      for (const r of this.morph.resets) {
+        const update = TERIOCK.CONFIG.stat[r].morphReset.update;
+        for (const k of Object.keys(update)) { preMorph[k] = foundry.utils.getProperty(this.actor, k); }
       }
       return {
         teriock: {
@@ -252,22 +259,22 @@ export default function TransformationSystemMixin(Base) {
           ...Object.fromEntries(
             POOL_STATS.map(stat => [disabledStatDiceFlag(stat), this.#toIds(disabledStatDiceItems[stat])]),
           ),
-          preTransform: foundry.utils.expandObject(preTransform),
+          preMorph: foundry.utils.expandObject(preMorph),
         },
       };
     }
 
     /** @inheritDoc */
     _getTipSuppressions() {
-      return Object.assign(super._getTipSuppressions(), { notPrimary: this._isSuppressedTransformation.bind(this) });
+      return Object.assign(super._getTipSuppressions(), { notPrimary: this._isSuppressedMorph.bind(this) });
     }
 
     /**
-     * If this is suppressed due to not being the primary transformation.
+     * If this is suppressed due to not being the primary morph.
      * @returns {boolean}
      */
-    _isSuppressedTransformation() {
-      return this.isTransformation && this.actor && !this.isPrimaryTransformation;
+    _isSuppressedMorph() {
+      return this.isMorph && this.actor && !this.isPrimaryMorph;
     }
 
     /** @inheritDoc */
@@ -275,22 +282,21 @@ export default function TransformationSystemMixin(Base) {
       const yes = await super._preUpdate(changes, options, user);
       if (yes === false) { return false; }
 
-      if (!this.actor || !this.isTransformation) { return; }
+      if (!this.actor || !this.isMorph) { return; }
       if (changes.disabled === false && this.parent._source.disabled) {
-        changes.flags = foundry.utils.mergeObject(changes.flags ?? {}, this._buildTransformationFlags());
+        changes.flags = foundry.utils.mergeObject(changes.flags ?? {}, this._buildMorphFlags());
       }
     }
 
     /** @inheritDoc */
     async getChildrenData() {
       const childrenData = await super.getChildrenData();
-      if (!this.isTransformation) { return childrenData; }
+      if (!this.isMorph) { return childrenData; }
       for (const s of childrenData.Item.filter(d => d.type === "species")) {
-        s.system.transformationLevel = this.transformation.level;
         for (const stat of POOL_STATS) {
-          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
+          s.system.statDice[stat].disabled = !this.morph.resets.has(stat);
         }
-        s.system.competence.raw = this.transformation.competence.raw;
+        s.system.competence.raw = this.morph.competence.raw;
         if (s.system.size.min && s.system.size.max) {
           s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
         }
@@ -301,14 +307,11 @@ export default function TransformationSystemMixin(Base) {
     /** @inheritDoc */
     async getCreateOperations(data = []) {
       const operations = await super.getCreateOperations(data);
-      if (!this.isTransformation) { return operations; }
-      const flags = this._buildTransformationFlags();
+      if (!this.isMorph) { return operations; }
+      const flags = this._buildMorphFlags();
       operations.push(this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{ _id: this.parent.id, flags }]));
       this.#addBatchToggleDocuments(operations, true, flags.teriock);
-      this.#addBatchActorUpdate(operations, {
-        "system.transformation.primary": this.parent.id,
-        ...this.#resetUpdateData,
-      });
+      this.#addBatchActorUpdate(operations, { "system.morph.primary": this.parent.id, ...this.#resetUpdateData });
       return operations;
     }
 
@@ -316,33 +319,33 @@ export default function TransformationSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",
-        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.effect.transform, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
-        onClick: this.setPrimaryTransformation.bind(this),
-        visible: this.isTransformation && !this.isPrimaryTransformation,
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.effect.morph, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryMorph"),
+        onClick: this.setPrimaryMorph.bind(this),
+        visible: this.isMorph && !this.isPrimaryMorph,
       }];
     }
 
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
-        transformation: Number(this.transformation.enabled),
-        "transformation.primary": Number(this.isPrimaryTransformation),
+        morph: Number(this.morph.enabled),
+        "morph.primary": Number(this.isPrimaryMorph),
       });
     }
 
     /**
-     * Operations that apply or remove this transformation on its actor.
+     * Operations that apply or remove this morph on its actor.
      * @param {boolean} active
      * @returns {DatabaseWriteOperation[]}
      */
-    getTransformationOperations(active) {
+    getMorphOperations(active) {
       const operations = [];
       this.#addBatchToggleDocuments(operations, active);
-      if (this.transformation.resets.size) {
+      if (this.morph.resets.size) {
         this.#addBatchActorUpdate(
           operations,
-          active ? this.#resetUpdateData : { system: this.parent.getFlag("teriock", "preTransform.system") ?? {} },
+          active ? this.#resetUpdateData : { system: this.parent.getFlag("teriock", "preMorph.system") ?? {} },
         );
       }
       return operations;
@@ -351,12 +354,12 @@ export default function TransformationSystemMixin(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
-      if (this.isTransformation && this.#inheritImg) {
+      if (this.isMorph && this.#inheritImg) {
         const s = this.primarySpecies;
         if (s) {
-          this.transformation.img ||= s.system.transformation.img;
-          this.transformation.ring ??= s.system.transformation.ring;
-          this.transformation.ringImg ||= s.system.transformation.ringImg;
+          this.morph.img ||= s.system.morph.img;
+          this.morph.ring ??= s.system.morph.ring;
+          this.morph.ringImg ||= s.system.morph.ringImg;
         }
       }
     }
@@ -364,49 +367,49 @@ export default function TransformationSystemMixin(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      if (!this.isPrimaryTransformation) { return; }
-      const { attribute, size, token } = TERIOCK.CONFIG.transformation.changes;
+      if (!this.isPrimaryMorph) { return; }
+      const { attribute, size, token } = TERIOCK.CONFIG.morph.changes;
       for (const a of Object.keys(TERIOCK.CONFIG.attribute)) {
-        if (!this.transformation.attributes.has(a)) {
-          const value = foundry.utils.getProperty(this.parent, `flags.teriock.preTransform.attributes.${a}`);
+        if (!this.morph.attributes.has(a)) {
+          const value = foundry.utils.getProperty(this.parent, `flags.teriock.preMorph.attributes.${a}`);
           if (value) { this.changes.push({ key: `system.attributes.${a}`, ...attribute, type: "override", value }); }
         }
       }
-      if (this.transformation.override.has("art") && this.actor?.system.settings.getSetting("autoTransformation")) {
-        if (typeof this.transformation.ring === "boolean") {
-          this.changes.push({ key: "token.ring.enabled", ...token, type: "override", value: this.transformation.ring });
+      if (this.morph.override.has("art") && this.actor?.system.settings.getSetting("autoMorph")) {
+        if (typeof this.morph.ring === "boolean") {
+          this.changes.push({ key: "token.ring.enabled", ...token, type: "override", value: this.morph.ring });
         }
-        if (this.transformation.img) {
-          this.changes.push({ key: "token.texture.src", ...token, type: "override", value: this.transformation.img });
+        if (this.morph.img) {
+          this.changes.push({ key: "token.texture.src", ...token, type: "override", value: this.morph.img });
         }
-        if (this.transformation.ringImg) {
+        if (this.morph.ringImg) {
           this.changes.push({
             key: "token.ring.subject.texture",
             ...token,
             type: "override",
-            value: this.transformation.ringImg,
+            value: this.morph.ringImg,
           });
         }
       }
       const value = this.primarySpecies?.system.size.value;
-      if (this.transformation.override.has("size") && value) {
+      if (this.morph.override.has("size") && value) {
         this.changes.push({ key: "system.size.value", ...size, type: "override", value });
       }
     }
 
     /**
-     * Set this as the primary transformation.
-     * @param {TeriockItem<"species">|null} [species] Species to set as this transformation's primary.
+     * Set this as the primary morph.
+     * @param {TeriockItem<"species">|null} [species] Species to set as this morph's primary.
      * @returns {Promise<void>}
      */
-    async setPrimaryTransformation(species = null) {
-      if (!this.parent.actor || !this.isTransformation) { return; }
+    async setPrimaryMorph(species = null) {
+      if (!this.parent.actor || !this.isMorph) { return; }
       const operations = [{
         action: "update",
         documentName: this.actor.documentName,
         pack: this.actor?.pack,
         parent: this.actor?.parent,
-        updates: [{ _id: this.actor?.id, "system.transformation.primary": this.parent.id }],
+        updates: [{ _id: this.actor?.id, "system.morph.primary": this.parent.id }],
       }];
       if (species) {
         operations.push({
@@ -414,12 +417,12 @@ export default function TransformationSystemMixin(Base) {
           documentName: this.parent.documentName,
           pack: this.parent.pack,
           parent: this.parent.parent,
-          updates: [{ _id: this.parent.id, "system.transformation.primary": species.id }],
+          updates: [{ _id: this.parent.id, "system.morph.primary": species.id }],
         });
       }
       await foundry.documents.modifyBatch(operations);
     }
   }
 
-  return TransformationSystem;
+  return MorphSystem;
 }

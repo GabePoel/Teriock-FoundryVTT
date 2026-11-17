@@ -81,6 +81,7 @@ declare global {
       identifier?: Identifier;
       label: string;
       morganti?: boolean;
+      morphReset?: { initial: boolean, update: Record<string, unknown> };
       multiplier: number;
       /** Stat pool configuration */
       pool?: {
@@ -91,7 +92,6 @@ declare global {
       };
       /** DSN appearance options */
       style?: { colorset: string };
-      transformationReset?: { initial: boolean, update: Record<string, unknown> };
     };
 
     export type SimpleEntry = { img?: string, label: string };

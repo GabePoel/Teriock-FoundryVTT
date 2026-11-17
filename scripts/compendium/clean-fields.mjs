@@ -137,7 +137,7 @@ function cleanActiveEffect(doc) {
     delete doc.system.description;
   }
   if (["ability", "property"].includes(doc.type) || doc.transfer === true) { delete doc.transfer; }
-  if (doc.system.transformation?.enabled === false) { delete doc.system.transformation; }
+  if (doc.system.morph?.enabled === false) { delete doc.system.morph; }
 }
 
 /**

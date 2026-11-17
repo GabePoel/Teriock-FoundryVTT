@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierSetField } from "../../../fields/_module.mjs";
-import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
+import { automationMorphFields } from "../../../fields/tools/morph-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -8,18 +8,18 @@ import { BaseAutomation } from "../abstract/_module.mjs";
  * @extends {BaseAutomation}
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
- * @category Transformation
+ * @category Morph
  */
-export default class TransformationAutomation
+export default class MorphAutomation
   extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "transformation" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "morph" });
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      ...automationTransformationFields(),
+      ...automationMorphFields(),
       globalIdentifiers: new IdentifierSetField({
         types: [...Actor.implementation.TYPES.filter(t => t !== "base"), "species"],
       }),
@@ -39,7 +39,6 @@ export default class TransformationAutomation
       "hr",
       ...this._competencePaths,
       "hr",
-      "level",
       "attributes",
       "resets",
       "suppress",
@@ -58,7 +57,7 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (TERIOCK.CONFIG.transformation.multiCheckboxPaths.includes(path)) {
+    if (TERIOCK.CONFIG.morph.multiCheckboxPaths.includes(path)) {
       inputConfig.input = (field, ic) => {
         ic.choices = field.element.choices;
         foundry.data.fields.StringField._prepareChoiceConfig(ic);
@@ -86,14 +85,13 @@ export default class TransformationAutomation
   /** @inheritDoc */
   async modifyExecutionEffectData(execution, data) {
     await super.modifyExecutionEffectData(execution, data);
-    const transformation = foundry.utils.getProperty(data, "system.transformation") ?? {};
-    if (!transformation.enabled) {
-      Object.assign(transformation, {
+    const morph = foundry.utils.getProperty(data, "system.morph") ?? {};
+    if (!morph.enabled) {
+      Object.assign(morph, {
         attributes: this.attributes.toObject(),
         competence: { raw: this.getCompetence({ execution }) },
         enabled: true,
         img: this.img,
-        level: this.level,
         override: this.override.toObject(),
         resets: this.resets.toObject(),
         ring: this.ring,
@@ -101,7 +99,7 @@ export default class TransformationAutomation
         suppress: this.suppress.toObject(),
       });
     }
-    foundry.utils.setProperty(data, "system.transformation", transformation);
+    foundry.utils.setProperty(data, "system.morph", morph);
     if (!this.#selectedUuids.length) { return; }
     const automations = foundry.utils.getProperty(data, "system.automations") ?? {};
     const [automationId, nodeId] = [foundry.utils.randomID(), foundry.utils.randomID()];

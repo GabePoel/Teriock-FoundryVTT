@@ -159,6 +159,10 @@ export default class ApplicableEffectSystem
         children.Item.push(...record.Item);
       }
     }
+    for (const s of children.Item.filter(d => d.type === "species")) {
+      s.system.illusionLevel = this.illusionLevel || s.system.illusionLevel;
+      s.system.transformationLevel = this.transformationLevel || s.system.transformationLevel;
+    }
     return children;
   }
 

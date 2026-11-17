@@ -68,8 +68,8 @@ declare global {
 
     // Effect Keys
     export type ApplicationTarget = keyof typeof CONFIG.effect.applicationTargets;
-    export type IllusionLevel = keyof typeof CONFIG.illusion.level;
-    export type TransformationLevel = keyof typeof CONFIG.transformation.level;
+    export type IllusionLevel = keyof typeof CONFIG.metaphysics.illusionLevels;
+    export type TransformationLevel = keyof typeof CONFIG.metaphysics.transformationLevels;
 
     // Display Keys
     export type Color = keyof typeof DISPLAY.colors;

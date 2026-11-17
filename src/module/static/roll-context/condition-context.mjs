@@ -3,8 +3,8 @@ import usableContext from "./usable-context.mjs";
 
 const conditionContext = {
   ...usableContext,
-  transformation: "TERIOCK.SCHEMA.Transformation.enabled.label",
-  "transformation.primary": "TERIOCK.ROLL_CONTEXT.Transformation.primary",
+  morph: "TERIOCK.SCHEMA.Morph.enabled.label",
+  "morph.primary": "TERIOCK.ROLL_CONTEXT.Morph.primary",
   "type.condition": "TYPES.ActiveEffect.condition",
 };
 
