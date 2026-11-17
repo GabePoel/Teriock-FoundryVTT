@@ -2,7 +2,7 @@ import { default as dprintConfig } from "../../dprint.json" with { type: "json" 
 import { default as system } from "../../system.json" with { type: "json" };
 
 export const BUILDER_NAME = "teriockBuilder00";
-export const CORE_VERSION = system.compatibility.verified.toString();
+export const CORE_VERSION = system.compatibility.minimum.toString();
 export const DOCUMENT_COLLECTION_KEYS = ["cards", "categories", "effects", "items", "pages", "results"];
 export const EXPAND_ADVENTURES = true;
 export const FOLDERS = true;
