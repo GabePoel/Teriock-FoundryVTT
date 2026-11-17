@@ -23,6 +23,7 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * Actor flag key storing item ids whose stat dice were disabled for a pool stat.
  * @param {Teriock.Keys.DieStat} stat
  * @returns {string}
+ * @remarks IDK if using using the stats as part of the string is really that robust but it works for now.
  */
 function disabledStatDiceFlag(stat) {
   return `disabled${stat.capitalize()}DiceItems`;
@@ -394,7 +395,7 @@ export default function TransformationSystemMixin(Base) {
     }
 
     /**
-     * Set this as the primary transformation, optionally designating a primary species.
+     * Set this as the primary transformation.
      * @param {TeriockItem<"species">|null} [species] Species to set as this transformation's primary.
      * @returns {Promise<void>}
      */

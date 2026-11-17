@@ -122,7 +122,8 @@ export default function MetaphysicsSystemMixin(Base) {
     prepareDerivedData() {
       super.prepareDerivedData();
 
-      // Enforce power sources
+      // Give anything that has a power source the corresponding effect type. Maybe this is a bad decision but like
+      // that's the content on the wiki is set up to work.
       for (const ps of this.powerSources) {
         if (ps in TERIOCK.CONFIG.metaphysics.effectTypes && !this.effectTypes.has(ps)) {
           this.effectTypes.add(ps);

@@ -3,6 +3,7 @@ import { mergeMetadata, parseIdentifier } from "../../../utils/_module.mjs";
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
  * @template {MixinBase} T
  * @param {T} Base
+ * @remarks A better way to handle this might just be to save wiki page links as part of the document's data IMO.
  */
 export default function WikiSystemMixin(Base) {
   /** @mixin */

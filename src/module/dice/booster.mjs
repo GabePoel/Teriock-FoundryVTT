@@ -8,8 +8,10 @@ import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeighted
 const { FunctionTerm } = foundry.dice.terms;
 
 /**
- * Subclassed to allow for boosting and deboosting. Foundry relies on the original class. So, the overwritten
- * methods on this subclass need to be transplanted into the original class in order to work.
+ * This subclass of {@link FunctionTerm} allows for boosting and deboosting but it isn't actually the class we directly
+ * use. Even though a new class can be defined in `CONFIG`, Foundry seems to get upset if it's not the original class
+ * that's provided. So in effect this really just makes the boosting/deboosting functionality more visible and
+ * intuitive even though everything is actually just monkey patched onto the original class.
  *
  * Relevant wiki pages:
  * - [Boosted](https://wiki.teriock.com/index.php/Keyword:Boosted)

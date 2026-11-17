@@ -397,6 +397,7 @@ export default function ArmamentSystemMixin(Base) {
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
         e.type === "property"
       );
+      // TODO: Decide if `props` is really the right name for this field. Should it just be `properties`?
       this.props = new Set(properties.map(p => p.constructor.getIdentifierSlug(p)));
 
       // Propagate damage types

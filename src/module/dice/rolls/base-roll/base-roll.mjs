@@ -15,6 +15,7 @@ export default class BaseRoll extends Roll {
    * Normalize a target into a plain, JSON serializable object. Already parsed targets pass through unchanged.
    * @param {Teriock.Dice.RawDieTarget} target
    * @returns {Teriock.Dice.DieTarget}
+   * @todo Targeting probably shouldn't belong to rolls and instead should have something less janky in chat messages.
    */
   static #parseTarget(target) {
     let img = "";
