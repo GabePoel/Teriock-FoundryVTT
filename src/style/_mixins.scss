@@ -1,5 +1,9 @@
+@use "sass:list";
 @use "sass:math";
 @use "sass:string";
+
+$tag-elements: identifier-tags, slug-tags, local-document;
+$input-elements: list.join(slug-input, $tag-elements);
 
 @mixin warm-drop-shadow($spread: 3px, $color: var(--color-cool-4), $fade: 60%) {
   filter: drop-shadow(0 0 $spread color-mix(in srgb, $color, transparent $fade));
@@ -117,7 +121,7 @@
 }
 
 @mixin tags-below-input() {
-  multi-select, identifier-tags, document-tags, local-document {
+  multi-select, document-tags, #{$tag-elements} {
     flex-direction: column-reverse;
     width: 100%;
   }

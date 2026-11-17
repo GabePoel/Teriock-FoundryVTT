@@ -38,11 +38,13 @@ export function toCamelCase(str) {
  * @param {string} str
  * @param {object} [options]
  * @param {boolean} [options.convertCamel] - Separate camelCase words.
+ * @param {boolean} [options.partial] - Keep trailing hyphen.
  * @returns {Slug}
  */
-export function toSlug(str, { convertCamel = false } = {}) {
+export function toSlug(str, { convertCamel = false, partial = false } = {}) {
   if (convertCamel) { str = str.replace(/([a-z0-9])([A-Z])/g, "$1-$2"); }
-  return str.stripDiacritics().slugify({ strict: true });
+  const slug = str.stripDiacritics().slugify({ strict: true }).replace(/-+/g, "-").replace(/^-|-$/g, "");
+  return partial && slug && /[^a-z0-9']$/i.test(str) ? `${slug}-` : slug;
 }
 
 /**

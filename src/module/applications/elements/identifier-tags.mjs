@@ -79,12 +79,9 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
 
   /** @inheritDoc */
   _formatInput(value) {
-    // Keep the colon and hyphen at the end of the text.
     const [type, ...rest] = value.split(":");
-    const identifier = rest.length ? rest.join("-") : type;
-    const slug = toSlug(identifier);
-    const formatted = slug && /[^a-z0-9']$/i.test(identifier) ? `${slug}-` : slug;
-    return rest.length ? `${toSlug(type)}:${formatted}` : formatted;
+    if (!rest.length) { return toSlug(type, { partial: true }); }
+    return `${toSlug(type)}:${toSlug(rest.join("-"), { partial: true })}`;
   }
 
   /** @inheritDoc */

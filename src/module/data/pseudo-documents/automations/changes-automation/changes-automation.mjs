@@ -20,7 +20,7 @@ export default class ChangesAutomation extends BaseAutomation {
     return this.changes.map(c => ({
       ...c,
       priority: c.priority ?? TeriockActiveEffect.CHANGE_TYPES[c.type]?.defaultPriority ?? 0,
-      value: foundry.data.validators.isJSON(c.value) ? JSON.parse(c.value) : c.value,
+      value: typeof c.value === "string" && foundry.data.validators.isJSON(c.value) ? JSON.parse(c.value) : c.value,
     }));
   }
 

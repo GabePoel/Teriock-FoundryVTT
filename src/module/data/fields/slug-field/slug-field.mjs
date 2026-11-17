@@ -1,4 +1,4 @@
-import { HTMLSlugInputElement } from "../../../applications/elements/_module.mjs";
+import { HTMLSlugInputElement, HTMLSlugTagsElement } from "../../../applications/elements/_module.mjs";
 import { prepareSuggestions } from "../tools/suggestions.mjs";
 import { validateSlug } from "../tools/validators.mjs";
 
@@ -20,7 +20,7 @@ export default class SlugField extends StringField {
       nullable: true,
       reset: null,
       suggestions: null,
-      type: null,
+      types: undefined,
       validateChoices: true,
     });
   }
@@ -37,11 +37,11 @@ export default class SlugField extends StringField {
    */
   _toInput(config) {
     config.reset ??= this.reset;
-    config.type ??= this.type;
     if (config.choices ?? this.choices) { return super._toInput(config); }
     config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
-      types: config.type ? [config.type] : [],
+      types: config.types ?? this.types ?? [],
     });
+    if (config.single === false) { return HTMLSlugTagsElement.create(config); }
     return HTMLSlugInputElement.create(config);
   }
 

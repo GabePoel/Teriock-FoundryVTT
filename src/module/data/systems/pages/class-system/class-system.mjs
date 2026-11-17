@@ -27,7 +27,7 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
         initial: "everyman",
         nullable: false,
         required: true,
-        type: "archetype",
+        types: ["archetype"],
       }),
       ranks: new IdentifierSetField({
         label: "TERIOCK.DOCUMENTS.Item.rank.plural",

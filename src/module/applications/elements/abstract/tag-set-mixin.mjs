@@ -68,6 +68,7 @@ export default function TagSetMixin(Base) {
      */
     #onClickTag(event) {
       if (!event.target.classList.contains("remove") || !this.editable) { return; }
+      event.preventDefault();
       delete this._value[event.target.closest(".tag").dataset.key];
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
       this._refresh();

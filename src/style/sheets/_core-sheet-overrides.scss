@@ -27,6 +27,30 @@
   padding-bottom: 1em;
 }
 
+.active-effect-config .tab.changes {
+  header,
+  ol {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.5fr) 4rem 24px;
+  }
+
+  header {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+  }
+
+  ol {
+    align-items: start;
+    @include mixins.tags-below-input;
+
+    .controls {
+      align-items: center;
+      display: flex;
+      height: var(--input-height);
+      justify-content: flex-end;
+    }
+  }
+}
+
 .cards-config.deck,
 .macro-config,
 .active-effect-config {

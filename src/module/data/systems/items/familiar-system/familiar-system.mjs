@@ -28,7 +28,7 @@ export default class FamiliarSystem extends ContractItemSystem {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       actorUuid: new fields.DocumentUUIDField({ type: "Actor" }),
-      creatureType: new SlugField({ suggestions: true, type: "creature" }),
+      creatureType: new SlugField({ suggestions: true, types: ["creature"] }),
     });
   }
 

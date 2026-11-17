@@ -1,4 +1,6 @@
+import { ActiveEffectChangeTypeConfig } from "@client/config.mjs";
 import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+import { DataField } from "@common/data/fields.mjs";
 
 import changeConfig from "../static/config/change-config.mjs";
 import tipConfig from "../static/config/tip-config.mjs";
@@ -9,10 +11,11 @@ declare global {
     export type SuppressionMessageKey = keyof typeof tipConfig.suppression;
     export type ErrorMessageKey = keyof typeof tipConfig.error;
 
+    export type ChangeTypeEntry = ActiveEffectChangeTypeConfig & { value?: () => DataField };
+
     export type ChildChangeTargetEntry = { initial?: boolean, label: string };
 
     export type ChildChangePathEntry = {
-      forExecution?: boolean;
       group: keyof typeof changeConfig.child.groups;
       initial?: boolean;
       label: string;

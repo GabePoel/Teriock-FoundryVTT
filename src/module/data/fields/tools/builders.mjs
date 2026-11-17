@@ -1,4 +1,4 @@
-import { FormulaField, IdentifierSetField, SlugField } from "../_module.mjs";
+import { ChangeValueField, FormulaField, IdentifierSetField, SlugField } from "../_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -110,7 +110,7 @@ export function changeField() {
       required: true,
     }),
     type: changeTypeField(),
-    value: new FormulaField({ deterministic: false, initial: "", label: "EFFECT.FIELDS.changes.element.value.label" }),
+    value: new ChangeValueField(),
   });
 }
 
@@ -416,7 +416,7 @@ export function tradecraftField(options = {}) {
     initial: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts)[0],
     label: _sloc("TERIOCK.COMMON.Tradecraft"),
     nullable: false,
-    type: "tradecraft",
+    types: ["tradecraft"],
     ...options,
   });
 }
@@ -487,7 +487,7 @@ export function fieldField(options = {}) {
     initial: Object.keys(TERIOCK.CONFIG.tradecraft.fields).find(k => TERIOCK.CONFIG.tradecraft.fields[k].initial),
     label: _sloc("TERIOCK.COMMON.Field"),
     nullable: false,
-    type: "field",
+    types: ["field"],
     ...options,
   });
 }
@@ -503,7 +503,7 @@ export function classField(options = {}) {
     initial: Object.keys(TERIOCK.CONFIG.class.classes)[0],
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
     nullable: false,
-    type: "class",
+    types: ["class"],
     ...options,
   });
 }
@@ -515,7 +515,7 @@ export function classField(options = {}) {
  */
 export function equipmentTypeField(options = {}) {
   return new SlugField({
-    type: "equipment",
+    types: ["equipment"],
     suggestions: () =>
       Object.fromEntries(
         game.teriock.identifiers.equipmentTypes.entries().filter(([, e]) => e.name).map((
@@ -533,7 +533,7 @@ export function equipmentTypeField(options = {}) {
  */
 export function mountTypeField(options = {}) {
   return new SlugField({
-    type: "mount",
+    types: ["mount"],
     suggestions: () =>
       Object.fromEntries(
         game.teriock.identifiers.mountTypes.entries().filter(([, e]) => e.name).map((
@@ -555,7 +555,7 @@ export function archetypeField(options = {}) {
     initial: Object.keys(TERIOCK.CONFIG.class.archetypes).find(k => TERIOCK.CONFIG.class.archetypes[k].initial),
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
     nullable: false,
-    type: "archetype",
+    types: ["archetype"],
     ...options,
   });
 }

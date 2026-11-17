@@ -1,4 +1,5 @@
 import { AttackSystemMixin } from "../_module.mjs";
+import { secondaryFormat } from "../../../../helpers/localization.mjs";
 import { dotJoin, getName, makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
@@ -70,7 +71,7 @@ export default function ArmamentSystemMixin(Base) {
           initial: null,
           nullable: true,
           placeholder: _loc("COMMON.None"),
-          type: "style",
+          types: ["style"],
           validateChoices: false,
           choices: () =>
             teriock.helpers.localization.choicesWithNone(
@@ -127,13 +128,8 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @returns {string[]} */
     get _damageWrappers() {
-      return this.hasAttack
-        ? [
-          _loc("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
-            value: this.hasTwoHandedAttack ? `${this.damage.base} / ${this.damage.twoHanded}` : this.damage.base,
-          }),
-        ]
-        : [];
+      if (!this.hasAttack) { return []; }
+      return [secondaryFormat(this.damage.base, this.damage.twoHanded, { secondFilter: FormulaField.exists })];
     }
 
     /** @returns {Teriock.Panels.PanelBar} */

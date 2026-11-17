@@ -99,9 +99,7 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
 
   /** @inheritDoc */
   _formatInput(value) {
-    // Keep hyphens at the end of the text so typing isn't confusing.
-    const slug = toSlug(value);
-    return slug && /[^a-z0-9']$/i.test(value) ? `${slug}-` : slug;
+    return toSlug(value, { partial: true });
   }
 
   /** @inheritDoc */

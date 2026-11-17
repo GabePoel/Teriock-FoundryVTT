@@ -1,3 +1,5 @@
+@use "../../mixins" as mixins;
+
 .change-config-container {
   align-items: center;
   display: flex;
@@ -8,6 +10,7 @@
   overflow-y: auto;
   padding: 0;
   width: 100%;
+  @include mixins.tags-below-input;
 
   .icon-input {
     width: 100%;
@@ -40,18 +43,17 @@
     .change-activation,
     .change-assignment {
       display: flex;
-      flex: 1;
+      flex: none;
       flex-direction: row;
       gap: 0.5rem;
     }
 
-    .change-activation {
-      flex: 1;
-    }
+    .teriock-icon-input-group {
+      align-items: start;
 
-    .change-assignment {
-      flex: 0 0 auto;
-      width: max-content;
+      > i {
+        height: var(--input-height);
+      }
     }
 
     .change-entry,
@@ -67,7 +69,12 @@
 
       .change-delete,
       .change-suppress {
-        flex: 1;
+        flex: none;
+        height: var(--input-height);
+      }
+
+      .change-delete:only-child {
+        height: calc(2 * var(--input-height) + 0.5rem);
       }
     }
   }

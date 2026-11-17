@@ -27,7 +27,7 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
         initial: "artisan",
         nullable: false,
         required: true,
-        type: "field",
+        types: ["field"],
       }),
     });
   }

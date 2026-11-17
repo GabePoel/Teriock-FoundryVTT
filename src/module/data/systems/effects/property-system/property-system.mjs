@@ -54,7 +54,7 @@ export default class PropertySystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      damageType: new SlugField({ suggestions: true, type: "damage" }),
+      damageType: new SlugField({ suggestions: true, types: ["damage"] }),
       extraDamage: rollableFormulaField(),
     });
   }

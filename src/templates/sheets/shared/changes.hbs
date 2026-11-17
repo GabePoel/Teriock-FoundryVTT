@@ -12,86 +12,73 @@
 <ol class="change-config-container" data-changes>
   {{#each changesData as |change i|}}
     {{#with ../fieldDefs as |changeFields|}}
-      <li class="change-container" data-index="{{ i }}" data-path="{{ ../../changesPath }}">
+      <li class="change-container">
         <div class="change-entry">
           {{formIcon
             changeFields.key
-            name=""
+            name=(concat ../../changesPath "." i ".key")
             value=change.key
             disabled=(not @root/editable)
             icon=@root/TERIOCK.DISPLAY.icons.manifest.change.key
             id=(concat @root/rootId ../../changesPath "." i ".key")
-            classes="teriock-change-input"
-            dataset=(object
-              tooltip=(minLen change.key 32)
-              property="key")
           }}
           {{formIcon
             changeFields.value
-            name=""
+            name=(concat ../../changesPath "." i ".value")
             value=change.value
+            changeType=change.type
             icon=@root/TERIOCK.DISPLAY.icons.manifest.change.value
             disabled=(not @root/editable)
             id=(concat @root/rootId ../../changesPath "." i ".value")
-            classes="teriock-change-input"
-            dataset=(object
-              tooltip=(minLen change.value 32)
-              property="value")
           }}
         </div>
         <div class="change-config">
           <div class="change-activation">
             {{formIcon
               changeFields.priority
-              name=""
+              name=(concat ../../changesPath "." i ".priority")
               value=change.priority
               icon=@root/TERIOCK.DISPLAY.icons.manifest.change.priority
               placeholder=change.defaultPriority
               disabled=(not @root/editable)
               id=(concat @root/rootId ../../changesPath "." i ".priority")
-              classes="teriock-change-input"
-              dataset=(object property="priority")
             }}
             {{#if changeFields.phase}}
               {{formIcon
                 changeFields.phase
-                name=""
+                name=(concat ../../changesPath "." i ".phase")
                 value=change.phase
                 icon=@root/TERIOCK.DISPLAY.icons.manifest.change.phase
                 disabled=(not @root/editable)
                 id=(concat @root/rootId ../../changesPath "." i ".phase")
-                classes="teriock-change-input"
-                dataset=(object
-                  property="phase"
-                  tooltip=(localize (concat "TERIOCK.CHANGES.Phase." change.phase ".hint")))
+                dataset=(object tooltip=(localize (concat "TERIOCK.CHANGES.Phase." change.phase ".hint")))
               }}
             {{/if}}
           </div>
           <div class="change-assignment">
             {{formIcon
               changeFields.type
-              name=""
+              name=(concat ../../changesPath "." i ".type")
               value=change.type
               icon=@root/TERIOCK.DISPLAY.icons.manifest.change.type
               disabled=(not @root/editable)
               id=(concat @root/rootId ../../changesPath "." i ".type")
-              classes="teriock-change-input"
-              dataset=(object
-                property="type")
             }}
             {{formIcon
               changeFields.target
-              name=""
+              name=(concat ../../changesPath "." i ".target")
               value=change.target
               icon=@root/TERIOCK.DISPLAY.icons.manifest.change.target
               disabled=(not @root/editable)
               id=(concat @root/rootId ../../changesPath "." i ".target")
-              classes="teriock-change-input"
-              dataset=(object
-                property="target")
             }}
           </div>
         </div>
+        <input
+          type="hidden"
+          name='{{concat ../../changesPath "." i ".applyIfSuppressed"}}'
+          value="{{ change.applyIfSuppressed }}"
+        />
         <div class="change-controls">
           {{!-- prettier-ignore --}}
           <button

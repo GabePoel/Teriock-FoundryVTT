@@ -1,6 +1,10 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import commandConfig from "./command-config.mjs";
 
+/**
+ * @import { ActiveEffectChangeRenderer } from "@client/documents/_types.mjs";
+ */
+
 const booleanTypes = ["upgrade", "downgrade", "override"];
 const simpleTypes = ["add", "subtract", ...booleanTypes];
 const numericalTypes = [...simpleTypes, "multiply"];
@@ -33,7 +37,6 @@ const groups = {
 /** @type {Record<string, Teriock.Config.ChildChangePathEntry>} */
 const paths = {
   "system.attackPenalty": {
-    forExecution: true,
     group: "offense",
     initial: true,
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
@@ -47,7 +50,6 @@ const paths = {
     types: typeSubsets.simple,
   },
   "system.boosts.*": {
-    forExecution: true,
     group: "boosts",
     label: "TERIOCK.SYSTEMS.Child.FIELDS.boosts.all",
     targets: ["ability", "armament"],
@@ -72,35 +74,30 @@ const paths = {
     types: typeSubsets.numerical,
   },
   "system.damage.*": {
-    forExecution: true,
     group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.alt",
     targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.damage.base": {
-    forExecution: true,
     group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label",
     targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.damage.twoHanded": {
-    forExecution: true,
     group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
     targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.hitBonus": {
-    forExecution: true,
     group: "offense",
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
     targets: ["ability", "armament"],
     types: typeSubsets.formula,
   },
   "system.piercing.raw": {
-    forExecution: true,
     group: "offense",
     label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
     targets: ["ability", "armament"],
@@ -119,7 +116,6 @@ const paths = {
     types: typeSubsets.boolean,
   },
   "system.warded": {
-    forExecution: true,
     group: "offense",
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
     targets: ["ability", "armament"],
@@ -128,7 +124,6 @@ const paths = {
   ...Object.fromEntries(
     Object.entries(commandConfig).filter(([_k, v]) => v.numeric).map(([k, v]) => {
       return [`system.boosts.${k}`, {
-        forExecution: true,
         group: "boosts",
         label: v.label,
         targets: ["ability", "armament"],
@@ -162,12 +157,56 @@ const phase = {
   },
 };
 
+/**
+ * Render an active effect change row with custom context. This is for Foundry's normal change configs and not our
+ * custom ones that are part of automations.
+ * @type {ActiveEffectChangeRenderer}
+ */
+const render = (context) => {
+  const field = types[context.change.type].value();
+  if (field instanceof foundry.data.fields.SetField) {
+    const { value } = context.change;
+    context.change.value = [foundry.data.validators.isJSON(value) ? JSON.parse(value) : value].flat().filter(Boolean);
+  }
+  context.fields = { ...context.fields, value: field };
+  return foundry.applications.handlebars.renderTemplate("templates/sheets/active-effect/change.hbs", context);
+};
+
+const harmTypesField = () => new teriock.data.fields.SlugSetField({ suggestions: true, types: ["damage", "drain"] });
+
+/** @satisfies {Record<string, Teriock.Config.ChangeTypeEntry>} */
 const types = {
-  boost: { defaultPriority: 60, label: "TERIOCK.EFFECTS.Changes.boost" },
-  substitute: { defaultPriority: 70, label: "TERIOCK.EFFECTS.Changes.substitute" },
-  typeAdd: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeAdd" },
-  typeRemove: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeRemove" },
-  typeSet: { defaultPriority: 45, label: "TERIOCK.EFFECTS.Changes.typeSet" },
+  ...Object.fromEntries(
+    simpleTypes.map(
+      type => [type, {
+        defaultPriority: CONST.ACTIVE_EFFECT_CHANGE_TYPES[type],
+        label: `EFFECT.CHANGES.TYPES.${type}`,
+        render,
+        value: () => new teriock.data.fields.FormulaField(),
+      }]
+    ),
+  ),
+  boost: {
+    defaultPriority: 60,
+    label: "TERIOCK.EFFECTS.Changes.boost",
+    render,
+    value: () => new teriock.data.fields.FormulaField(),
+  },
+  multiply: {
+    defaultPriority: CONST.ACTIVE_EFFECT_CHANGE_TYPES.multiply,
+    label: "EFFECT.CHANGES.TYPES.multiply",
+    render,
+    value: () => new teriock.data.fields.FormulaField({ deterministic: true }),
+  },
+  substitute: {
+    defaultPriority: 70,
+    label: "TERIOCK.EFFECTS.Changes.substitute",
+    render,
+    value: () => new teriock.data.fields.FormulaField({ placeholder: "@base" }),
+  },
+  typeAdd: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeAdd", render, value: harmTypesField },
+  typeRemove: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeRemove", render, value: harmTypesField },
+  typeSet: { defaultPriority: 45, label: "TERIOCK.EFFECTS.Changes.typeSet", render, value: harmTypesField },
 };
 
 const parentTargets = { Actor: "DOCUMENT.Actor", Item: "DOCUMENT.Item" };

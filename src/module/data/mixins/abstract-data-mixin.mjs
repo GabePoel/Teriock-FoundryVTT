@@ -130,8 +130,9 @@ export default function AbstractDataMixin(Base) {
 
       // Identifiers and UUIDs get displayed with their actual name if possible
       if (!fetched && !textContent && typeof value === "string") {
-        if (value && field instanceof teriock.data.fields.SlugField && field.type) {
-          value = `${field.type}:${value}`;
+        if (value && field instanceof teriock.data.fields.SlugField && field.types?.length) {
+          const identifiers = field.types.map(t => `${t}:${value}`);
+          value = identifiers.find(i => game.teriock.identifiers.getName(i)) ?? identifiers[0];
         }
         try {
           if (validateIdentifier(value, { strict: true }) && name) { textContent = getName(value); }

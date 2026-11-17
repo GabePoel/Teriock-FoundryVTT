@@ -214,6 +214,24 @@ export default class FormulaField extends StringField {
   }
 
   /** @inheritDoc */
+  _applyChangeCustom(value, delta, model, change) {
+    switch (change.type) {
+      case "boost":
+        return this._applyChangeBoost(value, delta, model, change);
+      case "substitute":
+        return this._applyChangeSubstitute(value, delta, model, change);
+      case "typeAdd":
+        return this._applyChangeTypeAdd(value, delta, model, change);
+      case "typeRemove":
+        return this._applyChangeTypeRemove(value, delta, model, change);
+      case "typeSet":
+        return this._applyChangeTypeSet(value, delta, model, change);
+      default:
+        return super._applyChangeCustom(value, delta, model, change);
+    }
+  }
+
+  /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
     if (!value) { return delta; }
     return this.deterministic
@@ -292,6 +310,7 @@ export default class FormulaField extends StringField {
 
   /** @inheritDoc */
   _castChangeDelta(delta) {
+    if (Array.isArray(delta)) { return delta; }
     return this._cast(delta).trim();
   }
 
@@ -314,26 +333,6 @@ export default class FormulaField extends StringField {
       }
     }
     return super._validateType(value);
-  }
-
-  /** @inheritDoc */
-  applyChange(value, model, change, { replacementData = {} } = {}) {
-    let updated;
-    const delta = change.value;
-    if (change.type === "boost") {
-      updated = this._applyChangeBoost(value, delta, model, change);
-    } else if (change.type === "substitute") {
-      updated = this._applyChangeSubstitute(value, delta, model, change);
-    } else if (change.type === "typeAdd") {
-      updated = this._applyChangeTypeAdd(value, delta, model, change);
-    } else if (change.type === "typeRemove") {
-      updated = this._applyChangeTypeRemove(value, delta, model, change);
-    } else if (change.type === "typeSet") {
-      updated = this._applyChangeTypeSet(value, delta, model, change);
-    } else {
-      return super.applyChange(value, model, change, { replacementData });
-    }
-    return this.initialize(updated, model);
   }
 
   /** @inheritDoc */

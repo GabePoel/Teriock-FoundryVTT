@@ -1,5 +1,5 @@
 import { formatDynamicSelectOptions, mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
+import { ChangeValueField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -36,7 +36,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
         initial: initialTarget,
         required: true,
       }),
-      value: new FormulaField({ deterministic: false, initial: "" }),
+      value: new ChangeValueField(),
     });
   }
 
@@ -91,7 +91,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (path.endsWith("key")) { inputConfig.choices = this._processedKeyChoices; }
     if (path.endsWith("qualifier")) { inputConfig.context = this.target; }
-    if (path.endsWith("value")) { inputConfig.context = "actor"; }
+    if (path.endsWith("value")) { inputConfig.changeType = this.changeType; }
     if (path.endsWith("changeType")) { inputConfig.choices = this._changeTypeChoices; }
     if (path.endsWith("priority")) { inputConfig.placeholder = this._defaultPriority.toString() ?? "0"; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
@@ -106,7 +106,9 @@ export default class ChildChangeAutomation extends BaseAutomation {
       qualifier: this.qualifier,
       target: this.target,
       type: this.changeType,
-      value: foundry.data.validators.isJSON(this.value) ? JSON.parse(this.value) : this.value,
+      value: typeof this.value === "string" && foundry.data.validators.isJSON(this.value)
+        ? JSON.parse(this.value)
+        : this.value,
     }];
   }
 

@@ -1,8 +1,7 @@
 // Designed to resemble Foundry's document-tags and string-tags elements
+@use "../mixins" as mixins;
 
-identifier-tags,
-slug-input,
-local-document {
+#{mixins.$input-elements} {
   --input-background-color: var(--color-cool-4);
   --input-border-color: transparent;
   --input-box-shadow: none;
@@ -18,7 +17,7 @@ local-document {
     --input-text-color: var(--color-light-4);
   }
 
-  // Frame the input and its button into a single control
+  // Button is styled to look like it's part of the input
   > .input-group {
     align-items: center;
     background: var(--input-background-color);
@@ -65,7 +64,7 @@ local-document {
   }
 }
 
-.theme-light :is(identifier-tags, slug-input, local-document) {
+.theme-light :is(#{mixins.$input-elements}) {
   --input-background-color: rgba(0, 0, 0, 0.1);
   --input-border-color: var(--color-dark-6);
   --input-box-shadow: inset 0 0 6px var(--input-background-color);
@@ -83,7 +82,7 @@ local-document {
 
 .tags.input-element-tags {
   .tag {
-    :is(identifier-tags, local-document):is(:disabled, [readonly]) & .remove {
+    :is(#{mixins.$tag-elements}):is(:disabled, [readonly]) & .remove {
       display: none;
     }
   }

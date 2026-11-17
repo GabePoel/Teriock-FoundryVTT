@@ -5,7 +5,7 @@ declare module "./child-change-automation.mjs" {
     priority: number | null;
     qualifier: Teriock.System.FormulaString;
     target: Teriock.Changes.ChildTarget;
-    value: Teriock.System.FormulaString;
+    value: Slug[] | Teriock.System.FormulaString;
   }
 }
 
