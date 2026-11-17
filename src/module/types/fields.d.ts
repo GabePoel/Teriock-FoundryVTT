@@ -29,7 +29,7 @@ declare global {
       | string[];
 
     export type _SlugFieldOptions = {
-      reset?: string | null;
+      generate?: string | null;
       suggestions?: IdentifierSuggestions | null;
       types?: string[];
       validateChoices?: boolean;

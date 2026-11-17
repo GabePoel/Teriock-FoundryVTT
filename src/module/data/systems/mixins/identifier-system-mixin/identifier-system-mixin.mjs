@@ -27,12 +27,12 @@ export default function IdentifierSystemMixin(Base) {
         name: name.value.trim() || name.placeholder,
       });
       if (!form.elements["system.slug"]) {
-        const group = this.schema.fields.slug.toFormGroup({ hint: "" }, { name: "system.slug", reset: defaultSlug });
+        const group = this.schema.fields.slug.toFormGroup({ hint: "" }, { generate: defaultSlug, name: "system.slug" });
         group.dataset.systemField = "";
         name.closest(".form-group").after(group);
       }
       const slug = form.elements["system.slug"];
-      slug.setAttribute("reset", defaultSlug);
+      slug.setAttribute("generate", defaultSlug);
       (slug.querySelector("input") ?? slug).placeholder = defaultSlug;
     }
 

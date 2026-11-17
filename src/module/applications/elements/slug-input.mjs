@@ -10,11 +10,11 @@ const { setInputAttributes } = foundry.applications.fields;
 
 /**
  * @typedef SlugInputConfig
- * @property {string|null} [reset] Slug applied when the reset button is clicked.
+ * @property {string|null} [generate] Slug applied when the generate button is clicked.
  */
 
 /**
- * A text input for slugs with an optional reset button.
+ * A text input for slugs with an optional generate button.
  * @category Identifiers
  */
 export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestionsElement {
@@ -28,7 +28,7 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
    */
   static create(config) {
     const el = document.createElement(this.tagName);
-    if (config.reset) { el.setAttribute("reset", config.reset); }
+    if (config.generate) { el.setAttribute("generate", config.generate); }
     if (config.value != null) { el.setAttribute("value", String(config.value)); }
     setInputAttributes(el, config);
     this._appendSuggestions(el, config.options);
@@ -36,17 +36,17 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
   }
 
   /**
-   * The reset button element.
+   * The generate button element.
    * @type {HTMLButtonElement|null}
    */
-  #resetButton = null;
+  #generateButton = null;
 
   /**
-   * Reset the identifier to the configured default value.
+   * Apply the generated slug.
    */
-  #onReset() {
-    if (!this.reset || !this.editable) { return; }
-    this._primaryInput.value = this.reset;
+  #onGenerate() {
+    if (!this.generate || !this.editable) { return; }
+    this._primaryInput.value = this.generate;
     this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
     this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
   }
@@ -62,17 +62,17 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
   }
 
   /**
-   * The identifier applied when the reset button is clicked.
+   * The slug applied when the generate button is clicked.
    * @returns {Slug|null}
    */
-  get reset() {
-    return this.getAttribute("reset");
+  get generate() {
+    return this.getAttribute("generate");
   }
 
   /** @inheritDoc */
   _activateListeners() {
     super._activateListeners();
-    this.#resetButton?.addEventListener("click", this.#onReset.bind(this));
+    this.#generateButton?.addEventListener("click", this.#onGenerate.bind(this));
     this._primaryInput.addEventListener("change", event => {
       event.stopPropagation();
       this._primaryInput.value = toSlug(this._primaryInput.value);
@@ -85,14 +85,14 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
   _buildElements() {
     const [tags, group] = super._buildElements();
     this._applyInputAttributes(this._primaryInput);
-    if (this.reset) {
-      this.#resetButton = createElement("button", {
-        ariaLabel: _loc("TERIOCK.ELEMENTS.SLUG_INPUT.reset"),
-        className: `icon ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button")}`,
-        dataset: { tooltip: "TERIOCK.ELEMENTS.SLUG_INPUT.reset" },
+    if (this.generate) {
+      this.#generateButton = createElement("button", {
+        ariaLabel: _loc("TERIOCK.ELEMENTS.SLUG_INPUT.generate"),
+        className: `icon ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.generate, "button")}`,
+        dataset: { tooltip: "TERIOCK.ELEMENTS.SLUG_INPUT.generate" },
         type: "button",
       });
-      group.append(this.#resetButton);
+      group.append(this.#generateButton);
     }
     return [tags, group];
   }

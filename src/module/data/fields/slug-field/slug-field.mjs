@@ -17,8 +17,8 @@ export default class SlugField extends StringField {
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       blank: true,
+      generate: null,
       nullable: true,
-      reset: null,
       suggestions: null,
       types: undefined,
       validateChoices: true,
@@ -36,7 +36,7 @@ export default class SlugField extends StringField {
    * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._SlugFieldOptions} config
    */
   _toInput(config) {
-    config.reset ??= this.reset;
+    config.generate ??= this.generate;
     if (config.choices ?? this.choices) { return super._toInput(config); }
     config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
       types: config.types ?? this.types ?? [],

@@ -77,8 +77,6 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ui.tables = applications.sidebar.tabs.TeriockRollTableDirectory;
   CONFIG.ui.world = applications.sidebar.tabs.TeriockWorldTab;
 
-  CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
-
   CONFIG.ux.Autocomplete = applications.ux.TeriockAutocomplete;
   CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
   CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
@@ -168,6 +166,7 @@ foundry.helpers.Hooks.once("init", function() {
     }
   };
 
+  // Pseudo-Documents
   const pd = data.pseudoDocuments;
   registerSubtypes(pd.activations, pd.activations.abstract.BaseActivation);
   registerSubtypes(pd.activations.commands, pd.activations.abstract.BaseActivation);
@@ -175,75 +174,99 @@ foundry.helpers.Hooks.once("init", function() {
   registerSubtypes(pd.automations, pd.automations.abstract.BaseAutomation);
   registerSubtypes(pd.expirations, pd.expirations.abstract.BaseExpiration);
 
-  CONFIG.ActiveEffect.changeTypes = TERIOCK.CONFIG.change.types;
   /** @category Hierarchy */
-  CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
+  const hierarchyCompendiumIndexFields = ["system._sup"];
+
+  // Active Effect
+  CONFIG.ActiveEffect.changeTypes = TERIOCK.CONFIG.change.types;
+  CONFIG.ActiveEffect.compendiumIndexFields = hierarchyCompendiumIndexFields;
   CONFIG.ActiveEffect.defaultType = "consequence";
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
   CONFIG.ActiveEffect.expiryAction = "delete";
   CONFIG.ActiveEffect.phases = TERIOCK.CONFIG.change.phase;
   registerSubtypes(data.systems.effects, foundry.abstract.TypeDataModel);
 
+  // Actor
   CONFIG.Actor.collection = documents.collections.TeriockActors;
   CONFIG.Actor.defaultType = "pc";
   CONFIG.Actor.documentClass = documents.TeriockActor;
   registerSubtypes(data.systems.actors, foundry.abstract.TypeDataModel);
 
+  // Ambient Light
   CONFIG.AmbientLight.documentClass = documents.TeriockAmbientLightDocument;
   CONFIG.AmbientLight.objectClass = canvas.placeables.TeriockAmbientLight;
 
+  // Card
   CONFIG.Card.documentClass = documents.TeriockCard;
   registerSubtypes(data.systems.cards, foundry.abstract.TypeDataModel);
 
+  // Cards
   CONFIG.Cards.documentClass = documents.TeriockCards;
 
+  // Chat Message
   CONFIG.ChatMessage.defaultType = "interactive";
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
   CONFIG.ChatMessage.template = "teriock/ui/chat-message";
   registerSubtypes(data.systems.messages, foundry.abstract.TypeDataModel);
 
+  // Combat
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Combat.initiative.decimals = 2;
   CONFIG.Combat.initiative.formula = data.models.InitiativeModifierModel.getFormula();
 
+  // Combatant
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
   registerSubtypes(data.systems.combatants, foundry.abstract.TypeDataModel);
 
+  // Combatant Group
   CONFIG.CombatantGroup.defaultType = "mob";
   CONFIG.CombatantGroup.documentClass = documents.TeriockCombatantGroup;
   registerSubtypes(data.systems.groups, foundry.abstract.TypeDataModel);
 
+  // Folder
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
-  /** @category Hierarchy */
-  CONFIG.Item.compendiumIndexFields = ["system._sup"];
+  // Item
+  CONFIG.Item.compendiumIndexFields = hierarchyCompendiumIndexFields;
   CONFIG.Item.defaultType = "power";
   CONFIG.Item.documentClass = documents.TeriockItem;
   registerSubtypes(data.systems.items, foundry.abstract.TypeDataModel);
 
+  // Journal Entry
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
 
+  // Journal Entry Category
   CONFIG.JournalEntryCategory.documentClass = documents.TeriockJournalEntryCategory;
 
+  // Journal Entry Page
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
   registerSubtypes(data.systems.pages, foundry.abstract.TypeDataModel);
 
+  // Level
   CONFIG.Level.documentClass = documents.TeriockLevel;
 
+  // Macro
   CONFIG.Macro.defaultType = "script";
   CONFIG.Macro.documentClass = documents.TeriockMacro;
 
+  // Region
   CONFIG.Region.documentClass = documents.TeriockRegionDocument;
+  CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
 
+  // Region Behavior
   registerSubtypes(data.systems.behaviors, foundry.abstract.TypeDataModel);
 
+  // Roll Table
   CONFIG.RollTable.documentClass = documents.TeriockRollTable;
 
+  // Scene
   CONFIG.Scene.documentClass = documents.TeriockScene;
 
+  // Table Result
   CONFIG.TableResult.documentClass = documents.TeriockTableResult;
 
+  // Token
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
   CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
   CONFIG.Token.movement.defaultSpeed = 6;
@@ -254,6 +277,7 @@ foundry.helpers.Hooks.once("init", function() {
     config.getCostFunction = token => token.actor?.system.getMovementCostFunction(action) ?? (cost => cost);
   }
 
+  // User
   CONFIG.User.collection = documents.collections.TeriockUsers;
   CONFIG.User.documentClass = documents.TeriockUser;
 
@@ -276,6 +300,7 @@ foundry.helpers.Hooks.once("init", function() {
   const sp = s.page;
   const su = s.utility;
 
+  // Active Effect
   rs(d.TeriockActiveEffect, se.AbilitySheet, "Ability", { types: ["ability"] });
   rs(d.TeriockActiveEffect, se.ApplicableEffectSheet, "ApplicableEffect", { types: ["imbuement"] });
   rs(d.TeriockActiveEffect, se.AttunementSheet, "Attunement", { types: ["attunement"] });
@@ -287,15 +312,21 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockActiveEffect, se.ResourceSheet, "Resource", { types: ["resource"] });
   rs(d.TeriockActiveEffect, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActiveEffect.TYPES });
 
+  // Actor
   rs(d.TeriockActor, sa.InventorySheet, "Inventory", { types: ["inventory"] });
   rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "environment", "npc", "pc"] });
   rs(d.TeriockActor, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActor.TYPES });
 
+  // Ambient Light
   rs(d.TeriockAmbientLightDocument, s.TeriockAmbientLightConfig, "AmbientLight");
 
+  // Combatant
   rs(d.TeriockCombatant, s.TeriockCombatantConfig, "Combatant");
+
+  // Combatant Group
   rs(d.TeriockCombatantGroup, s.CombatantGroupConfig, "CombatantGroup");
 
+  // Item
   rs(d.TeriockItem, si.ArmamentSheet, "Armament", { types: ["body"] });
   rs(d.TeriockItem, si.EquipmentSheet, "Equipment", { types: ["equipment"] });
   rs(d.TeriockItem, si.FamiliarSheet, "Familiar", { types: ["familiar"] });
@@ -307,19 +338,25 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockItem, su.ChildSheet, "Child", { types: ["archetype"] });
   rs(d.TeriockItem, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockItem.TYPES });
 
+  // Journal Entry
   rs(d.TeriockJournalEntry, s.TeriockJournalEntrySheet, "Journal");
 
+  // Journal Entry Page
   rs(d.TeriockJournalEntryPage, sp.BasePageSheet, "Page", {
     types: ["damage", "drain", "rule", "style", "tradecraft"],
   });
   rs(d.TeriockJournalEntryPage, sp.ClassSheet, "Class", { types: ["class"] });
 
+  // Level
   rs(d.TeriockLevel, s.TeriockLevelConfig, "Level");
 
+  // Roll Table
   rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");
 
+  // Scene
   rs(d.TeriockScene, s.TeriockSceneConfig, "Scene");
 
+  // Table Result
   rs(d.TeriockTableResult, s.TeriockTableResultConfig, "TableResult");
 
   // Configure Dice
@@ -447,14 +484,22 @@ Hooks.once("teriock.identifiersInit", () => {
 // ===========
 
 Hooks.once("ready", () => {
+  // Settings CSS Classes
+  // --------------------
   document.body.classList.toggle(
     "teriock-no-editable-highlights",
     !game.settings.get("teriock", "highlightEditableValues"),
   );
+
+  // Registry Initialization
+  // -----------------------
   game.teriock.initializeIdentifiers();
-  applications.ux.TeriockDragDrop.registerGlobalDragHandler();
+
+  // Global Listeners
+  // ----------------
   /** @category Groups */
   applications.sidebar.tabs.TeriockCombatTracker.registerGroupTargeting();
+  applications.ux.TeriockDragDrop.registerGlobalDragHandler();
 });
 
 // Register Hook Listeners and Handlebars Helpers

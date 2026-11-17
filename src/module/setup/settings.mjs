@@ -269,7 +269,7 @@ function getMenuSettings() {
           },
         }]),
       ),
-      icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
+      icon: TERIOCK.DISPLAY.icons.manifest.settings.documentBehavior,
     },
     gameMasterControls: {
       groups: {

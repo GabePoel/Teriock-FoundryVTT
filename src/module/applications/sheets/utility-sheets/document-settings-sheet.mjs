@@ -29,22 +29,22 @@ export default class DocumentSettingsSheet extends DocumentDialog {
    * Configure a field.
    * @param {string} path
    * @param {object} [options]
+   * @param {string|null} [options.generate]
    * @param {string} [options.hint]
    * @param {string} [options.label]
    * @param {string} [options.placeholder]
-   * @param {string|null} [options.reset]
    * @returns {{field: DataField, value: *, localize: boolean}}
    */
   #quickField(path, options = {}) {
-    const { hint, label, localize = true, placeholder, reset } = options;
+    const { generate, hint, label, localize = true, placeholder } = options;
     return {
       field: this.document.getFieldForProperty(path),
+      generate,
       hint,
       label,
       localize,
       name: path,
       placeholder,
-      reset,
       value: foundry.utils.getProperty(this.document._source, path),
     };
   }
@@ -52,14 +52,11 @@ export default class DocumentSettingsSheet extends DocumentDialog {
   /**
    * Configure a field on this document's embedded settings model.
    * @param {DataField} schemaField
-   * @param {string} [parentPath]
    * @returns {{field: DataField, value: *, localize: boolean, name: string}}
    * @category Behavior
    */
-  #settingsField(schemaField, parentPath = "") {
-    const settingsRoot = this.document.system.settings.schema.fieldPath;
-    const relativePath = parentPath ? `${parentPath}.${schemaField.name}` : schemaField.name;
-    const path = `${settingsRoot}.${relativePath}`;
+  #settingsField(schemaField) {
+    const path = schemaField.fieldPath;
     return {
       field: schemaField,
       hint: schemaField.hint,
@@ -68,16 +65,6 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       name: path,
       value: foundry.utils.getProperty(this.document._source, path),
     };
-  }
-
-  /**
-   * Legend for this document's settings fieldset.
-   * @returns {string|undefined}
-   * @category Behavior
-   */
-  #settingsLegend() {
-    const category = this.document.system.settings?.constructor?.CATEGORY;
-    return category ? `TERIOCK.SETTINGS.${category}.name` : undefined;
   }
 
   /** @inheritDoc */
@@ -95,8 +82,8 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       context.configs.push({
         fields: [
           this.#quickField("system.slug", {
+            generate: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
             placeholder: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
-            reset: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
           }),
           this.#quickField("_stats.compendiumSource"),
           this.#quickField("_stats.duplicateSource"),
@@ -106,23 +93,14 @@ export default class DocumentSettingsSheet extends DocumentDialog {
         localize: true,
       });
     }
-    if (this.document.system?.settings) {
-      const schema = this.document.system.settings.schema;
-      const settingsFields = Object.values(schema.fields).filter(field =>
-        !(field instanceof foundry.data.fields.SchemaField)
-      ).map(field => this.#settingsField(field));
-      if (settingsFields.length) {
-        context.configs.push({ fields: settingsFields, legend: this.#settingsLegend(), localize: true });
-      }
-      for (const field of Object.values(schema.fields)) {
-        if (field instanceof foundry.data.fields.SchemaField) {
-          context.configs.push({
-            fields: Object.values(field.fields).map(f => this.#settingsField(f, field.name)),
-            legend: field.label,
-            localize: true,
-          });
-        }
-      }
+    const settingsFields = Object.values(this.document.system?.settings?.schema.fields ?? {});
+    if (settingsFields.length) {
+      context.configs.push({
+        fields: settingsFields.map(field => this.#settingsField(field)),
+        icon: TERIOCK.DISPLAY.icons.manifest.settings.documentBehavior,
+        label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.behavior.legend",
+        localize: true,
+      });
     }
     const useFieldset = context.configs.length > 1;
     context.configs = context.configs.map(config => ({ ...config, fieldset: useFieldset }));
