@@ -7,4 +7,4 @@ export { default as PseudoCollectionField } from "./pseudo-collection-field.mjs"
 export { default as SlugField } from "./slug-field/slug-field.mjs";
 export { default as TernaryField } from "./ternary-field.mjs";
 export * as tools from "./tools/_module.mjs";
-export { default as UnitField } from "./unit-field.mjs";
+export { default as UnitField } from "./unit-field/unit-field.mjs";

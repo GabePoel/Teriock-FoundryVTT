@@ -1,12 +1,11 @@
-import { HTMLUnitInputElement } from "../../applications/elements/_module.mjs";
-import FormulaField from "./formula-field/formula-field.mjs";
+import { HTMLUnitInputElement } from "../../../applications/elements/_module.mjs";
+import FormulaField from "../formula-field/formula-field.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
 
 /**
- * @import { ActiveEffectChangeData } from "@client/documents/_types.mjs";
  * @import { DataModel } from "@common/abstract/_module.mjs";
- * @import BaseUnitModel from "../models/unit-models/base-unit-model/base-unit-model.mjs";
+ * @import BaseUnitModel from "../../models/unit-models/base-unit-model/base-unit-model.mjs";
  */
 
 /**
@@ -36,14 +35,7 @@ export default class UnitField extends EmbeddedDataField {
     });
   }
 
-  /**
-   * Changes are applied directly to the raw value.
-   * @inheritDoc
-   * @param {BaseUnitModel} value
-   * @param {DataModel} model
-   * @param {ActiveEffectChangeData} change
-   * @returns {BaseUnitModel|undefined}
-   */
+  /** @inheritDoc */
   applyChange(value, model, change, options = {}) {
     if (!this.canApplyChange(value, model)) { return undefined; }
     // Quantities are assumed to be in the model's base
@@ -74,7 +66,7 @@ export default class UnitField extends EmbeddedDataField {
    * @returns {boolean}
    */
   isLocked(model) {
-    const lockedPaths = model.system?.lockedPaths;
+    const lockedPaths = foundry.utils.getProperty(model, "system.lockedPaths");
     return Boolean(lockedPaths?.has(`${this.fieldPath}.raw`) || lockedPaths?.has(`${this.fieldPath}.unit`));
   }
 }
