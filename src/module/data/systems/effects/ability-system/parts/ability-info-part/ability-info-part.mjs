@@ -99,6 +99,14 @@ export default function AbilityInfoPart(Base) {
         warded: Number(this.warded),
       });
     }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      if ((this.spell || (this.elderSorcery && this.elderSorceryIncant)) && !this.elements.size) {
+        this.elements.add("celestial");
+      }
+      super.prepareBaseData();
+    }
   }
 
   return AbilityInfoPart;

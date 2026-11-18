@@ -112,7 +112,9 @@ export default class AbilitySystem
       {
         addLabel: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
         classes: [TERIOCK.DISPLAY.panels.styles.elderSorcery],
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", { elements: this.elementString }),
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", {
+          elements: this.getStringForProperty("elements"),
+        }),
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },

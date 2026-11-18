@@ -1,4 +1,3 @@
-import { objectMap } from "../../../../utils/_module.mjs";
 import { levelField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
@@ -20,7 +19,7 @@ export default function MetaphysicsSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         effectTypes: slugSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
-        elements: slugSetField(objectMap(TERIOCK.CONFIG.metaphysics.elements, undefined, { filter: e => !e.extra })),
+        elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
         illusionLevel: levelField(TERIOCK.CONFIG.metaphysics.illusionLevels),
         powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
         transformationLevel: levelField(TERIOCK.CONFIG.metaphysics.transformationLevels),
@@ -113,15 +112,6 @@ export default function MetaphysicsSystemMixin(Base) {
           }]
           : []),
       ];
-    }
-
-    /**
-     * A string representing the elements for this.
-     * @returns {string}
-     */
-    get elementString() {
-      if (this.elements.size === 0) { return _loc("TERIOCK.COMMON.Celestial"); }
-      return this.getStringForProperty("elements");
     }
 
     /** @inheritDoc */
