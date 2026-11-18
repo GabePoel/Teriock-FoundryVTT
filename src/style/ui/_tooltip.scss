@@ -1,3 +1,5 @@
+@use "../mixins" as mixins;
+
 [role="tooltip"]:not(.teriock-rich-tooltip) {
   .teriock-panel {
     padding: 0;
@@ -33,6 +35,51 @@
 
 [role="tooltip"] .teriock-panel {
   text-align: start;
+}
+
+.teriock-rich-tooltip,
+.teriock-updater-tooltip {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.teriock-updater-tooltip {
+  overflow: hidden;
+  padding: 0.25em 0.5em;
+
+  &:not(.locked-tooltip) {
+    border: 1px solid var(--color-panel-edge);
+  }
+
+  .teriock-updater-tooltip-container {
+    column-gap: 0.75em;
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 0.125em;
+  }
+
+  .teriock-updater-tooltip-header {
+    border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
+    color: var(--color-text-subtle);
+    font-size: smaller;
+    font-weight: 500;
+    grid-column: span 2;
+    margin-bottom: 0.25em;
+    padding-bottom: 0.25em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .teriock-updater-tooltip-entry {
+    align-items: baseline;
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: subgrid;
+  }
+
+  .teriock-updater-tooltip-label {
+    @include mixins.text-subtle;
+    text-align: center;
+  }
 }
 
 .teriock-rich-tooltip {

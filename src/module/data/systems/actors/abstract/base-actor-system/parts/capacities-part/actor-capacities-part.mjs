@@ -40,7 +40,7 @@ export default function ActorCapacitiesPart(Base) {
         }, { persisted: false }),
         encumbranceLevel: initialNumber(),
         size: new fields.SchemaField({
-          category: initialString(),
+          label: initialString(),
           length: initialNumber(),
           reach: initialNumber(),
           value: new fields.NumberField({ initial: 3, max: 30, min: 0.25, nullable: false, placeholder: "3" }),
@@ -120,7 +120,7 @@ export default function ActorCapacitiesPart(Base) {
     prepareDerivedData() {
       super.prepareDerivedData();
       const sizeDefinition = this.parent.constructor.getSizeConfig(this.size.value);
-      this.size.category = sizeDefinition.category;
+      this.size.label = sizeDefinition.label;
       this.size.length = sizeDefinition.length;
       this.size.reach = sizeDefinition.reach;
     }

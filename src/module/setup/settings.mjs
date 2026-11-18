@@ -209,6 +209,12 @@ function getMenuSettings() {
               type: Boolean,
               onChange: () => game.teriock.render({ applications: true }),
             },
+            showUpdaterStates: {
+              default: false,
+              scope: "client",
+              type: Boolean,
+              onChange: () => game.teriock.render({ applications: true }),
+            },
             unlockSheetsByDefault: { default: false, scope: "user", type: Boolean },
           },
         },

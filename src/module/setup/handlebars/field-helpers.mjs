@@ -108,11 +108,17 @@ function formUpdater(model, options = { hash: {} }) {
     id: options.hash.id ?? makeElementId(options, action, dataset.updater, paths),
     type: "button",
   });
+  const isChanged = changed ?? foundry.utils.hasProperty(model?.overrides, path);
+  const tooltip = formUpdaterTooltip(model, { hash: { changed: isChanged, data, label, locked, path, source } })
+    .toString();
   const displayElement = createElement("span", { className: "teriock-updater-display" });
+  if (tooltip) {
+    Object.assign(displayElement.dataset, { tooltipClass: "teriock-updater-tooltip", tooltipHtml: tooltip });
+  }
   if (icon) {
     const iconContainerElement = createElement("span", {
       className: "teriock-updater-icon",
-      dataset: { tooltip: label },
+      dataset: { tooltip: label, tooltipClass: "" },
     });
     const iconElement = createElement("i", { className: makeIconClass(icon, "light") });
     if (color) { iconElement.style.color = color; }
@@ -128,7 +134,7 @@ function formUpdater(model, options = { hash: {} }) {
       innerHTML: data,
     }),
   );
-  if (String(data) !== String(source) || (changed ?? foundry.utils.hasProperty(model?.overrides, path))) {
+  if (String(data) !== String(source) || isChanged) {
     valueElement.append(
       createElement("span", {
         className: toClass(["teriock-updater-source", isSourcePlaceholder && "teriock-form-placeholder"]),
@@ -143,7 +149,7 @@ function formUpdater(model, options = { hash: {} }) {
       abbreviationElement.append(
         createElement("span", {
           className: "teriock-updater-abbreviation-text",
-          dataset: { tooltip: _loc(abbreviationTooltip) },
+          dataset: { tooltip: _loc(abbreviationTooltip), tooltipClass: "" },
           textContent: _loc(abbreviation),
         }),
       );
@@ -155,6 +161,57 @@ function formUpdater(model, options = { hash: {} }) {
   }
   containerElement.append(displayElement);
   return new Handlebars.SafeString(containerElement.outerHTML);
+}
+
+/**
+ * @typedef FormUpdaterTooltipHash
+ * @property {boolean} changed
+ * @property {string} data
+ * @property {string} label
+ * @property {boolean} locked
+ * @property {string} path
+ * @property {string} source
+ */
+
+/**
+ * Make a tooltip that displays the state of an updater form.
+ * @param {AbstractData} model
+ * @param {object} [options]
+ * @param {Partial<FormUpdaterTooltipHash>} [options.hash]
+ * @returns {Handlebars.SafeString}
+ */
+function formUpdaterTooltip(model, options = { hash: {} }) {
+  if (!game.settings.get("teriock", "showUpdaterStates")) { return new Handlebars.SafeString(""); }
+  const { data, source } = options.hash;
+  const path = String(options.hash.path ?? "");
+  const changed = options.hash.changed ?? foundry.utils.hasProperty(model?.overrides, path);
+  const locked = options.hash.locked ?? model?.system?.lockedPaths?.has?.(path);
+  const status = changed ? "changed" : locked === undefined ? null : locked ? "locked" : "unlocked";
+  const entries = { source };
+  if (String(data) !== String(source)) { entries.data = data; }
+  if (status) { entries.state = _loc(`TERIOCK.SHEETS.Common.UPDATE.STATUS.${status}`); }
+  const tooltipElement = createElement("div", { className: "teriock-updater-tooltip-container" });
+  for (const [key, value] of Object.entries(entries)) {
+    if (value == null || value === "") { continue; }
+    const entryElement = createElement("div", {
+      className: `teriock-updater-tooltip-entry teriock-updater-tooltip-${key}`,
+    });
+    entryElement.append(
+      createElement("label", {
+        className: "teriock-updater-tooltip-label",
+        textContent: _loc(`TERIOCK.SHEETS.Common.UPDATE.${key}`),
+      }),
+      createElement("span", { className: "teriock-updater-tooltip-value", innerHTML: value }),
+    );
+    tooltipElement.append(entryElement);
+  }
+  if (!tooltipElement.childElementCount) { return new Handlebars.SafeString(""); }
+  if (options.hash.label) {
+    tooltipElement.prepend(
+      createElement("div", { className: "teriock-updater-tooltip-header", textContent: _loc(options.hash.label) }),
+    );
+  }
+  return new Handlebars.SafeString(tooltipElement.outerHTML);
 }
 
 /**
@@ -215,4 +272,4 @@ function formHover(model, options = { hash: {} }) {
   `);
 }
 
-export default { formClasses, formHover, formIcon, formUpdater };
+export default { formClasses, formHover, formIcon, formUpdater, formUpdaterTooltip };

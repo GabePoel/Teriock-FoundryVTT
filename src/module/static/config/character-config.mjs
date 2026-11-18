@@ -157,5 +157,5 @@ export default {
 
 preLocalizeObject("CONFIG.character.movement", { key: "label" });
 preLocalizeObject("CONFIG.character.sense", { key: "label" });
-preLocalizeObject("CONFIG.character.sizes", { keys: ["category"] });
+preLocalizeObject("CONFIG.character.sizes", { keys: ["label"] });
 preLocalizeObject("CONFIG.character.speed", { keys: ["label"] });

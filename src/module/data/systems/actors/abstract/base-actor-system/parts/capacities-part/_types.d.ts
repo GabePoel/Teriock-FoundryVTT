@@ -8,8 +8,8 @@ declare global {
       encumbranceLevel: number;
       /** <schema> Size */
       size: {
-        /** <derived> Named size category */
-        category: string;
+        /** <derived> */
+        label: string;
         /** <derived> */
         length: number;
         /** <derived> */

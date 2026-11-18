@@ -6,7 +6,13 @@
       </div>
       {{#each displayTags as |tag|}}
         <span
-          class="teriock-sheet-tag tsubtle"
+          class="
+            teriock-sheet-tag
+            tsubtle
+            {{#if (exists tag.tooltip)}}
+              thelp
+            {{/if}}
+          "
           {{#if (exists tag.tooltip)}}
             data-tooltip="{{ tag.tooltip }}"
           {{/if}}
