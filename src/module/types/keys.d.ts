@@ -23,11 +23,13 @@ declare global {
       | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.SlowExecutionTime;
     export type Expansion = keyof typeof CONFIG.ability.expansion;
-    export type Effect = keyof typeof CONFIG.wiki.index.effect;
 
-    // Tag Keys
-    export type Element = keyof typeof CONFIG.wiki.index.element;
+    // Metaphysics Keys
+    export type Effect = keyof typeof CONFIG.wiki.index.effect;
+    export type Element = keyof typeof CONFIG.metaphysics.elements;
     export type Source = keyof typeof CONFIG.wiki.index.source;
+    export type IllusionLevel = keyof typeof CONFIG.metaphysics.illusionLevels;
+    export type TransformationLevel = keyof typeof CONFIG.metaphysics.transformationLevels;
 
     // Attribute Keys
     export type Attribute = keyof typeof CONFIG.attribute;
@@ -68,8 +70,6 @@ declare global {
 
     // Effect Keys
     export type ApplicationTarget = keyof typeof CONFIG.effect.applicationTargets;
-    export type IllusionLevel = keyof typeof CONFIG.metaphysics.illusionLevels;
-    export type TransformationLevel = keyof typeof CONFIG.metaphysics.transformationLevels;
 
     // Display Keys
     export type Color = keyof typeof DISPLAY.colors;

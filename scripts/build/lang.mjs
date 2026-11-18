@@ -79,14 +79,7 @@ const LANG = base;
 
 if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
-const WIKI_TITLE_SUFFIXES = [
-  " creatures",
-  "ly powered abilities",
-  " powered abilities",
-  " effects",
-  " element abilities",
-  " Fighting Style",
-];
+const WIKI_TITLE_SUFFIXES = [" creatures", "ly powered abilities", " powered abilities", " effects", " Fighting Style"];
 
 /**
  * Capitalize each word.

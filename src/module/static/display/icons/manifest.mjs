@@ -112,6 +112,7 @@ export default {
     creature: "ms-owl",
     curse: "ms-skull-list",
     effect: "ms-microbiology",
+    element: "ms-triangle-circle",
     environment: "ms-thunderstorm",
     equipment: "ms-package-2",
     familiar: "ms-pest-control-rodent",
