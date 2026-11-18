@@ -1,3 +1,4 @@
+import { objectMap } from "../../../../utils/_module.mjs";
 import { levelField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
@@ -19,7 +20,7 @@ export default function MetaphysicsSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         effectTypes: slugSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
-        elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
+        elements: slugSetField(objectMap(TERIOCK.CONFIG.metaphysics.elements, undefined, { filter: e => !e.extra })),
         illusionLevel: levelField(TERIOCK.CONFIG.metaphysics.illusionLevels),
         powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
         transformationLevel: levelField(TERIOCK.CONFIG.metaphysics.transformationLevels),

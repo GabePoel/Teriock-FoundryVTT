@@ -5,6 +5,7 @@ import { thumbnails } from "../display/_module.mjs";
 export default {
   effectTypes: wikiIndexToConfig("effect", "TERIOCK.TERMS.EffectTypes"),
   elements: {
+    celestial: { extra: true, img: thumbnails.manifest.element.celestial, label: "TERIOCK.TERMS.Elements.celestial" },
     flame: { img: thumbnails.manifest.element.flame, label: "TERIOCK.TERMS.Elements.flame" },
     life: { img: thumbnails.manifest.element.life, label: "TERIOCK.TERMS.Elements.life" },
     nature: { img: thumbnails.manifest.element.nature, label: "TERIOCK.TERMS.Elements.nature" },

@@ -2,7 +2,7 @@ const metaphysicsContext = {};
 export default metaphysicsContext;
 
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.CONFIG.metaphysics.elements).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.metaphysics.elements).filter(([_k, v]) => !v.extra).forEach(([k, v]) => {
     metaphysicsContext[`element.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.metaphysics.effectTypes).forEach(([k, v]) => {

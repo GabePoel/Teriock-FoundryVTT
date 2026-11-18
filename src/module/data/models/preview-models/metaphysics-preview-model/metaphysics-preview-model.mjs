@@ -1,3 +1,4 @@
+import { objectMap } from "../../../../utils/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
@@ -14,7 +15,7 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
         label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
       }),
       element: nullStringField({
-        choices: TERIOCK.CONFIG.metaphysics.elements,
+        choices: objectMap(TERIOCK.CONFIG.metaphysics.elements, undefined, { filter: e => !e.extra }),
         label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
       }),
       kind: nullStringField({ choices: TERIOCK.CONFIG.effect.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
