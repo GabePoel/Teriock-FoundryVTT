@@ -5,6 +5,7 @@ import usableContext from "./usable-context.mjs";
 const abilityContext = {
   ...usableContext,
   basic: "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label",
+  conjured: "TERIOCK.COMMON.Conjured",
   es: "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label",
   "grant.only": "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnly.label",
   "grant.use": "TERIOCK.SYSTEMS.Ability.FIELDS.grantUse.label",

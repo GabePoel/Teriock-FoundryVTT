@@ -50,7 +50,7 @@ export default function AbilityInfoPart(Base) {
       if (this.standard && !this.skill && !this.spell) { tags.push(this.getStringForProperty("standard")); }
       if (this.standard && this.skill) { tags.push("TERIOCK.COMMON.Semblant"); }
       if (this.skill) { tags.push(this.getStringForProperty("skill")); }
-      if (this.standard && this.spell) { tags.push("TERIOCK.COMMON.Conjured"); }
+      if (this.conjured) { tags.push("TERIOCK.COMMON.Conjured"); }
       if (this.spell) { tags.push(this.getStringForProperty("spell")); }
       if (this.invoked) {
         tags.push({ label: "TERIOCK.COSTS.Components.invoked", tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label" });
@@ -60,6 +60,18 @@ export default function AbilityInfoPart(Base) {
       if (this.guildmaster) { tags.push(this.getStringForProperty("guildmaster")); }
       // if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
       return tags;
+    }
+
+    /**
+     * If this is a conjured spell.
+     *
+     * Relevant wiki pages:
+     * - [Conjured](https://wiki.teriock.com/index.php/Keyword:Conjured)
+     *
+     * @returns {boolean}
+     */
+    get conjured() {
+      return this.spell && (this.standard || !this.elderSorcery);
     }
 
     /**
@@ -74,6 +86,7 @@ export default function AbilityInfoPart(Base) {
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
         basic: Number(this.basic),
+        conjured: Number(this.conjured),
         guildmaster: Number(this.guildmaster),
         invoked: Number(this.invoked),
         lore: Number(this.lore),
