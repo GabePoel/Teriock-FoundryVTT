@@ -63,6 +63,12 @@ export default class TeriockJournalEntrySheet extends mixClasses(JournalEntryShe
   }
 
   /** @inheritDoc */
+  async _renderPageViews(context, options) {
+    await super._renderPageViews(context, options);
+    this._reapplyScrollPositions();
+  }
+
+  /** @inheritDoc */
   isPageVisible(page) {
     return super.isPageVisible(page) && !page.isHidden;
   }

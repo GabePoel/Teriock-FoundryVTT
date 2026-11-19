@@ -4,6 +4,7 @@ import { TeriockDialog } from "../api/_module.mjs";
 
 const { AbstractFormInputElement } = foundry.applications.elements;
 const { setInputAttributes } = foundry.applications.fields;
+const { SearchFilter } = foundry.applications.ux;
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
@@ -22,21 +23,40 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
    */
   static #lastAdded = { op: 1 };
 
+  /**
+   * Search queries kept between renders.
+   * @type {Map<string, string>}
+   */
+  static #queries = new Map();
+
   /** @inheritDoc */
   static tagName = "elder-sorcery-words";
 
   /**
    * Create an HTMLElderSorceryWordsElement using provided configuration data.
-   * @param {FormInputConfig<object>} config
+   * @param {FormInputConfig<object> & { searchKey?: string }} config
    * @returns {HTMLElderSorceryWordsElement}
    */
   static create(config) {
     const el = document.createElement(this.tagName);
     setInputAttributes(el, config);
+    if (config.searchKey) { el.setAttribute("search-key", config.searchKey); }
     el._setValue(config.value);
     el.setAttribute("value", JSON.stringify(el._value ?? {}));
     return el;
   }
+
+  /**
+   * The table rendered as content.
+   * @type {HTMLDivElement}
+   */
+  #content;
+
+  /**
+   * The search input.
+   * @type {HTMLInputElement|null}
+   */
+  #search = null;
 
   /**
    * The table this represents.
@@ -83,9 +103,41 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
   }
 
   /** @inheritDoc */
+  _activateListeners() {
+    if (!this.#search) { return; }
+    const key = this.getAttribute("search-key");
+    new SearchFilter({
+      initial: HTMLElderSorceryWordsElement.#queries.get(key) ?? "",
+      inputSelector: ".teriock-block-search",
+      callback: (_event, query) => {
+        if (query === (HTMLElderSorceryWordsElement.#queries.get(key) ?? "")) { return; }
+        HTMLElderSorceryWordsElement.#queries.set(key, query);
+        this._refresh();
+      },
+    }).bind(this);
+    const signal = this.abortSignal;
+    this.#search.addEventListener("change", event => event.stopPropagation(), { signal });
+    this.#search.addEventListener("keydown", event => {
+      if (event.key === "Enter") { event.preventDefault(); }
+    }, { signal });
+  }
+
+  /** @inheritDoc */
   _buildElements() {
     this._value ??= JSON.parse(this.getAttribute("value") || "{}");
-    return [];
+    this.#content = document.createElement("div");
+    this.#content.className = "teriock-words-content";
+    const searchKey = this.getAttribute("search-key");
+    if (!searchKey) { return [this.#content]; }
+    this.#search = document.createElement("input");
+    Object.assign(this.#search, {
+      autocomplete: "off",
+      className: "teriock-block-search",
+      placeholder: _loc("TERIOCK.SHEETS.Common.SEARCH.placeholder"),
+      type: "search",
+    });
+    this.#search.dataset.disable = "false";
+    return [this.#search, this.#content];
   }
 
   /** @inheritDoc */
@@ -112,17 +164,25 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
 
   /** @inheritDoc */
   _refresh() {
+    if (!this.#content) { return; }
     const { scrollLeft = 0, scrollTop = 0 } = this.querySelector(".teriock-words-table") ?? {};
-    const context = { ...this.#table.getContext(), editable: this.editable };
-    this.innerHTML = Handlebars.partials["teriock/ui/elder-sorcery-words-table"](context, {
+    const query = HTMLElderSorceryWordsElement.#queries.get(this.getAttribute("search-key"));
+    const rgx = query ? new RegExp(RegExp.escape(query), "i") : null;
+    const table = rgx
+      ? ElderSorceryWordsModel.fromEntries(
+        Array.from(this.#table.entries()).filter(e => SearchFilter.testQuery(rgx, e.word)),
+      )
+      : this.#table;
+    const context = { ...table.getContext(), editable: this.editable };
+    this.#content.innerHTML = Handlebars.partials["teriock/ui/elder-sorcery-words-table"](context, {
       allowProtoMethodsByDefault: true,
       allowProtoPropertiesByDefault: true,
     });
     const scroller = this.querySelector(".teriock-words-table");
-    scroller.dataset.scrollableId = this.name || this.constructor.tagName;
+    scroller.dataset.scrollableId = this.name || this.getAttribute("search-key") || this.constructor.tagName;
     Object.assign(scroller, { scrollLeft, scrollTop });
     if (this.editable) {
-      this.insertAdjacentHTML(
+      this.#content.insertAdjacentHTML(
         "beforeend",
         `<div class="teriock-words-buttons"><button data-action="addWord" type="button"><i class="${context.icons.add}"></i>${
           _loc("TERIOCK.SHEETS.Table.ADD.title")

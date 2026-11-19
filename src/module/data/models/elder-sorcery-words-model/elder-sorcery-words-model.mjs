@@ -163,10 +163,13 @@ export default class ElderSorceryWordsModel extends BaseDataModel {
 
   /**
    * Render this table as an HTML element.
+   * @param {object} [options]
+   * @param {string} [options.searchKey]
    * @returns {HTMLElement}
    */
-  renderElement() {
+  renderElement(options = {}) {
     return teriock.applications.elements.HTMLElderSorceryWordsElement.create({
+      ...options,
       readonly: true,
       value: this.toObject(),
     });
@@ -174,9 +177,11 @@ export default class ElderSorceryWordsModel extends BaseDataModel {
 
   /**
    * Render this table as HTML.
+   * @param {object} [options]
+   * @param {string} [options.searchKey]
    * @returns {string}
    */
-  renderHTML() {
-    return this.renderElement().outerHTML;
+  renderHTML(options = {}) {
+    return this.renderElement(options).outerHTML;
   }
 }

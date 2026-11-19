@@ -24,7 +24,7 @@ export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMix
   }
 
   /** @inheritDoc */
-  async toEmbed(config, _options = {}) {
+  async toEmbed(config, options = {}) {
     const list = value => {
       if (value === undefined) { return undefined; }
       return String(value).split(",").map(v => v.trim()).filter(Boolean).flatMap(v => {
@@ -36,6 +36,10 @@ export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMix
       elements: list(config.elements),
       ops: list(config.ops)?.map(Number),
       parts: list(config.parts),
-    }).renderElement();
+    }).renderElement({
+      searchKey: config.search || config.values.includes("search")
+        ? [options.relativeTo?.uuid, this.parent.uuid].filterJoin("-")
+        : undefined,
+    });
   }
 }

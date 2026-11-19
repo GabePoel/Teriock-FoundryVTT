@@ -61,7 +61,7 @@ export default class TeriockPlayableActorSheet
    */
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
-      allWords: (await this.document.system.getAllWords()).renderHTML(),
+      allWords: (await this.document.system.getAllWords()).renderHTML({ searchKey: this.id }),
     });
   }
 }
