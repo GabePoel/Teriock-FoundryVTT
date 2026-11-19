@@ -6,6 +6,37 @@ img: systems/teriock/src/assets/thumbnails/ability/storm-elder-sorcery-words.web
 name: Storm Elder Sorcery Words
 system:
   _sup: 3f227e1c3fb85be3
+  automations:
+    - _id: QxMLM1a48ir5CPlg
+      disabledToggles:
+        - competenceFluent
+        - competenceProficient
+      elements:
+        - storm
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: "1"
+      type: elderSorcery
+    - _id: 4KGZ7qGAVVVAv6NG
+      disabledToggles:
+        - competenceFluent
+        - competenceNone
+      elements:
+        - storm
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: 1 + (3 * @p)
+      type: elderSorcery
+    - _id: XKScw9dmDGgieVHz
+      disabledToggles:
+        - competenceNone
+        - competenceProficient
+      elements:
+        - storm
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: 1 + (3 * @f)
+      type: elderSorcery
   delivery: self
   duration:
     unit: passive
@@ -20,7 +51,7 @@ system:
   overview:
     base: >-
       <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Identifier[core:storm-elder-sorcery-words]{Storm Elder Sorcery
-      words}.</p><p>@Embed[table:elder-sorcery-words elements=storm ops=1 caption=false]</p>
+      words}.</p><p>@Embed[table:common-elder-sorcery-words elements=storm ops=1 caption=false]</p>
     fluent: <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3 × @Identifier[core:fluency-bonus]{F}).</p>
     proficient: >-
       <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3 ×

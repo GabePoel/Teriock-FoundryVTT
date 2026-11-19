@@ -6,6 +6,37 @@ img: systems/teriock/src/assets/thumbnails/ability/necromancy-elder-sorcery-word
 name: Necromancy Elder Sorcery Words
 system:
   _sup: 24ca0fecea593c33
+  automations:
+    - _id: cJulQdJubE3DbCF9
+      disabledToggles:
+        - competenceFluent
+        - competenceProficient
+      elements:
+        - necromancy
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: "1"
+      type: elderSorcery
+    - _id: mllsmrwhNTRqkr10
+      disabledToggles:
+        - competenceFluent
+        - competenceNone
+      elements:
+        - necromancy
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: 1 + (3 * @p)
+      type: elderSorcery
+    - _id: 1InzfKcrYYITFw3q
+      disabledToggles:
+        - competenceNone
+        - competenceProficient
+      elements:
+        - necromancy
+      globalIdentifiers:
+        - table:common-elder-sorcery-words
+      maxOp: 1 + (3 * @f)
+      type: elderSorcery
   delivery: self
   duration:
     unit: passive
@@ -20,7 +51,7 @@ system:
   overview:
     base: >-
       <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Identifier[core:necromancy-elder-sorcery-words]{Necromancy
-      Elder Sorcery words}.</p><p>@Embed[table:elder-sorcery-words elements=necromancy ops=1 caption=false]</p>
+      Elder Sorcery words}.</p><p>@Embed[table:common-elder-sorcery-words elements=necromancy ops=1 caption=false]</p>
     fluent: <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3 × @Identifier[core:fluency-bonus]{F}).</p>
     proficient: >-
       <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3 ×

@@ -638,6 +638,31 @@ effects:
     name: All Elder Sorcery Words
     system:
       _sup: zFZJiaEo31yg0oXh
+      automations:
+        - _id: TjhVHTljjZDDxA8C
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+          globalIdentifiers:
+            - table:common-elder-sorcery-words
+          maxOp: "1"
+          type: elderSorcery
+        - _id: 60RpnMwtFwvxKg5B
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+          globalIdentifiers:
+            - table:common-elder-sorcery-words
+          maxOp: 1 + (3 * @p)
+          type: elderSorcery
+        - _id: SQbFfhhcYx9pqlQn
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+          globalIdentifiers:
+            - table:common-elder-sorcery-words
+          maxOp: 1 + (3 * @f)
+          type: elderSorcery
       competence:
         raw: 1
       delivery: self
@@ -658,7 +683,7 @@ effects:
       overview:
         base: >-
           <p>You know celestial OP 1 @Identifier[core:elder-sorcery-words]{Elder Sorcery words} and those of every
-          element.</p><p>@Embed[table:elder-sorcery-words ops=1 caption=false]</p>
+          element.</p><p>@Embed[table:common-elder-sorcery-words ops=1 caption=false]</p>
         fluent: <p>The OP of words you know is 1 + (3 × @Identifier[core:fluency-bonus]{F}).</p>
         proficient: <p>The OP of words you know is 1 + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
       powerSources:
