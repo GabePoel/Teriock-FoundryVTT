@@ -1,12 +1,23 @@
-import { mergeMetadata, toId } from "../../../utils/_module.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import { BaseActorSystem } from "./abstract/_module.mjs";
 
 export default class EnvironmentSystem extends BaseActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: super.metadata.childTypes.filter(t =>
-      !["archetype", "attunement", "backstory", "body", "familiar", "fluency", "mount", "rank", "scar", "species"]
-        .includes(t)
+      ![
+        "archetype",
+        "attunement",
+        "backstory",
+        "body",
+        "familiar",
+        "fluency",
+        "mount",
+        "rank",
+        "scar",
+        "sorcery",
+        "species",
+      ].includes(t)
     ),
     icon: TERIOCK.DISPLAY.icons.manifest.document.environment,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.environment,
@@ -27,22 +38,7 @@ export default class EnvironmentSystem extends BaseActorSystem {
 
     this.parent.updateSource(
       foundry.utils.mergeObject({
-        effects: [{
-          name: _loc("TERIOCK.SYSTEMS.Environment.DEFAULTS.conditionImmunity"),
-          system: {
-            affinities: Object.fromEntries(
-              Object.keys(TERIOCK.STATUSES.conditions).map(
-                identifier => [toId(identifier), {
-                  _id: toId(identifier),
-                  category: "condition",
-                  identifier,
-                  type: "immunity",
-                }]
-              ),
-            ),
-          },
-          type: "consequence",
-        }],
+        effects: [foundry.utils.deepClone(TERIOCK.CONFIG.effect.common.conditionImmunity)],
         items: [{ name: _loc("TERIOCK.SYSTEMS.Environment.DEFAULTS.environmentPower"), type: "power" }],
         prototypeToken: {
           actorLink: false,

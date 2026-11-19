@@ -33,7 +33,6 @@ export default class InventorySystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    const CONDITION_IMMUNITY = { category: "condition", type: "immunity" };
     const LIGHT_CHANGE = {
       phase: TERIOCK.CONFIG.change.defaultPhase,
       priority: 150,
@@ -45,19 +44,7 @@ export default class InventorySystem extends BaseActorSystem {
 
     this.parent.updateSource(
       foundry.utils.mergeObject({
-        effects: [{
-          name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableDown"),
-          system: {
-            affinities: { invImmunity00002: { _id: "invImmunity00002", slug: "down", ...CONDITION_IMMUNITY } },
-          },
-          type: "consequence",
-        }, {
-          name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableEncumbered"),
-          system: {
-            affinities: { invImmunity00001: { _id: "invImmunity00001", slug: "encumbered", ...CONDITION_IMMUNITY } },
-          },
-          type: "consequence",
-        }, {
+        effects: [foundry.utils.deepClone(TERIOCK.CONFIG.effect.common.conditionImmunity), {
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableLighting"),
           system: {
             automations: {
