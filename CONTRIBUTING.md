@@ -58,6 +58,10 @@ Anything relating to the specific process by which `Actor` documents can have th
 
 We use `@category Perception` for anything relating broadly to token vision.
 
+### Sorcery
+
+The `@category Sorcery` tag is for stuff that does Elder Sorcery word handling.
+
 ### Terrain
 
 Anything relating to the terrain that `Actor` and `TokenDocument` documents are in.

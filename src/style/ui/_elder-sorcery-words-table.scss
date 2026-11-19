@@ -19,7 +19,12 @@ elder-sorcery-words {
 }
 
 .teriock-words-table {
+  --table-header-border-color: var(--color-block-display-border);
+  --table-header-bg-color: var(--color-panel-associations-background);
+  --table-row-color-even: var(--color-panel-associations-background);
   align-self: stretch;
+  border: 1px solid var(--table-header-border-color);
+  border-radius: 4px;
   isolation: isolate;
   min-height: 0;
   overflow: auto;
@@ -39,20 +44,16 @@ elder-sorcery-words {
       background:
         linear-gradient(var(--table-header-bg-color), var(--table-header-bg-color)),
         var(--color-sticky-background);
-      border-block: 1px solid var(--table-header-border-color);
+      border-bottom: 1px solid var(--table-header-border-color);
       position: sticky;
       top: 0;
       z-index: 1;
 
       &:first-child {
-        border-inline: 1px solid var(--table-header-border-color);
+        border-right: 1px solid var(--table-header-border-color);
         left: 0;
         text-align: center;
         z-index: 2;
-      }
-
-      &:last-child {
-        border-inline-end: 1px solid var(--table-header-border-color);
       }
     }
   }
@@ -83,15 +84,11 @@ elder-sorcery-words {
       background:
         linear-gradient(var(--op-color), var(--op-color)),
         var(--color-sticky-background);
-      border-inline: 1px solid var(--table-header-border-color);
+      border-right: 1px solid var(--table-header-border-color);
       left: 0;
       position: sticky;
       text-align: center;
       vertical-align: middle;
-    }
-
-    &:last-of-type th {
-      border-bottom: 1px solid var(--table-header-border-color);
     }
   }
 
