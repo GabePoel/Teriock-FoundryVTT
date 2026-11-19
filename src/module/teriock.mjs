@@ -399,10 +399,11 @@ foundry.helpers.Hooks.once("init", function() {
   game.teriock.templatesReady = foundry.applications.handlebars.loadTemplates(templates);
 });
 
-// Override Compendium Applications
-// ================================
+// Setup
+// =====
 
 foundry.helpers.Hooks.once("setup", function() {
+  if (game.user.isGM) { CONFIG.Actor.defaultType = "npc"; }
   for (const pack of game.packs) { pack.applicationClass = applications.sidebar.apps.TeriockCompendium; }
 });
 
