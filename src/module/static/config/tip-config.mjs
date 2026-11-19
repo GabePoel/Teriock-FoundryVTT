@@ -14,7 +14,6 @@ const suppression = {
   inactiveRanks: "TERIOCK.SYSTEMS.Archetype.MESSAGES.suppression.inactiveRanks",
   notPrimary: "TERIOCK.SYSTEMS.Morph.MESSAGES.suppression.notPrimary",
   parentDestroyed: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.destroyed",
-  parentNotPassive: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.notPassive",
   parentStashed: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.stashed",
   parentUnequipped: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.unequipped",
   shattered: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.shattered",
