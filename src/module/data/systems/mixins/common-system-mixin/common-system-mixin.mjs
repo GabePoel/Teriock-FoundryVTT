@@ -66,12 +66,11 @@ export default function CommonSystemMixin(Base) {
     /**
      * Select an existing document of this type and get the data to create a copy of it.
      * @param {DatabaseCreateOperation} [_createOptions]
-     * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
      * @param {Teriock.Select.DocumentSelectionConfig} [config] - Config for the document selector.
      * @returns {Promise<object|null>}
      */
-    static async importDocument(_createOptions = {}, options = {}, config = {}) {
-      const selected = await selectDocument(this.metadata.type, config, options);
+    static async importDocument(_createOptions = {}, config = {}) {
+      const selected = await selectDocument(this.metadata.type, config);
       if (!selected) { return null; }
       return game.collections.get(selected.documentName)?.fromCompendium(selected)
         ?? foundry.utils.mergeObject(selected.toObject(), { _stats: { compendiumSource: selected.uuid } });

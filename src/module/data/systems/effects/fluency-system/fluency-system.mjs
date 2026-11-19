@@ -64,11 +64,11 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
-  static async importDocument(createOptions = {}, options = {}) {
+  static async importDocument(createOptions = {}) {
     const tc = await selectDocument("tradecraft", {
       globalIdentifiers: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(t => `tradecraft:${t}`),
       globalTypes: [],
-    }, options);
+    });
     if (!tc) { return null; }
     return {
       img: tc.img,

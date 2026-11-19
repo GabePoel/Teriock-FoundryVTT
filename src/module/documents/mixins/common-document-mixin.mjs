@@ -55,10 +55,9 @@ export default function CommonDocumentMixin(Base) {
       const label = _loc(combined ? "DOCUMENT.Document" : this.metadata.label);
       const title = _loc("DOCUMENT.Create", { type: label });
 
-      // Special handling to allow for subs and other child Document relations to be created and also right clicks
-      const create = async (createData, renderSheet) => {
+      // Special handling to allow for subs and other child Document relations to be created
+      const create = async (createData, op = operation) => {
         const cls = this.getTypeClass(createData.type);
-        const op = renderSheet ? operation : { ...operation, renderSheet: false };
         return parent
           ? (await parent.createChildDocuments(cls.documentName, [createData], op))?.[0]
           : cls.create(createData, { ...op, pack });
@@ -70,20 +69,15 @@ export default function CommonDocumentMixin(Base) {
           action: "import",
           icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.import, "button"),
           label: _loc("TERIOCK.DIALOGS.ImportDocument", { type: label }),
-          callback: async (event, button) => {
-            let renderSheet = event.type !== "contextmenu";
-            const onConfirm = confirmEvent => {
-              if (confirmEvent.button === 2) { renderSheet = false; }
-            };
-            const importData = await getSystemClass(button.form.elements.type.value).importDocument(createOptions, {
-              onConfirm,
-            });
+          callback: async (_event, button) => {
+            const importData = await getSystemClass(button.form.elements.type.value).importDocument(createOptions);
             if (!importData) { return null; }
             const formData = new foundry.applications.ux.FormDataExtended(button.form).object;
-            const filled = Object.fromEntries(
-              Object.entries(formData).filter(([, v]) => v),
-            );
-            return create(foundry.utils.mergeObject({ ...importData, folder: null }, filled), renderSheet);
+            const filled = Object.fromEntries(Object.entries(formData).filter(([, v]) => v));
+            return create(foundry.utils.mergeObject({ ...importData, folder: null }, filled), {
+              ...operation,
+              renderSheet: false,
+            });
           },
         }],
         context: combined
@@ -102,7 +96,7 @@ export default function CommonDocumentMixin(Base) {
           : {},
         ok: {
           label: title,
-          callback: async (event, button) => {
+          callback: async (_event, button) => {
             // Reimplement using the child operation create data
             const createData = foundry.utils.mergeObject(
               data,
@@ -112,7 +106,7 @@ export default function CommonDocumentMixin(Base) {
             const type = createData.type;
             if (!createData.folder) { delete createData.folder; }
             createData.name = createData.name?.trim() || this.getTypeClass(type).defaultName({ pack, parent, type });
-            return create(createData, event.type !== "contextmenu");
+            return create(createData);
           },
         },
         types: types?.filter(type => this.TYPES.includes(type)),
@@ -121,10 +115,6 @@ export default function CommonDocumentMixin(Base) {
           render?.(event, dialog);
           const select = dialog.element.querySelector("[name=type]");
           select.disabled = select.options.length === 1;
-          for (const action of Object.keys(dialog.options.buttons)) {
-            const button = dialog.element.querySelector(`button[data-action="${action}"]`);
-            button.addEventListener("contextmenu", event => dialog._onSubmit(button, event));
-          }
         },
       };
       return super.createDialog(data, createOptions, { ...dialogOptions, ...options }, renderOptions);

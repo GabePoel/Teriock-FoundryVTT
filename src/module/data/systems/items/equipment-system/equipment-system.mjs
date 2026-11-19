@@ -96,8 +96,8 @@ export default class EquipmentSystem
   }
 
   /** @inheritDoc */
-  static async importDocument(createOptions = {}, options = {}) {
-    return super.importDocument(createOptions, options, {
+  static async importDocument(createOptions = {}) {
+    return super.importDocument(createOptions, {
       globalIdentifiers: Array.from(game.teriock.identifiers.equipmentTypes.keys(), e => `equipment:${e}`),
       globalTypes: [],
     });

@@ -63,16 +63,15 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
-  static async importDocument(createOptions = {}, options = {}) {
+  static async importDocument(createOptions = {}) {
     const classDocument = await selectDocument("class", {
       globalIdentifiers: Object.keys(TERIOCK.CONFIG.class.classes).map(c => `class:${c}`),
       globalTypes: [],
-    }, options);
+    });
     if (!classDocument) { return null; }
     const selectedRanks = await DocumentSelector.selectFromConfig({
       globalIdentifiers: Array.from(classDocument.system.ranks ?? []),
     }, {
-      ...options,
       hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
         name: _loc("TYPES.Item.rank").toLocaleLowerCase(game.i18n.lang),
       }),

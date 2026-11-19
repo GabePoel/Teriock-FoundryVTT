@@ -28,16 +28,12 @@ export async function selectCompendiumsDialog(checked = true) {
  * Select a document.
  * @param {string} type
  * @param {Teriock.Select.DocumentSelectionConfig} [config]
- * @param {object} [options]
- * @param {string} [options.label]
- * @param {(event: Event) => void} [options.onConfirm]
  * @returns {Promise<TeriockDocument|null>}
  */
-export async function selectDocument(type, config = {}, options = {}) {
-  const label = options.label ?? getTypeLabel(type) ?? type;
+export async function selectDocument(type, config = {}) {
+  const label = getTypeLabel(type) ?? type;
   const selected = await DocumentSelector.selectFromConfig({ globalTypes: [type], multi: false, ...config }, {
     hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", { name: label.toLocaleLowerCase(game.i18n.lang) }),
-    onConfirm: options.onConfirm,
     openable: true,
     resolve: true,
     title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: label }),
