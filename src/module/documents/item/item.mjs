@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -11,9 +11,6 @@ const { Item } = foundry.documents;
  * @mixes ChildDocument
  */
 export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, CommonDocumentMixin, ChildDocumentMixin) {
-  /** @inheritDoc */
-  static documentMetadata = mergeMetadata(super.documentMetadata, { changePath: "system.itemChanges" });
-
   /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();
@@ -69,6 +66,11 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   /** @inheritDoc */
   *allApplicableEffects() {
     for (const effect of this.effects) { if (!effect.isReference) { yield effect; } }
+  }
+
+  /** @inheritDoc */
+  getChangesFromEffect(effect) {
+    return effect.system.itemChanges;
   }
 
   /**

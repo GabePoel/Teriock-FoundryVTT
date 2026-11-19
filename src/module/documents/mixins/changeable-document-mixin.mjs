@@ -47,7 +47,7 @@ export default function ChangeableDocumentMixin(Base) {
       const changes = [];
       for (const effect of this.allApplicableEffects()) {
         if (effect.disabled) { continue; }
-        for (const change of foundry.utils.getProperty(effect, this.documentMetadata.changePath) ?? []) {
+        for (const change of this.getChangesFromEffect(effect)) {
           if (change.key === "" || change.phase !== phase || !(effect.active || change.applyIfSuppressed)) { continue; }
           const copy = foundry.utils.deepClone(change);
           copy.effect = effect;
@@ -69,6 +69,15 @@ export default function ChangeableDocumentMixin(Base) {
         if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
       }
       foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
+    }
+
+    /**
+     * Get the changes from an active effect that apply to this document.
+     * @param {TeriockActiveEffect} _effect
+     * @returns {Teriock.Changes.ChangeData[]}
+     */
+    getChangesFromEffect(_effect) {
+      return [];
     }
 
     /** @inheritDoc */

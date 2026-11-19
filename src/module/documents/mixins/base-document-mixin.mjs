@@ -28,7 +28,6 @@ export default function BaseDocumentMixin(Base) {
      * @type {Teriock.Metadata.DocumentMetadata}
      */
     static documentMetadata = Object.freeze({
-      changePath: "system.changes",
       child: false,
       hierarchy: false,
       identifier: { depth: 0, track: false, trackEmbeds: false },
