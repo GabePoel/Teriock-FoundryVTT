@@ -1,4 +1,3 @@
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import {
   expandDocumentDataArray,
   findBestDocument,
@@ -216,14 +215,35 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Apply any transformations to child data which are caused by ActiveEffects.
+   * Fire a trigger on every mechanic of this actor and create the resulting messages.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Teriock.System.TriggerScope} scope
+   * @returns {Promise<void>}
+   * @internal
+   * @category Triggers
+   */
+  async _dispatchTrigger(trigger, scope) {
+    scope.chatDataBySource ??= {};
+    for (const mechanic of [...this.system.automations, ...this.system.expirations]) {
+      if (mechanic.validateTrigger?.(trigger, scope)) { await mechanic._onFire(scope); }
+    }
+    await this.createTriggeredMessages(scope);
+  }
+
+  /**
+   * Child changes for a phase grouped by target.
    * @param {Teriock.Changes.Phase} phase
+   * @returns {Record<Teriock.Changes.ChildTarget, Teriock.Changes.ChildChangeData[]>}
    * @internal
    */
-  _applyActiveEffectsToChildren(phase) {
-    if (!game.settings.get("teriock", "nonHierarchicalChanges")) { return; }
-    /** @type {Record<string, Teriock.Changes.ChildChangeData[]>} */
+  _getChildChanges(phase) {
+    /** @type {Record<Teriock.Changes.ChildTarget, Teriock.Changes.ChildChangeData[]>} */
     const changeMap = { ability: [], armament: [] };
+    if (
+      !TERIOCK.CONFIG.change.phase[phase]?.appliesToChildren || !game.settings.get("teriock", "nonHierarchicalChanges")
+    ) {
+      return changeMap;
+    }
     for (const effect of this.appliedEffects) {
       for (const change of effect.system.childChanges) {
         if (
@@ -241,55 +261,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
       }
     }
     for (const c of Object.values(changeMap)) { c.sort((a, b) => a?.priority - b?.priority); }
-    const data = this.getRollData();
-    this._applyChangesToDocuments(changeMap.ability, this.previewedTypes.ability, data);
-    this._applyChangesToDocuments(changeMap.armament, this.previewedTags.armament, data);
-  }
-
-  /**
-   * Apply any transformations to item data which are causde by ActiveEffects.
-   * @param {Teriock.Changes.Phase} phase
-   * @internal
-   */
-  _applyActiveEffectsToItems(phase) {
-    for (const item of this.items) { item.applyActiveEffects(phase); }
-  }
-
-  /**
-   * Apply qualified changes to an array of documents.
-   * @param {Teriock.Changes.ChildChangeData[]} changes
-   * @param {(TeriockActiveEffect|TeriockItem)[]} documents
-   * @param {object} replacementData
-   * @internal
-   */
-  _applyChangesToDocuments(changes, documents, replacementData) {
-    for (const d of documents) {
-      const overrides = {};
-      let qualifierData;
-      for (const c of changes) {
-        if (BaseRoll.qualify(c.qualifier, () => (qualifierData ??= d.system.getLocalRollData()))) {
-          const result = ActiveEffect.implementation.applyChange(d, c, { replacementData });
-          if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
-        }
-      }
-      foundry.utils.mergeObject(d.overrides, foundry.utils.expandObject(overrides));
-    }
-  }
-
-  /**
-   * Fire a trigger on every mechanic of this actor and create the resulting messages.
-   * @param {Teriock.System.Trigger} trigger
-   * @param {Teriock.System.TriggerScope} scope
-   * @returns {Promise<void>}
-   * @internal
-   * @category Triggers
-   */
-  async _dispatchTrigger(trigger, scope) {
-    scope.chatDataBySource ??= {};
-    for (const mechanic of [...this.system.automations, ...this.system.expirations]) {
-      if (mechanic.validateTrigger?.(trigger, scope)) { await mechanic._onFire(scope); }
-    }
-    await this.createTriggeredMessages(scope);
+    return changeMap;
   }
 
   /**
@@ -359,13 +331,14 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   /** @inheritDoc */
   applyActiveEffects(phase) {
     const apply = !this._completedActiveEffectPhases.has(phase);
-    if (TERIOCK.CONFIG.change.phase[phase]?.applyToChildren && apply) {
-      this._applyActiveEffectsToChildren(phase);
-      this._completedActiveEffectPhases.add(phase);
-    } else {
-      super.applyActiveEffects(phase);
+    super.applyActiveEffects(phase);
+    if (!apply) { return; }
+    const { ability, armament } = this._getChildChanges(phase);
+    if (TERIOCK.CONFIG.change.phase[phase]?.appliedByActor) {
+      const armaments = new Set(this.previewedTags.armament);
+      for (const item of this.items) { item.applyActiveEffects(phase, armaments.has(item) ? armament : []); }
     }
-    if (TERIOCK.CONFIG.change.phase[phase]?.applyToItems && apply) { this._applyActiveEffectsToItems(phase); }
+    if (ability.length) { for (const a of this.previewedTypes.ability) { a.applyActiveEffects(phase, ability); } }
   }
 
   /**
@@ -423,20 +396,18 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareSpecialData();
+  }
+
+  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     this.prepareDependeeDocuments();
     super.prepareEmbeddedDocuments();
     this.system.prepareChildAutomations();
-    this.prepareChangeData();
     this.applyActiveEffects("setup");
     this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase);
-    this.applyActiveEffects("children");
-  }
-
-  /** @inheritDoc */
-  prepareSpecialData() {
-    super.prepareSpecialData();
-    this.applyActiveEffects("special");
   }
 
   /**

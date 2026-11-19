@@ -1,11 +1,7 @@
-import { mixClasses } from "../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
-
-/**
- * @import { ActiveEffectChangeData } from "@client/documents/_types.mjs";
- */
 
 /**
  * The Teriock Item implementation.
@@ -15,6 +11,9 @@ const { Item } = foundry.documents;
  * @mixes ChildDocument
  */
 export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, CommonDocumentMixin, ChildDocumentMixin) {
+  /** @inheritDoc */
+  static documentMetadata = mergeMetadata(super.documentMetadata, { changePath: "system.itemChanges" });
+
   /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();
@@ -68,48 +67,8 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   }
 
   /** @inheritDoc */
-  _clearData() {
-    super._clearData();
-    this._completedActiveEffectPhases = new Set();
-  }
-
-  /**
-   * Get all ActiveEffects that may apply to this document.
-   * @yields {TeriockActiveEffect}
-   * @returns {Generator<TeriockActiveEffect, void, void>}
-   */
   *allApplicableEffects() {
     for (const effect of this.effects) { if (!effect.isReference) { yield effect; } }
-  }
-
-  /**
-   * Apply any transformations to the Item data which are caused by ActiveEffects.
-   * @param {string} phase
-   */
-  applyActiveEffects(phase) {
-    if (!(phase in ActiveEffect.implementation.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) {
-      return;
-    }
-    this._completedActiveEffectPhases.add(phase);
-    /** @type {ActiveEffectChangeData[]} */
-    const changes = [];
-    for (const effect of this.allApplicableEffects()) {
-      if (effect.disabled) { continue; }
-      for (const change of effect.system.itemChanges) {
-        if (change.key === "" || change.phase !== phase || !(effect.active || change.applyIfSuppressed)) { continue; }
-        const copy = foundry.utils.deepClone(change);
-        copy.effect = effect;
-        changes.push(copy);
-      }
-    }
-    changes.sort((a, b) => a.priority - b.priority);
-    const overrides = {};
-    const replacementData = this.getRollData();
-    for (const change of changes) {
-      const result = ActiveEffect.implementation.applyChange(this, change, { replacementData });
-      if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
-    }
-    foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
 
   /**
@@ -125,13 +84,18 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) { this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase); }
+    if (this.isTop) {
+      this.applyActiveEffects("setup");
+      this.applyActiveEffects("main");
+      this.prepareSpecialData();
+      this.applyActiveEffects("final");
+    }
   }
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
-    this.applyActiveEffects("setup");
+    this.applyActiveEffects("initial");
   }
 
   /** @inheritDoc */

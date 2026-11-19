@@ -63,13 +63,6 @@ export default function PropagationDataMixin(Base) {
     }
 
     /**
-     * Data preparation that sets up qualified changes to be added as normal changes.
-     */
-    prepareChangeData() {
-      this._propagateOperation("prepareChangeData", false);
-    }
-
-    /**
      * The final step of data preparation that happens after `prepareSpecialData()`. This ensures that values are
      * constrained by maximum and minimum values.
      */

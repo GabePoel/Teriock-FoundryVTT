@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
-import { HierarchyDocumentMixin } from "./_module.mjs";
+import { ChangeableDocumentMixin, HierarchyDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -9,10 +9,11 @@ import { HierarchyDocumentMixin } from "./_module.mjs";
 export default function ChildDocumentMixin(Base) {
   /**
    * @mixes HierarchyDocument
+   * @mixes ChangeableDocument
    * @mixin
    * @implements {Teriock.Functionality.Usable}
    */
-  class ChildDocument extends mixClasses(Base, HierarchyDocumentMixin) {
+  class ChildDocument extends mixClasses(Base, HierarchyDocumentMixin, ChangeableDocumentMixin) {
     /** @inheritDoc */
     static documentMetadata = mergeMetadata(super.documentMetadata, { child: true });
 
@@ -23,24 +24,11 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /**
-     * Changes to this document's data that were applied during preparation.
-     * @type {object}
-     */
-    overrides = this.overrides ?? {};
-
-    /**
      * Checks if the document is suppressed.
      * @returns {boolean}
      */
     get isSuppressed() {
       return this.system.isSuppressed || super.isSuppressed;
-    }
-
-    /**
-     * Clear or replace properties not automatically reset by upstream initialization.
-     */
-    _clearData() {
-      this.overrides = {};
     }
 
     /** @inheritDoc */
@@ -62,18 +50,6 @@ export default function ChildDocumentMixin(Base) {
       if (!this.checkEditor(userId) || !childTypes) { return; }
       const invalid = this.subs.filter(s => !childTypes.includes(s.type));
       if (invalid.length) { this.deleteChildDocuments(this.documentName, invalid.map(s => s._id)); }
-    }
-
-    /** @inheritDoc */
-    prepareBaseData() {
-      this._clearData();
-      super.prepareBaseData();
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
-      if (this.isTop) { this.prepareChangeData(); }
     }
 
     /** @inheritDoc */

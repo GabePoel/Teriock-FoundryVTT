@@ -49,6 +49,13 @@ export default function AutomatableSystemMixin(Base) {
           source.transformationLevel ||= ["minor", "full", "greater"].indexOf(a.level) + 1;
           delete a.level;
         }
+        if (a?.type === "changes") {
+          for (const c of a.changes ?? []) {
+            if (c.phase === "setup" && c.target === "Item") { c.phase = "initial"; }
+            else if (c.phase === "derived") { c.phase = "main"; }
+            else if (c.phase === "special") { c.phase = "final"; }
+          }
+        }
       }
       return super.migrateData(source, options);
     }

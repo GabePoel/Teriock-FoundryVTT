@@ -80,7 +80,7 @@ export default class BasePreviewModel extends BaseDataModel {
   static defineFilters() {
     return {
       active: new TernaryField({ label: "TERIOCK.SHEETS.Common.TAGS.active" }),
-      children: new TernaryField({ label: "TERIOCK.CHANGES.Phase.children.label" }),
+      children: new TernaryField({ label: "EFFECT.TABS.children" }),
       duplicates: new TernaryField({ label: "TERIOCK.COMMON.Duplicates" }),
       fluent: new TernaryField({ label: "TERIOCK.SCHEMA.Competence.choices.2" }),
       proficient: new TernaryField({ label: "TERIOCK.SCHEMA.Competence.choices.1" }),

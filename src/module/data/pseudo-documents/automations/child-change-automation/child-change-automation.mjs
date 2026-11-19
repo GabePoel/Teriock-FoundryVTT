@@ -29,6 +29,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
         required: true,
       }),
       key: new fields.StringField({ choices: TERIOCK.CONFIG.change.child.paths, initial: initialKey, required: true }),
+      phase: new fields.StringField({ blank: false, initial: TERIOCK.CONFIG.change.defaultPhase, required: true }),
       priority: new fields.NumberField(),
       qualifier: qualifierField(),
       target: new fields.StringField({
@@ -60,7 +61,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["target", "qualifier", "key", "changeType", "value", "priority"];
+    return ["target", "qualifier", "key", "changeType", "value", "priority", "phase"];
   }
 
   /** @returns {Record<string, string>} */
@@ -94,6 +95,10 @@ export default class ChildChangeAutomation extends BaseAutomation {
     if (path.endsWith("value")) { inputConfig.changeType = this.changeType; }
     if (path.endsWith("changeType")) { inputConfig.choices = this._changeTypeChoices; }
     if (path.endsWith("priority")) { inputConfig.placeholder = this._defaultPriority.toString() ?? "0"; }
+    if (path.endsWith("phase")) {
+      groupConfig.hint = TERIOCK.CONFIG.change.phase[this.phase]?.hint;
+      inputConfig.choices = objectMap(TERIOCK.CONFIG.change.phase, p => p.label, { filter: p => p.appliesToChildren });
+    }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
@@ -101,7 +106,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
   getChanges() {
     return [{
       key: this.key,
-      phase: "children",
+      phase: this.phase,
       priority: this.priority ?? this._defaultPriority,
       qualifier: this.qualifier,
       target: this.target,

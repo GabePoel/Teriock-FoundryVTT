@@ -33,6 +33,15 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   }
 
   /** @inheritDoc */
+  static migrateData(source, options) {
+    for (const c of source.changes ?? []) {
+      if (c.phase === "derived") { c.phase = "main"; }
+      else if (c.phase === "special") { c.phase = "final"; }
+    }
+    return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
   get _displayToggles() {
     return [...super._displayToggles, {
       label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
@@ -212,13 +221,10 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   }
 
   /** @inheritDoc */
-  prepareChangeData() {
-    super.prepareChangeData();
-    if (this.isPassive === false) { return; }
-    this.changes.push(
-      ...this.automations.active.filter(a => a.metadata.tags.changes).flatMap(a => a.getChanges()).filter(c =>
-        c.target === "Actor"
-      ),
-    );
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    for (const a of this.automations.filter(a => a.metadata.tags.changes)) {
+      this.changes.push(...a.getChanges().filter(c => c.target === "Actor").map(c => ({ ...c, automationId: a.id })));
+    }
   }
 }

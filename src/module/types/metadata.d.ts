@@ -3,6 +3,7 @@ declare global {
     export type CollectionMetadata = { validate: boolean };
 
     export type DocumentMetadata = {
+      changePath: string;
       child: boolean;
       hierarchy: boolean;
       identifier: { depth: number, track: boolean, trackEmbeds: boolean };

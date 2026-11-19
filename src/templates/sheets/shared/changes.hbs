@@ -39,7 +39,7 @@
               name=(concat ../../changesPath "." i ".priority")
               value=change.priority
               icon=@root/TERIOCK.DISPLAY.icons.manifest.change.priority
-              placeholder=change.defaultPriority
+              placeholder=(path @root/types change.type "defaultPriority")
               disabled=(not @root/editable)
               id=(concat @root/rootId ../../changesPath "." i ".priority")
             }}
@@ -48,10 +48,11 @@
                 changeFields.phase
                 name=(concat ../../changesPath "." i ".phase")
                 value=change.phase
+                choices=@root/TERIOCK.CONFIG.change.phase
                 icon=@root/TERIOCK.DISPLAY.icons.manifest.change.phase
                 disabled=(not @root/editable)
                 id=(concat @root/rootId ../../changesPath "." i ".phase")
-                dataset=(object tooltip=(localize (concat "TERIOCK.CHANGES.Phase." change.phase ".hint")))
+                dataset=(object tooltip=(path @root/TERIOCK.CONFIG.change.phase change.phase "hint"))
               }}
             {{/if}}
           </div>

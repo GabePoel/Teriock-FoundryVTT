@@ -135,26 +135,23 @@ const paths = {
 
 const child = { groups, paths, targets: childTargets, typeSubsets };
 
+// no sort
 const phase = {
-  children: {
-    applyToChildren: true,
-    hint: "TERIOCK.CHANGES.Phase.children.hint",
-    label: "TERIOCK.CHANGES.Phase.children.label",
+  initial: { hint: "EFFECT.CHANGES.PHASES.initial.hint", label: "EFFECT.CHANGES.PHASES.initial.label" },
+  setup: {
+    appliedByActor: true,
+    appliesToChildren: true,
+    hint: "TERIOCK.CHANGES.Phase.setup.hint",
+    label: "TERIOCK.CHANGES.Phase.setup.label",
   },
-  derived: {
-    applyToItems: true,
+  main: {
+    appliedByActor: true,
+    appliesToChildren: true,
     default: true,
-    hint: "TERIOCK.CHANGES.Phase.derived.hint",
-    label: "TERIOCK.CHANGES.Phase.derived.label",
-    visible: true,
+    hint: "TERIOCK.CHANGES.Phase.main.hint",
+    label: "TERIOCK.CHANGES.Phase.main.label",
   },
-  setup: { hint: "TERIOCK.CHANGES.Phase.setup.hint", label: "TERIOCK.CHANGES.Phase.setup.label", visible: true },
-  special: {
-    applyToItems: true,
-    hint: "TERIOCK.CHANGES.Phase.special.hint",
-    label: "TERIOCK.CHANGES.Phase.special.label",
-    visible: true,
-  },
+  final: { appliedByActor: true, hint: "EFFECT.CHANGES.PHASES.final.hint", label: "EFFECT.CHANGES.PHASES.final.label" },
 };
 
 /**

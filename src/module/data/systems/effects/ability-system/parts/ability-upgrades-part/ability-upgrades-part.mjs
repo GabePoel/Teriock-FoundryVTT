@@ -58,8 +58,8 @@ export default function AbilityUpgradesPart(Base) {
     }
 
     /** @inheritDoc */
-    prepareChangeData() {
-      super.prepareChangeData();
+    prepareDerivedData() {
+      super.prepareDerivedData();
       if (this.upgrades.score.attribute) {
         this.changes.push({
           key: `system.attributes.${this.upgrades.score.attribute}.score`,
@@ -80,11 +80,6 @@ export default function AbilityUpgradesPart(Base) {
           value: this.upgrades.competence.value.toString(),
         });
       }
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
       if (this.upgrades.score.attribute) {
         const attribute = attributeLink(this.upgrades.score.attribute);
         const value = this.upgrades.score.value;

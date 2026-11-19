@@ -30,10 +30,7 @@ export default class ChangesAutomation extends BaseAutomation {
    */
   async getEditor(config = {}) {
     const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
-      changesData: this._source.changes.map(c => ({
-        ...c,
-        defaultPriority: (TeriockActiveEffect.CHANGE_TYPES[c.type]?.defaultPriority ?? 0).toString(),
-      })),
+      changesData: this._source.changes,
       changesPath: `${this.localPath}.changes`,
       editable: this.getNearestDocument()?.sheet?.isEditable,
       fieldDefs: this.schema.fields.changes.element.fields,

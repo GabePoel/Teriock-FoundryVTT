@@ -283,9 +283,22 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.isTop) { this.prepareSpecialData(); }
+  }
+
+  /** @inheritDoc */
   resetChildMaps() {
     super.resetChildMaps();
     delete this._cache.isReference;
+  }
+
+  /** @inheritDoc */
+  shouldApplyChange(change, options) {
+    if (!super.shouldApplyChange(change, options)) { return false; }
+    if (!change.automationId) { return true; }
+    return this.system.isPassive !== false && Boolean(this.system.automations.get(change.automationId)?.active);
   }
 
   /**
