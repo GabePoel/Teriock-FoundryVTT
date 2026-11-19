@@ -1,5 +1,8 @@
+import { objectMap } from "../../utils/_module.mjs";
+
 /**
  * @import { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
+ * @import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
  */
 
 /**
@@ -10,22 +13,12 @@
 export default function PseudoControllerDataMixin(Base) {
   /** @mixin */
   class PseudoControllerData extends Base {
-    /** @inheritDoc */
-    _configure(options = {}) {
-      super._configure(options);
-      const isDocument = this instanceof foundry.abstract.Document;
-      const model = isDocument ? CONFIG[this.documentName]?.dataModels?.[this._source.type] : this;
-      const collections = {};
-      for (const [documentName, path] of Object.entries(model?.metadata?.pseudos ?? {})) {
-        const field = model.schema.getField(isDocument ? path.slice("system.".length) : path);
-        const source = foundry.utils.getProperty(this._source, path);
-        collections[documentName] = new field.implementation(field.name, this, [], { field, source });
-      }
-      Object.defineProperty(this, "pseudoCollections", {
-        configurable: true,
-        value: Object.seal(collections),
-        writable: false,
-      });
+    /**
+     * Collections of Pseudo-Documents embedded in this.
+     * @returns {Record<string, PseudoCollection>}
+     */
+    get pseudoCollections() {
+      return objectMap(this.metadata?.pseudos ?? {}, path => foundry.utils.getProperty(this, path));
     }
 
     /**
@@ -43,7 +36,8 @@ export default function PseudoControllerDataMixin(Base) {
 
     /** @inheritDoc */
     getEmbeddedCollection(embeddedName) {
-      return this.pseudoCollections[embeddedName] ?? super.getEmbeddedCollection?.(embeddedName);
+      const path = this.metadata?.pseudos?.[embeddedName];
+      return (path && foundry.utils.getProperty(this, path)) || super.getEmbeddedCollection?.(embeddedName);
     }
   }
 

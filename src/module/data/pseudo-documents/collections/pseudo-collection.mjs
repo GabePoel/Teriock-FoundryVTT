@@ -1,7 +1,6 @@
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 
 /**
- * @import { DataModel } from "@common/abstract/_module.mjs";
  * @import PseudoCollectionField from "../../fields/pseudo-collection-field.mjs";
  */
 
@@ -66,16 +65,6 @@ export default class PseudoCollection extends TypeCollection {
       if (typeof options.active === "boolean" && this._checkIfActive(p) !== options.active) { return false; }
       return !(typeof options.isPassive === "boolean" && p.isPassive !== options.isPassive);
     });
-  }
-
-  /**
-   * Initialize the model collection.
-   * @param {DataModel} model
-   * @param {object} [_options]
-   */
-  initialize(model, _options = {}) {
-    this.model = model;
-    this.clear();
   }
 
   /**

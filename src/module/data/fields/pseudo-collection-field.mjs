@@ -1,5 +1,5 @@
 import { BasePseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
-import { PseudoCollection, SourcePseudoCollection } from "../pseudo-documents/collections/_module.mjs";
+import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
 
 const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
@@ -68,14 +68,6 @@ export default class PseudoCollectionField extends TypedObjectField {
     return this.documentClass.metadata.documentName;
   }
 
-  /**
-   * The Collection implementation to use when initializing the collection.
-   * @returns {typeof PseudoCollection}
-   */
-  get implementation() {
-    return this.persisted ? SourcePseudoCollection : PseudoCollection;
-  }
-
   /** @inheritDoc */
   _cast(value) {
     if (value instanceof Map) { value = Array.from(value.values()); }
@@ -92,11 +84,11 @@ export default class PseudoCollectionField extends TypedObjectField {
   }
 
   /** @inheritDoc */
-  initialize(_value, model, options = {}) {
-    const controller = model instanceof BasePseudoDocument ? model : model.getNearestDocument();
-    const collection = controller?.pseudoCollections?.[this.documentName] ?? null;
-    collection?.initialize(model, options);
-    return collection;
+  initialize(value, model, options = {}) {
+    const pseudos = Object.values(super.initialize(value, model, options) ?? {}).filter(p =>
+      p instanceof this.documentClass
+    ).sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
+    return new PseudoCollection(this.name, model, pseudos, { field: this });
   }
 
   /** @inheritDoc */
