@@ -45,7 +45,7 @@ export default function HackStatApplicationMixin(Base) {
      * @this {HackStatApplication}
      */
     static async _onTakeCommand(_event, target) {
-      if (!game.teriock.checkEditable(this)) { return; }
+      if (target.dataset.disable !== "false" && !game.teriock.checkEditable(this)) { return; }
       await this.document.run(target.dataset.command, { showDialog: true });
     }
 
