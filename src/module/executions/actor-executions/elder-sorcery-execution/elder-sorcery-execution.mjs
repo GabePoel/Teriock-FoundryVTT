@@ -137,7 +137,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
   _initializeSource(data, options = {}) {
     const actor = this._resolveActor(options);
     data = foundry.utils.mergeObject(actor?.system.elderSorceryCreation ?? {}, data, { inplace: false });
-    data.level ??= actor?.system.scaling.lvl ?? 0;
+    data.level ??= actor?.system.scaling.scale ?? 0;
     return super._initializeSource(data, options);
   }
 

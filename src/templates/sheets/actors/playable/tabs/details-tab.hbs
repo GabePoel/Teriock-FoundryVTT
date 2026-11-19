@@ -22,7 +22,7 @@
           </div>
           <div class="teriock-block-display-divider"></div>
           <div class="details-list">
-            {{#each TERIOCK.CONFIG.character.movement as |config key|}}
+            {{#each TERIOCK.CONFIG.actor.movement as |config key|}}
               {{#if (lookup @root/activeSpeedAdjustments key)}}
                 <div
                   class="
@@ -68,10 +68,10 @@
                 data-paths="system.speedAdjustments.{{ key }}"
               >
                 <span class="unselected">
-                  {{path @root/TERIOCK.CONFIG.character.speed (lookup @root/system.speedAdjustments key) "label"}}
+                  {{path @root/TERIOCK.CONFIG.actor.speed (lookup @root/system.speedAdjustments key) "label"}}
                 </span>
                 <span class="selected">
-                  {{path @root/TERIOCK.CONFIG.character.speed (lookup @root/system._source.speedAdjustments key) "label"}}
+                  {{path @root/TERIOCK.CONFIG.actor.speed (lookup @root/system._source.speedAdjustments key) "label"}}
                 </span>
               </button>
             {{/each}}
@@ -95,7 +95,7 @@
             <div class="details-list">
               <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
               <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
-              {{#each TERIOCK.CONFIG.character.sense as |config key|}}
+              {{#each TERIOCK.CONFIG.actor.sense as |config key|}}
                 {{#unless config.hidden}}
                   <div>
                     {{{ config.label }}}

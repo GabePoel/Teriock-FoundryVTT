@@ -1,10 +1,10 @@
 import abilityConfig from "./ability-config.mjs";
+import actorConfig from "./actor-config.mjs";
 import affinityConfig from "./affinity-config.mjs";
 import attributeConfig from "./attribute-config.mjs";
 import attunementConfig from "./attunement-config.mjs";
 import categoryConfig from "./category-config.mjs";
 import changeConfig from "./change-config.mjs";
-import characterConfig from "./character-config.mjs";
 import classConfig from "./class-config.mjs";
 import combatConfig from "./combat-config.mjs";
 import commandConfig from "./command-config.mjs";
@@ -36,12 +36,12 @@ import wikiConfig from "./wiki-config.mjs";
 
 const config = {
   ability: abilityConfig,
+  actor: actorConfig,
   affinity: affinityConfig,
   attribute: attributeConfig,
   attunement: attunementConfig,
   category: categoryConfig,
   change: changeConfig,
-  character: characterConfig,
   class: classConfig,
   combat: combatConfig,
   command: commandConfig,

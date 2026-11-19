@@ -10,15 +10,15 @@ declare global {
       };
       /** <base> Scaling bonuses */
       scaling: {
+        /** <schema> What bonuses scale off of */
+        basis: "br" | "lvl";
         /** <schema> Battle rating from species unless set */
         br: number;
-        /** <schema> Scale off BR instead of LVL */
-        brScale: boolean;
-        /** <base> Fluency bonus derived from level */
+        /** <base> Fluency bonus derived from scale */
         f: number;
         /** <schema> Level */
         lvl: number;
-        /** <base> Proficiency bonus derived from level */
+        /** <base> Proficiency bonus derived from scale */
         p: number;
         /** <base> Total rank derived from level */
         rank: number;

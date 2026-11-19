@@ -77,7 +77,8 @@
               type="button"
               data-action="updatePaths"
               data-icon="{{ TERIOCK.DISPLAY.icons.manifest.ui.level }}"
-              data-paths="system.scaling.lvl system.scaling.br system.scaling.brScale"
+              data-paths="system.scaling.lvl system.scaling.br system.scaling.basis"
+              data-title='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.label"}}'
             >
               <span class="unselected">{{ system.scaling.lvl }}</span>
               <span class="selected">{{ system._source.scaling.lvl }}</span>
@@ -88,7 +89,7 @@
           </span>
           {{infoIcon "core:leveling-up"}}
         </span>
-        {{#if system.scaling.brScale}}
+        {{#if (eq system.scaling.basis "br")}}
           <span class="actor-shortbox actor-br-box">
             <span class="actor-shortbox-value">
               <button
@@ -97,7 +98,8 @@
                 type="button"
                 data-action="updatePaths"
                 data-icon="{{ TERIOCK.DISPLAY.icons.manifest.ui.level }}"
-                data-paths="system.scaling.lvl system.scaling.br system.scaling.brScale"
+                data-paths="system.scaling.lvl system.scaling.br system.scaling.basis"
+                data-title='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.label"}}'
               >
                 <span class="unselected">{{ system.scaling.br }}</span>
                 <span class="selected">
@@ -125,7 +127,7 @@
         {{/unless}}
         <span
           class="actor-shortbox actor-proficiency-box"
-          {{#if system.scaling.brScale}}
+          {{#if (eq system.scaling.basis "br")}}
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}'
           {{else}}
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
@@ -139,7 +141,7 @@
         </span>
         <span
           class="actor-shortbox actor-fluency-box"
-          {{#if system.scaling.brScale}}
+          {{#if (eq system.scaling.basis "br")}}
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}'
           {{else}}
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'

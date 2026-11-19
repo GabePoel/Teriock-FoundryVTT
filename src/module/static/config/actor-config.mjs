@@ -85,6 +85,10 @@ export default {
       slug: "walk",
     },
   },
+  scalingBases: {
+    br: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.label",
+    lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
+  },
   /** @category Perception */
   sense: {
     blind: /** @type {Teriock.Config.SenseEntry} */ {
@@ -155,7 +159,8 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.character.movement", { key: "label" });
-preLocalizeObject("CONFIG.character.sense", { key: "label" });
-preLocalizeObject("CONFIG.character.sizes", { keys: ["label"] });
-preLocalizeObject("CONFIG.character.speed", { keys: ["label"] });
+preLocalizeObject("CONFIG.actor.movement", { key: "label" });
+preLocalizeObject("CONFIG.actor.scalingBases");
+preLocalizeObject("CONFIG.actor.sense", { key: "label" });
+preLocalizeObject("CONFIG.actor.sizes", { keys: ["label"] });
+preLocalizeObject("CONFIG.actor.speed", { keys: ["label"] });

@@ -103,9 +103,9 @@ declare global {
 
     // Character Keys
     export type Currency = keyof typeof CONFIG.currency;
-    export type Movement = keyof typeof CONFIG.character.movement;
-    export type Sense = keyof typeof CONFIG.character.sense;
-    export type Speed = keyof typeof CONFIG.character.speed;
+    export type Movement = keyof typeof CONFIG.actor.movement;
+    export type Sense = keyof typeof CONFIG.actor.sense;
+    export type Speed = keyof typeof CONFIG.actor.speed;
 
     // Math Keys
     export type Comparison = keyof typeof CONFIG.math.comparisons;

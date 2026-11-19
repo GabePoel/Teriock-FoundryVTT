@@ -48,7 +48,7 @@ export default class EnvironmentSystem extends BaseActorSystem {
           displayName: CONST.TOKEN_DISPLAY_MODES.NONE,
           disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
         },
-        system: { scaling: { br: 1, brScale: true } },
+        system: { scaling: { basis: "br", br: 1 } },
       }, data),
     );
   }

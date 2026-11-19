@@ -7,8 +7,8 @@ export default class InitiativeModifierModel extends BaseModifierModel {
    * @type {Teriock.Metadata.ModifierMetadata}
    */
   static metadata = mergeMetadata(super.metadata, {
-    initialBase: TERIOCK.CONFIG.character.defaults.initiative.base,
-    initialCompetence: TERIOCK.CONFIG.character.defaults.initiative.competence,
+    initialBase: TERIOCK.CONFIG.actor.defaults.initiative.base,
+    initialCompetence: TERIOCK.CONFIG.actor.defaults.initiative.competence,
   });
 
   /** @inheritDoc */

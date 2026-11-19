@@ -130,7 +130,7 @@ Hooks.once("teriock.identifiersInit", () => {
       [`ranks.archetype.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: v.label }),
     });
   });
-  Object.values(TERIOCK.CONFIG.character.movement).forEach(v => {
+  Object.values(TERIOCK.CONFIG.actor.movement).forEach(v => {
     Object.assign(actorContext, {
       [`speed.${v.slug}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
     });
@@ -143,7 +143,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(game.teriock.identifiers.getNames("species", { permission: "LIMITED" })).forEach(([k, name]) => {
     Object.assign(actorContext, { [`species.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.species", { name }) });
   });
-  Object.entries(TERIOCK.CONFIG.character.sense).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.actor.sense).forEach(([k, v]) => {
     Object.assign(actorContext, { [`sense.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.sense", { name: v.label }) });
   });
   Object.entries(TERIOCK.CONFIG.terrain.terrains).forEach(([k, v]) => {

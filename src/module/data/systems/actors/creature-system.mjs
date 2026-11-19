@@ -29,7 +29,7 @@ export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSyst
     this.parent.updateSource(
       foundry.utils.mergeObject({
         prototypeToken: { actorLink: false, disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE },
-        system: { scaling: { brScale: true } },
+        system: { scaling: { basis: "br" } },
       }, data),
     );
   }

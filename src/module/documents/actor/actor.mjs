@@ -92,8 +92,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    * @returns {Teriock.Config.SizeEntry}
    */
   static getSizeConfig(size) {
-    const minCategoryMaxSize = Math.min(...TERIOCK.CONFIG.character.sizes.map(d => d.max).filter(m => m >= size));
-    return foundry.utils.deepClone(TERIOCK.CONFIG.character.sizes.find(d => d.max === minCategoryMaxSize));
+    const minCategoryMaxSize = Math.min(...TERIOCK.CONFIG.actor.sizes.map(d => d.max).filter(m => m >= size));
+    return foundry.utils.deepClone(TERIOCK.CONFIG.actor.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
   /** @inheritDoc */

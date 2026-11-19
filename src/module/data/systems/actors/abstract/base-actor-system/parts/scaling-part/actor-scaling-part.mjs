@@ -27,14 +27,19 @@ export default function ActorScalingPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         presence: initialSchema({
-          max: initialNumber(TERIOCK.CONFIG.character.defaults.maxPresence),
+          max: initialNumber(TERIOCK.CONFIG.actor.defaults.maxPresence),
           min: initialNumber(),
           over: initialBoolean(),
           value: initialNumber(),
         }),
         scaling: new fields.SchemaField({
+          basis: new fields.StringField({
+            blank: false,
+            choices: TERIOCK.CONFIG.actor.scalingBases,
+            initial: "lvl",
+            required: true,
+          }),
           br: new fields.NumberField({ initial: null, nullable: true }),
-          brScale: new fields.BooleanField({ initial: false }),
           f: initialNumber(),
           lvl: new fields.NumberField({ initial: 1, integer: true, min: 1 }),
           p: initialNumber(),
@@ -42,6 +47,17 @@ export default function ActorScalingPart(Base) {
           scale: initialNumber(),
         }),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      foundry.abstract.Document._addDataFieldMigration(
+        source,
+        "scaling.brScale",
+        "scaling.basis",
+        d => (foundry.utils.getProperty(d, "scaling.brScale") ? "br" : "lvl"),
+      );
+      return super.migrateData(source, options);
     }
 
     /**
@@ -93,12 +109,12 @@ export default function ActorScalingPart(Base) {
 
     /** @inheritDoc */
     prepareBaseData() {
-      this.presence.max = Math.max(
-        TERIOCK.CONFIG.character.defaults.maxPresence,
-        Math.floor(1 + (this.scaling.lvl + 1) / 5),
-      );
       this.scaling.br ??= Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
-      this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
+      this.scaling.scale = this.scaling[this.scaling.basis];
+      this.presence.max = Math.max(
+        TERIOCK.CONFIG.actor.defaults.maxPresence,
+        Math.floor(1 + (this.scaling.scale + 1) / 5),
+      );
       this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
       this.scaling.p = Math.max(
         TERIOCK.CONFIG.system.baseValues.p,

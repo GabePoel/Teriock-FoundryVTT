@@ -51,7 +51,7 @@ export default function ActorSensesPart(Base) {
           }),
         }),
         senses: new MultiChangeField({
-          ...objectMap(TERIOCK.CONFIG.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
+          ...objectMap(TERIOCK.CONFIG.actor.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
         }),
       });
     }

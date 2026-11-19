@@ -40,7 +40,7 @@ export default class TeriockTokenRuler extends TokenRuler {
     if (context) {
       context.speed = this.token.actor?.system.movementSpeed;
       if (waypoint.terrain?.difficultTerrain) {
-        context.difficultTerrain = makeIconClass(TERIOCK.CONFIG.character.movement.difficultTerrain.icon);
+        context.difficultTerrain = makeIconClass(TERIOCK.CONFIG.actor.movement.difficultTerrain.icon);
       }
     }
     return context;

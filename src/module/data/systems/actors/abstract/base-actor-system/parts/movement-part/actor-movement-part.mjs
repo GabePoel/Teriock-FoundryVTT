@@ -31,7 +31,7 @@ export default function ActorMovementPart(Base) {
         difficultTerrain: initialBoolean(),
         movementSpeed: new fields.NumberField({ initial: null, nullable: true, units: "TERIOCK.LENGTH.ft.symbol" }),
         speedAdjustments: new MultiChangeField(
-          objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
+          objectMap(TERIOCK.CONFIG.actor.movement, e => speedField(e.initial, e.label)),
         ),
         terrains: terrainsField({ persisted: false }),
       });
@@ -70,7 +70,7 @@ export default function ActorMovementPart(Base) {
         tokens.length ? tokens.map(t => t.movementAction) : [CONFIG.Token.movement.defaultAction],
       );
       return new Set(
-        Object.entries(TERIOCK.CONFIG.character.movement).filter(([key, entry]) =>
+        Object.entries(TERIOCK.CONFIG.actor.movement).filter(([key, entry]) =>
           actions.has(entry.movementAction) || this.parent.statuses.has(entry.status)
           || (key === "difficultTerrain" && this.difficultTerrain)
         ).map(([key]) => key),
@@ -104,13 +104,13 @@ export default function ActorMovementPart(Base) {
      */
     getMovementCostFunction(action) {
       const multipliers = { horizontal: 1, vertical: 1 };
-      for (const [key, entry] of Object.entries(TERIOCK.CONFIG.character.movement)) {
+      for (const [key, entry] of Object.entries(TERIOCK.CONFIG.actor.movement)) {
         if (entry.movementAction !== action && !this.parent.statuses.has(entry.status)) { continue; }
         for (const d of entry.direction ? [entry.direction] : ["horizontal", "vertical"]) {
-          multipliers[d] *= TERIOCK.CONFIG.character.speed[this.speedAdjustments[key]].multiplier;
+          multipliers[d] *= TERIOCK.CONFIG.actor.speed[this.speedAdjustments[key]].multiplier;
         }
       }
-      const difficult = TERIOCK.CONFIG.character.speed[this.speedAdjustments.difficultTerrain].multiplier;
+      const difficult = TERIOCK.CONFIG.actor.speed[this.speedAdjustments.difficultTerrain].multiplier;
       return (baseCost, from, to, distance, segment) => {
         if (!distance) { return baseCost; }
         const terrain = segment.terrain?.difficultTerrain ? difficult : 1;
@@ -124,7 +124,7 @@ export default function ActorMovementPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       rollData.speed = this.movementSpeed;
-      for (const [k, v] of Object.entries(TERIOCK.CONFIG.character.movement)) {
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.actor.movement)) {
         rollData[`speed.${v.slug}`] = this.speedAdjustments[k] || 0;
       }
       for (const terrain of this.terrains) { rollData[`terrain.${terrain}`] = 1; }
@@ -171,7 +171,7 @@ export default function ActorMovementPart(Base) {
  */
 function speedField(initial, label) {
   return new fields.NumberField({
-    choices: TERIOCK.CONFIG.character.speed,
+    choices: TERIOCK.CONFIG.actor.speed,
     initial,
     integer: true,
     label,

@@ -80,7 +80,7 @@ export default function ActorTokenPart(Base) {
       let maxRange = 0;
       let visionMode = "basic";
       for (const [k, v] of Object.entries(this.senses)) {
-        const senseVisionMode = TERIOCK.CONFIG.character.sense[k]?.visionMode;
+        const senseVisionMode = TERIOCK.CONFIG.actor.sense[k]?.visionMode;
         if (senseVisionMode && v > maxRange) {
           maxRange = v;
           visionMode = senseVisionMode;
