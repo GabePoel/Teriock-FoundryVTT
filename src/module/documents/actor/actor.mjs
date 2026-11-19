@@ -239,9 +239,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   _getChildChanges(phase) {
     /** @type {Record<Teriock.Changes.ChildTarget, Teriock.Changes.ChildChangeData[]>} */
     const changeMap = { ability: [], armament: [] };
-    if (
-      !TERIOCK.CONFIG.change.phase[phase]?.appliesToChildren || !game.settings.get("teriock", "nonHierarchicalChanges")
-    ) {
+    if (!TERIOCK.CONFIG.change.phase[phase]?.appliesToChildren || !game.settings.get("teriock", "sharedChanges")) {
       return changeMap;
     }
     for (const effect of this.appliedEffects) {

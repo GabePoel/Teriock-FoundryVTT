@@ -327,7 +327,7 @@ function getMenuSettings() {
         system: {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.system,
           settings: {
-            nonHierarchicalChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
+            sharedChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
             trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
           },
         },
