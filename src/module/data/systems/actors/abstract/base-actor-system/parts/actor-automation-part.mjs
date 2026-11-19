@@ -14,24 +14,23 @@ export default function ActorAutomationPart(Base) {
    */
   class ActorAutomationPart extends Base {
     /**
-     * Apply all competence automations of a certain value to this actor's children.
-     * @param {Teriock.System.CompetenceLevel} value
+     * Apply all competence automations to this actor's children.
      */
-    #applyCompetenceAutomations(value) {
-      const autos = this.automations.getTypeSync("changeCompetence", {
-        active: true,
-        competence: value,
-        isPassive: true,
-      });
-      const identifiers = new Set(autos.map(a => a.identifier));
-      for (const c of this.parent.modifiable?.contents ?? []) {
-        if (
-          identifiers.has(c.identifier)
-          && c.system.competence.raw < value
-          && !c.system.lockedPaths?.has("system.competence.raw")
-        ) {
-          c.system.competence.raw = value;
-          foundry.utils.setProperty(c.overrides, "system.competence.raw", value);
+    #applyCompetenceAutomations() {
+      let changed = true;
+      while (changed) {
+        changed = false;
+        const levels = new Map();
+        for (const a of this.automations.getTypeSync("changeCompetence", { active: true, isPassive: true })) {
+          levels.set(a.identifier, Math.max(levels.get(a.identifier) ?? 0, a.competence.raw));
+        }
+        for (const c of this.parent.modifiable?.contents ?? []) {
+          const value = levels.get(c.identifier) ?? 0;
+          if (value > c.system.competence.raw && !c.system.lockedPaths?.has("system.competence.raw")) {
+            c.system.competence.raw = value;
+            foundry.utils.setProperty(c.overrides, "system.competence.raw", value);
+            changed = true;
+          }
         }
       }
     }
@@ -52,8 +51,7 @@ export default function ActorAutomationPart(Base) {
      */
     prepareChildAutomations() {
       this.#applySuppressAutomations();
-      this.#applyCompetenceAutomations(1);
-      this.#applyCompetenceAutomations(2);
+      this.#applyCompetenceAutomations();
     }
   }
 
