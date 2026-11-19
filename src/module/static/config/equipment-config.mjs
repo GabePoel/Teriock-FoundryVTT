@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { wikiIndexToConfig } from "../../utils/_module.mjs";
 import { colors, icons } from "../display/_module.mjs";
-import systemConfig from "./system-config.mjs";
+import kindConfig from "./kind-config.mjs";
 
 export default {
   equipmentClasses: wikiIndexToConfig("classification", "TERIOCK.TERMS.EquipmentClasses"),
@@ -21,8 +21,8 @@ export default {
       icon: icons.manifest.powerLevel.mundane,
       label: "TERIOCK.TERMS.EquipmentKind.mundane",
     },
-    ...systemConfig.childKinds,
-    unknown: { ...systemConfig.childKinds.unknown, label: "TERIOCK.TERMS.EquipmentKind.unknown" },
+    ...kindConfig.child,
+    unknown: { ...kindConfig.child.unknown, label: "TERIOCK.TERMS.EquipmentKind.unknown" },
   },
   unidentifiedProperties: ["cumbersome", "destroyed", "glowing", "master-crafted", "morganti", "shattered", "small"],
 };

@@ -117,12 +117,12 @@ export default function ActorScalingPart(Base) {
       );
       this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
       this.scaling.p = Math.max(
-        TERIOCK.CONFIG.system.baseValues.p,
-        Math.floor(TERIOCK.CONFIG.system.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
+        TERIOCK.CONFIG.actor.defaults.p,
+        Math.floor(TERIOCK.CONFIG.actor.defaults.p + 1 + (this.scaling.scale - 7) / 10),
       );
       this.scaling.f = Math.max(
-        TERIOCK.CONFIG.system.baseValues.f,
-        Math.floor(TERIOCK.CONFIG.system.baseValues.f + (this.scaling.scale - 2) / 5),
+        TERIOCK.CONFIG.actor.defaults.f,
+        Math.floor(TERIOCK.CONFIG.actor.defaults.f + (this.scaling.scale - 2) / 5),
       );
       super.prepareBaseData();
     }

@@ -159,7 +159,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.senses = {};
-      for (const key of Object.keys(TERIOCK.CONFIG.actor.sense)) {
+      for (const key of Object.keys(TERIOCK.CONFIG.actor.senses)) {
         context.senses[key] = {
           source: toRangeHTML(this.document.system._source.senses[key]),
           value: toRangeHTML(this.document.system.senses[key]),

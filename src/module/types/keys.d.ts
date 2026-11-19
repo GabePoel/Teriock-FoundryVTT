@@ -66,7 +66,7 @@ declare global {
     export type Trait = keyof typeof CONFIG.wiki.index.trait;
 
     // Kind Keys
-    export type Kind = keyof typeof CONFIG.system.defaultKinds;
+    export type Kind = keyof typeof CONFIG.kind.default;
     export type EffectKind = keyof typeof CONFIG.effect.kind;
     export type AttunementKind = keyof typeof CONFIG.attunement.kind;
     export type RankKind = keyof typeof CONFIG.class.kind;
@@ -104,8 +104,8 @@ declare global {
     // Character Keys
     export type Currency = keyof typeof CONFIG.currency;
     export type Movement = keyof typeof CONFIG.actor.movement;
-    export type Sense = keyof typeof CONFIG.actor.sense;
-    export type Speed = keyof typeof CONFIG.actor.speed;
+    export type Sense = keyof typeof CONFIG.actor.senses;
+    export type Speed = keyof typeof CONFIG.actor.speedAdjustments;
 
     // Math Keys
     export type Comparison = keyof typeof CONFIG.math.comparisons;

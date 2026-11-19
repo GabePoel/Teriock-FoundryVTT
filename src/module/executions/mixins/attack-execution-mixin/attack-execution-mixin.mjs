@@ -214,8 +214,8 @@ export default function AttackExecutionMixin(Base) {
             threshold = target.actor.system.defense.ac;
             comparison = "gt";
           }
-          if (this.limb) { threshold += TERIOCK.CONFIG.system.target.limb; }
-          else if (this.vitals) { threshold += TERIOCK.CONFIG.system.target.vitals; }
+          if (this.limb) { threshold += TERIOCK.CONFIG.combat.targetThresholdDeltas.limb; }
+          else if (this.vitals) { threshold += TERIOCK.CONFIG.combat.targetThresholdDeltas.vitals; }
           rollOptions.thresholds = [...ThresholdRoll.defaultOptions.thresholds, {
             comparison,
             inverse: true,

@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 import colors from "../display/colors.mjs";
-import systemConfig from "./system-config.mjs";
+import kindConfig from "./kind-config.mjs";
 
 export default {
   kind: /** @enum {Teriock.Config.KindEntry} */ {
@@ -15,7 +15,7 @@ export default {
     familiar: { color: colors.palette.green, icon: icons.manifest.document.familiar, label: "TYPES.Item.familiar" },
     mount: { color: colors.palette.blue, icon: icons.manifest.document.mount, label: "TYPES.Item.mount" },
     pact: { color: colors.palette.purple, icon: icons.manifest.document.pact, label: "TYPES.Item.pact" },
-    ...systemConfig.childKinds,
+    ...kindConfig.child,
   },
 };
 

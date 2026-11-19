@@ -2,7 +2,15 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {
-  defaults: { initiative: { base: "@mov.score", competence: 1 }, maxPresence: 1 },
+  defaults: {
+    ac: 10,
+    f: 1,
+    initiative: { base: "@mov.score", competence: 1 },
+    maxCurses: 3,
+    maxPresence: 1,
+    p: 0,
+    size: 3,
+  },
   movement: {
     climb: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.climb,
@@ -90,7 +98,7 @@ export default {
     lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   },
   /** @category Perception */
-  sense: {
+  senses: {
     blind: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "blindFighting",
       grantsSight: false,
@@ -150,7 +158,7 @@ export default {
     { label: "TERIOCK.TERMS.Sizes.gargantuan", length: 5, max: 24, reach: 25, slug: "gargantuan" },
     { label: "TERIOCK.TERMS.Sizes.colossal", length: 6, max: Infinity, reach: 30, slug: "colossal" },
   ],
-  speed: {
+  speedAdjustments: {
     0: { label: "TERIOCK.TERMS.SpeedAdjustments.0", multiplier: 0 },
     1: { label: "TERIOCK.TERMS.SpeedAdjustments.1", multiplier: 0.25 },
     2: { label: "TERIOCK.TERMS.SpeedAdjustments.2", multiplier: 0.5 },
@@ -161,6 +169,6 @@ export default {
 
 preLocalizeObject("CONFIG.actor.movement", { key: "label" });
 preLocalizeObject("CONFIG.actor.scalingBases");
-preLocalizeObject("CONFIG.actor.sense", { key: "label" });
+preLocalizeObject("CONFIG.actor.senses", { key: "label" });
 preLocalizeObject("CONFIG.actor.sizes", { keys: ["label"] });
-preLocalizeObject("CONFIG.actor.speed", { keys: ["label"] });
+preLocalizeObject("CONFIG.actor.speedAdjustments", { keys: ["label"] });

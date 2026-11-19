@@ -22,7 +22,7 @@ Hooks.once("teriock.identifiersInit", () => {
   game.teriock.identifiers.mountTypes.entries().filter(([, e]) => e.name).forEach(([k, e]) => {
     mountContext[`mount.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Mount.mount", { name: e.name });
   });
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.kind.default).forEach(([k, v]) => {
     mountContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
 });

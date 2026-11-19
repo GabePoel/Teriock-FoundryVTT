@@ -13,7 +13,7 @@ Hooks.once("teriock.metaphysicsContextInit", () => {
 preLocalizeObject("ROLL_CONTEXT.imbuement");
 
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.kind.default).forEach(([k, v]) => {
     imbuementContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
 });

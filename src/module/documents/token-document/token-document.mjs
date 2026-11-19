@@ -221,7 +221,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     const autoVisionRange = actor.system.settings.getSetting("autoVisionRange");
     if (autoDetectionMode || autoVisionRange) {
       this.sight.range = 0;
-      for (const [id, config] of Object.entries(TERIOCK.CONFIG.actor.sense)) {
+      for (const [id, config] of Object.entries(TERIOCK.CONFIG.actor.senses)) {
         const range = actor.system.senses[id];
         if (autoDetectionMode) {
           const mode = config?.detectionMode;

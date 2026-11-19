@@ -30,6 +30,7 @@ export default {
       types: ["adeptitude", "ineptitude", "incapability"],
     },
   },
+  resistanceThreshold: 10,
   // no sort
   types: {
     hexseal: {

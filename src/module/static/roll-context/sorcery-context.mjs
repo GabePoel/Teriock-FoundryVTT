@@ -13,7 +13,7 @@ export default sorceryContext;
 
 preLocalizeObject("ROLL_CONTEXT.sorcery");
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.kind.default).forEach(([k, v]) => {
     sorceryContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
 });

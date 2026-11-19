@@ -1,6 +1,6 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { colors, icons, thumbnails } from "../display/_module.mjs";
-import systemConfig from "./system-config.mjs";
+import kindConfig from "./kind-config.mjs";
 
 export default {
   archetypes: {
@@ -143,7 +143,7 @@ export default {
       icon: icons.manifest.rank.learned,
       label: "TERIOCK.TERMS.RankKind.learned",
     },
-    ...systemConfig.childKinds,
+    ...kindConfig.child,
   },
 };
 

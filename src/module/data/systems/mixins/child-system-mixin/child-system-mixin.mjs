@@ -44,7 +44,7 @@ export default function ChildSystemMixin(Base) {
      */
     static metadata = mergeMetadata(super.metadata, {
       initialKind: "normal",
-      kinds: TERIOCK.CONFIG.system.defaultKinds,
+      kinds: TERIOCK.CONFIG.kind.default,
       preserveOnRefresh: ["system.competence", ...super.metadata.preserveOnRefresh],
       tags: { triggerable: true },
     });

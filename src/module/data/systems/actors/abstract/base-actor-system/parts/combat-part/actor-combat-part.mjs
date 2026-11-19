@@ -48,7 +48,7 @@ export default function ActorCombatPart(Base) {
             worn: initialNumber(),
           }),
           bv: new fields.NumberField({ initial: null, integer: true, nullable: true }),
-          cc: initialNumber(TERIOCK.CONFIG.system.baseValues.ac),
+          cc: initialNumber(TERIOCK.CONFIG.actor.defaults.ac),
         }),
         initiative: new fields.EmbeddedDataField(InitiativeModifierModel),
         offense: new fields.SchemaField({
@@ -146,7 +146,7 @@ export default function ActorCombatPart(Base) {
         && e.master?.type !== "species"
       );
       this.defense.av.base = Math.max(0, ...worn.map(e => e.system.av.raw));
-      this.defense.ac ??= TERIOCK.CONFIG.system.baseValues.ac;
+      this.defense.ac ??= TERIOCK.CONFIG.actor.defaults.ac;
       this.defense.bv ??= 0;
     }
 

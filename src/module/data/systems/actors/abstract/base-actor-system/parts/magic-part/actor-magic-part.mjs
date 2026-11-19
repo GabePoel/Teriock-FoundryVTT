@@ -33,7 +33,7 @@ export default function ActorMagicPart(Base) {
       return Object.assign(super.defineSchema(), {
         curses: new fields.SchemaField({
           max: new fields.ExtendedNumberField({
-            initial: TERIOCK.CONFIG.system.baseValues.maxCurses,
+            initial: TERIOCK.CONFIG.actor.defaults.maxCurses,
             integer: true,
             min: 0,
             required: true,

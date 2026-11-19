@@ -81,10 +81,10 @@ export default class SpeciesSystem
         max: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
         min: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
         value: new fields.NumberField({
-          initial: TERIOCK.CONFIG.system.baseValues.size,
+          initial: TERIOCK.CONFIG.actor.defaults.size,
           min: 0,
           nullable: false,
-          placeholder: `${TERIOCK.CONFIG.system.baseValues.size}`,
+          placeholder: `${TERIOCK.CONFIG.actor.defaults.size}`,
           validate: validateNonZero,
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
@@ -226,7 +226,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   prepareBaseData() {
-    if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.CONFIG.system.baseValues.size; }
+    if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.CONFIG.actor.defaults.size; }
     super.prepareBaseData();
     // Abilities from minor transformations are not proficient.
     this.#minorAbilities = [];

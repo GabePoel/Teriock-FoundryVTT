@@ -33,7 +33,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.species.traits).forEach(([k, v]) => {
     speciesContext[`trait.${k}`] = v.label;
   });
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.kind.default).forEach(([k, v]) => {
     speciesContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
 });

@@ -14,6 +14,7 @@ const combatConfig = {
     executor: "TERIOCK.COMBAT.Relation.executor",
     target: "TERIOCK.COMBAT.Relation.target",
   },
+  targetThresholdDeltas: { limb: 2, vitals: 3 },
   // no sort
   timing: { start: "TERIOCK.COMBAT.Timing.start", end: "TERIOCK.COMBAT.Timing.end" },
 };

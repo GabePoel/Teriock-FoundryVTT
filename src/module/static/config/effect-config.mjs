@@ -2,7 +2,7 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { toId } from "../../utils/_module.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import * as STATUSES from "../statuses.mjs";
-import systemConfig from "./system-config.mjs";
+import kindConfig from "./kind-config.mjs";
 
 export default {
   applicationTargets: {
@@ -39,7 +39,7 @@ export default {
       icon: icons.manifest.form.intrinsic,
       label: "TERIOCK.TERMS.EffectKind.intrinsic",
     },
-    ...systemConfig.childKinds,
+    ...kindConfig.child,
   },
 };
 

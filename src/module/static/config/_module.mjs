@@ -18,6 +18,7 @@ import effectConfig from "./effect-config.mjs";
 import elderSorceryConfig from "./elder-sorcery-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
+import kindConfig from "./kind-config.mjs";
 import lengthConfig from "./length-config.mjs";
 import mathConfig from "./math-config.mjs";
 import metaphysicsConfig from "./metaphysics-config.mjs";
@@ -25,7 +26,6 @@ import morphConfig from "./morph-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import speciesConfig from "./species-config.mjs";
 import statConfig from "./stat-config.mjs";
-import systemConfig from "./system-config.mjs";
 import terrainConfig from "./terrain-config.mjs";
 import timeConfig from "./time-config.mjs";
 import tipConfig from "./tip-config.mjs";
@@ -55,6 +55,7 @@ const config = {
   elderSorcery: elderSorceryConfig,
   equipment: equipmentConfig,
   hack: hackConfig,
+  kind: kindConfig,
   length: lengthConfig,
   math: mathConfig,
   metaphysics: metaphysicsConfig,
@@ -62,7 +63,6 @@ const config = {
   piercing: piercingConfig,
   species: speciesConfig,
   stat: statConfig,
-  system: systemConfig,
   terrain: terrainConfig,
   time: timeConfig,
   tip: tipConfig,

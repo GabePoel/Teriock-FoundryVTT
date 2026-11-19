@@ -1,5 +1,5 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { INF } from "../const.mjs";
+import { INF } from "../constants.mjs";
 import { colors, icons, thumbnails } from "../display/_module.mjs";
 import currencyConfig from "./currency-config.mjs";
 

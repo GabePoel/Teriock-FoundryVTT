@@ -18,7 +18,7 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach(([k, v]) => {
     fluencyContext[`tradecraft.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.tradecraft", { name: v.label });
   });
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.kind.default).forEach(([k, v]) => {
     fluencyContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
 });

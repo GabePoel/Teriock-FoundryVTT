@@ -107,10 +107,10 @@ export default function ActorMovementPart(Base) {
       for (const [key, entry] of Object.entries(TERIOCK.CONFIG.actor.movement)) {
         if (entry.movementAction !== action && !this.parent.statuses.has(entry.status)) { continue; }
         for (const d of entry.direction ? [entry.direction] : ["horizontal", "vertical"]) {
-          multipliers[d] *= TERIOCK.CONFIG.actor.speed[this.speedAdjustments[key]].multiplier;
+          multipliers[d] *= TERIOCK.CONFIG.actor.speedAdjustments[this.speedAdjustments[key]].multiplier;
         }
       }
-      const difficult = TERIOCK.CONFIG.actor.speed[this.speedAdjustments.difficultTerrain].multiplier;
+      const difficult = TERIOCK.CONFIG.actor.speedAdjustments[this.speedAdjustments.difficultTerrain].multiplier;
       return (baseCost, from, to, distance, segment) => {
         if (!distance) { return baseCost; }
         const terrain = segment.terrain?.difficultTerrain ? difficult : 1;
@@ -171,7 +171,7 @@ export default function ActorMovementPart(Base) {
  */
 function speedField(initial, label) {
   return new fields.NumberField({
-    choices: TERIOCK.CONFIG.actor.speed,
+    choices: TERIOCK.CONFIG.actor.speedAdjustments,
     initial,
     integer: true,
     label,
