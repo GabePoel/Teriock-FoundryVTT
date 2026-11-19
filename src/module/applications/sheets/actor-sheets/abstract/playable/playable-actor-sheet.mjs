@@ -60,8 +60,8 @@ export default class TeriockPlayableActorSheet
    * @category Sorcery
    */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    context.allWords = await (await this.document.system.getAllWords()).renderHTML();
-    return context;
+    return Object.assign(await super._prepareContext(options), {
+      allWords: (await this.document.system.getAllWords()).renderHTML(),
+    });
   }
 }

@@ -163,17 +163,20 @@ export default class ElderSorceryWordsModel extends BaseDataModel {
 
   /**
    * Render this table as an HTML element.
-   * @returns {Promise<HTMLElement>}
+   * @returns {HTMLElement}
    */
-  async renderElement() {
-    return customElements.get("elder-sorcery-words").create({ readonly: true, value: this.toObject() });
+  renderElement() {
+    return teriock.applications.elements.HTMLElderSorceryWordsElement.create({
+      readonly: true,
+      value: this.toObject(),
+    });
   }
 
   /**
    * Render this table as HTML.
-   * @returns {Promise<string>}
+   * @returns {string}
    */
-  async renderHTML() {
-    return (await this.renderElement()).outerHTML;
+  renderHTML() {
+    return this.renderElement().outerHTML;
   }
 }
