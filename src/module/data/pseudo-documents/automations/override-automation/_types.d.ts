@@ -2,6 +2,7 @@ declare module "./override-automation.mjs" {
   export default interface OverrideAutomation {
     rollBonus: Teriock.System.FormulaString;
     rollFormula: Teriock.System.FormulaString;
+    heightenable: boolean | null;
     makeEffect: boolean | null;
     targetsActor: boolean | null;
     targetsArmament: boolean | null;

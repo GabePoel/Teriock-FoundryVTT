@@ -173,7 +173,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @returns {boolean} */
   get canHeighten() {
-    return this.competence.proficient && Boolean(this.source.system.heightened) && !this.noHeighten
+    const override = this._orderedAutomations.findLast(a => typeof a.heightenable === "boolean");
+    const heightenable = override ? override.heightenable : Boolean(this.source.system.heightened);
+    return this.competence.proficient && heightenable && !this.noHeighten
       && ((this.actor?.system.scaling.p ?? 0) > 0);
   }
 

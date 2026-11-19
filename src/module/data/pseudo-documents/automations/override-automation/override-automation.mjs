@@ -27,6 +27,7 @@ export default class OverrideAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      heightenable: new TernaryField(),
       makeEffect: new TernaryField(),
       preventAttack: new fields.BooleanField({ initial: false }),
       preventBlockCone: new fields.BooleanField({ initial: false }),
@@ -51,6 +52,7 @@ export default class OverrideAutomation
       "makeEffect",
       "targetsActor",
       "targetsArmament",
+      "heightenable",
       "hr",
       "rollFormula",
       "rollBonus",
