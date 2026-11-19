@@ -104,6 +104,8 @@ export default class CostPayer extends ResolvableDialog {
       ).map(([k, _v]) => k),
     );
     if (this.#execution.canHeighten) { this.#costs.add("mp"); }
+    this.#automations = this.#execution.automations.getTypeSync("cost", { active: true });
+    for (const k of this.#automations.flatMap(a => a.stats)) { this.#costs.add(k); }
     const actor = this.#execution.actor;
     const consumptions = actor?.system.automations.getTypeSync("consumption", { active: true }) ?? [];
     for (const k of this.#costs) {
@@ -115,6 +117,9 @@ export default class CostPayer extends ResolvableDialog {
       ) ?? [];
     }
   }
+
+  /** @type {CostAutomation[]} */
+  #automations = [];
 
   /** @type {Set<string>} */
   #costs = new Set();
@@ -194,11 +199,14 @@ export default class CostPayer extends ResolvableDialog {
       costs[k] = await BaseRoll.getValue(this.state.costOptions.primary[k] || "0", rollData) || 0;
       sources[k] = this.#sources[k].filter((_d, i) => this.state.sources[k]?.[i]);
     }
-    costs.mp += heightened;
     for (const k of this.#includedTweaks()) {
       const { multiplier, primary } = TERIOCK.CONFIG.cost.tweaks[k];
       costs[primary] += multiplier * (Number(this.state.costOptions.tweaks[k]) || 0);
     }
+    for (const a of this.#automations) {
+      for (const k of a.stats) { costs[k] = await a.modifyCost(k, costs[k], rollData); }
+    }
+    costs.mp += heightened;
     return { costs, heightened, sources };
   }
 
