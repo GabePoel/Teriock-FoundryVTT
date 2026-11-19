@@ -206,7 +206,7 @@ const types = {
   typeSet: { defaultPriority: 45, label: "TERIOCK.EFFECTS.Changes.typeSet", render, value: harmTypesField },
 };
 
-const parentTargets = { ActiveEffect: "DOCUMENT.ActiveEffect", Actor: "DOCUMENT.Actor", Item: "DOCUMENT.Item" };
+const parentTargets = { Actor: "DOCUMENT.Actor", Item: "DOCUMENT.Item" };
 
 const parent = { targets: parentTargets };
 

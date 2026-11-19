@@ -183,11 +183,6 @@ export default class TeriockActiveEffect
     options.dependents[this._id] = foundry.utils.getProperty(this, "flags._teriock.dependents") ?? [];
   }
 
-  /** @inheritDoc */
-  *allApplicableEffects() {
-    yield this;
-  }
-
   /**
    * Create multiple dependent Document instances in this document's actor using provided input data. All
    * created documents will be dependent on this one. The operation fails silently if this does not have an actor.
@@ -201,11 +196,6 @@ export default class TeriockActiveEffect
     if (!op) { return []; }
     const out = await foundry.documents.modifyBatch([op]);
     return out[0];
-  }
-
-  /** @inheritDoc */
-  getChangesFromEffect(effect) {
-    return effect.system.effectChanges;
   }
 
   /**
@@ -295,18 +285,7 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) {
-      this.applyActiveEffects("setup");
-      this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase);
-      this.prepareSpecialData();
-      this.applyActiveEffects("final");
-    }
-  }
-
-  /** @inheritDoc */
-  prepareEmbeddedDocuments() {
-    super.prepareEmbeddedDocuments();
-    this.applyActiveEffects("initial");
+    if (this.isTop) { this.prepareSpecialData(); }
   }
 
   /** @inheritDoc */

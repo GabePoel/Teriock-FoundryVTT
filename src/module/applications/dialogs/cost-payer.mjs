@@ -96,6 +96,7 @@ export default class CostPayer extends ResolvableDialog {
     if (!options.execution) { console.error("Cost payer must have an ability execution."); }
     this.#execution = options.execution;
     Object.assign(this.state.costOptions.primary, options.execution.costs);
+    this.#automations = this.#execution.automations.getTypeSync("cost", { active: true });
     Object.assign(this.state.costOptions.tweaks, this.#ability.system.costs.tweaks);
     this.state.sources = {};
     this.#costs = new Set(
@@ -104,6 +105,7 @@ export default class CostPayer extends ResolvableDialog {
       ).map(([k, _v]) => k),
     );
     if (this.#execution.canHeighten) { this.#costs.add("mp"); }
+    for (const k of this.#automations.flatMap(a => a.stats)) { this.#costs.add(k); }
     const actor = this.#execution.actor;
     const consumptions = actor?.system.automations.getTypeSync("consumption", { active: true }) ?? [];
     for (const k of this.#costs) {
@@ -114,7 +116,19 @@ export default class CostPayer extends ResolvableDialog {
         consumptions.some(a => a.getNearestDocument() === d && a.canPay(this.#ability, k))
       ) ?? [];
     }
+    const rollData = this.#execution.getRollData();
+    for (const a of this.#automations) {
+      for (const k of a.stats) {
+        this.state.costOptions.primary[k] = a.modifyCost(k, this.state.costOptions.primary[k]);
+      }
+      for (const k of Object.keys(TERIOCK.CONFIG.cost.tweaks)) {
+        this.state.costOptions.tweaks[k] = a.modifyTweak(k, Number(this.state.costOptions.tweaks[k]) || 0, rollData);
+      }
+    }
   }
+
+  /** @type {CostAutomation[]} */
+  #automations = [];
 
   /** @type {Set<string>} */
   #costs = new Set();

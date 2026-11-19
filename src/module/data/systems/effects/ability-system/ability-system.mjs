@@ -307,12 +307,14 @@ export default class AbilitySystem
       id: "unheightened",
       off: "TERIOCK.MECHANIC_TOGGLES.Heightening.unheightened.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Heightening.unheightened.on",
+      visible: pseudo => pseudo.canToggleHeightening,
     }, {
       group: "heightening",
       icon: TERIOCK.DISPLAY.icons.manifest.ability.heightened,
       id: "heightened",
       off: "TERIOCK.MECHANIC_TOGGLES.Heightening.heightened.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Heightening.heightened.on",
+      visible: pseudo => pseudo.canToggleHeightening,
     }, ...super.mechanicToggles];
   }
 

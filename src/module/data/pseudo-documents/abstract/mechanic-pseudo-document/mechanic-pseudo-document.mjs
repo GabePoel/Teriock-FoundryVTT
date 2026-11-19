@@ -57,6 +57,14 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
+   * Whether this can depend on heightening.
+   * @returns {boolean}
+   */
+  get canToggleHeightening() {
+    return true;
+  }
+
+  /**
    * Whether the competence requirements for this to be active are met.
    * @returns {boolean}
    */

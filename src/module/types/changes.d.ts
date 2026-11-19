@@ -16,7 +16,7 @@ declare global {
       | "upgrade"
       | keyof typeof changeConfig.types;
 
-    export type Target = "ability" | "ActiveEffect" | "Actor" | "armament" | "Item";
+    export type Target = "ability" | "Actor" | "armament" | "Item";
 
     export type ChildPath = keyof typeof changeConfig.child.paths;
 

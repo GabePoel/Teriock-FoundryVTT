@@ -149,8 +149,9 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   static substitute(value, delta, substitutionTerm = "base") {
-    if (!FormulaField.exists(value)) { return delta; }
-    return BaseRoll.replaceFormulaData(delta, { [substitutionTerm]: value });
+    let valueString = "0";
+    if (FormulaField.exists(value)) { valueString = new BaseRoll(value, {}).terms.length > 1 ? `(${value})` : value; }
+    return BaseRoll.replaceFormulaData(delta, { [substitutionTerm]: valueString });
   }
 
   /**
