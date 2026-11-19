@@ -123,63 +123,6 @@
               {{/each}}
             </div>
           </div>
-          <div class="tgrid g2 details-limits">
-            <div class="teriock-block-display">
-              {{infoIcon "ability:rotators"}}
-              <div class="actor-stat">
-                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}</div>
-                <div class="actor-stat-value details-fraction">
-                  {{formHover
-                    document
-                    cssClass="updatable"
-                    unselected=system.rotators.value
-                    selected=system.rotators.value
-                    action="toggleDocs"
-                    dataset=(object path="system.rotatorDocuments")
-                  }}
-                  /
-                  {{formHover
-                    document
-                    cssClass="updatable"
-                    action="updatePaths"
-                    icon=TERIOCK.DISPLAY.icons.manifest.maneuver.passive
-                    path="system.rotators.max"
-                    selected=(asInf system._source.rotators.max)
-                    unselected=(asInf system.rotators.max)
-                  }}
-                </div>
-              </div>
-            </div>
-            <div class="teriock-block-display">
-              {{infoIcon
-                "keyword:curse"
-                noTable=true
-              }}
-              <div class="actor-stat">
-                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
-                <div class="actor-stat-value details-fraction">
-                  {{formHover
-                    document
-                    cssClass="updatable"
-                    unselected=system.curses.value
-                    selected=system.curses.value
-                    action="toggleDocs"
-                    dataset=(object path="system.curseDocuments")
-                  }}
-                  /
-                  {{formHover
-                    document
-                    cssClass="updatable"
-                    action="updatePaths"
-                    icon=TERIOCK.DISPLAY.icons.manifest.document.curse
-                    path="system.curses.max"
-                    selected=(asInf system._source.curses.max)
-                    unselected=(asInf system.curses.max)
-                  }}
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="teriock-block-display">
             {{infoIcon "condition:hidden"}}
             <div class="actor-stats">
@@ -205,6 +148,35 @@
                   path="system.detection.perceiving"
                   selected=system._source.detection.perceiving
                   unselected=system.detection.perceiving
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="teriock-block-display">
+            {{infoIcon
+              "keyword:curse"
+              noTable=true
+            }}
+            <div class="actor-stat">
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
+              <div class="actor-stat-value details-fraction">
+                {{formHover
+                  document
+                  cssClass="updatable"
+                  unselected=system.curses.value
+                  selected=system.curses.value
+                  action="toggleDocs"
+                  dataset=(object path="system.curseDocuments")
+                }}
+                /
+                {{formHover
+                  document
+                  cssClass="updatable"
+                  action="updatePaths"
+                  icon=TERIOCK.DISPLAY.icons.manifest.document.curse
+                  path="system.curses.max"
+                  selected=(asInf system._source.curses.max)
+                  unselected=(asInf system.curses.max)
                 }}
               </div>
             </div>

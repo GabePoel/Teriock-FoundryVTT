@@ -1,5 +1,7 @@
+import { ElderSorceryWordsField } from "../../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
+import { ElderSorceryWordsTable } from "../../../../../../models/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -45,6 +47,7 @@ export default function ActorMagicPart(Base) {
           min: initialNumber(),
           value: initialNumber(),
         }),
+        words: new ElderSorceryWordsField(),
       });
     }
 
@@ -64,6 +67,15 @@ export default function ActorMagicPart(Base) {
       return this.parent.previewedTypes.ability.filter(a =>
         a.system.rotator && !a.isReference && (!a.parent || a.parent.type === "rank" || a.parent.metadata.tags.simple)
       );
+    }
+
+    /**
+     * Every Elder Sorcery word the actor knows.
+     * @returns {Promise<ElderSorceryWordsTable>}
+     */
+    async getAllWords() {
+      const automations = this.automations.getTypeSync("elderSorcery", { active: true, isPassive: true });
+      return ElderSorceryWordsTable.merge(this.words, ...(await Promise.all(automations.map(a => a.allWords()))));
     }
 
     /** @inheritDoc */

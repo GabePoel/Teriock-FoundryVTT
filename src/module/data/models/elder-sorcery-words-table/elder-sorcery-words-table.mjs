@@ -1,24 +1,12 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { objectMap } from "../../../utils/_module.mjs";
+import { makeIconClass, objectMap } from "../../../utils/_module.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * The master class for handling Elder Sorcery words.
+ * A helper data model that stores and manipulates Elder Sorcery words.
  */
-export default class ElderSorceryTable extends BaseDataModel {
-  /**
-   * Activate listeners on a rendered table.
-   * @param {HTMLElement} element
-   */
-  static activateListeners(element) {
-    element.addEventListener("click", event => {
-      const word = event.target.closest("[data-action='copyWord']")?.dataset.word;
-      if (word) { this.copyWord(word); }
-    });
-  }
-
+export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
    * Copy a word to the clipboard.
    * @param {string} text
@@ -44,18 +32,25 @@ export default class ElderSorceryTable extends BaseDataModel {
   }
 
   /**
-   * Merge several tables together.
-   * @param {...ElderSorceryTable} tables
-   * @returns {ElderSorceryTable}
+   * A table containing some entries.
+   * @param {Iterable<Teriock.ElderSorcery.Entry>} entries
+   * @returns {ElderSorceryWordsTable}
    */
-  static merge(...tables) {
+  static fromEntries(entries) {
     const source = {};
-    for (const table of tables) {
-      for (const { element, op, part, word } of table.entries()) {
-        (((source[element] ??= {})[part] ??= {})[op] ??= new Set()).add(word);
-      }
+    for (const { element, op, part, word } of entries) {
+      (((source[element] ??= {})[part] ??= {})[op] ??= new Set()).add(word);
     }
     return new this(source);
+  }
+
+  /**
+   * Merge several tables together.
+   * @param {...ElderSorceryWordsTable} tables
+   * @returns {ElderSorceryWordsTable}
+   */
+  static merge(...tables) {
+    return this.fromEntries(tables.flatMap(t => Array.from(t.entries())));
   }
 
   /**
@@ -64,6 +59,15 @@ export default class ElderSorceryTable extends BaseDataModel {
    */
   get isEmpty() {
     return this.entries().next().done;
+  }
+
+  /**
+   * A table with a word added.
+   * @param {Teriock.ElderSorcery.Entry} entry
+   * @returns {ElderSorceryWordsTable}
+   */
+  addWord(entry) {
+    return this.constructor.fromEntries([...this.entries(), { ...entry, op: Number(entry.op) }]);
   }
 
   /**
@@ -83,7 +87,7 @@ export default class ElderSorceryTable extends BaseDataModel {
   /**
    * A table with only the words matching a filter.
    * @param {Teriock.ElderSorcery.Filter} [filter]
-   * @returns {ElderSorceryTable}
+   * @returns {ElderSorceryWordsTable}
    */
   filter({ elements, ops, parts } = {}) {
     const matcher = values => {
@@ -92,13 +96,9 @@ export default class ElderSorceryTable extends BaseDataModel {
       return key => keys.has(String(key));
     };
     const [matchElement, matchOp, matchPart] = [matcher(elements), matcher(ops), matcher(parts)];
-    const source = {};
-    for (const { element, op, part, word } of this.entries()) {
-      if (matchElement(element) && matchPart(part) && matchOp(op)) {
-        (((source[element] ??= {})[part] ??= {})[op] ??= new Set()).add(word);
-      }
-    }
-    return new this.constructor(source);
+    return this.constructor.fromEntries(
+      Array.from(this.entries()).filter(e => matchElement(e.element) && matchPart(e.part) && matchOp(e.op)),
+    );
   }
 
   /**
@@ -112,25 +112,25 @@ export default class ElderSorceryTable extends BaseDataModel {
 
   /**
    * Columns and OP row groups for rendering this table.
-   * @returns {{ columns: object[], groups: object[] }}
+   * @returns {{ columns: object[], groups: object[], icons: Record<string, string> }}
    */
   getContext() {
     const columns = [];
     for (const [element, { label: elementLabel }] of Object.entries(TERIOCK.CONFIG.metaphysics.elements)) {
-      for (const [partOfSpeech, label] of Object.entries(TERIOCK.CONFIG.elderSorcery.partsOfSpeech)) {
-        if (!Object.values(this[element]?.[partOfSpeech] ?? {}).some(w => w.size)) { continue; }
+      for (const [part, label] of Object.entries(TERIOCK.CONFIG.elderSorcery.partsOfSpeech)) {
+        if (!Object.values(this[element]?.[part] ?? {}).some(w => w.size)) { continue; }
         columns.push({
           cssClass: `es-${element}`,
           element,
           label: _loc("TERIOCK.SHEETS.Table.HEADERS.words", { element: elementLabel, partOfSpeech: label }),
-          partOfSpeech,
+          part,
         });
       }
     }
     const ops = new Set(Array.from(this.entries(), e => e.op));
     const groups = Array.from(ops).sort((a, b) => a - b).map(op => {
       const cells = columns.map(c =>
-        Array.from(this[c.element]?.[c.partOfSpeech]?.[op] ?? []).sort((a, b) => a.localeCompare(b, game.i18n.lang))
+        Array.from(this[c.element]?.[c.part]?.[op] ?? []).sort((a, b) => a.localeCompare(b, game.i18n.lang))
       );
       const length = Math.max(0, ...cells.map(c => c.length));
       return { op, rows: Array.fromRange(length).map(i => cells.map((c, j) => ({ ...columns[j], op, word: c[i] }))) };
@@ -140,7 +140,24 @@ export default class ElderSorceryTable extends BaseDataModel {
       group.shifted = rows % 2 === 1;
       rows += group.rows.length;
     }
-    return { columns, groups };
+    const icons = {
+      add: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.add, "solid"),
+      delete: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.trash, "solid"),
+    };
+    return { columns, groups, icons };
+  }
+
+  /**
+   * A table with a word removed.
+   * @param {Teriock.ElderSorcery.Entry} entry
+   * @returns {ElderSorceryWordsTable}
+   */
+  removeWord({ element, op, part, word }) {
+    return this.constructor.fromEntries(
+      Array.from(this.entries()).filter(e =>
+        !(e.element === element && e.part === part && e.op === Number(op) && e.word === word)
+      ),
+    );
   }
 
   /**
@@ -148,7 +165,7 @@ export default class ElderSorceryTable extends BaseDataModel {
    * @returns {Promise<HTMLElement>}
    */
   async renderElement() {
-    return foundry.utils.parseHTML(await this.renderHTML());
+    return customElements.get("elder-sorcery-words").create({ readonly: true, value: this.toObject() });
   }
 
   /**
@@ -156,6 +173,6 @@ export default class ElderSorceryTable extends BaseDataModel {
    * @returns {Promise<string>}
    */
   async renderHTML() {
-    return TeriockTextEditor.renderTemplate("teriock/sheets/pages/words-table", this.getContext());
+    return (await this.renderElement()).outerHTML;
   }
 }

@@ -1,6 +1,7 @@
 export * from "./ability-updaters/_module.mjs";
 export * from "./armament-updaters/_module.mjs";
 export { default as BaseUpdater } from "./base-updater.mjs";
+export { default as ElderSorceryWordsUpdater } from "./elder-sorcery-words-updater.mjs";
 export { default as FluencyTradecraftUpdater } from "./fluency-tradecraft-updater.mjs";
 export { default as KindUpdater } from "./kind-updater.mjs";
 export * from "./rank-updaters/_module.mjs";

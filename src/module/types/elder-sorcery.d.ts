@@ -1,4 +1,3 @@
-// TODO: Move this into an `elder-sorcery.d.ts` file.
 declare global {
   namespace Teriock.ElderSorcery {
     export type ElementWords = Partial<Record<Teriock.Keys.PartOfSpeech, Record<number, Set<string>>>>;
@@ -16,10 +15,6 @@ declare global {
       parts?: Iterable<Teriock.Keys.PartOfSpeech> | Teriock.Keys.PartOfSpeech | null;
     }
   }
-}
-
-declare module "./elder-sorcery-table.mjs" {
-  export default interface ElderSorceryTable extends Record<Teriock.Keys.Element, Teriock.ElderSorcery.ElementWords> {}
 }
 
 export {};

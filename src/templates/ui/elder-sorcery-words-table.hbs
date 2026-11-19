@@ -4,25 +4,30 @@
       <tr>
         <th>{{localize "TERIOCK.SHEETS.Table.HEADERS.op"}}</th>
         {{#each columns as |column|}}
-          <th class="{{ column.cssClass }}">{{ column.label }}</th>
+          <th class="{{ column.cssClass }}">
+            {{ column.label }}
+          </th>
         {{/each}}
       </tr>
     </thead>
     {{#each groups as |group|}}
-      <tbody {{#if group.shifted}}class="shifted"{{/if}}>
+      <tbody
+        {{#if group.shifted}}
+          class="shifted"
+        {{/if}}
+      >
         {{#each group.rows as |row|}}
           <tr>
             {{#if @first}}
-              <th rowspan="{{ group.rows.length }}">{{ group.op }}</th>
+              <th rowspan="{{ group.rows.length }}">
+                {{ group.op }}
+              </th>
             {{/if}}
             {{#each row as |cell|}}
               <td
                 class="{{ cell.cssClass }}"
                 {{#if cell.word}}
-                {{#unless ../../../editable}}
-                data-action="copyWord"
-                data-word="{{ cell.word }}"
-                {{/unless}}
+                  {{#unless ../../../editable}}data-action="copyWord" data-word="{{ cell.word }}"{{/unless}}
                 {{/if}}
               >
                 {{#if cell.word}}
@@ -31,12 +36,12 @@
                     {{#if ../../../editable}}
                       {{!-- prettier-ignore --}}
                       <button
-                        class="inline-control icon {{ @root/icons.delete }}"
+                        class="inline-control icon {{ ../../../icons.delete }}"
                         aria-label='{{localize "COMMON.Delete"}}'
                         data-action="deleteWord"
                         data-element="{{ cell.element }}"
                         data-op="{{ cell.op }}"
-                        data-part-of-speech="{{ cell.partOfSpeech }}"
+                        data-part="{{ cell.part }}"
                         data-tooltip="COMMON.Delete"
                         data-word="{{ cell.word }}"
                         type="button"

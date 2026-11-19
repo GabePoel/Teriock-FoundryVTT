@@ -12,6 +12,7 @@ export { default as CommonOutcomesAutomation } from "./common-outcomes-automatio
 export { default as ConsumptionAutomation } from "./consumption-automation/consumption-automation.mjs";
 export { default as CoverAutomation } from "./cover-automation/cover-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation/duration-automation.mjs";
+export { default as ElderSorceryAutomation } from "./elder-sorcery-automation/elder-sorcery-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation/feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation/hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation/heal-automation.mjs";

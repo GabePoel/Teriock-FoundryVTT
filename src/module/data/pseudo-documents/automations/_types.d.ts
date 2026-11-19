@@ -12,6 +12,7 @@ import {
   ConsumptionAutomation,
   CoverAutomation,
   DurationAutomation,
+  ElderSorceryAutomation,
   FeatAutomation,
   HacksAutomation,
   HealAutomation,
@@ -51,6 +52,7 @@ declare global {
     consumption: ConsumptionAutomation;
     cover: CoverAutomation;
     duration: DurationAutomation;
+    elderSorcery: ElderSorceryAutomation;
     feat: FeatAutomation;
     hacks: HacksAutomation;
     heal: HealAutomation;

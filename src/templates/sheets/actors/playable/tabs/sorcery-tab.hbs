@@ -1,0 +1,49 @@
+<section class="actor-tab sorcery-tab tab {{ tabClass }}" data-group="primary" data-tab="sorcery">
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Sorcery.title"}}</h1>
+  <div class="actor-tab-page">
+    <div class="tgrid g3 sorcery-top">
+      <div class="teriock-block-display">
+        {{infoIcon "ability:rotators"}}
+        <div class="actor-stat">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Sorcery.rotators"}}</div>
+          <div class="actor-stat-value details-fraction">
+            {{formHover
+              document
+              cssClass="updatable"
+              unselected=system.rotators.value
+              selected=system.rotators.value
+              action="toggleDocs"
+              dataset=(object path="system.rotatorDocuments")
+            }}
+            /
+            {{formHover
+              document
+              cssClass="updatable"
+              action="updatePaths"
+              icon=TERIOCK.DISPLAY.icons.manifest.maneuver.passive
+              path="system.rotators.max"
+              selected=(asInf system._source.rotators.max)
+              unselected=(asInf system.rotators.max)
+            }}
+          </div>
+        </div>
+      </div>
+      <div class="teriock-block-display gi2 sorcery-buttons">
+        <button data-action="openUpdater" data-updater="ElderSorceryWordsUpdater" type="button" {{disabled (not editable)}}>{{makeIcon TERIOCK.DISPLAY.icons.manifest.ui.edit "button"}} {{localize "TERIOCK.SHEETS.Actor.TABS.Sorcery.customWords"}}</button>
+        <button data-action="takeCommand" data-command="elderSorcery" type="button">{{makeIcon TERIOCK.DISPLAY.icons.manifest.execution.elderSorcery "button"}} {{localize "TERIOCK.SHEETS.Actor.TABS.Sorcery.create"}}</button>
+      </div>
+    </div>
+    <div class="teriock-block-display">
+      {{> "teriock/ui/preview"
+        @root.previews.sorcery
+      }}
+    </div>
+    <div class="teriock-block-display sorcery-words">
+      <div class="actor-stat">
+        {{infoIcon "core:elder-sorcery-words"}}
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Sorcery.words"}}</div>
+      </div>
+      {{{ allWords }}}
+    </div>
+  </div>
+</section>

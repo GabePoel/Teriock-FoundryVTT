@@ -134,7 +134,7 @@ export default {
     region: "mdi-checkerboard",
     resource: "mdi-abacus",
     scar: "ms-skull",
-    sorcery: "ms-auto-stories",
+    sorcery: "mdi-pentagram",
     source: "ms-bolt",
     species: "ms-genetics",
     stone: "ms-circle",

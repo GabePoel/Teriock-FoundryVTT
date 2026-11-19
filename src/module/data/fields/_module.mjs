@@ -1,4 +1,5 @@
 export { default as ChangeValueField } from "./change-value-field.mjs";
+export { default as ElderSorceryWordsField } from "./elder-sorcery-words-field.mjs";
 export { default as FormulaField } from "./formula-field/formula-field.mjs";
 export { default as IdentifierField } from "./identifier-field/identifier-field.mjs";
 export { default as IdentifierSetField } from "./identifier-set-field/identifier-set-field.mjs";

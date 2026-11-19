@@ -6,7 +6,7 @@ import {
   FluencySystem,
   ResourceSystem,
 } from "../../../../../../data/systems/effects/_module.mjs";
-import { PowerSystem, RankSystem } from "../../../../../../data/systems/items/_module.mjs";
+import { PowerSystem, RankSystem, SorcerySystem } from "../../../../../../data/systems/items/_module.mjs";
 import { getSystemClass } from "../../../../../../utils/_module.mjs";
 
 /**
@@ -134,7 +134,9 @@ export default function PlayableActorSheetSectionsPart(Base) {
           docs: this.document.previewed.getTypeSync("power"),
           empty: _loc("TERIOCK.DOCUMENTS.Item.power.plural").toLocaleLowerCase(game.i18n.lang),
         },
-        ...Item.implementation.TYPES.filter(t => t !== "power" && getSystemClass(t)?.metadata.tags.simple).map(t => ({
+        ...Item.implementation.TYPES.filter(t =>
+          !["power", "sorcery"].includes(t) && getSystemClass(t)?.metadata.tags.simple
+        ).map(t => ({
           docs: this.document.previewed.getTypeSync(t),
           empty: _loc(`TERIOCK.DOCUMENTS.Item.${t}.plural`).toLocaleLowerCase(game.i18n.lang),
           optional: true,
@@ -180,6 +182,28 @@ export default function PlayableActorSheetSectionsPart(Base) {
     }
 
     /**
+     * @this {PlayableActorSheetSectionsPart}
+     * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
+     */
+    static async #previewGroupSorcery() {
+      const rotators = this.document.system.rotatorDocuments;
+      return [{
+        docs: rotators,
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Sorcery.rotators").toLocaleLowerCase(game.i18n.lang),
+        optional: true,
+      }, {
+        docs: this.document.previewed.getTypeSync("ability").filter(a =>
+          a.system.spell && a.system.elderSorcery && !rotators.includes(a)
+        ),
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Sorcery.spells").toLocaleLowerCase(game.i18n.lang),
+        optional: true,
+      }, {
+        docs: this.document.previewed.getTypeSync("sorcery"),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.sorcery.plural").toLocaleLowerCase(game.i18n.lang),
+      }];
+    }
+
+    /**
      * Object that {@link TABS} and {@link PREVIEWS} are derived from.
      * @type {PlayableSection[]}
      */
@@ -220,14 +244,14 @@ export default function PlayableActorSheetSectionsPart(Base) {
       label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
       preview: { addButton: { type: "rank" }, groups: this.#previewGroupRank, model: previews.RankPreviewModel },
     }, {
-      dragTypes: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar", "sorcery"],
+      dragTypes: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
       icon: PowerSystem.metadata.icon,
       id: "powers",
       label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
       preview: {
         addButton: {
           type: "power",
-          types: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar", "sorcery"],
+          types: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
         },
         groups: this.#previewGroupPower,
         model: previews.PowerPreviewModel,
@@ -260,6 +284,17 @@ export default function PlayableActorSheetSectionsPart(Base) {
         data: { display: { gapless: false, size: "medium" } },
         groups: this.#previewGroupAffinity,
         model: previews.AffinityPreviewModel,
+      },
+    }, {
+      dragTypes: ["sorcery"],
+      icon: SorcerySystem.metadata.icon,
+      id: "sorcery",
+      label: "TERIOCK.SHEETS.Actor.TABS.Sorcery.title",
+      preview: {
+        addButton: { type: "sorcery" },
+        data: { display: { gapless: true, size: "small" } },
+        groups: this.#previewGroupSorcery,
+        model: previews.MetaphysicsPreviewModel,
       },
     }, {
       icon: TERIOCK.DISPLAY.icons.manifest.ui.details,

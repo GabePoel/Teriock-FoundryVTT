@@ -1,8 +1,7 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { ElderSorceryTable } from "../../../models/_module.mjs";
+import { ElderSorceryWordsField } from "../../../fields/_module.mjs";
 import { BaseSystemMixin, IdentifierSystemMixin } from "../../mixins/_module.mjs";
 
-const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
 /**
@@ -20,13 +19,7 @@ export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMix
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { table: new fields.EmbeddedDataField(ElderSorceryTable) });
-  }
-
-  /** @inheritDoc */
-  onEmbed(element, options = {}) {
-    super.onEmbed(element, options);
-    ElderSorceryTable.activateListeners(element);
+    return Object.assign(super.defineSchema(), { words: new ElderSorceryWordsField() });
   }
 
   /** @inheritDoc */
@@ -38,7 +31,7 @@ export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMix
         return Number.isInteger(start) && Number.isInteger(end) ? Array.fromRange(end - start + 1, start) : [v];
       });
     };
-    return this.table.filter({
+    return this.words.filter({
       elements: list(config.elements),
       ops: list(config.ops)?.map(Number),
       parts: list(config.parts),

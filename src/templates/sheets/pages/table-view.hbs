@@ -1,12 +1,18 @@
 <div>
   {{#if title.show}}
     <header class="journal-page-header">
-      <h{{ title.level }}>{{ name }}</h{{ title.level }}>
+      <h
+        {{ title.level }}
+      >
+        {{ name }}
+      </h>
     </header>
   {{/if}}
-  {{#if (exists groups)}}
-    {{> "teriock/sheets/pages/words-table"
-      editable=false
+  {{#unless document.system.words.isEmpty}}
+    {{formInput
+      document.system.schema.fields.words
+      value=source.system.words
+      readonly=true
     }}
-  {{/if}}
+  {{/unless}}
 </div>

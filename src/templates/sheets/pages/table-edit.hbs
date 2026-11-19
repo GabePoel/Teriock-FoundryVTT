@@ -1,9 +1,8 @@
 <section class="teriock-words-edit">
-  {{#if editable}}
-    <button data-action="addWord" type="button">
-      <i class="{{ icons.add }}"></i>
-      {{localize "TERIOCK.SHEETS.Table.ADD.title"}}
-    </button>
-  {{/if}}
-  {{> "teriock/sheets/pages/words-table"}}
+  {{formInput
+    document.system.schema.fields.words
+    name="system.words"
+    value=source.system.words
+    disabled=(not editable)
+  }}
 </section>

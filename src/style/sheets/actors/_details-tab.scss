@@ -1,8 +1,7 @@
 @use "../../mixins" as mixins;
 
 .details-tab {
-  .details-columns,
-  .details-limits {
+  .details-columns {
     gap: 1em;
   }
 
@@ -14,18 +13,6 @@
 
   .details-list .updatable {
     @include mixins.editable-background;
-  }
-
-  .affix {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    .selected,
-    .unselected {
-      grid-area: 1 / 1;
-      padding-inline: 0.5em;
-      position: static;
-    }
   }
 
   .details-list {
@@ -99,6 +86,21 @@
 
   .details-terrain {
     @include mixins.tag-style;
+  }
+}
+
+.details-tab,
+.sorcery-tab {
+  .affix {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .selected,
+    .unselected {
+      grid-area: 1 / 1;
+      padding-inline: 0.5em;
+      position: static;
+    }
   }
 
   .details-fraction {
