@@ -427,12 +427,12 @@ const commandConfig = {
     },
   },
   attack: {
-    execute: each((a, o) => a.useDocument("ability:basic-attack", o)),
+    execute: each((a, { armamentId, ...o }) => a.system.rollAttack({ ...o, armament: a.items.get(armamentId) })),
+    icon: icons.manifest.interaction.attack,
     label: "TERIOCK.COMMANDS.Attack.label",
     reverse: "attack",
     shared: true,
     slug: "attack",
-    icon: () => teriock.data.systems.effects.AbilitySystem.metadata.icon,
   },
   attune: {
     common: true,

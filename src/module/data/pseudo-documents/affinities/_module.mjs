@@ -1,2 +1,2 @@
 export * as abstract from "./abstract/_module.mjs";
-export * from "./affinity-types.mjs";
+export { default as types } from "./affinity-types.mjs";

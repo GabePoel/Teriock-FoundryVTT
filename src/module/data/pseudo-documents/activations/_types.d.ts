@@ -1,7 +1,6 @@
 import commandConfig from "../../../static/config/command-config.mjs";
 import {
   AddDocumentsActivation,
-  AttackActivation,
   ChangeMovementActivation,
   ChangeQuantityActivation,
   MacroActivation,
@@ -19,12 +18,11 @@ type CommandActivationKey = {
     : K;
 }[keyof typeof commandConfig];
 
-type CommandActivationTypeMap = Record<Exclude<CommandActivationKey, "attack">, BaseActivation>;
+type CommandActivationTypeMap = Record<CommandActivationKey, BaseActivation>;
 
 declare global {
   export interface ActivationTypeMap extends CommandActivationTypeMap {
     addDocuments: AddDocumentsActivation;
-    attack: AttackActivation;
     changeMovement: ChangeMovementActivation;
     changeQuantity: ChangeQuantityActivation;
     macro: MacroActivation;

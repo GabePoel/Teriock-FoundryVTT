@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
-import { AttackActivation } from "../../activations/_module.mjs";
+import commandActivations from "../../activations/command-activations.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -48,19 +48,21 @@ export default class AttackAutomation
   async _getActivations(options) {
     const threshold = await this.getThreshold(options?.rollData ?? {});
     return [
-      new AttackActivation({
-        armamentId: this.keepArmament ? (options.armament ?? options.execution?.armament)?.id : undefined,
-        attackPenalty: this.attackPenalty,
-        circumstance: this.circumstance,
-        competence: { raw: this.getCompetence(options) },
-        consumeAmmunition: this.consumeAmmunition,
+      new commandActivations.attack({
         display: this.getDisplayData(threshold),
-        limb: this.limb,
-        sb: this.sb,
-        threshold,
-        useArmament: this.useArmament,
-        vitals: this.vitals,
-        warded: this.warded,
+        options: {
+          armamentId: this.keepArmament ? (options.armament ?? options.execution?.armament)?.id : undefined,
+          attackPenalty: this.attackPenalty || undefined,
+          circumstance: this.circumstance,
+          competence: this.getCompetence(options),
+          consumeAmmunition: this.consumeAmmunition,
+          limb: this.limb,
+          sb: this.sb,
+          threshold,
+          useArmament: this.useArmament,
+          vitals: this.vitals,
+          warded: this.warded,
+        },
       }),
     ];
   }

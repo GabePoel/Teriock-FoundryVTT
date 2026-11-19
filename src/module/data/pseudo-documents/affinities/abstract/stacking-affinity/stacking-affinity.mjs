@@ -3,8 +3,8 @@ import BaseAffinity from "../base-affinity/base-affinity.mjs";
 const { fields } = foundry.data;
 
 /**
- * An affinity that contributes an amount rather than simply being present, and so adds up across every source that
- * grants it.
+ * An affinity that contributes an amount rather than simply being present. Stacking affinities get their total added
+ * up across all the identical instances.
  */
 export default class StackingAffinity extends BaseAffinity {
   /** @inheritDoc */

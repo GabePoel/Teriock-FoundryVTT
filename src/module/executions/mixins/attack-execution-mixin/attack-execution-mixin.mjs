@@ -342,7 +342,7 @@ export default function AttackExecutionMixin(Base) {
      * @returns {Teriock.System.FormulaString}
      */
     _resolveAttackPenalty(options = {}) {
-      if (options.attackPenalty !== undefined) { return options.attackPenalty; }
+      if (typeof options.attackPenalty === "string") { return options.attackPenalty; }
       if (!this.isAttack || !this.combatant) { return "0"; }
       return this.isContact && this.armament ? this.armament.system.attackPenalty : this._baseAttackPenalty;
     }
@@ -353,8 +353,7 @@ export default function AttackExecutionMixin(Base) {
      * @returns {boolean}
      */
     _resolveLimb(options = {}) {
-      if (options.limb !== undefined) { return options.limb; }
-      return this.isContact && this._baseLimb;
+      return typeof options.limb === "boolean" ? options.limb : this.isContact && this._baseLimb;
     }
 
     /**
@@ -363,7 +362,7 @@ export default function AttackExecutionMixin(Base) {
      * @returns {boolean}
      */
     _resolveVitals(options = {}) {
-      if (options.vitals !== undefined) { return options.vitals; }
+      if (typeof options.vitals === "boolean") { return options.vitals; }
       const armamentVitals = this.armament?.system.vitals && this.isAttack;
       return this.isContact && armamentVitals ? true : this._baseVitals;
     }
@@ -374,7 +373,7 @@ export default function AttackExecutionMixin(Base) {
      * @returns {boolean}
      */
     _resolveWarded(options = {}) {
-      if (options.warded !== undefined) { return options.warded; }
+      if (typeof options.warded === "boolean") { return options.warded; }
       const armamentWarded = (this.armament?.system.warded && this._armamentWardedApplies)
         || this.actor?.system.offense.warded;
       return this.isContact && armamentWarded ? true : this._baseWarded;
