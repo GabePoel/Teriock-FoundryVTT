@@ -4,6 +4,7 @@ import BaseUpdater from "./base-updater.mjs";
 /**
  * Dialog for updating an actor's custom Elder Sorcery words.
  * @property {TeriockActor} document
+ * @category Sorcery
  */
 export default class ElderSorceryWordsUpdater extends BaseUpdater {
   /** @inheritDoc */

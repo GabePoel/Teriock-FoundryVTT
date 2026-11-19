@@ -8,6 +8,7 @@ const { TypeDataModel } = foundry.abstract;
  * Elder Sorcery table.
  * @extends {TypeDataModel}
  * @mixes BaseSystem
+ * @category Sorcery
  */
 export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMixin, IdentifierSystemMixin) {
   /** @inheritDoc */

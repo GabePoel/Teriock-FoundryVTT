@@ -7,6 +7,7 @@ const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 /**
  * @extends {JournalEntryPageHandlebarsSheet}
  * @property {TeriockJournalEntryPage<"table">} document
+ * @category Sorcery
  */
 export default class TableSheet
   extends mixClasses(JournalEntryPageHandlebarsSheet, BaseDocumentSheetMixin, SystemSettingsButtonSheetMixin)

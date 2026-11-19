@@ -1,5 +1,6 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 
+/** @category Sorcery */
 const elderSorceryConfig = {
   partsOfSpeech: {
     adjective: "TERIOCK.TERMS.PartsOfSpeech.adjective",

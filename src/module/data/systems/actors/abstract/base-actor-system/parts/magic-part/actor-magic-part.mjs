@@ -72,6 +72,7 @@ export default function ActorMagicPart(Base) {
     /**
      * Every Elder Sorcery word the actor knows.
      * @returns {Promise<ElderSorceryWordsTable>}
+     * @category Sorcery
      */
     async getAllWords() {
       const automations = this.automations.getTypeSync("elderSorcery", { active: true, isPassive: true });

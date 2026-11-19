@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  * Gives custom and linked Elder Sorcery words.
  * @extends {BaseAutomation}
  * @mixes SelectionAutomation
+ * @category Sorcery
  */
 export default class ElderSorceryAutomation extends mixClasses(BaseAutomation, SelectionAutomationMixin) {
   /** @inheritDoc */

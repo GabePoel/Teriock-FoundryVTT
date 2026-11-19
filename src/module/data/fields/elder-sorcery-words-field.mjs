@@ -5,6 +5,7 @@ const { EmbeddedDataField } = foundry.data.fields;
 
 /**
  * Special case {@link EmbeddedDataField} for an {@link ElderSorceryWordsTable}.
+ * @category Sorcery
  */
 export default class ElderSorceryWordsField extends EmbeddedDataField {
   /**

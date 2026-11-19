@@ -184,6 +184,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
     /**
      * @this {PlayableActorSheetSectionsPart}
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
+     * @category Sorcery
      */
     static async #previewGroupSorcery() {
       const rotators = this.document.system.rotatorDocuments;

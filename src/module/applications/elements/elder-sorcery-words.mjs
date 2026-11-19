@@ -13,6 +13,7 @@ const { NumberField, StringField } = foundry.data.fields;
 /**
  * Display and edit a table of elder sorcery words.
  * @extends {AbstractFormInputElement<object>}
+ * @category Sorcery
  */
 export default class HTMLElderSorceryWordsElement extends AbstractFormInputElement {
   /**

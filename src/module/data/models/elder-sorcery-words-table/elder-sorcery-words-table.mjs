@@ -5,6 +5,7 @@ const { fields } = foundry.data;
 
 /**
  * A helper data model that stores and manipulates Elder Sorcery words.
+ * @category Sorcery
  */
 export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
