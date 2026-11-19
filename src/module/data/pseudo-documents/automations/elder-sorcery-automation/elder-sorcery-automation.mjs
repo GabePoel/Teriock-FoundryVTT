@@ -2,7 +2,7 @@ import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { ElderSorceryWordsField, FormulaField, IdentifierSetField } from "../../../fields/_module.mjs";
 import { slugSetField } from "../../../fields/tools/builders.mjs";
-import ElderSorceryWordsTable from "../../../models/elder-sorcery-words-table/elder-sorcery-words-table.mjs";
+import ElderSorceryWordsModel from "../../../models/elder-sorcery-words-model/elder-sorcery-words-model.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { SelectionAutomationMixin } from "../mixins/_module.mjs";
 
@@ -67,11 +67,11 @@ export default class ElderSorceryAutomation extends mixClasses(BaseAutomation, S
 
   /**
    * Every word this gives the actor.
-   * @returns {Promise<ElderSorceryWordsTable>}
+   * @returns {Promise<ElderSorceryWordsModel>}
    */
   async allWords() {
     const pages = await this.getSelectableDocuments();
-    const table = ElderSorceryWordsTable.merge(this.words, ...pages.map(p => p.system.words));
+    const table = ElderSorceryWordsModel.merge(this.words, ...pages.map(p => p.system.words));
     let ops;
     if (this.minOp || this.maxOp) {
       const rollData = this.getRollData();

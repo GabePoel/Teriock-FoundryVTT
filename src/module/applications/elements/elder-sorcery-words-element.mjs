@@ -1,4 +1,4 @@
-import ElderSorceryWordsTable from "../../data/models/elder-sorcery-words-table/elder-sorcery-words-table.mjs";
+import ElderSorceryWordsModel from "../../data/models/elder-sorcery-words-model/elder-sorcery-words-model.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -40,10 +40,10 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
 
   /**
    * The table this represents.
-   * @returns {ElderSorceryWordsTable}
+   * @returns {ElderSorceryWordsModel}
    */
   get #table() {
-    return new ElderSorceryWordsTable(this._value);
+    return new ElderSorceryWordsModel(this._value);
   }
 
   /**
@@ -100,7 +100,7 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
     const { action, word } = target.dataset;
     if (action === "copyWord") {
       event.stopPropagation();
-      ElderSorceryWordsTable.copyWord(word);
+      ElderSorceryWordsModel.copyWord(word);
     } else if (action === "addWord" && this.editable) {
       event.stopPropagation();
       this.#addWord();

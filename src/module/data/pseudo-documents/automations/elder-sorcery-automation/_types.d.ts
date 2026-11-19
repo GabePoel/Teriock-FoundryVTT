@@ -1,4 +1,4 @@
-import { ElderSorceryWordsTable } from "../../../models/_module.mjs";
+import { ElderSorceryWordsModel } from "../../../models/_module.mjs";
 
 declare module "./elder-sorcery-automation.mjs" {
   export default interface ElderSorceryAutomation {
@@ -6,7 +6,7 @@ declare module "./elder-sorcery-automation.mjs" {
     maxOp: Teriock.System.FormulaString;
     minOp: Teriock.System.FormulaString;
     parts: Set<Teriock.Keys.PartOfSpeech>;
-    words: ElderSorceryWordsTable;
+    words: ElderSorceryWordsModel;
   }
 }
 

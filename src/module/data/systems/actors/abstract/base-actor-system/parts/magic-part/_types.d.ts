@@ -1,4 +1,4 @@
-import { ElderSorceryWordsTable } from "../../../../../../models/_module.mjs";
+import { ElderSorceryWordsModel } from "../../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -23,7 +23,7 @@ declare global {
       /** <schema> <base> How many curses the {@link TeriockActor} has prepared */
       rotators: Teriock.Fields.BarField;
       /** <schema> Elder Sorcery words the {@link TeriockActor} has learned individually */
-      words: ElderSorceryWordsTable;
+      words: ElderSorceryWordsModel;
     }
   }
 }

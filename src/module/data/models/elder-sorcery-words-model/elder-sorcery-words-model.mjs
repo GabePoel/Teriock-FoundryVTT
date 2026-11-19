@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * A helper data model that stores and manipulates Elder Sorcery words.
  * @category Sorcery
  */
-export default class ElderSorceryWordsTable extends BaseDataModel {
+export default class ElderSorceryWordsModel extends BaseDataModel {
   /**
    * Copy a word to the clipboard.
    * @param {string} text
@@ -35,7 +35,7 @@ export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
    * A table containing some entries.
    * @param {Iterable<Teriock.ElderSorcery.Entry>} entries
-   * @returns {ElderSorceryWordsTable}
+   * @returns {ElderSorceryWordsModel}
    */
   static fromEntries(entries) {
     const source = {};
@@ -47,8 +47,8 @@ export default class ElderSorceryWordsTable extends BaseDataModel {
 
   /**
    * Merge several tables together.
-   * @param {...ElderSorceryWordsTable} tables
-   * @returns {ElderSorceryWordsTable}
+   * @param {...ElderSorceryWordsModel} tables
+   * @returns {ElderSorceryWordsModel}
    */
   static merge(...tables) {
     return this.fromEntries(tables.flatMap(t => Array.from(t.entries())));
@@ -65,7 +65,7 @@ export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
    * A table with a word added.
    * @param {Teriock.ElderSorcery.Entry} entry
-   * @returns {ElderSorceryWordsTable}
+   * @returns {ElderSorceryWordsModel}
    */
   addWord(entry) {
     return this.constructor.fromEntries([...this.entries(), { ...entry, op: Number(entry.op) }]);
@@ -88,7 +88,7 @@ export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
    * A table with only the words matching a filter.
    * @param {Teriock.ElderSorcery.Filter} [filter]
-   * @returns {ElderSorceryWordsTable}
+   * @returns {ElderSorceryWordsModel}
    */
   filter({ elements, ops, parts } = {}) {
     const matcher = values => {
@@ -151,7 +151,7 @@ export default class ElderSorceryWordsTable extends BaseDataModel {
   /**
    * A table with a word removed.
    * @param {Teriock.ElderSorcery.Entry} entry
-   * @returns {ElderSorceryWordsTable}
+   * @returns {ElderSorceryWordsModel}
    */
   removeWord({ element, op, part, word }) {
     return this.constructor.fromEntries(
