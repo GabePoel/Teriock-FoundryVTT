@@ -20,7 +20,7 @@ const { TextEditor } = foundry.applications.ux;
  * @template {typeof AbstractTagsElement} T
  * @param {T} Base
  */
-export default function TagSetMixin(Base) {
+export default function TagSetElementMixin(Base) {
   /**
    * @mixin
    */

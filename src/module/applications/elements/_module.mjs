@@ -1,21 +1,21 @@
-import HTMLElderSorceryWordsElement from "./elder-sorcery-words.mjs";
-import HTMLIdentifierTagsElement from "./identifier-tags.mjs";
-import HTMLLocalDocumentElement from "./local-document.mjs";
-import HTMLSlugInputElement from "./slug-input.mjs";
-import HTMLSlugTagsElement from "./slug-tags.mjs";
-import HTMLTernaryButtonElement from "./ternary-button.mjs";
-import HTMLToggleButtonElement from "./toggle-button.mjs";
-import HTMLUnitInputElement from "./unit-input.mjs";
+import HTMLElderSorceryWordsElement from "./elder-sorcery-words-element.mjs";
+import HTMLIdentifierTagsElement from "./identifier-tags-element.mjs";
+import HTMLLocalDocumentElement from "./local-document-element.mjs";
+import HTMLSlugInputElement from "./slug-input-element.mjs";
+import HTMLSlugTagsElement from "./slug-tags-element.mjs";
+import HTMLTernaryButtonElement from "./ternary-button-element.mjs";
+import HTMLToggleButtonElement from "./toggle-button-element.mjs";
+import HTMLUnitInputElement from "./unit-input-element.mjs";
 
 export * from "./abstract/_module.mjs";
-export { default as HTMLElderSorceryWordsElement } from "./elder-sorcery-words.mjs";
-export { default as HTMLIdentifierTagsElement } from "./identifier-tags.mjs";
-export { default as HTMLLocalDocumentElement } from "./local-document.mjs";
-export { default as HTMLSlugInputElement } from "./slug-input.mjs";
-export { default as HTMLSlugTagsElement } from "./slug-tags.mjs";
-export { default as HTMLTernaryButtonElement } from "./ternary-button.mjs";
-export { default as HTMLToggleButtonElement } from "./toggle-button.mjs";
-export { default as HTMLUnitInputElement } from "./unit-input.mjs";
+export { default as HTMLElderSorceryWordsElement } from "./elder-sorcery-words-element.mjs";
+export { default as HTMLIdentifierTagsElement } from "./identifier-tags-element.mjs";
+export { default as HTMLLocalDocumentElement } from "./local-document-element.mjs";
+export { default as HTMLSlugInputElement } from "./slug-input-element.mjs";
+export { default as HTMLSlugTagsElement } from "./slug-tags-element.mjs";
+export { default as HTMLTernaryButtonElement } from "./ternary-button-element.mjs";
+export { default as HTMLToggleButtonElement } from "./toggle-button-element.mjs";
+export { default as HTMLUnitInputElement } from "./unit-input-element.mjs";
 
 window.customElements.define(HTMLElderSorceryWordsElement.tagName, HTMLElderSorceryWordsElement);
 window.customElements.define(HTMLIdentifierTagsElement.tagName, HTMLIdentifierTagsElement);

@@ -1,5 +1,5 @@
 import { createElement } from "../../../utils/_module.mjs";
-import AbstractTagsElement from "./abstract-tags.mjs";
+import AbstractTagsElement from "./abstract-tags-element.mjs";
 
 const { Autocomplete } = foundry.applications.ux;
 
