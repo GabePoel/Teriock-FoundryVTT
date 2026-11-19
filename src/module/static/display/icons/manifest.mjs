@@ -444,6 +444,7 @@ export default {
     time: "ms-nest-clock-farsight-analog",
     toggle: "ms-toggle-on",
     tooltip: "ms-tooltip",
+    trash: "fa-trash",
     undo: "ms-undo",
     unlocked: "ms-lock-open-right",
     unset: "ms-backspace",

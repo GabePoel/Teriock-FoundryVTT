@@ -24,6 +24,9 @@ declare global {
       | Teriock.Keys.SlowExecutionTime;
     export type Expansion = keyof typeof CONFIG.ability.expansion;
 
+    // Elder Sorcery Keys
+    export type PartOfSpeech = keyof typeof CONFIG.elderSorcery.partsOfSpeech;
+
     // Metaphysics Keys
     export type Effect = keyof typeof CONFIG.wiki.index.effect;
     export type Element = keyof typeof CONFIG.metaphysics.elements;

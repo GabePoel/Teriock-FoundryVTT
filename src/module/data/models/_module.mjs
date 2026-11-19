@@ -1,5 +1,6 @@
 export { default as CompetenceModel } from "./competence-model/competence-model.mjs";
 export { default as DefenseModel } from "./defense-model/defense-model.mjs";
+export { default as ElderSorceryTable } from "./elder-sorcery-table/elder-sorcery-table.mjs";
 export * from "./modifier-models/_module.mjs";
 export { default as PiercingModel } from "./piercing-model/piercing-model.mjs";
 export * from "./preview-models/_module.mjs";

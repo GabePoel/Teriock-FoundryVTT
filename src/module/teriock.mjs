@@ -346,6 +346,7 @@ foundry.helpers.Hooks.once("init", function() {
     types: ["damage", "drain", "rule", "style", "tradecraft"],
   });
   rs(d.TeriockJournalEntryPage, sp.ClassSheet, "Class", { types: ["class"] });
+  rs(d.TeriockJournalEntryPage, sp.TableSheet, "Table", { types: ["table"] });
 
   // Level
   rs(d.TeriockLevel, s.TeriockLevelConfig, "Level");

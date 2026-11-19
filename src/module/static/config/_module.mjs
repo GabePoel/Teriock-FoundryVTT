@@ -15,6 +15,7 @@ import deathBagConfig from "./death-bag-config.mjs";
 import displayConfig from "./display-config.mjs";
 import documentBehaviorConfig from "./document-behavior-config.mjs";
 import effectConfig from "./effect-config.mjs";
+import elderSorceryConfig from "./elder-sorcery-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
 import lengthConfig from "./length-config.mjs";
@@ -51,6 +52,7 @@ const config = {
   display: displayConfig,
   documentBehavior: documentBehaviorConfig,
   effect: effectConfig,
+  elderSorcery: elderSorceryConfig,
   equipment: equipmentConfig,
   hack: hackConfig,
   length: lengthConfig,

@@ -167,7 +167,9 @@ export default tseslint.config(
         { type: "unsorted", useConfigurationIf: { declarationCommentMatchesPattern: "^no sort$" } },
         {
           type: "unsorted",
-          useConfigurationIf: { matchesAstSelector: "PropertyDefinition[key.name='PARTS'] > ObjectExpression" },
+          useConfigurationIf: {
+            matchesAstSelector: "PropertyDefinition[key.name=/^(EDIT_|VIEW_)?PARTS$/] > ObjectExpression",
+          },
         },
         { type: "unsorted", useConfigurationIf: { declarationMatchesPattern: "^PARTS$" } },
         { groups: ["property", "method", "unknown"], order: "asc", partitionByNewLine: true, type: "alphabetical" },

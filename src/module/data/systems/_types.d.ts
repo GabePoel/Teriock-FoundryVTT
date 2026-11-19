@@ -39,7 +39,15 @@ import {
   SpeciesSystem,
 } from "./items/_module.mjs";
 import { BaseMessageSystem, InteractiveSystem, SharedSystem, TriggeredSystem } from "./messages/_module.mjs";
-import { ClassSystem, DamageSystem, DrainSystem, RuleSystem, StyleSystem, TradecraftSystem } from "./pages/_module.mjs";
+import {
+  ClassSystem,
+  DamageSystem,
+  DrainSystem,
+  RuleSystem,
+  StyleSystem,
+  TableSystem,
+  TradecraftSystem,
+} from "./pages/_module.mjs";
 
 declare global {
   export interface ActiveEffectSystemMap {
@@ -110,6 +118,7 @@ declare global {
     drain: DrainSystem;
     rule: RuleSystem;
     style: StyleSystem;
+    table: TableSystem;
     tradecraft: TradecraftSystem;
   }
 
