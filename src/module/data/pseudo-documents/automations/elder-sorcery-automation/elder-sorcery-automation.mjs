@@ -69,7 +69,7 @@ export default class ElderSorceryAutomation extends mixClasses(BaseAutomation, S
    * Every word this gives the actor.
    * @returns {Promise<ElderSorceryWordsModel>}
    */
-  async allWords() {
+  async getAllWords() {
     const pages = await this.getSelectableDocuments();
     const table = ElderSorceryWordsModel.merge(this.words, ...pages.map(p => p.system.words));
     let ops;

@@ -76,7 +76,7 @@ export default function ActorMagicPart(Base) {
      */
     async getAllWords() {
       const automations = this.automations.getTypeSync("elderSorcery", { active: true, isPassive: true });
-      return ElderSorceryWordsModel.merge(this.words, ...(await Promise.all(automations.map(a => a.allWords()))));
+      return ElderSorceryWordsModel.merge(this.words, ...(await Promise.all(automations.map(a => a.getAllWords()))));
     }
 
     /** @inheritDoc */
