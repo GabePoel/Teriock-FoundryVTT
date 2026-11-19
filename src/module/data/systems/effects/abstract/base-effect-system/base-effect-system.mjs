@@ -71,6 +71,17 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   }
 
   /**
+   * Changes to apply to this effect.
+   * @returns {Teriock.Changes.ChangeData[]}
+   */
+  get effectChanges() {
+    return this.automations.filter(a => a.metadata.tags.changes).flatMap(a => {
+      const changes = a.getChanges().filter(c => c.target === "ActiveEffect");
+      return changes.length && a.active ? changes : [];
+    });
+  }
+
+  /**
    * Changes to apply to the parent item.
    * @returns {Teriock.Changes.ChangeData[]}
    */

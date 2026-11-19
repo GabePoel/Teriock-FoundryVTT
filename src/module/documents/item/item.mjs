@@ -69,6 +69,12 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   }
 
   /** @inheritDoc */
+  applyActiveEffects(phase, inherited = {}) {
+    super.applyActiveEffects(phase, inherited);
+    for (const effect of this.allApplicableEffects()) { effect.applyActiveEffects(phase, inherited); }
+  }
+
+  /** @inheritDoc */
   getChangesFromEffect(effect) {
     return effect.system.itemChanges;
   }
@@ -104,5 +110,10 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   renderRelativeSheets() {
     super.renderRelativeSheets();
     if (this.dependee?.isViewer) { this.dependee.render(); }
+  }
+
+  /** @inheritDoc */
+  selectInheritedChanges(inherited) {
+    return this.metadata?.tags.armament ? (inherited.armament ?? []) : [];
   }
 }

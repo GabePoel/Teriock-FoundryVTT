@@ -10,7 +10,6 @@ export { default as ChildChangeAutomation } from "./child-change-automation/chil
 export { default as ChoicesAutomation } from "./choices-automation/choices-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation/common-outcomes-automation.mjs";
 export { default as ConsumptionAutomation } from "./consumption-automation/consumption-automation.mjs";
-export { default as CostAutomation } from "./cost-automation/cost-automation.mjs";
 export { default as CoverAutomation } from "./cover-automation/cover-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation/duration-automation.mjs";
 export { default as ElderSorceryAutomation } from "./elder-sorcery-automation/elder-sorcery-automation.mjs";

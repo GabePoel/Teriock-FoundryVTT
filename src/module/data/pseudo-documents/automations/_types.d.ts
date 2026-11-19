@@ -10,7 +10,6 @@ import {
   ChoicesAutomation,
   CommonOutcomesAutomation,
   ConsumptionAutomation,
-  CostAutomation,
   CoverAutomation,
   DurationAutomation,
   ElderSorceryAutomation,
@@ -51,7 +50,6 @@ declare global {
     choices: ChoicesAutomation;
     common: CommonOutcomesAutomation;
     consumption: ConsumptionAutomation;
-    cost: CostAutomation;
     cover: CoverAutomation;
     duration: DurationAutomation;
     elderSorcery: ElderSorceryAutomation;

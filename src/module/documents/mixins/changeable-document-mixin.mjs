@@ -36,9 +36,9 @@ export default function ChangeableDocumentMixin(Base) {
     /**
      * Apply any transformations to this document's data which are caused by ActiveEffects.
      * @param {Teriock.Changes.Phase} phase
-     * @param {Teriock.Changes.ChildChangeData[]} [inherited]
+     * @param {Partial<Record<Teriock.Changes.ChildTarget, Teriock.Changes.ChildChangeData[]>>} [inherited]
      */
-    applyActiveEffects(phase, inherited = []) {
+    applyActiveEffects(phase, inherited = {}) {
       if (!(phase in ActiveEffect.implementation.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) {
         return;
       }
@@ -55,7 +55,7 @@ export default function ChangeableDocumentMixin(Base) {
         }
       }
       let qualifierData;
-      for (const change of inherited) {
+      for (const change of this.selectInheritedChanges(inherited)) {
         if (BaseRoll.qualify(change.qualifier, () => (qualifierData ??= this.system.getLocalRollData()))) {
           changes.push(change);
         }
@@ -84,6 +84,15 @@ export default function ChangeableDocumentMixin(Base) {
     prepareBaseData() {
       this._clearData();
       super.prepareBaseData();
+    }
+
+    /**
+     * Select certain child changes passed along from an actor to apply to this document.
+     * @param {Partial<Record<Teriock.Changes.ChildTarget, Teriock.Changes.ChildChangeData[]>>} _inherited
+     * @returns {Teriock.Changes.ChildChangeData[]}
+     */
+    selectInheritedChanges(_inherited) {
+      return [];
     }
   }
 

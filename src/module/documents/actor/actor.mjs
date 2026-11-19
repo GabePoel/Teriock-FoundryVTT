@@ -330,13 +330,11 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   applyActiveEffects(phase) {
     const apply = !this._completedActiveEffectPhases.has(phase);
     super.applyActiveEffects(phase);
-    if (!apply) { return; }
-    const { ability, armament } = this._getChildChanges(phase);
-    if (TERIOCK.CONFIG.change.phase[phase]?.appliedByActor) {
-      const armaments = new Set(this.previewedTags.armament);
-      for (const item of this.items) { item.applyActiveEffects(phase, armaments.has(item) ? armament : []); }
+    if (!apply || !TERIOCK.CONFIG.change.phase[phase]?.appliedByActor) { return; }
+    const inherited = this._getChildChanges(phase);
+    for (const d of [...this.items, ...this.effects.filter(e => !e.isReference)]) {
+      d.applyActiveEffects(phase, inherited);
     }
-    if (ability.length) { for (const a of this.previewedTypes.ability) { a.applyActiveEffects(phase, ability); } }
   }
 
   /**
