@@ -51,8 +51,7 @@ export default function AutomatableSystemMixin(Base) {
         }
         if (a?.type === "changes") {
           for (const c of a.changes ?? []) {
-            if (c.phase === "setup" && c.target === "Item") { c.phase = "initial"; }
-            else if (c.phase === "derived") { c.phase = "main"; }
+            if (c.phase === "derived") { c.phase = "main"; }
             else if (c.phase === "special") { c.phase = "final"; }
           }
         }
