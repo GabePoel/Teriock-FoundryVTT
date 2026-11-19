@@ -28,7 +28,7 @@
           min=bar.data.min
           name=bar.paths.value
           type="number"
-          value=bar.data.value
+          value=bar.source.value
         }}
         {{#if bar.config.bar.temp}}
           <span>+</span>
@@ -38,7 +38,7 @@
             disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
             min=0
             name=bar.paths.temp
-            value=bar.data.temp
+            value=bar.source.temp
           }}
         {{/if}}
         {{#if bar.config.morganti}}
@@ -49,7 +49,7 @@
             disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
             min=0
             name=bar.paths.morganti
-            value=bar.data.morganti
+            value=bar.source.morganti
           }}
         {{/if}}
       </div>

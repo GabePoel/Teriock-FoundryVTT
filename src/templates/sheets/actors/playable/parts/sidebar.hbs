@@ -49,6 +49,7 @@
       <div
         class="
           actor-name
+          affix
           {{#if displayedImgRing}}
             ring
           {{/if}}
@@ -58,7 +59,13 @@
         {{formInput
           fields.name
           value=name
-          classes="actor-name-text"
+          classes="actor-name-text unselected"
+          name="preparedName"
+        }}
+        {{formInput
+          fields.name
+          value=source.name
+          classes="actor-name-text selected"
         }}
       </div>
       <div class="actor-basics">

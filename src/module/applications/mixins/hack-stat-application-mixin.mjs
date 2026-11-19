@@ -106,6 +106,7 @@ export default function HackStatApplicationMixin(Base) {
           temp: config.bar.temp ? `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.temp` : null,
         },
         paths: { morganti: `system.${key}.morganti`, temp: `system.${key}.temp`, value: `system.${key}.value` },
+        source: system._source[key] ?? data,
         text,
       };
     }

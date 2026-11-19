@@ -245,13 +245,12 @@
       </div>
     </div>
     <div class="teriock-block-display actor-notes-content">
-      <prose-mirror name="system.notes" value="{{ system.notes }}" toggled="true" editable="editable">
-        {{#if (exists enrichedNotes)}}
-          {{{ enrichedNotes }}}
-        {{else}}
-          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}
-        {{/if}}
-      </prose-mirror>
+      {{formInput
+        systemFields.notes
+        enriched=enrichedNotes
+        toggled=true
+        value=system._source.notes
+      }}
     </div>
   </div>
 </section>
