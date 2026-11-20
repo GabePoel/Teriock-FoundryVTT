@@ -167,19 +167,6 @@ export default class EquipmentSystem
   }
 
   /** @inheritDoc */
-  async _preUpdate(changes, options, user) {
-    const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) { return false; }
-
-    // Save migrated text when version updates
-    if (foundry.utils.isNewerVersion(TERIOCK.CONST.EQUIPMENT_APPEARANCE_VERSION, this.parent._stats.systemVersion)) {
-      const { appearance, description, flaws, kind, price } = this._source;
-      changes.system = { appearance, description, flaws, kind, price, ...changes.system };
-      options.diff = false;
-    }
-  }
-
-  /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), { [`equipment.${this.equipmentType}`]: 1 });
   }

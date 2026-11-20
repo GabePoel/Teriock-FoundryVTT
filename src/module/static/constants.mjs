@@ -1,6 +1,5 @@
 export const CONDITIONS_JOURNAL_UUID = "Compendium.teriock.rules.JournalEntry.condition0000000";
 export const EMBED_TYPES = /** @type {const} */ (["panel", "description", "path", "block"]);
-export const EQUIPMENT_APPEARANCE_VERSION = "0.15.85";
 export const INF = 999999999999999;
 export const INF_CODE = "\uF534";
 export const ROLL_DATA_NAMESPACES = {

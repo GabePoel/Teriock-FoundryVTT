@@ -52,6 +52,15 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
     return paths;
   }
 
+  /** @inheritDoc */
+  get formTips() {
+    const tips = super.formTips;
+    if (this.origin === "executor" && this.activeTriggers.size) {
+      tips.unshift({ level: "warning", text: "TERIOCK.AUTOMATIONS.Move.NOTIFICATIONS.triggeredExecutor" });
+    }
+    return tips;
+  }
+
   /**
    * Whether this moves tokens in a random direction instead of from a specific point.
    * @returns {boolean}

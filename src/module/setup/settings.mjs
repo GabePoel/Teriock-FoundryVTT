@@ -39,8 +39,8 @@ function getMenuSettings() {
         armor: {
           icon: TERIOCK.DISPLAY.icons.manifest.target.armor,
           settings: {
-            armorSuppressesRanks: { default: false, scope: "world", type: Boolean },
-            armorWeakensRanks: { default: false, scope: "world", type: Boolean },
+            armorSuppressesRanks: { default: false, requiresReload: true, scope: "world", type: Boolean },
+            armorWeakensRanks: { default: false, requiresReload: true, scope: "world", type: Boolean },
           },
         },
         cone: {
@@ -335,7 +335,7 @@ function getMenuSettings() {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.system,
           settings: {
             sharedChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
-            trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
+            trackSustainedConsequences: { default: true, requiresReload: true, scope: "world", type: Boolean },
           },
         },
 

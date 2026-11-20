@@ -184,9 +184,7 @@ export default function HackStatApplicationMixin(Base) {
      * @returns {Promise<void>}
      */
     async _rollStatDie(_event, statDie) {
-      const criticallyWounded = this.document.statuses.has("critically-wounded");
       await statDie.use(this.state?.consumeStatDice ?? true, { substitution: this.state?.substitution });
-      if (!criticallyWounded) { await this.document.run("awaken"); }
     }
 
     /** @inheritDoc */
