@@ -51,7 +51,7 @@ export default class ConstructionNode
   /** @inheritDoc */
   static async deleteDocuments(ids = [], operation = {}) {
     const resolved = await this._resolveParent(operation);
-    const pseudos = ids.map(id => resolved.parent.getEmbeddedDocument(this.documentName, id));
+    const pseudos = ids.map(id => resolved.parent.getEmbeddedDocument(this.documentName, id)).filter(Boolean);
     const allIds = new Set();
     for (const p of pseudos) {
       allIds.add(p.id);

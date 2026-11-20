@@ -57,8 +57,12 @@ export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, 
 
     // If this is a known condition, have it use the static ID.
     if (data?.system?.slug && Object.hasOwn(TERIOCK.STATUSES.conditions, data.system.slug)) {
+      const _id = TERIOCK.STATUSES.conditions[data.system.slug]._id;
+      if (this.parent.collection?.has(_id)) { return false; }
+      this.parent.updateSource({ _id });
       options.keepId = true;
     }
+    
     if (data.disabled === true) { return false; }
   }
 

@@ -93,7 +93,7 @@ export default function PlayableActorSheetCombatPart(Base) {
      */
     static async #onToggleSb() {
       if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.update({ "system.offense.sb": !this.document.system.offense.sb });
+      await this.document.update({ "system.offense.sb": !this.document._source.system.offense.sb });
     }
 
     /**

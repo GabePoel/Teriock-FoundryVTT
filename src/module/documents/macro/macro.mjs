@@ -32,6 +32,7 @@ export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin) {
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) { return false; }
 
+    if (!foundry.utils.hasProperty(changes, "command") || changes.command === this._source.command) { return; }
     for (const key of ["macroDocumentUuid", "macroHash"]) {
       if (this.getFlag("teriock", key) && !foundry.utils.hasProperty(changes, `flags.teriock.${key}`)) {
         foundry.utils.setProperty(changes, `flags.teriock.${key}`, _del);

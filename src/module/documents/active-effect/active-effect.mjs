@@ -94,6 +94,19 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  static async _preDeleteOperation(documents, operation, user) {
+    const yes = await super._preDeleteOperation(documents, operation, user);
+    if (yes === false) { return false; }
+
+    if (CONFIG.ActiveEffect.expiryAction !== "delete") { return; }
+    const collection = documents[0]?.collection;
+    for (const id of operation.ids) {
+      const effect = collection?.get(id);
+      if (effect?.metadata.tags.applicable) { effect.fireTrigger("expireEffect"); }
+    }
+  }
+
+  /** @inheritDoc */
   static applyChange(targetDoc, change, options = {}) {
     if (foundry.utils.getProperty(targetDoc, "system.lockedPaths")?.has(change.key)) { return {}; }
     const changed = super.applyChange(targetDoc, change, options);

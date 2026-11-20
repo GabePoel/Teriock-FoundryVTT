@@ -112,16 +112,6 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  async _preDelete(options, user) {
-    const yes = await super._preDelete(options, user);
-    if (yes === false) { return false; }
-
-    if (CONFIG.ActiveEffect.expiryAction === "delete") {
-      this.parent.fireTrigger("expireEffect");
-    }
-  }
-
-  /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) { return false; }
