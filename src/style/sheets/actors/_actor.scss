@@ -611,6 +611,11 @@
       .money-value {
         display: block;
         text-transform: none;
+
+        .selected,
+        .unselected {
+          justify-content: start;
+        }
       }
     }
 
@@ -623,12 +628,20 @@
       font-size: large;
       height: 24px;
       margin: 0;
+      min-width: 0;
       outline: none;
       padding: 0;
       text-align: center;
 
       &:not(:disabled) {
         @include mixins.box-hover;
+      }
+
+      .selected,
+      .unselected {
+        @include mixins.text-cutoff;
+        display: block;
+        line-height: 24px;
       }
     }
   }

@@ -10,4 +10,4 @@ function minLen(value, length) {
   return value.length >= length ? value : "";
 }
 
-export default { asInf, formatGp, minLen, toClass, toSlug };
+export default { asInf, formatGp, minLen, toClass, toSlug, toNearest: (n, interval) => Number(n).toNearest(interval) };

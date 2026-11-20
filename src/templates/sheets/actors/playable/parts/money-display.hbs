@@ -41,22 +41,31 @@
         {{!-- prettier-ignore --}}
         <button
           id="{{ @root/appId }}-currency-debt"
-          class="tgrid-item gi1 money-panel-input tcenter updatable"
+          class='tgrid-item gi1 money-panel-input tcenter affix updatable {{formClasses @root/document path="system.money.debt"}}'
           type="button"
           data-action="updatePaths"
           data-icon="{{ TERIOCK.DISPLAY.icons.manifest.ui.interest }}"
           data-paths="system.money.debt system.interestRate"
-          data-tooltip="{{minLen system.money.debt 4}}"
+          data-tooltip="{{minLen (toNearest system.money.debt 0.01) 4}}"
         >
-          {{numberFormat system.money.debt decimals=2}}
+          <span class="unselected">{{toNearest system.money.debt 0.01}}</span>
+          <span class="selected">{{toNearest system._source.money.debt 0.01}}</span>
         </button>
         <span class="money-info tsubtle tcenter gi3">
           <span class="money-name">{{localize "TERIOCK.CURRENCY.debt.label"}}</span>
-          <span class="money-value">
-            {{localize
-              "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
-              rate=system.interestRate
-            }}
+          <span class='money-value affix {{formClasses @root/document path="system.interestRate"}}'>
+            <span class="unselected">
+              {{localize
+                "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
+                rate=system.interestRate
+              }}
+            </span>
+            <span class="selected">
+              {{localize
+                "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
+                rate=system._source.interestRate
+              }}
+            </span>
           </span>
         </span>
       </span>
