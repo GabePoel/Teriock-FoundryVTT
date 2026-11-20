@@ -79,7 +79,9 @@ export default class MorphAutomation
 
   /** @inheritDoc */
   async interactOnExecutionEffectData(execution) {
-    this.#selectedUuids = ((await this.selectDocuments({ relativeTo: execution.actor })) || []).map(d => d.uuid);
+    const documents = await this.selectDocuments({ relativeTo: execution.actor });
+    if (documents === false) { return false; }
+    this.#selectedUuids = (documents || []).map(d => d.uuid);
   }
 
   /** @inheritDoc */

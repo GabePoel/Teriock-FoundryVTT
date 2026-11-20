@@ -201,12 +201,15 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
   async primaryAction() {
     if (!game.teriock.checkScene()) { return []; }
     await game.teriock.minimizeStart();
-    const tokens = await this.#placeTokens();
-    if (this.addToCombat && this.actor?.inCombat) {
-      await TeriockTokenDocument.createCombatants(tokens, { combat: this.actor.defaultCombatant.combat });
+    try {
+      const tokens = await this.#placeTokens();
+      if (this.addToCombat && this.actor?.inCombat) {
+        await TeriockTokenDocument.createCombatants(tokens, { combat: this.actor.defaultCombatant.combat });
+      }
+      return tokens;
+    } finally {
+      await game.teriock.minimizeEnd();
     }
-    await game.teriock.minimizeEnd();
-    return tokens;
   }
 
   /** @inheritDoc */

@@ -343,7 +343,11 @@ export default class AbilitySystem
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    return Object.assign(rollData, { av0: Number(this.piercing.av0) * 2, ub: Number(this.piercing.ub), warded: 0 });
+    return Object.assign(rollData, {
+      av0: Number(this.piercing.av0) * 2,
+      ub: Number(this.piercing.ub),
+      warded: Number(this.warded),
+    });
   }
 
   /** @inheritDoc */

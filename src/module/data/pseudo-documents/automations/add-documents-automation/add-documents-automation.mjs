@@ -153,6 +153,7 @@ export default class AddDocumentsAutomation
     if (!this.attachesToEffect) { return; }
     const scope = { actor: execution.actor, execution };
     const roots = await this.getNodes(scope);
+    if (roots === false) { return false; }
     if (!roots) { return; }
     const rootIds = new Set(roots.map(n => n._id));
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);

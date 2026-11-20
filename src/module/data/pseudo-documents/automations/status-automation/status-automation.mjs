@@ -149,7 +149,11 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   /** @inheritDoc */
   async interactOnExecutionEffectData(execution) {
     this.#trackedUuids = [];
-    if (this.target) { this.#trackedUuids.push(...((await this.selectVisibleTokens()) || []).map(t => t.uuid)); }
+    if (this.target) {
+      const tokens = await this.selectVisibleTokens();
+      if (tokens === false) { return false; }
+      this.#trackedUuids.push(...(tokens || []).map(t => t.uuid));
+    }
     if (this.executor) {
       const uuid = execution.actor?.defaultToken?.document?.uuid || execution.actor?.uuid;
       if (uuid) { this.#trackedUuids.push(uuid); }

@@ -254,7 +254,9 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _buildActivations() {
-    if ((this.targetsActor || this.targetsArmament) && this.makeEffect) { await this._buildEffectActivations(); }
+    if ((this.targetsActor || this.targetsArmament) && this.makeEffect) {
+      if ((await this._buildEffectActivations()) === false) { return false; }
+    }
     const rollData = this.getRollData();
     const fetched = await Promise.all(
       this.automations.active.map(a => a.getActivations({ execution: this, rollData })),
@@ -273,7 +275,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<void>}
    */
   async _buildEffectActivations() {
-    await this._callAutomations(a => a.interactOnExecutionEffectData(this));
+    if ((await this._callAutomations(a => a.interactOnExecutionEffectData(this))) === false) { return false; }
     /** @type {Teriock.Mechanics.MechanicToggleEntry[]} */
     const toggles = (this.source?.system.mechanicToggles ?? []).filter(t => t.variant);
     const variants = [];
@@ -369,12 +371,10 @@ export default class BaseExecution extends BaseDataModel {
   /**
    * Call a function on all the automations.
    * @param {(Automation) => Promise<false|void>} fn
-   * @returns {Promise<boolean|void>}
+   * @returns {Promise<false|void>}
    */
   async _callAutomations(fn) {
-    const calls = [];
-    for (const automation of this._orderedAutomations) { calls.push(await fn(automation)); }
-    if (calls.includes(false)) { return false; }
+    for (const automation of this._orderedAutomations) { if ((await fn(automation)) === false) { return false; } }
   }
 
   /**
@@ -527,7 +527,7 @@ export default class BaseExecution extends BaseDataModel {
    */
   async _postInput() {
     if (await this._callAutomations(a => a.interactOnExecutionInput(this)) === false) { return false; }
-    if (await this._callAutomations(a => a.modifyExecution(this)) === false) { return false; }
+    await this._callAutomations(a => a.modifyExecution(this));
   }
 
   /**

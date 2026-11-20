@@ -57,13 +57,15 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
     }
     data.color ??= game.user.color;
     await game.teriock.minimizeStart();
-    const region = await canvas.regions.placeRegion(data, {
-      allowRotation: true,
-      attachToToken: this.attachToToken,
-      createOptions: { asGM: true },
-    });
-    await game.teriock.minimizeEnd();
-    return region;
+    try {
+      return await canvas.regions.placeRegion(data, {
+        allowRotation: true,
+        attachToToken: this.attachToToken,
+        createOptions: { asGM: true },
+      });
+    } finally {
+      await game.teriock.minimizeEnd();
+    }
   }
 
   /** @inheritDoc */

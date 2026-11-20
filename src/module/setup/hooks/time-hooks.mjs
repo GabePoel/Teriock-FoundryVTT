@@ -13,11 +13,7 @@ async function increaseDebt(_worldTime, dt) {
     if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
       const daysElapsed = dt / 86400;
       const newDebt = actor.system.money.debt * Math.pow(1 + actor.system.interestRate / 100, daysElapsed);
-      operations.push({
-        action: "update",
-        docData: { "system.money.debt": newDebt },
-        uuid: actor.uuid,
-      });
+      operations.push({ action: "update", docData: { "system.money.debt": newDebt }, uuid: actor.uuid });
     }
   }
   await batchWrite(operations);

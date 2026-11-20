@@ -161,7 +161,7 @@ export default function AbilityCostsPart(Base) {
         ...Object.fromEntries(
           Object.entries(this.costs.primary).map((
             [k, v],
-          ) => [`cost.${k}`, FormulaField.exists(v.formula) ? v.formula : v.description ? "x" : 0]),
+          ) => [`cost.${k}`, FormulaField.exists(v.formula) ? v.formula : v.description ? 1 : 0]),
         ),
       });
     }

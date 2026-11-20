@@ -207,7 +207,6 @@ export default class TargetAutomation extends BaseAutomation {
   async interactOnExecutionInput(execution) {
     if (!game.teriock.checkScene()) { return; }
     this.#targetIds = game.user.targets.map(t => t.id);
-    await game.teriock.minimizeStart();
     const data = await this.getRegionData({ execution, rollData: execution.getRollData() });
     data.color = game.user.color;
     const ethereal = Boolean(execution?.actor?.statuses.has("ethereal"));
@@ -216,15 +215,19 @@ export default class TargetAutomation extends BaseAutomation {
       const executorId = execution.executor?.id;
       if (executorId) { exclude.add(executorId); }
     }
-    await canvas.regions.placeRegion(data, {
-      allowRotation: true,
-      attachToToken: this.attachToToken,
-      create: game.settings.get("teriock", "preserveTargetRegions") && !game.paused,
-      createOptions: { asGM: true },
-      onMove: ({ document }) => getTargets(document, ethereal, exclude),
-      onRotate: ({ document }) => getTargets(document, ethereal, exclude),
-    });
-    await game.teriock.minimizeEnd();
+    await game.teriock.minimizeStart();
+    try {
+      await canvas.regions.placeRegion(data, {
+        allowRotation: true,
+        attachToToken: this.attachToToken,
+        create: game.settings.get("teriock", "preserveTargetRegions") && !game.paused,
+        createOptions: { asGM: true },
+        onMove: ({ document }) => getTargets(document, ethereal, exclude),
+        onRotate: ({ document }) => getTargets(document, ethereal, exclude),
+      });
+    } finally {
+      await game.teriock.minimizeEnd();
+    }
   }
 }
 

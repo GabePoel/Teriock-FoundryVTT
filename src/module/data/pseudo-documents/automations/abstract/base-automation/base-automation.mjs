@@ -162,7 +162,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /**
    * User interaction and data preparation that happens as part generating effect data.
    * @param {BaseExecution} _execution
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async interactOnExecutionEffectData(_execution) {}
 
@@ -176,7 +176,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /**
    * Modify an ongoing execution. This happens after user inputs are complete.
    * @param {BaseExecution} _execution
-   * @returns {Promise<false|void>}
+   * @returns {Promise<void>}
    */
   async modifyExecution(_execution) {}
 
@@ -205,7 +205,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (this.metadata.tags.interactInExecution && this.triggers?.size) { this.interactInExecution = false; }
+    if (this.metadata.tags.interactInExecution && this.activeTriggers?.size) { this.interactInExecution = false; }
     if (this.metadata.tags.useInExecution && !this.interactInExecution) { this.useInExecution = false; }
   }
 }

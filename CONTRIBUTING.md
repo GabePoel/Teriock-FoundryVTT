@@ -74,7 +74,6 @@ Anything relating to the [terrain](https://wiki.teriock.com/index.php?title=Core
 
 The trigger pipeline is _kind of_ like a local version of Foundry's hooks and is used to handle stuff that occurs automatically and triggers off of other events within an `Actor`. These aren't _fully_ automatic because that would cause friction and confusion and instead make chat messages whenever something happens. This functionality is given the `@category Triggers` tag.
 
-
 ## Conventions
 
 There are a lot of implicit code conventions that I'm not quite sure how to articulate. But generally anything that implements something from the actual rules should have a "Relevant wiki pages" list with bullets that link to corresponding pages on the [wiki](https://wiki.teriock.com/index.php?title=Main_Page). This shouldn't list every page with any relevance because the lists can get long. Just the pages that are most relevant. And this doesn't need to be on every method in a class or group of functions if they're all relevant. Just put the links at whatever the most prominent/reasonable place is.
@@ -91,4 +90,5 @@ The wiki links should be structured like so:
  * @remark Any JSDoc tags normally go below.
  */
 ```
-Note that the wiki page has its title without the page's namespace.
+
+Note that the wiki page has its title without the page's namespace. Put the pages in alphabetical order.

@@ -57,7 +57,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @param {HierarchyDocument[]} documents
      * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
      * @param {TeriockUser} user
-     * @returns {Promise<boolean|void>}
+     * @returns {Promise<false|void>}
      */
     static async _preCreateOperation(documents, operation, user) {
       const yes = await super._preCreateOperation(documents, operation, user);
@@ -87,7 +87,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @param {HierarchyDocument[]} documents
      * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
-     * @returns {Promise<boolean|void>}
+     * @returns {Promise<false|void>}
      */
     static async _preDeleteOperation(documents, operation, user) {
       const yes = await super._preDeleteOperation(documents, operation, user);
@@ -103,7 +103,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @param {HierarchyDocument[]} documents
      * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
-     * @returns {Promise<boolean|void>}
+     * @returns {Promise<false|void>}
      */
     static async _preUpdateOperation(documents, operation, user) {
       const yes = await super._preUpdateOperation(documents, operation, user);

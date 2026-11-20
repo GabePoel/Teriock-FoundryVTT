@@ -55,7 +55,7 @@ export default function BaseDocumentMixin(Base) {
      * @param {TeriockItem[]} documents
      * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
      * @param {TeriockUser} user
-     * @returns {Promise<boolean|void>}
+     * @returns {Promise<void>}
      */
     static async _onCreateOperation(documents, operation, user) {
       await this._onWriteOperation(documents, operation, user);
