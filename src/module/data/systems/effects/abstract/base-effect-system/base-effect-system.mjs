@@ -172,7 +172,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     if (yes === false) { return false; }
 
     if (options?.keepCompetence) { return; }
-    const competence = (await this.parent.getElder())?.system?.competence?.raw;
+    const competence = (await this.parent.getElder())?._source?.system?.competence?.raw;
     if (typeof competence === "number") {
       this.parent.updateSource({ "system.competence.raw": competence });
     }

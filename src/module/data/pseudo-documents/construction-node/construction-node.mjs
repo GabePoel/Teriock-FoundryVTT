@@ -162,7 +162,7 @@ export default class ConstructionNode
     const operations = [];
     targets.forEach(t => {
       Object.entries(record).filter(([_k, v]) => v.length).forEach(([k, v]) =>
-        operations.push(t.getCreateChildDocumentsOperation(k, foundry.utils.deepClone(v)))
+        operations.push(t.getCreateChildDocumentsOperation(k, foundry.utils.deepClone(v), { keepCompetence: true }))
       );
     });
     return operations;

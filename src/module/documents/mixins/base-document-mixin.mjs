@@ -464,7 +464,7 @@ export default function BaseDocumentMixin(Base) {
           name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
           ...data,
         }),
-        { pack: this.pack, parent: this.parent },
+        { keepCompetence: true, pack: this.pack, parent: this.parent },
       );
     }
 

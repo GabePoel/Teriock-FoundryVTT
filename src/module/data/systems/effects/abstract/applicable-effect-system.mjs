@@ -162,7 +162,7 @@ export default class ApplicableEffectSystem
     const children = await this.getChildrenData();
     const operations = await super.getCreateOperations([...data, ...children.Item]);
     if (children.ActiveEffect.length) {
-      operations.push(this.parent.getCreateSubDocumentsOperation(children.ActiveEffect));
+      operations.push(this.parent.getCreateSubDocumentsOperation(children.ActiveEffect, { keepCompetence: true }));
     }
     if (automations.length) {
       operations.push(
