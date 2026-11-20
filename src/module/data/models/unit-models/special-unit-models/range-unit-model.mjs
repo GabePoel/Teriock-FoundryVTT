@@ -14,9 +14,9 @@ export default class RangeUnitModel extends LengthUnitModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get zeroChoiceEntries() {
-    return [{ id: "contact", label: "TERIOCK.MODELS.Range.UNITS.contact.label" }, {
-      id: "melee",
-      label: "TERIOCK.MODELS.Range.UNITS.melee.label",
-    }, { id: "self", label: "TERIOCK.MODELS.Range.UNITS.self.label" }];
+    return [{ id: "melee", label: "TERIOCK.MODELS.Range.UNITS.melee.label" }, {
+      id: "self",
+      label: "TERIOCK.MODELS.Range.UNITS.self.label",
+    }];
   }
 }
