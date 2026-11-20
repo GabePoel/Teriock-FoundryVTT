@@ -1,0 +1,37 @@
+<div class="roll-data-viewer-body">
+  <div class="roll-data-search">
+    <input
+      class="teriock-block-search"
+      aria-label='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
+      autocomplete="off"
+      data-disable="false"
+      placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
+      type="search"
+      value="{{ query }}"
+    />
+    {{infoIcon
+      ""
+      dataset=(object
+        tooltip="TERIOCK.DIALOGS.RollDataViewer.documentation"
+        tooltipUuid=TERIOCK.CONST.ROLL_DATA_PAGE_UUID)
+    }}
+  </div>
+  <div class="roll-data-table-container scrollable">
+    <table class="roll-data-table">
+      <thead>
+        <tr>
+          <th>{{localize "TERIOCK.COMMON.Key"}}</th>
+          <th>{{localize "TERIOCK.COMMON.Value"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rollData as |entry|}}
+          <tr data-key="@{{ entry.key }}">
+            <td>{{{ entry.code }}}</td>
+            <td>{{ entry.value }}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

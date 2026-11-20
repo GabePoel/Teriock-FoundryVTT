@@ -18,6 +18,7 @@ export default function BaseApplicationMixin(Base) {
     static DEFAULT_OPTIONS = {
       actions: {
         openDocument: this._onOpenDocument,
+        openInfo: this._onOpenInfo,
         toggleCollapse: this._onToggleCollapse,
         toggleCollapseRightClick: { buttons: [2], handler: this._onToggleCollapse },
       },
@@ -38,6 +39,24 @@ export default function BaseApplicationMixin(Base) {
         const uuid = target.dataset.uuid;
         const document = await (this.document?.fetchFromUuid?.(uuid) ?? foundry.utils.fromUuid(uuid));
         await document?.sheet?.render(true);
+      }
+    }
+
+    /**
+     * Open the document corresponding to an info icon.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @this {BaseApplication}
+     * @returns {Promise<void>}
+     */
+    static async _onOpenInfo(_event, target) {
+      const uuid = target.dataset.tooltipUuid || game.teriock.identifiers.get(target.dataset.tooltipIdentifier);
+      if (!uuid) { return; }
+      const doc = await (this.document?.fetchFromUuid?.(uuid) ?? fromUuid(uuid));
+      if (doc?.documentName === "JournalEntryPage") {
+        await doc.parent.sheet?.render({ force: true, pageId: doc.id });
+      } else {
+        await doc?.sheet?.render({ force: true });
       }
     }
 

@@ -6,6 +6,7 @@ const actorContext = {
   f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",
+  scale: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.scale.label",
 
   hp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
   "hp.dice": "TERIOCK.ROLL_CONTEXT.StatDice.hpRemaining",

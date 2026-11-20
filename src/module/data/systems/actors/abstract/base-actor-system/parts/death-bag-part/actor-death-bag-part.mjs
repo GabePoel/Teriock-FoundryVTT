@@ -1,3 +1,4 @@
+import { FormulaField } from "../../../../../../fields/_module.mjs";
 import { deathBagSchema } from "../../../../../../fields/tools/builders.mjs";
 
 /**
@@ -31,7 +32,10 @@ export default function ActorDeathBagPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       rollData["bag.pull"] = this.deathBag.pull;
-      rollData["bag.stones"] = Object.values(this.deathBag.stones).reduce((total, n) => total + n, 0);
+      const stones = Object.values(this.deathBag.stones);
+      rollData["bag.stones"] = stones.every(n => Number.isNumeric(n))
+        ? stones.reduce((total, n) => total + Number(n), 0)
+        : `(${FormulaField.sum(...stones)})`;
       for (const color of Object.keys(this.deathBag.stones)) {
         rollData[`bag.stones.${color}`] = this.deathBag.stones[color];
       }

@@ -1,4 +1,5 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
+import { RollDataViewer } from "../../applications/dialogs/_module.mjs";
 import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
@@ -122,7 +123,24 @@ function recolorCompendiumDocumentHeader(application) {
 }
 
 /**
- * Add a button to share image in chat to the header.
+ * Add a roll data view button to the sheet.
+ * @param {DocumentSheetV2} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function addRollDataViewerToHeader(application, controls) {
+  if (!application.window.header || typeof application.document.getRollData !== "function") { return; }
+  controls.push({
+    action: "viewRollData",
+    icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.formula, "contextMenu"),
+    label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewRollData"),
+    ownership: "OBSERVER",
+    onClick: () => RollDataViewer.create({ document: application.document }),
+  });
+}
+
+/**
+ * Add a share image in chat button to the header.
  * @param {ImagePopout & {options: ApplicationConfiguration & ImagePopoutConfiguration}} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
@@ -250,6 +268,7 @@ function sortControls(application, controls) {
 const applicationHookEntries = [
   ["getHeaderControlsApplicationV2", sortControls],
   ["getHeaderControlsDocumentSheetV2", addEmbedContextMenuEntriesToHeader],
+  ["getHeaderControlsDocumentSheetV2", addRollDataViewerToHeader],
   ["getHeaderControlsDocumentSheetV2", addWikiOpenToHeader],
   ["getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader],
   ["getHeaderControlsImagePopout", addShareImageToHeader],

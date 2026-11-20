@@ -104,7 +104,13 @@ export default function ActorScalingPart(Base) {
      * @returns {object}
      */
     getScalingRollData() {
-      return { br: this.scaling.br, f: this.scaling.f, lvl: this.scaling.lvl, p: this.scaling.p };
+      return {
+        br: this.scaling.br,
+        f: this.scaling.f,
+        lvl: this.scaling.lvl,
+        p: this.scaling.p,
+        scale: this.scaling.scale,
+      };
     }
 
     /** @inheritDoc */
