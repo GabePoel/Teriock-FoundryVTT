@@ -26,7 +26,7 @@ export default class BaseMenu extends TeriockApplication {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    general: { template: "teriock/menus/base-menu" },
+    general: { classes: ["scrollable", "scroll-fade"], scrollable: [""], template: "teriock/menus/base-menu" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -170,6 +170,7 @@ export default class BaseMenu extends TeriockApplication {
     const field = isDataField ? setting.type : new Field({ blank: false, required: true });
     const data = {
       classes: setting.classes,
+      columns: setting.columns,
       field,
       hint: setting.hint,
       label: setting.name,

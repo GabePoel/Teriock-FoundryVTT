@@ -234,6 +234,7 @@ function getMenuSettings() {
               onChange: () => game.teriock.render({ applications: true, tooltips: true }),
             },
             documentTooltips: {
+              columns: 2,
               inputType: "checkboxes",
               scope: "client",
               type: new fields.SetField(
@@ -320,7 +321,13 @@ function getMenuSettings() {
               type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute })),
             },
             secretDocuments: { scope: "world", type: new IdentifierSetField() },
-            secretTradecrafts: { inputType: "checkboxes", scope: "world", stacked: true, type: tradecraftsField() },
+            secretTradecrafts: {
+              columns: 4,
+              inputType: "checkboxes",
+              scope: "world",
+              stacked: true,
+              type: tradecraftsField(),
+            },
             showPrivateTradecraftDiceRolls: { default: true, scope: "world", type: Boolean },
           },
         },
@@ -348,6 +355,7 @@ function getMenuSettings() {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.error,
           settings: {
             errorMessages: {
+              columns: 2,
               inputType: "checkboxes",
               scope: "client",
               stacked: true,
@@ -386,6 +394,7 @@ function getMenuSettings() {
               onChange: () => game.teriock.render({ tooltips: true }),
             },
             suppressionMessages: {
+              columns: 3,
               inputType: "checkboxes",
               scope: "client",
               stacked: true,
@@ -395,6 +404,7 @@ function getMenuSettings() {
               onChange: () => game.teriock.render({ applications: true }),
             },
             suppressionMessageTypes: {
+              columns: 5,
               inputType: "checkboxes",
               scope: "client",
               stacked: true,

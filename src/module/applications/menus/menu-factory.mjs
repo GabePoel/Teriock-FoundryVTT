@@ -18,7 +18,9 @@ export default function MenuFactory(key, menu) {
     /** @inheritDoc */
     static PARTS = {
       ...(tabbed ? { tabs: { template: "templates/generic/tab-navigation.hbs" } } : {}),
-      ...Object.fromEntries(groups.map(([id, group]) => [id, { template: group.template ?? template }])),
+      ...Object.fromEntries(
+        groups.map(([id, group]) => [id, { ...BaseMenu.PARTS.general, template: group.template ?? template }]),
+      ),
       footer: BaseMenu.PARTS.footer,
     };
 
