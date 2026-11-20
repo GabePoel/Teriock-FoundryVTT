@@ -27,7 +27,7 @@ export default class TradecraftModifierModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  async use(options) {
+  async use(options = {}) {
     await this.actor.fireTrigger("rollTradecraft", { tradecraft: this.key });
     await super.use(Object.assign(options, { source: this }));
   }

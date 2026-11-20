@@ -176,7 +176,7 @@ export default class ApplicableEffectSystem
     }
     if (automations.length) {
       operations.push(
-        this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
+        this.parent.parent.getUpdateChildDocumentsOperation("ActiveEffect", [{
           _id: this.parent.id,
           ...Object.fromEntries(automations.map(a => [`system.automations.${a.id}`, _del])),
         }]),

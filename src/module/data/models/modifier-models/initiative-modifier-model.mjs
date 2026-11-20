@@ -27,7 +27,7 @@ export default class InitiativeModifierModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  async use(options) {
+  async use(options = {}) {
     const roller = this.actor.defaultCombatant;
     if (!roller) { return; }
     await super.use(Object.assign(options, { roller, source: roller.group ?? roller }));

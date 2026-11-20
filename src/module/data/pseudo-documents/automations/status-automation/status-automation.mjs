@@ -94,7 +94,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
     return {
       cards: await Promise.all(this.#trackedUuids.map(async uuid => {
         const doc = await fromUuid(uuid);
-        return { documentUuid: uuid, img: doc.img, name: doc.name };
+        return { documentUuid: uuid, img: doc?.img, name: doc?.name };
       })),
       icon: teriock.data.systems.actors.CreatureSystem.metadata.icon,
       title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {

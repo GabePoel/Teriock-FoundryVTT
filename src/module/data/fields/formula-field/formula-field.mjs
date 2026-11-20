@@ -246,7 +246,7 @@ export default class FormulaField extends StringField {
 
   /** @inheritDoc */
   _applyChangeMultiply(value, delta, _model, _change) {
-    return FormulaField.multiply(value ?? "0", delta);
+    return FormulaField.multiply(value || "0", delta);
   }
 
   /**

@@ -25,6 +25,6 @@ export default class TradecraftCheckExecution extends mixClasses(BaseExecution, 
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels.push(Object.assign(await this.journalEntryPage?.getPanelParts(), { collapsed: true }));
+    this.panels.push(await this._buildJournalPanel());
   }
 }

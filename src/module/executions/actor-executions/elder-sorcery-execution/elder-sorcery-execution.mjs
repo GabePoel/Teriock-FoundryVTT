@@ -73,13 +73,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [
-      Object.assign(await this.journalEntryPage.getPanelParts(), {
-        classes: ["elder-sorcery", "es-multi"],
-        collapsed: true,
-        icon: this.icon,
-      }),
-    ];
+    this.panels = [await this._buildJournalPanel({ classes: ["elder-sorcery", "es-multi"], icon: this.icon })];
   }
 
   /** @inheritDoc */

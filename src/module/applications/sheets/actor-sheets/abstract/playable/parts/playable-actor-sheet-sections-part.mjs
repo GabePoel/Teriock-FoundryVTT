@@ -72,6 +72,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
         docs: this.document.previewed.getTypeSync("consequence"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.consequence.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
+        docs: this.document.previewed.getTypeSync("imbuement"),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.imbuement.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: true,
+      }, {
         docs: this.document.previewed.getTypeSync("holiday"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.holiday.plural").toLocaleLowerCase(game.i18n.lang),
         optional: true,

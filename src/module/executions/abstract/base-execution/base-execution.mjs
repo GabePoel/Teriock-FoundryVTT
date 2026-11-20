@@ -323,6 +323,16 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * A panel for this execution's journal entry page.
+   * @param {Partial<Teriock.Panels.PanelParts>} [data]
+   * @returns {Promise<Teriock.Panels.PanelParts|null>}
+   */
+  async _buildJournalPanel({ collapsed = true, ...data } = {}) {
+    const panel = await this.journalEntryPage?.getPanelParts();
+    return panel ? Object.assign(panel, { collapsed, ...data }) : null;
+  }
+
+  /**
    * Build panels displayed in this execution's chat message.
    * @returns {Promise<false|void>}
    */
