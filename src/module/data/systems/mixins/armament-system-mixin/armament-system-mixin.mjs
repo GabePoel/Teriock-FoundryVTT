@@ -1,5 +1,5 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import { secondaryFormat } from "../../../../helpers/localization.mjs";
+import { listFormat, secondaryFormat } from "../../../../helpers/localization.mjs";
 import { dotJoin, getName, makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
@@ -271,17 +271,16 @@ export default function ArmamentSystemMixin(Base) {
     get damageTag() {
       if (!this.hasAttack) { return ""; }
       const value = secondaryFormat(this.damage.base, this.damage.twoHanded, { secondFilter: FormulaField.exists });
-      const types = ["damage", "drain"].filter(c => this.commands.has(c))
-        .map(c => _loc(`TERIOCK.SYSTEMS.Armament.PANELS.${c}`));
-      return [value, types.join("/")].filterJoin(" ");
+      const types = ["damage", "drain"].filter(c => this.commands.has(c)).map(c =>
+        _loc(`TERIOCK.SYSTEMS.Armament.PANELS.${c}`)
+      );
+      return [value, listFormat(types, { style: "short" })].filterJoin(" ");
     }
 
     /** @inheritDoc */
     get embedParts() {
       const parts = super.embedParts;
-      return Object.assign(parts, {
-        text: dotJoin([this.damageTag, ...this._defenseBar.wrappers, parts.text]),
-      });
+      return Object.assign(parts, { text: dotJoin([this.damageTag, ...this._defenseBar.wrappers, parts.text]) });
     }
 
     /**
