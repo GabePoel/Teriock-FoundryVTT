@@ -52,7 +52,7 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
           label: `${prefix}.triggers.label`,
           localize: true,
           rootId,
-        }, { name: "triggers", type: "checkboxes", value: [] }),
+        }, { columns: 2, name: "triggers", type: "checkboxes", value: [] }),
       );
     }
     if (passesTime) {

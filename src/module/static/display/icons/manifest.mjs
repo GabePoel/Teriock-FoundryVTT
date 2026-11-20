@@ -90,7 +90,7 @@ export default {
     d10: "mdi-dice-d10",
     d100: "mdi-percent",
     d12: "mdi-dice-d12",
-    d2: "mdi-circle",
+    d2: "mdi-poker-chip",
     d20: "mdi-dice-d20",
     d4: "mdi-dice-d4",
     d6: "mdi-dice-d6",
