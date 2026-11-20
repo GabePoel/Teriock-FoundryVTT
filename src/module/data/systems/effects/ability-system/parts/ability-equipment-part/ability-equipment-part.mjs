@@ -53,7 +53,7 @@ export default function AbilityEquipmentPart(Base) {
           : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
         visible: this.parent.isEditable && this.isArmamentChild,
         onClick: async (_ev, doc) => {
-          if (doc === this.parent.parent) { await this.parent.update({ "system.grantUse": !this.grantUse }); }
+          if (doc === this.parent.parent) { await this.parent.update({ "system.grantUse": !this._source.grantUse }); }
         },
       };
     }

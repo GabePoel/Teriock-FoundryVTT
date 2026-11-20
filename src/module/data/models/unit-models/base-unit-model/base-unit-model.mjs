@@ -215,7 +215,9 @@ export default class BaseUnitModel extends BaseDataModel {
    * @returns {number}
    */
   get rollValue() {
-    return safeInf(this.#evaluate());
+    const actor = this.metadata.formula && this.raw?.includes("@") ? this.actor : null;
+    const useActor = actor && this.getNearestDocument() !== actor;
+    return safeInf(this.#evaluate(useActor ? actor.getRollData() : {}));
   }
 
   /**
