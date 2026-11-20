@@ -47,7 +47,10 @@ export default class BaseExecution extends BaseDataModel {
   /** @type {TeriockJournalEntryPage} */
   #journalEntryPage;
 
-  /** @type {Record<Teriock.Keys.Command, number>} */
+  /**
+   * @type {Record<Teriock.Keys.Command, number>}
+   * @category Boosting
+   */
   _boostsResolved = {};
 
   /** @type {Activation[]} */
@@ -425,6 +428,7 @@ export default class BaseExecution extends BaseDataModel {
   /**
    * Evaluate boosts.
    * @returns {Promise<false|void>}
+   * @category Boosting
    */
   async _evaluateBoosts() {
     const boostPromises = Object.entries(this._boosts).map(async (
@@ -481,6 +485,7 @@ export default class BaseExecution extends BaseDataModel {
    * Whether this has boosts for a given command.
    * @param {Teriock.Keys.Command} command
    * @returns {boolean}
+   * @category Boosting
    */
   _hasBoostForCommand(command) {
     return this._boostsResolved[command] && this.activations.some(a => a.type === "roll" && a.command === command);

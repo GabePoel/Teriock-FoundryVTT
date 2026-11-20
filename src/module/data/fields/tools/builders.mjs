@@ -442,6 +442,10 @@ export function tradecraftsField(options = {}) {
 
 /**
  * Field for selecting terrains.
+ * 
+ * Relevant wiki pages:
+ * - [Terrain Types](https://wiki.teriock.com/index.php?title=Core:Terrain_Types)
+ * 
  * @param {ArrayFieldOptions} [options]
  * @returns {SetField}
  * @category Terrain

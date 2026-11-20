@@ -8,4 +8,22 @@ const comparisons = {
   neq: { inverse: "eq", label: "TERIOCK.TERMS.Comparison.neq", fn: (a, b) => Number(a != b) },
 };
 
-export default { comparisons };
+/**
+ * Dice modifiers that boosting and deboosting is somewhat compatible with.
+ * @category Boosting
+ */
+const boostableModifiers = [
+  "countEven",
+  "countFailures",
+  "countOdd",
+  "countSuccess",
+  "deductFailures",
+  "marginSuccess",
+  "maximum",
+  "minimum",
+  "reroll",
+  "rerollRecursive",
+  "subtractFailures",
+];
+
+export default { boostableModifiers, comparisons };

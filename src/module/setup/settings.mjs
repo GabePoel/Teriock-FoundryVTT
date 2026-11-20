@@ -73,7 +73,9 @@ function getMenuSettings() {
         keyword: {
           icon: TERIOCK.DISPLAY.icons.manifest.document.keyword,
           settings: {
+            /** @category Boosting */
             numericalBoostsAndDeboosts: { default: false, scope: "world", type: Boolean },
+            /** @category Boosting */
             randomBoostedTypes: { default: false, scope: "world", type: Boolean },
           },
         },

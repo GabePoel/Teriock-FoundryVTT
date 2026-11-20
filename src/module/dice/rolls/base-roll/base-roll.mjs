@@ -6,7 +6,7 @@ const { Roll } = foundry.dice;
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
- * @import { NumericTerm, RollTerm } from "@client/dice/terms/_module.mjs";
+ * @import { DiceTerm, NumericTerm, RollTerm } from "@client/dice/terms/_module.mjs";
  */
 
 /** @inheritDoc */
@@ -151,6 +151,7 @@ export default class BaseRoll extends Roll {
   /**
    * Reset all rolls recursively.
    * @param {BaseRoll} roll
+   * @category Boosting
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
@@ -190,8 +191,37 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * The dice terms that boosts and deboosts can change.
+   * @returns {DiceTerm[]}
+   * @category Boosting
+   */
+  get boostableDice() {
+    return this.dice.filter(d => {
+      const modifiers = d.constructor.MODIFIERS ?? {};
+      const keys = Object.keys(modifiers).sort((a, b) => b.length - a.length);
+      if (!d.modifiers.length || !keys.length) { return true; }
+      const pattern = new RegExp(keys.join("|"), "gi");
+      return d.modifiers.every(m =>
+        Array.from(m.matchAll(pattern), ([k]) => modifiers[k.toLowerCase()]).every(fn =>
+          TERIOCK.CONFIG.math.boostableModifiers.includes(fn)
+        )
+      );
+    });
+  }
+
+  /**
+   * Whether this roll can be boosted or deboosted.
+   * @returns {boolean}
+   * @category Boosting
+   */
+  get canBoost() {
+    return this.boostableDice.length > 0 || game.settings.get("teriock", "numericalBoostsAndDeboosts");
+  }
+
+  /**
    * The numeric terms of this roll. This includes those of any formula it boosts or deboosts.
    * @returns {NumericTerm[]}
+   * @category Boosting
    */
   get numbers() {
     return this.terms.flatMap(t => t instanceof foundry.dice.terms.NumericTerm ? [t] : (t.numbers ?? []));
@@ -251,6 +281,7 @@ export default class BaseRoll extends Roll {
    * Boost this roll in place.
    * @param {object} [options]
    * @returns {Promise<BaseRoll>}
+   * @category Boosting
    */
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
@@ -258,8 +289,8 @@ export default class BaseRoll extends Roll {
     if (!clone._evaluated) { await clone.evaluate(); }
     clone.collapseNumbers();
     const die = Booster._boost(clone);
-    if (!die._evaluated) { await die.evaluate(); }
-    else if (die.results) {
+    if (die && !die._evaluated) { await die.evaluate(); }
+    else if (die?.results) {
       const dieRoll = new BaseRoll(die.formula);
       await dieRoll.evaluate();
       die.results.push(dieRoll.dice[0].results.at(-1));
@@ -286,6 +317,7 @@ export default class BaseRoll extends Roll {
   /**
    * Combine each deterministic part of this roll and the formulas it boosts into a single number. Formulas are handled
    * like `@p * 2` becoming `(@p * 2)d1`. This only does anything if `numericalBoostsAndDeboosts` is enabled.
+   * @category Boosting
    */
   collapseNumbers() {
     if (!game.settings.get("teriock", "numericalBoostsAndDeboosts")) { return; }
@@ -319,6 +351,7 @@ export default class BaseRoll extends Roll {
    * Deboost this roll in place.
    * @param {object} [options]
    * @returns {Promise<BaseRoll>}
+   * @category Boosting
    */
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });

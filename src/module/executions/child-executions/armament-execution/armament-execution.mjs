@@ -86,7 +86,10 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Com
     return super._getInput();
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Boosting
+   */
   _hasBoostForCommand(command) {
     return (super._hasBoostForCommand(command)
       || (this._boostsResolved[command] && this.commands.has(command) && FormulaField.exists(this.formula)));

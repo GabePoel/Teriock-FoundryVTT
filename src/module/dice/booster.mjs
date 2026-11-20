@@ -18,6 +18,7 @@ const { FunctionTerm } = foundry.dice.terms;
  * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
  *
  * @inheritDoc
+ * @category Boosting
  */
 class BoosterTerm extends FunctionTerm {
   static BOOST_ALIASES = {

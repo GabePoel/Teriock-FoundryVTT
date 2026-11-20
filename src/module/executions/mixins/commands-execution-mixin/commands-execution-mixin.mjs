@@ -91,6 +91,7 @@ export default function CommandsExecutionMixin(Base) {
 
     /**
      * Apply boosts, deboosts, and critical modifiers to the formula.
+     * @category Boosting
      */
     _applyCommandModifiers() {
       if (!FormulaField.exists(this.formula)) { return; }

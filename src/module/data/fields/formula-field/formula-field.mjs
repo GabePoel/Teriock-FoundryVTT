@@ -67,6 +67,7 @@ export default class FormulaField extends StringField {
    * @param {Teriock.System.FormulaString} value - Original formula.
    * @param {Teriock.System.FormulaString} delta - Modification to formula.
    * @returns {Teriock.System.FormulaString}
+   * @category Boosting
    */
   static boost(value, delta) {
     if (FormulaField.exists(value) && FormulaField.exists(delta)) { return `sb(${value}, ${delta})`; }
@@ -212,6 +213,7 @@ export default class FormulaField extends StringField {
    * @param {DataModel} _model
    * @param {ActiveEffectChangeData} _change
    * @returns {Teriock.System.FormulaString}
+   * @category Boosting
    */
   _applyChangeBoost(value, delta, _model, _change) {
     if (!delta || this.deterministic) { return value; }

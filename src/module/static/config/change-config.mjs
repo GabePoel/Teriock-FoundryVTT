@@ -49,6 +49,7 @@ const paths = {
     targets: ["armament"],
     types: typeSubsets.simple,
   },
+  /** @category Boosting */
   "system.boosts.*": {
     group: "boosts",
     label: "TERIOCK.SYSTEMS.Child.FIELDS.boosts.all",
@@ -183,6 +184,7 @@ const types = {
       }]
     ),
   ),
+  /** @category Boosting */
   boost: {
     defaultPriority: 60,
     label: "TERIOCK.EFFECTS.Changes.boost",

@@ -52,13 +52,15 @@ export default class CommandsRoll extends BaseRoll {
     this.#setCommandFlavor();
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Boosting
+   */
   _getFormulaContextOptions(config = {}) {
-    const boostable = () => this.dice.length > 0 || game.settings.get("teriock", "numericalBoostsAndDeboosts");
     return [{
       icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.boost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
-      visible: boostable,
+      visible: this.canBoost,
       onClick: async () => {
         const newRoll = await this.boost(this.options);
         await newRoll.toMessage({ speaker: TeriockChatMessage.getSpeaker(), ...config.messageData });
@@ -66,7 +68,7 @@ export default class CommandsRoll extends BaseRoll {
     }, {
       icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.deboost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
-      visible: boostable,
+      visible: this.canBoost,
       onClick: async () => {
         const newRoll = await this.deboost(this.options);
         await newRoll.toMessage({ speaker: TeriockChatMessage.getSpeaker(), ...config.messageData });

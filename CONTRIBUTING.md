@@ -26,6 +26,10 @@ Some parts of the codebase that are essential for interlocking functionality as 
 
 Things marked with `@category Behavior` relate to inherited document behavior settings. These are settings with a world scope and then are _also_ duplicated on individual documents in case they need to be overwritten.
 
+### Boosting
+
+If something is given `@category Boosting` then it relates to handling of [boosting](https://wiki.teriock.com/index.php?title=Keyword:Boosted) and [deboosting](https://wiki.teriock.com/index.php?title=Keyword:Deboosted) dice.
+
 ### Delegation
 
 The `@category Delegation` tag means something is related to GM query delegation. This is used for database operations that need to be handled by the GM.
@@ -40,7 +44,7 @@ Any functionality relating to Ethereal vision and what can/can't be seen by Ethe
 
 ### Groups
 
-We use `CombatantGroup` documents to handle `Combatant` documents that share a turn and the different types of ways those turns can be shared. This requires a substantial amount of modification to the default combat, tracker, and turn behavior so it is marked with `@category Groups`.
+We use `CombatantGroup` documents to handle `Combatant` documents that share a turn and the different types of ways those turns can be shared. This requires a substantial amount of modification to the default combat, tracker, and turn behavior so it is marked with `@category Groups`. These are used to implement rules for [mobs](https://wiki.teriock.com/index.php?title=Core:Mobs) and [minions](https://wiki.teriock.com/index.php?title=Core:Minions).
 
 ### Hierarchy
 
@@ -52,7 +56,7 @@ Anything with the `@category Identifiers` tag is related to handling regarding l
 
 ### Morph
 
-Anything relating to the specific process by which `Actor` documents can have their species' changed by `ActiveEffect` documents is given the `@category Morph` tag.
+Anything relating to the specific process by which `Actor` documents can have their species' changed by `ActiveEffect` documents is given the `@category Morph` tag. This is called "morph" instead of "transform" so it doesn't get confused with being [transformed](https://wiki.teriock.com/index.php?title=Condition:Transformed).
 
 ### Perception
 
@@ -60,12 +64,31 @@ We use `@category Perception` for anything relating broadly to token vision.
 
 ### Sorcery
 
-The `@category Sorcery` tag is for stuff that does Elder Sorcery word handling.
+The `@category Sorcery` tag is for stuff that does [Elder Sorcery word](https://wiki.teriock.com/index.php?title=Core:Elder_Sorcery_Words) handling.
 
 ### Terrain
 
-Anything relating to the terrain that `Actor` and `TokenDocument` documents are in.
+Anything relating to the [terrain](https://wiki.teriock.com/index.php?title=Core:Terrain_Types) that `Actor` and `TokenDocument` documents are in.
 
 ### Triggers
 
 The trigger pipeline is _kind of_ like a local version of Foundry's hooks and is used to handle stuff that occurs automatically and triggers off of other events within an `Actor`. These aren't _fully_ automatic because that would cause friction and confusion and instead make chat messages whenever something happens. This functionality is given the `@category Triggers` tag.
+
+
+## Conventions
+
+There are a lot of implicit code conventions that I'm not quite sure how to articulate. But generally anything that implements something from the actual rules should have a "Relevant wiki pages" list with bullets that link to corresponding pages on the [wiki](https://wiki.teriock.com/index.php?title=Main_Page). This shouldn't list every page with any relevance because the lists can get long. Just the pages that are most relevant. And this doesn't need to be on every method in a class or group of functions if they're all relevant. Just put the links at whatever the most prominent/reasonable place is.
+
+The wiki links should be structured like so:
+
+```js
+/**
+ * Any normal documentation text that describes the thing at the top.
+ *
+ * Relevant wiki pages:
+ * - [Crab](https://wiki.teriock.com/index.php?title=Creature:Crab)
+ *
+ * @remark Any JSDoc tags normally go below.
+ */
+```
+Note that the wiki page has its title without the page's namespace.
