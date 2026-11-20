@@ -62,7 +62,7 @@ export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, 
       this.parent.updateSource({ _id });
       options.keepId = true;
     }
-    
+
     if (data.disabled === true) { return false; }
   }
 

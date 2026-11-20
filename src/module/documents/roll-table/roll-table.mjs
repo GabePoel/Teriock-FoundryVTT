@@ -55,15 +55,16 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
    * @returns {Promise<TeriockDocument[]>}
    */
   async getAllContents() {
-    const out = await this.getContents();
-    const allDocs = [...out.filter(d => !["Folder", "RollTable"].includes(d.documentName))];
-    for (const d of out) {
-      if (["Folder", "RollTable"].includes(d.documentName)) {
-        const toAdd = await d.getAllContents();
-        allDocs.push(...toAdd);
-      }
+    const known = new Map();
+    const queue = [this];
+    while (queue.length) {
+      const doc = queue.shift();
+      if (known.has(doc.uuid)) { continue; }
+      known.set(doc.uuid, doc);
+      if (doc.documentName === "RollTable") { queue.push(...(await doc.getContents())); }
+      else if (doc.documentName === "Folder") { queue.push(...(await doc.getAllContents())); }
     }
-    return allDocs;
+    return Array.from(known.values()).filter(d => !["Folder", "RollTable"].includes(d.documentName));
   }
 
   /**
