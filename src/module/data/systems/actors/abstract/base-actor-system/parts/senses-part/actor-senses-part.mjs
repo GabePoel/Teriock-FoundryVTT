@@ -1,4 +1,4 @@
-import { objectMap } from "../../../../../../../utils/_module.mjs";
+import { objectMap, safeInf } from "../../../../../../../utils/_module.mjs";
 import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 
 /**
@@ -63,7 +63,7 @@ export default function ActorSensesPart(Base) {
         "detection.hiding": this.detection.hiding ?? this.attributes.snk.passive,
         "detection.perceiving": this.detection.perceiving ?? this.attributes.per.passive,
       });
-      for (const [k, v] of Object.entries(this.senses)) { rollData[`sense.${k}`] = v; }
+      for (const [k, v] of Object.entries(this.senses)) { rollData[`sense.${k}`] = safeInf(v); }
       return rollData;
     }
 

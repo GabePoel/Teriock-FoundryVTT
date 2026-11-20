@@ -22,7 +22,7 @@ const { fields } = foundry.data;
  * @param {string|number} value
  */
 function getChoiceLabel(config, value) {
-  const option = config.options.find((o) => o.value === value);
+  const option = config.options.find((o) => o.value === String(value));
   return _loc(option?.label ?? String(value ?? ""));
 }
 

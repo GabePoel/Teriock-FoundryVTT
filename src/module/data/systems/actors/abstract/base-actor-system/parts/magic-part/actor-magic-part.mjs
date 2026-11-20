@@ -1,3 +1,4 @@
+import { safeInf } from "../../../../../../../utils/_module.mjs";
 import { ElderSorceryWordsField } from "../../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
@@ -83,9 +84,9 @@ export default function ActorMagicPart(Base) {
     getRollData() {
       return Object.assign(super.getRollData(), {
         curses: this.curses.value,
-        "curses.max": this.curses.max,
+        "curses.max": safeInf(this.curses.max),
         rotators: this.rotators.value,
-        "rotators.max": this.rotators.max,
+        "rotators.max": safeInf(this.rotators.max),
       });
     }
 

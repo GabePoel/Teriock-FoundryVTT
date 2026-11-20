@@ -149,7 +149,7 @@ export default class StatPoolModel extends BaseDataModel {
       for (const term of terms) {
         for (let i = 0; i < term.number; i++) {
           const statDie = new StatDie({
-            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + index.toString(), {
+            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.stat + index.toString(), {
               hash: true,
             }),
             faces: term.faces,

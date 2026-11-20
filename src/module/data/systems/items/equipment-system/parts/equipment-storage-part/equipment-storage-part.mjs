@@ -59,7 +59,7 @@ export default function EquipmentStoragePart(Base) {
         && e.name === this.parent.name
         && e.system.slug === this.slug
         && e.system.consumption.enabled
-        && e.system.quantity.value < e.system.quantity.max
+        && e.system.quantity.value + this._source.quantity.value <= e.system.quantity.max
       );
       if (stackCandidates.length === 0) { return null; }
       const selected = await DocumentSelector.selectSingle(stackCandidates, {

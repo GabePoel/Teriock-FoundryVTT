@@ -204,7 +204,7 @@ export default class SpeciesSystem
     const data = super.getLocalRollData();
     Object.assign(data, {
       br: this.br,
-      lifespan: this.lifespan.enabled ? this.lifespan.max : 0,
+      lifespan: this.lifespan.enabled ? safeInf(this.lifespan.max) : 0,
       "lifespan.adulthood": this.lifespan.enabled ? this.lifespan.adulthood : 0,
       "lifespan.enabled": Number(this.lifespan.enabled),
       "lifespan.max": this.lifespan.enabled ? safeInf(this.lifespan.max) : 0,

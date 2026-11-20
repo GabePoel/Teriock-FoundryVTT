@@ -120,12 +120,6 @@ export default function EquipmentWieldingPart(Base) {
       return Object.assign(super.embedParts, { struck: !this.equipped });
     }
 
-    /** @inheritDoc */
-    _onCreate(data, options, userId) {
-      super._onCreate(data, options, userId);
-      if (this.parent.checkEditor(userId)) { this.unglue(); }
-    }
-
     /**
      * Equip this equipment.
      * @returns {Promise<void>}

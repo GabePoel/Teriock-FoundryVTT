@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -89,9 +89,10 @@ export default class TargetAutomation extends BaseAutomation {
    */
   #evaluate(path, rollData, execution = null) {
     let out = 0;
-    if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.value ?? 0; }
+    if (path !== "angle" && !this[path] && execution) { out = safeInf(execution.source.system.range.value ?? 0); }
     else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
     if (path === "angle") { return out; }
+    out = Math.max(0, out);
     if (canvas?.dimensions?.distancePixels) { out *= canvas.dimensions.distancePixels; }
     if (this.expandWithToken && this.regionType !== "emanation" && execution?.actor?.defaultToken) {
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
@@ -166,6 +167,13 @@ export default class TargetAutomation extends BaseAutomation {
     return paths;
   }
 
+  /** @inheritDoc */
+  async cleanupExecution() {
+    if (!this.#targetIds) { return; }
+    canvas.tokens?.setTargets(this.#targetIds, { mode: "replace" });
+    this.#targetIds = null;
+  }
+
   /**
    * Get the data for this Automation's region.
    * @param {{rollData?: object, execution?: BaseExecution}} [options]
@@ -193,13 +201,6 @@ export default class TargetAutomation extends BaseAutomation {
       shapes: this.#getRegionShapeData(options),
       visibility: this.visibility ?? CONST.REGION_VISIBILITY.ALWAYS,
     };
-  }
-
-  /** @inheritDoc */
-  async interactOnExecutionCompletion() {
-    if (!this.#targetIds) { return; }
-    canvas.tokens?.setTargets(this.#targetIds, { mode: "replace" });
-    this.#targetIds = null;
   }
 
   /** @inheritDoc */

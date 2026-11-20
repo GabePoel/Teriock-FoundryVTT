@@ -91,11 +91,11 @@ export default class StatDie extends BasePseudoDocument {
    */
   async toggle(spent) {
     spent ??= !this.spent;
-    const spentCopy = new Set(this.parent.spent);
+    const document = this.getNearestDocument();
+    const spentCopy = new Set(document.system.statDice[this.stat].spent);
     if (spent) { spentCopy.add(this.index); }
     else { spentCopy.delete(this.index); }
-    const updatePath = `system.statDice.${this.parent.stat}.spent`;
-    await this.getNearestDocument().update({ [updatePath]: spentCopy.toObject() });
+    await document.update({ [`system.statDice.${this.stat}.spent`]: spentCopy.toObject() });
   }
 
   /**
