@@ -13,10 +13,11 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class RepositionAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "move" });
+  static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "move" });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -37,6 +38,12 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
     });
   }
 
+  /**
+   * The origin token selected during an execution.
+   * @type {TeriockTokenDocument|null|undefined}
+   */
+  #executionOrigin;
+
   /** @inheritDoc */
   get _formPaths() {
     return ["distance", ...this._originPaths, "movementAction", "hr", ...this._triggerDisplayPaths];
@@ -53,12 +60,14 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
   }
 
   /** @inheritDoc */
-  get formTips() {
-    const tips = super.formTips;
-    if (this.origin === "executor" && this.activeTriggers.size) {
-      tips.unshift({ level: "warning", text: "TERIOCK.AUTOMATIONS.Move.NOTIFICATIONS.triggeredExecutor" });
-    }
-    return tips;
+  get _triggerPaths() {
+    const paths = super._triggerPaths;
+    return this.selectsOrigin ? paths : paths.filter(p => p !== "interactInExecution");
+  }
+
+  /** @inheritDoc */
+  get canHaveTriggers() {
+    return !["executor", "target"].includes(this.origin) && super.canHaveTriggers;
   }
 
   /**
@@ -69,46 +78,44 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
     return this.origin === "random";
   }
 
+  /**
+   * Whether the origin is a token someone selects.
+   * @returns {boolean}
+   */
+  get selectsOrigin() {
+    return ["chosen", "target"].includes(this.origin);
+  }
+
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const originToken = await this._getOriginToken(options.execution);
-    if (!this.randomDirection && !originToken) { return []; }
+    const originToken = this.origin === "executor"
+      ? options.execution?.executor?.document ?? null
+      : this.#executionOrigin ?? null;
+    const originMode = this.selectsOrigin && this.#executionOrigin === undefined ? this.origin : null;
+    if (!this.randomDirection && !originToken && !originMode) { return []; }
     const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
       new RepositionActivation({
         distance,
         movementAction: this.movementAction || null,
         originBarrier: this.originBarrier,
+        originMode,
         originUuid: originToken?.uuid,
         randomDirection: this.randomDirection,
       }),
     ];
   }
 
-  /**
-   * Get the movement's origin token.
-   * @param {AbilityExecution} execution
-   * @returns {Promise<TeriockTokenDocument|null>}
-   */
-  async _getOriginToken(execution) {
-    if (this.origin === "executor" && execution?.executor?.document?.uuid) { return execution.executor.document; }
-    else if (this.origin === "target") {
-      return (await game.canvas.tokens.selectTargeted({
-        multi: false,
-        nullable: true,
-        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
-          name: this.getNearestDocument()?.name || "",
-        }),
-      }))?.[0] ?? null;
-    } else if (this.origin === "chosen") {
-      return (await game.canvas.tokens.selectVisible({
-        multi: false,
-        nullable: true,
-        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
-          name: this.getNearestDocument()?.name || "",
-        }),
-      }))?.[0] ?? null;
-    }
-    return null;
+  /** @inheritDoc */
+  async cleanupExecution() {
+    this.#executionOrigin = undefined;
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput() {
+    if (!this.interactInExecution || !this.selectsOrigin) { return; }
+    const origin = await RepositionActivation.selectOrigin(this.origin, this.getNearestDocument()?.name);
+    if (origin === false) { return false; }
+    this.#executionOrigin = origin;
   }
 }

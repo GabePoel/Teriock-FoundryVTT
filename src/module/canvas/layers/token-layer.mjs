@@ -14,6 +14,7 @@ export default class TeriockTokenLayer extends TokenLayer {
     const key = (options.multi ?? true) ? "SelectTargetedTokens" : "SelectTargetedToken";
     return DocumentSelector.selectMulti(user.targets.map(t => t.document), {
       hint: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.hint`),
+      noDocumentsMessage: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.noDocuments`),
       silent: true,
       title: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.title`),
       tooltip: false,
@@ -30,6 +31,7 @@ export default class TeriockTokenLayer extends TokenLayer {
     const key = (options.multi ?? true) ? "SelectVisibleTokens" : "SelectVisibleToken";
     return DocumentSelector.selectMulti(this.placeables.filter(t => t.isVisible).map(t => t.document), {
       hint: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.hint`),
+      noDocumentsMessage: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.noDocuments`),
       silent: true,
       title: _loc(`TERIOCK.SYSTEMS.User.DIALOGS.${key}.title`),
       tooltip: false,

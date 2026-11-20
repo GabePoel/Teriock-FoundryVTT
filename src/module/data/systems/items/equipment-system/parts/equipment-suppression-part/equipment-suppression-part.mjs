@@ -207,8 +207,8 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async reforge() {
-      await this.parent.fireTrigger("reforge");
       await this.parent.toggleChild("property:destroyed", { active: false });
+      await this.parent.fireTrigger("reforge");
     }
 
     /**
@@ -220,8 +220,8 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async repair() {
-      await this.parent.fireTrigger("repair");
       await this.parent.toggleChild("property:shattered", { active: false });
+      await this.parent.fireTrigger("repair");
     }
 
     /**
@@ -254,8 +254,8 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async undampen() {
-      await this.parent.fireTrigger("undampen");
       await this.parent.toggleChild("property:dampened", { active: false });
+      await this.parent.fireTrigger("undampen");
     }
 
     /**

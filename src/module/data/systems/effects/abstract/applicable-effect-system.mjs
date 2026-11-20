@@ -118,7 +118,7 @@ export default class ApplicableEffectSystem
 
     if (
       CONFIG.ActiveEffect.expiryAction === "update" && foundry.utils.getProperty(changes, "duration.expired") === true
-    ) { this.parent.fireTrigger("expireEffect"); }
+    ) { await this.parent.fireTrigger("expireEffect"); }
   }
 
   /** @inheritDoc */

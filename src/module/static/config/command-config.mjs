@@ -688,9 +688,9 @@ const commandConfig = {
         Object.assign(data, parsed.data);
         Object.assign(options, parsed.options);
       }
-      if (config.hook) { await a.fireTrigger(config.hook); }
       const { AffinityExecution, ResistanceExecution } = teriock.executions.activity;
-      await (config.threshold ? ResistanceExecution : AffinityExecution).create(data, options);
+      const execution = await (config.threshold ? ResistanceExecution : AffinityExecution).create(data, options);
+      if (config.hook && execution.message) { await a.fireTrigger(config.hook); }
     }),
     icon: icons.manifest.effect.resist,
     reverse: "resist",

@@ -158,7 +158,6 @@ export default function EquipmentIdentificationPart(Base) {
      * @returns {Promise<void>}
      */
     async identify() {
-      await this.parent.fireTrigger("identify");
       if (!this.identification.identified && game.users.activeGM) {
         ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.ask", {
           format: { name: this.parent.fullName },
@@ -173,6 +172,7 @@ export default function EquipmentIdentificationPart(Base) {
             format: { name: this.parent.fullName },
             localize: true,
           });
+          await this.parent.fireTrigger("identify");
           return;
         }
       }
@@ -198,7 +198,6 @@ export default function EquipmentIdentificationPart(Base) {
      * @returns {Promise<void>}
      */
     async readMagic() {
-      await this.parent.fireTrigger("readMagic");
       if (!this.identification.identified && !this.identification.read) {
         if (game.users.activeGM) {
           ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.ask", {
@@ -228,6 +227,7 @@ export default function EquipmentIdentificationPart(Base) {
             format: { name: this.parent.fullName },
             localize: true,
           });
+          await this.parent.fireTrigger("readMagic");
         } else {
           ui.notifications.error("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.failure", {
             format: { name: this.parent.fullName },

@@ -342,12 +342,25 @@ export default function MorphSystemMixin(Base) {
     getMorphOperations(active) {
       const operations = [];
       this.#addBatchToggleDocuments(operations, active);
+      const actorUpdate = {};
       if (this.morph.resets.size) {
-        this.#addBatchActorUpdate(
-          operations,
-          active ? this.#resetUpdateData : { system: this.parent.getFlag("teriock", "preMorph.system") ?? {} },
+        Object.assign(
+          actorUpdate,
+          active
+            ? this.#resetUpdateData
+            : { system: foundry.utils.deepClone(this.parent.getFlag("teriock", "preMorph.system") ?? {}) },
         );
       }
+      const primary = this.actor.system.morph.primary;
+      if (active && (!primary || primary.disabled)) {
+        foundry.utils.setProperty(actorUpdate, "system.morph.primary", this.parent.id);
+      } else if (!active && this.actor.system._source.morph.primary === this.parent.id) {
+        const fallback = this.actor.effects.filter(e =>
+          e !== this.parent && e.system.isMorph && !e.disabled
+        ).sort((a, b) => b._stats.createdTime - a._stats.createdTime)[0];
+        foundry.utils.setProperty(actorUpdate, "system.morph.primary", fallback?.id ?? null);
+      }
+      if (!foundry.utils.isEmpty(actorUpdate)) { this.#addBatchActorUpdate(operations, actorUpdate); }
       return operations;
     }
 

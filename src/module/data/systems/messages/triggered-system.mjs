@@ -27,5 +27,6 @@ export default class TriggeredSystem extends InteractiveSystem {
     const yes = await super._preActivateActivation(activation);
     if (yes === false) { return false; }
     activation.actors = [this.parent.speakerActor].filter(Boolean);
+    activation.tokens = [this.parent.speakerToken?.object].filter(Boolean);
   }
 }

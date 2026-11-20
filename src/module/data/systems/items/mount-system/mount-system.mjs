@@ -133,8 +133,8 @@ export default class MountSystem
    * @returns {Promise<void>}
    */
   async mount() {
-    await this.parent.fireTrigger("mount");
     await this.parent.update({ "system.mounted": true });
+    await this.parent.fireTrigger("mount");
   }
 
   /** @inheritDoc */

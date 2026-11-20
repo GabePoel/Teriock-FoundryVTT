@@ -100,10 +100,8 @@ export default class TeriockActiveEffect
 
     if (CONFIG.ActiveEffect.expiryAction !== "delete") { return; }
     const collection = documents[0]?.collection;
-    for (const id of operation.ids) {
-      const effect = collection?.get(id);
-      if (effect?.metadata.tags.applicable) { effect.fireTrigger("expireEffect"); }
-    }
+    const effects = operation.ids.map(id => collection?.get(id)).filter(e => e?.metadata.tags.applicable);
+    await Promise.all(effects.map(e => e.fireTrigger("expireEffect")));
   }
 
   /** @inheritDoc */

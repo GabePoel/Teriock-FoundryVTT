@@ -42,7 +42,10 @@ export default function AmmunitionExecutionMixin(Base) {
         editable: true,
         label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
         nullable: true,
-        getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
+        getChoices: () =>
+          this.actor?.previewedTypes.equipment.filter(e =>
+            e.system.consumption.enabled && e !== this._ammunitionArmament
+          ) ?? [],
         update: ammunition => this._updateAmmunition(/** @type {TeriockItem<"equipment">} */ (ammunition)),
       };
     }

@@ -19,11 +19,33 @@ export default class RepositionActivation extends BaseActivation {
       distance: new fields.NumberField(),
       movementAction: movementActionField({ blank: true, initial: null, nullable: true, required: false }),
       originBarrier: new fields.BooleanField(),
+      originMode: new fields.StringField({ choices: ["chosen", "target"], initial: null, nullable: true }),
       originUuid: new fields.DocumentUUIDField({ initial: null, nullable: true, type: "Token" }),
       randomDirection: new fields.BooleanField(),
       x: new fields.NumberField({ initial: null, nullable: true }),
       y: new fields.NumberField({ initial: null, nullable: true }),
     });
+  }
+
+  /**
+   * Select a token to move relative to.
+   * @param {"chosen"|"target"} mode
+   * @param {string} [name]
+   * @returns {Promise<TeriockTokenDocument|null|false>}
+   */
+  static async selectOrigin(mode, name = "") {
+    const options = {
+      auto: true,
+      multi: false,
+      nullable: true,
+      silent: false,
+      title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", { name }),
+    };
+    const selected = mode === "target"
+      ? await game.canvas.tokens.selectTargeted(options)
+      : await game.canvas.tokens.selectVisible(options);
+    if (selected === false) { return false; }
+    return selected?.[0] ?? null;
   }
 
   /**
@@ -33,8 +55,10 @@ export default class RepositionActivation extends BaseActivation {
    */
   async #applyMovements(distance) {
     if (!this.checkTokens()) { return; }
-    const origin = this.origin;
-    const scene = this.scene;
+    const selected = this.originMode ? await this.constructor.selectOrigin(this.originMode, this.label) : null;
+    if (this.originMode && !selected) { return; }
+    const origin = selected ? { x: selected.x, y: selected.y } : this.origin;
+    const scene = selected?.scene ?? this.scene;
     if ((!origin && !this.randomDirection) || !scene) { return; }
     const instructions = {};
     const setMovementActionData = [];

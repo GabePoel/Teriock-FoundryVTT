@@ -225,7 +225,11 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   async _dispatchTrigger(trigger, scope) {
     scope.chatDataBySource ??= {};
     for (const mechanic of [...this.system.automations, ...this.system.expirations]) {
-      if (mechanic.validateTrigger?.(trigger, scope)) { await mechanic._onFire(scope); }
+      try {
+        if (mechanic.validateTrigger?.(trigger, scope)) { await mechanic._onFire(scope); }
+      } catch (err) {
+        console.error(`Failed to fire ${trigger} on ${mechanic.uuid}.`, err);
+      }
     }
     await this.createTriggeredMessages(scope);
   }

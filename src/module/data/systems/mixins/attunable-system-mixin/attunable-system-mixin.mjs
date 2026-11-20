@@ -143,7 +143,6 @@ export default function AttunableSystemMixin(Base) {
      * @returns {Promise<TeriockActiveEffect<"attunement"> | null>} Promise that resolves to the attunement effect or null.
      */
     async attune() {
-      await this.parent.fireTrigger("attune");
       let attunement = this.attunement;
       if (attunement) { return attunement; }
       const attunementData = {
@@ -156,6 +155,7 @@ export default function AttunableSystemMixin(Base) {
       if (!this.actor?.metadata.childTypes.includes("attunement")) { return null; }
       const enoughPresence = this.tier.value <= this.actor.system.presence.max - this.actor.system.presence.value;
       [attunement] = await this.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+      if (attunement) { await this.parent.fireTrigger("attune"); }
       const options = { format: { name: this.parent.fullName }, localize: true };
       if (enoughPresence) { ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", options); }
       else { ui.notifications.warn("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", options); }
@@ -172,8 +172,8 @@ export default function AttunableSystemMixin(Base) {
      * @returns {Promise<void>}
      */
     async deattune() {
-      await this.parent.fireTrigger("deattune");
       if (this.attunement) {
+        await this.parent.fireTrigger("deattune");
         await this.attunement.delete();
         ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {
           format: { name: this.parent.fullName },

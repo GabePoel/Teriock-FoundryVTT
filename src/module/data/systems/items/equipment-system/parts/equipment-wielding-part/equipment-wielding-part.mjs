@@ -110,7 +110,7 @@ export default function EquipmentWieldingPart(Base) {
     get defaultAmmunition() {
       if (!this.ammunition.enabled) { return null; }
       const ammunition = this.actor?.previewedTypes.equipment.filter(e =>
-        e.system.consumption.enabled && (e.system.equipmentType === this.ammunition.type)
+        e !== this.parent && e.system.consumption.enabled && e.system.equipmentType === this.ammunition.type
       );
       return ammunition?.find(e => e.active) ?? ammunition?.[0] ?? null;
     }
@@ -125,8 +125,8 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async equip() {
-      await this.parent.fireTrigger("equip");
       await this.parent.update({ "system.equipped": true });
+      await this.parent.fireTrigger("equip");
     }
 
     /** @inheritDoc */
@@ -172,8 +172,8 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async glue() {
-      await this.parent.fireTrigger("glue");
       await this.parent.toggleChild("property:glued", { active: true });
+      await this.parent.fireTrigger("glue");
     }
 
     /** @inheritDoc */

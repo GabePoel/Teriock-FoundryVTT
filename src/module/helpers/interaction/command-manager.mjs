@@ -208,6 +208,9 @@ export default class CommandManager {
       Object.assign(options, result);
     }
     const resolved = await this.#resolve(entry, actors, options);
+    if (entry.execute) {
+      if ((await entry.execute(actors, options)) === false) { return null; }
+    } else { await this.#write(entry.operations, actors, resolved); }
     if (entry.trigger) {
       await Promise.all(
         actors.map((a, i) =>
@@ -220,9 +223,6 @@ export default class CommandManager {
         ),
       );
     }
-    if (entry.execute) {
-      if ((await entry.execute(actors, options)) === false) { return null; }
-    } else { await this.#write(entry.operations, actors, resolved); }
     return { actors, amount: options.amount, morganti: options.morganti };
   }
 }

@@ -55,10 +55,12 @@ const triggerConfig = {
   equipment: {
     choices: {
       dampen: "TERIOCK.TRIGGERS.Equipment.choices.dampen",
+      destroy: "TERIOCK.TRIGGERS.Equipment.choices.destroy",
       equip: "TERIOCK.TRIGGERS.Equipment.choices.equip",
       glue: "TERIOCK.TRIGGERS.Equipment.choices.glue",
       identify: "TERIOCK.TRIGGERS.Equipment.choices.identify",
       readMagic: "TERIOCK.TRIGGERS.Equipment.choices.readMagic",
+      reforge: "TERIOCK.TRIGGERS.Equipment.choices.reforge",
       repair: "TERIOCK.TRIGGERS.Equipment.choices.repair",
       shatter: "TERIOCK.TRIGGERS.Equipment.choices.shatter",
       undampen: "TERIOCK.TRIGGERS.Equipment.choices.undampen",
