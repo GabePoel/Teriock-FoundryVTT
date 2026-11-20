@@ -15,7 +15,7 @@ async function increaseDebt(_worldTime, dt) {
       const newDebt = actor.system.money.debt * Math.pow(1 + actor.system.interestRate / 100, daysElapsed);
       operations.push({
         action: "update",
-        docData: { "system.money.debt": newDebt.toNearest(0.01) },
+        docData: { "system.money.debt": newDebt },
         uuid: actor.uuid,
       });
     }

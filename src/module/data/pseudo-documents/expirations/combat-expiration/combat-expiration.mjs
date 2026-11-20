@@ -31,7 +31,8 @@ export default class CombatExpiration extends BaseExpiration {
   /** @inheritDoc */
   _validateExpirationAttempt(type, context) {
     const progress = super._validateExpirationAttempt(type, context) && context.event === this.event
-      && context.timing === this.timing && this.isValidActor(context.actor);
+      && context.timing === this.timing
+      && (!["action", "turn"].includes(this.event) || this.isValidActor(context.actor));
     if (!progress || this.skip === 0) { return progress; }
     this.update({ skip: this.skip - 1 });
     return false;

@@ -38,7 +38,7 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
       const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
         name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
       });
-      activations.push(new acts.SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
+      activations.push(new acts.SummonActivation({ display: { label }, globalUuids: [this.documentUuid] }));
     }
     if (doc.documentName === "Macro") {
       activations.push(new acts.MacroActivation({ display: { label: name }, primaryMacro: this.documentUuid }));
