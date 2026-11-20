@@ -196,7 +196,11 @@ export default class BaseRoll extends Roll {
    * @category Boosting
    */
   get boostableDice() {
-    return this.dice.filter(d => {
+    const dice = this.terms.flatMap(t => {
+      if (t instanceof foundry.dice.terms.DiceTerm) { return [t]; }
+      return t.isBooster ? (t.rolls[0]?.boostableDice ?? []) : [];
+    });
+    return dice.filter(d => {
       const modifiers = d.constructor.MODIFIERS ?? {};
       const keys = Object.keys(modifiers).sort((a, b) => b.length - a.length);
       if (!d.modifiers.length || !keys.length) { return true; }
