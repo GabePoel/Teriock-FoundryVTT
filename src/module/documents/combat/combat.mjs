@@ -252,12 +252,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
     super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
-    // Expand newly created CombatantGroups in the tracker
-    if (collection === "groups") {
-      for (const app of [ui.combat, ui.combat.popout].filter(a => a?.rendered)) {
-        for (const group of documents) { app._toggleCollapsed(`group-${group.id}`, false); }
-      }
-    }
     this.#onModifyGroups(collection, prior);
     if (collection === "combatants" && game.user.id === userId && game.users.activeGM && !options.summonsGrouped) {
       this.#groupSummons(documents);

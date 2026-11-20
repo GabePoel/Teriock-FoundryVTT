@@ -180,3 +180,15 @@ function speedField(initial, label) {
     step: 1,
   });
 }
+
+/**
+ * Make sure linked actors have the correct terrains when the scene changes or the canvas loads.
+ * @see {canvasReady}
+ * @category Terrain
+ */
+function checkSceneTerrains() {
+  const actors = new Set(game.actors.filter(a => a._cache.terrains?.size));
+  for (const token of canvas.scene?.tokens ?? []) { if (token.actor) { actors.add(token.actor); } }
+  for (const actor of actors) { actor.system.checkTerrains?.(); }
+}
+Hooks.on("canvasReady", checkSceneTerrains);

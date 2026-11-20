@@ -2,6 +2,8 @@ import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_mo
 import { makeIcon } from "../../utils/_module.mjs";
 
 /**
+ * @import { ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ * @import { DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
  */
@@ -133,3 +135,23 @@ export default function EmbeddableDataMixin(Base) {
 
   return EmbeddableData;
 }
+
+/**
+ * Add the entries from {@link EmbeddableData.getEmbedContextMenuEntries} to sheet header.
+ * @param {DocumentSheetV2 & { document: TeriockDocument }} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function addEmbedContextMenuEntriesToHeader(application, controls) {
+  if (!application.window.header) { return; }
+  const document = application.document;
+  if (typeof document.getEmbedContextMenuEntries !== "function") { return; }
+  const entries = document.getEmbedContextMenuEntries(document);
+  const { PanelSheet } = teriock.applications.sheets.utility;
+  controls.push(
+    ...entries.filter(e =>
+      e.action !== "duplicateDoc" && (e.action !== "openPanelDoc" || !(application instanceof PanelSheet))
+    ),
+  );
+}
+Hooks.on("getHeaderControlsDocumentSheetV2", addEmbedContextMenuEntriesToHeader);

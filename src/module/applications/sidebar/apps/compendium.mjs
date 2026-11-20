@@ -5,6 +5,10 @@ import { TeriockCompendiumDirectory } from "../tabs/_module.mjs";
 const { Compendium } = foundry.applications.sidebar.apps;
 
 /**
+ * @import { DocumentSheetV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * @extends {Compendium}
  * @mixes TeriockDocumentDirectory
  */
@@ -72,3 +76,15 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
       && ["ActiveEffect", "Actor", "Item"].includes(this.documentName);
   }
 }
+
+/**
+ * Change the color of headers for documents in compendiums.
+ * @param {DocumentSheetV2} application
+ */
+function recolorCompendiumDocumentHeader(application) {
+  if (!application.window.header) { return; }
+  if (application.document?.inCompendium) {
+    application.window.header.style.backgroundColor = "var(--compendium-sheet-header-background-color)";
+  }
+}
+Hooks.on("getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader);

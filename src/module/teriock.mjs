@@ -504,8 +504,7 @@ Hooks.once("ready", () => {
   applications.ux.TeriockDragDrop.registerGlobalDragHandler();
 });
 
-// Register Hook Listeners and Handlebars Helpers
-// ==============================================
+// Register Handlebars Helpers
+// ===========================
 
-setup.registerHookListeners();
 setup.registerHandlebarsHelpers();

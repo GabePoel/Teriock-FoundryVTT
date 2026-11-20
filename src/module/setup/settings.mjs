@@ -470,6 +470,10 @@ export function registerSettings() {
     menuApplication.registerMenu();
   }
   const worldSettings = {
+    relevantActors: {
+      type: new fields.SetField(new fields.ForeignDocumentField(foundry.documents.BaseActor, { idOnly: true })),
+      onChange: () => ui.world?.render(),
+    },
     terrains: {
       type: terrainsField(),
       onChange: () => {

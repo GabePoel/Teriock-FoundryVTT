@@ -3,6 +3,7 @@ import { TimeUnitModel } from "../../../data/models/unit-models/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
+import { HTMLDocumentIdElement } from "../../elements/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 const { fields } = foundry.data;
@@ -274,12 +275,15 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
 
   /** @inheritDoc */
   async _prepareContext(options) {
+    const settings = Object.fromEntries(["relevantActors", "terrains", "worldEffects"].map(key => {
+      const { name, type } = game.settings.settings.get(`teriock.${key}`);
+      return [key, { field: type, label: name, value: Array.from(game.settings.get("teriock", key)) }];
+    }));
+    const uuids = game.actors.map(a => a.uuid);
+    settings.relevantActors.input = (_field, config) => HTMLDocumentIdElement.create({ ...config, uuids });
     return Object.assign(await super._prepareContext(options), {
       disabled: !game.user.isGM,
-      settings: Object.fromEntries(["terrains", "worldEffects"].map(key => {
-        const { name, type } = game.settings.settings.get(`teriock.${key}`);
-        return [key, { field: type, label: name, value: Array.from(game.settings.get("teriock", key)) }];
-      })),
+      settings,
       worldTime: game.time.calendar.format(),
       worldTitle: game.world.title,
     });
@@ -327,3 +331,35 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
     return context;
   }
 }
+
+/**
+ * Re-render the world settings so new actors can be marked as relevant.
+ * @param {TeriockActor} actor
+ * @see {createActor}
+ */
+function renderRelevantActors(actor) {
+  if (game.user.isGM && !actor.pack) { ui.world?.render({ parts: ["settings"] }); }
+}
+Hooks.on("createActor", renderRelevantActors);
+
+/**
+ * Remove a deleted actor from the relevant actors setting.
+ * @param {TeriockActor} actor
+ * @see {deleteActor}
+ */
+function cleanRelevantActors(actor) {
+  const relevant = game.settings.get("teriock", "relevantActors");
+  if (game.user.isActiveGM && !actor.pack && relevant.has(actor.id)) {
+    game.settings.set("teriock", "relevantActors", relevant.difference(new Set([actor.id])));
+  }
+}
+Hooks.on("deleteActor", cleanRelevantActors);
+
+/**
+ * Refresh the time displayed in the world tab.
+ * @see {updateWorldTime}
+ */
+function renderWorldTime() {
+  ui.world?.render({ parts: ["header"] });
+}
+Hooks.on("updateWorldTime", renderWorldTime);

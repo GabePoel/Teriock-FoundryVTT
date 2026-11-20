@@ -1,4 +1,8 @@
-import { mergeMetadata, parseIdentifier } from "../../../utils/_module.mjs";
+import { makeIconClass, mergeMetadata, parseIdentifier } from "../../../utils/_module.mjs";
+
+/**
+ * @import { ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ */
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
  * @template {MixinBase} T
@@ -53,3 +57,22 @@ export default function WikiSystemMixin(Base) {
 
   return WikiSystem;
 }
+
+/**
+ * Add a wiki open button to the sheet header.
+ * @param {ChildSheet} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function addWikiOpenToHeader(application, controls) {
+  if (!application.window.header) { return; }
+  if (application.document.system?.metadata?.tags?.wiki && application.document.system.isOnWiki) {
+    controls.push({
+      action: "wikiOpenThis",
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.wiki, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
+      onClick: () => application.document.system.wikiOpen(),
+    });
+  }
+}
+Hooks.on("getHeaderControlsDocumentSheetV2", addWikiOpenToHeader);

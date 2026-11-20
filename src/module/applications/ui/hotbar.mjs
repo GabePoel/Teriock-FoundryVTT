@@ -1,5 +1,7 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { findBestDocument, fromIdentifier, makeIcon, toId } from "../../utils/_module.mjs";
+import { findBestDocument, fromIdentifier, makeIcon, makeIconClass, toId } from "../../utils/_module.mjs";
+import { TeriockDialog } from "../api/_module.mjs";
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
 
@@ -154,3 +156,58 @@ export default class TeriockHotbar extends Hotbar {
     return this.hotbarFolder;
   }
 }
+
+/**
+ * Create a macro when a child document is dropped on the hotbar.
+ * @param {TeriockHotbar} hotbar
+ * @param {object} data
+ * @param {string} slot
+ * @returns {false|void}
+ * @see {hotbarDrop}
+ */
+function createChildHotbarDropMacro(hotbar, data, slot) {
+  const cls = foundry.utils.getDocumentClass(data.type);
+  if (!cls?.documentMetadata?.child) { return; }
+  cls.fromDropData(data).then(async doc => {
+    if (!doc) { return; }
+    const create = game.settings.get("teriock", "showHotbarDropDialog")
+      ? await TeriockDialog.prompt({
+        buttons: [{
+          action: "useMatches",
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.search),
+          label: _loc("TERIOCK.HOTBAR.UseMatches"),
+          callback: () => hotbar._createMatchesUse,
+        }, {
+          action: "toggleSheet",
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.openWindow),
+          label: _loc("HOTBAR.ToggleSheet", { document: _loc("DOCUMENT.Document") }),
+          callback: () => hotbar._createDocumentSheetToggle,
+        }],
+        content: await TeriockTextEditor.enrichHTML(
+          await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", {
+            child: `@UUID[${doc.uuid}]`,
+            identifier: `[[code ${doc.identifier}]]`,
+            label: doc.typeLabel.toLocaleLowerCase(game.i18n.lang),
+          }),
+        ),
+        modal: true,
+        ok: {
+          action: "useDocument",
+          default: true,
+          icon: makeIconClass(doc.typeIcon ?? TERIOCK.DISPLAY.icons.manifest.ui.linked),
+          label: _loc("TERIOCK.HOTBAR.UseDocument"),
+          callback: () => hotbar._createDocumentUse,
+        },
+        position: { width: 550 },
+        window: {
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.macro, "title"),
+          title: _loc("TERIOCK.HOTBAR.SelectAction"),
+        },
+      })
+      : hotbar._createDocumentUse;
+    const macro = await create?.call(hotbar, doc);
+    if (macro) { await game.user.assignHotbarMacro(macro, slot, { fromSlot: data.slot }); }
+  });
+  return false;
+}
+Hooks.on("hotbarDrop", createChildHotbarDropMacro);

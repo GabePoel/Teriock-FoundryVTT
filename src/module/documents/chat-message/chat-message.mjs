@@ -1,9 +1,12 @@
-import { dedent, mixClasses } from "../../utils/_module.mjs";
+import { dedent, makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
 
 /**
+ * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ * @import { ImagePopout } from "@client/applications/apps/_module.mjs";
+ * @import { ImagePopoutConfiguration } from "@client/applications/apps/image-popout.mjs";
  * @import { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
  */
 
@@ -151,3 +154,20 @@ export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocu
     return element;
   }
 }
+
+/**
+ * Add a share image in chat button to the header.
+ * @param {ImagePopout & {options: ApplicationConfiguration & ImagePopoutConfiguration}} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function addShareImageToHeader(application, controls) {
+  if (!application.window.header) { return; }
+  controls.push({
+    action: "shareImageInChat",
+    icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.shareImage, "contextMenu"),
+    label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
+    onClick: () => TeriockChatMessage.fromImg(application.options.src),
+  });
+}
+Hooks.on("getHeaderControlsImagePopout", addShareImageToHeader);

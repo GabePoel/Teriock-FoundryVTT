@@ -1,4 +1,4 @@
-import { HTMLLocalDocumentElement } from "../../../applications/elements/_module.mjs";
+import { HTMLDocumentIdElement } from "../../../applications/elements/_module.mjs";
 
 const { DocumentIdField } = foundry.data.fields;
 
@@ -69,7 +69,7 @@ export default class LocalDocumentField extends DocumentIdField {
     if (!config.model) { return super._toInput(config); }
     const collection = this._findCollection(config.model, this.model.metadata.collection);
     config.uuids ??= collection?.filter(d => this.filter(d, config.model)).map(d => d.uuid);
-    return HTMLLocalDocumentElement.create(config);
+    return HTMLDocumentIdElement.create({ ...config, single: true });
   }
 
   /** @inheritDoc */

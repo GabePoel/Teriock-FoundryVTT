@@ -1,6 +1,6 @@
 /**
- * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
- * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry, ApplicationRenderOptions } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2, DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  */
 
 /**
@@ -409,3 +409,61 @@ function findMatchingElements(root, selector) {
   matches.push(...root.querySelectorAll(selector));
   return matches;
 }
+
+/**
+ * Adds a right-click option to the close button in all applications.
+ * @param {ApplicationV2|DocumentSheetV2|ExecutionEditor} application
+ * @param {HTMLElement} _element
+ * @param {object} _context
+ * @param {ApplicationRenderOptions} options
+ * @see {renderApplicationV2}
+ */
+function addApplicationDebugListener(application, _element, _context, options) {
+  if (!options.isFirstRender || !application.window.header) { return; }
+  application.window.header.addEventListener("contextmenu", async e => {
+    if (!e.target.closest("[data-action=close]") || !game.settings.get("teriock", "developerMode")) { return; }
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    console.warn("Debug Application:");
+    console.log("Application", application);
+    if (application.execution) {
+      console.log("Execution", application.execution);
+    }
+    if (application.document) {
+      console.log("Document", application.document);
+      if (typeof application.document.getRollData === "function") {
+        console.log("Roll Data", application.document.getRollData());
+      }
+    }
+    if (typeof application._prepareContext === "function") {
+      const context = await application._prepareContext({ force: false, isFirstRender: false });
+      console.log("Context", context);
+    }
+  }, { capture: true });
+}
+Hooks.on("renderApplicationV2", addApplicationDebugListener);
+
+/**
+ * Sort the document header control document sheets to be alphabetical. Modules might still break this though...
+ * @param {ApplicationV2} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function sortControls(application, controls) {
+  const teriock = application.options.classes?.includes("teriock")
+    || typeof application.document?.getEmbedContextMenuEntries === "function";
+  if (!teriock) { return; }
+  for (const c of controls) { c.label = _loc(c.label); }
+  controls = game.i18n.sortObjects(controls, "label");
+  controls.sort((a, b) => {
+    const getOrder = control => {
+      if (control.action === "attach") { return 1; }
+      if (control.action === "detach") { return 2; }
+      if (control.icon?.includes("delete")) { return 4; }
+      return 3;
+    };
+    return getOrder(a) - getOrder(b);
+  });
+}
+Hooks.on("getHeaderControlsApplicationV2", sortControls);

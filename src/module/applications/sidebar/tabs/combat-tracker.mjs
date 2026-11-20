@@ -526,3 +526,29 @@ export default class TeriockCombatTracker
     return true;
   }
 }
+
+/**
+ * Expand newly created CombatantGroups in the tracker.
+ * @param {TeriockCombatantGroup} group
+ * @see {createCombatantGroup}
+ * @category Groups
+ */
+function expandCreatedGroup(group) {
+  for (const app of [ui.combat, ui.combat.popout].filter(a => a?.rendered)) {
+    app._toggleCollapsed(`group-${group.id}`, false);
+  }
+}
+Hooks.on("createCombatantGroup", expandCreatedGroup);
+
+/**
+ * @param {TeriockToken} token
+ * @param {boolean} controlled
+ * @see {controlToken}
+ * @category Groups
+ */
+function markCombatantsControlled(token, controlled) {
+  for (const combatant of ui.combat?.viewed?.getCombatantsByToken(token.document) ?? []) {
+    ui.combat.markCombatantControlled(combatant, controlled);
+  }
+}
+Hooks.on("controlToken", markCombatantsControlled);

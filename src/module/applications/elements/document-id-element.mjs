@@ -7,35 +7,35 @@ const { fromUuidSync } = foundry.utils;
  */
 
 /**
- * @typedef LocalDocumentInputConfig
+ * @typedef DocumentIdInputConfig
  * @property {string[]} [uuids] - UUIDs of the documents which can be chosen.
  */
 
 /**
- * A picker for a single embedded document referenced by ID. Documents are chosen with a {@link DocumentSelector}.
+ * A picker for documents referenced by ID. Documents are chosen with a {@link DocumentSelector}.
  */
-export default class HTMLLocalDocumentElement extends TagSetMixin(AbstractTagsElement) {
+export default class HTMLDocumentIdElement extends TagSetMixin(AbstractTagsElement) {
   /** @inheritDoc */
   static icons = { ...super.icons, add: "fa-solid fa-file-import" };
 
   /** @inheritDoc */
   static labels = {
     ...super.labels,
-    add: "TERIOCK.ELEMENTS.LOCAL_DOCUMENT.select",
+    add: "TERIOCK.ELEMENTS.DOCUMENT_ID.select",
     remove: "ELEMENTS.DOCUMENT_TAGS.Remove",
   };
 
   /** @inheritDoc */
-  static tagName = "local-document";
+  static tagName = "document-id";
 
   /**
-   * Create an HTMLLocalDocumentElement using provided configuration data.
-   * @param {FormInputConfig<string> & LocalDocumentInputConfig} config
-   * @returns {HTMLLocalDocumentElement}
+   * Create an HTMLDocumentIdElement using provided configuration data.
+   * @param {FormInputConfig<string> & DocumentIdInputConfig} config
+   * @returns {HTMLDocumentIdElement}
    */
   static create(config) {
-    config.placeholder ||= _loc("TERIOCK.ELEMENTS.LOCAL_DOCUMENT.placeholder");
-    const el = super.create(Object.assign(config, { single: true }));
+    config.placeholder ||= _loc("TERIOCK.ELEMENTS.DOCUMENT_ID.placeholder");
+    const el = super.create(config);
     el.uuids = config.uuids;
     return el;
   }
@@ -55,10 +55,18 @@ export default class HTMLLocalDocumentElement extends TagSetMixin(AbstractTagsEl
 
   /** @inheritDoc */
   async _onClickButton() {
+    const { DocumentSelector } = teriock.applications.dialogs;
     const documents = this.uuids.map(uuid => fromUuidSync(uuid)).filter(Boolean);
-    const selected = await teriock.applications.dialogs.DocumentSelector.selectSingle(documents, {
+    const ids = [this._getValue() ?? []].flat();
+    const checked = documents.filter(d => ids.includes(d.id)).map(d => d.uuid);
+    if (!this.single) {
+      const selected = await DocumentSelector.selectMulti(documents, { checked, openable: true });
+      if (selected) { this.value = selected.map(d => d.id); }
+      return;
+    }
+    const selected = await DocumentSelector.selectSingle(documents, {
       auto: false,
-      checked: documents.find(d => d.id === this._getValue())?.uuid,
+      checked: checked[0],
       nullable: true,
       openable: true,
     });

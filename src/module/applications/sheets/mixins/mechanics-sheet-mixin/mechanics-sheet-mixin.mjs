@@ -3,7 +3,7 @@ import { TeriockDragDrop } from "../../../ux/_module.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
- * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationConfiguration, ApplicationRenderOptions, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  * @import { Collection } from "@common/utils/_module.mjs";
  */
 
@@ -300,3 +300,26 @@ export default function MechanicsSheetMixin(Base) {
 
   return MechanicsSheet;
 }
+
+/**
+ * Adds a right-click option to the delete button of mechanics.
+ * @param {MechanicsSheet} application
+ * @param {HTMLElement} _element
+ * @param {object} _context
+ * @param {ApplicationRenderOptions} options
+ * @see {renderMechanicsSheet}
+ */
+function addMechanicDebugListener(application, _element, _context, options) {
+  if (!options.isFirstRender) { return; }
+  application.element.addEventListener("contextmenu", async e => {
+    const el = e.target.closest("[data-action=deleteMechanic]");
+    if (!el || !game.settings.get("teriock", "developerMode")) { return; }
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    const pseudo = await fromUuid(el.dataset.uuid);
+    console.warn("Debug Pseudo");
+    if (pseudo) { console.log("Pseudo-Document", pseudo); }
+  }, { capture: true });
+}
+Hooks.on("renderMechanicsSheet", addMechanicDebugListener);

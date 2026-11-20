@@ -209,6 +209,12 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     }
   }
 
+  /** @inheritDoc */
+  _onUpdateMovement(movement, operation, user) {
+    super._onUpdateMovement(movement, operation, user);
+    if (!movement.chain.length && this.checkEditor(user) && this.actor) { this.actor.fireTrigger("movement"); }
+  }
+
   /**
    * @inheritDoc
    * @category Perception

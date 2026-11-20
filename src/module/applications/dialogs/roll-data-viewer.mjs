@@ -5,7 +5,8 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
 const { SearchFilter } = foundry.applications.ux;
 
 /**
- * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ * @import { DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
  */
 
@@ -98,3 +99,21 @@ export default class RollDataViewer extends DocumentDialog {
     this.#search.unbind();
   }
 }
+
+/**
+ * Add a roll data view button to the sheet.
+ * @param {DocumentSheetV2} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ * @see {getHeaderControlsApplicationV2}
+ */
+function addRollDataViewerToHeader(application, controls) {
+  if (!application.window.header || typeof application.document.getRollData !== "function") { return; }
+  controls.push({
+    action: "viewRollData",
+    icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.formula, "contextMenu"),
+    label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewRollData"),
+    ownership: "OBSERVER",
+    onClick: () => RollDataViewer.create({ document: application.document }),
+  });
+}
+Hooks.on("getHeaderControlsDocumentSheetV2", addRollDataViewerToHeader);

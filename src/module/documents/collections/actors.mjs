@@ -32,11 +32,12 @@ export default class TeriockActors extends Actors {
   }
 
   /**
-   * All the currently relevant actors. They are either visible or PCs.
+   * All the currently relevant actors. They are either visible, PCs, or explicitly set.
    * @returns {TeriockActor[]}
    */
   get relevant() {
-    return Array.from(new Set([...this.characters, ...this.visible]));
+    const pinned = Array.from(game.settings.get("teriock", "relevantActors"), id => this.get(id)).filter(Boolean);
+    return Array.from(new Set([...this.characters, ...pinned, ...this.visible]));
   }
 
   /**
