@@ -1,4 +1,5 @@
-import { makeIconClass } from "../../utils/_module.mjs";
+import { makeIconClass, mixClasses } from "../../utils/_module.mjs";
+import { DragDropApplicationMixin } from "../api/mixins/_module.mjs";
 import { TeriockCompendiumDirectory } from "../sidebar/tabs/_module.mjs";
 import BaseMenu from "./base-menu.mjs";
 
@@ -6,7 +7,7 @@ import BaseMenu from "./base-menu.mjs";
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  */
 
-export default class CompendiumPriorityMenu extends BaseMenu {
+export default class CompendiumPriorityMenu extends mixClasses(BaseMenu, DragDropApplicationMixin) {
   /**
    * Move an identifier source row up or down.
    * @param {PointerEvent} _event
@@ -27,6 +28,7 @@ export default class CompendiumPriorityMenu extends BaseMenu {
   static DEFAULT_OPTIONS = {
     actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority, reset: this._onReset },
     position: { width: 500 },
+    teriock: { dragDrop: { selectors: { sort: "[data-identifier-priority-row]" } } },
   };
 
   /**
@@ -103,6 +105,24 @@ export default class CompendiumPriorityMenu extends BaseMenu {
       if (aPriority !== bPriority) { return bPriority - aPriority; }
       return a.label.localeCompare(b.label, game.i18n.lang);
     });
+  }
+
+  /** @inheritDoc */
+  _onDragStart(event) {
+    event.dataTransfer.effectAllowed = "move";
+    super._onDragStart(event);
+    const row = event.currentTarget;
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ collection: row.dataset.identifierPriorityCollection, type: "Compendium" }),
+    );
+  }
+
+  /** @inheritDoc */
+  async _onSortDrop({ element }) {
+    const order = Array.from(element.parentElement.children, el => el.dataset.identifierPriorityCollection);
+    this.#identifierSourceRows.sort((a, b) => order.indexOf(a.collection) - order.indexOf(b.collection));
+    await this.render({ parts: ["identifierSources"] });
   }
 
   /** @inheritDoc */

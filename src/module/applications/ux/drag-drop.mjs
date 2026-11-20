@@ -76,11 +76,11 @@ export default class TeriockDragDrop extends DragDrop {
    * @param {DragEvent} event
    */
   static initializeDragEvent(event) {
+    TeriockDragDrop.#initializedEvent = event;
+    window.addEventListener("dragend", TeriockDragDrop.#onDragEnd, { once: true });
     const dragData = TextEditor.implementation.getDragEventData(event);
     if (!dragData?.uuid) { return; }
-    TeriockDragDrop.#initializedEvent = event;
     game.tooltip.deactivate();
-    window.addEventListener("dragend", TeriockDragDrop.#onDragEnd, { once: true });
     dragData.interactive ??= !game.keyboard.isModifierActive("CONTROL");
     TeriockDragDrop.#payload = dragData;
     const document = fromUuidSync(dragData.uuid, { strict: false });

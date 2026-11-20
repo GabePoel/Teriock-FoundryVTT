@@ -1,10 +1,10 @@
 <div class="teriock-compendium-priority-settings teriock-form-container">
   <p class="hint">{{localize "TERIOCK.SETTINGS.identifierSourcePriority.hint"}}</p>
   <div class="form-fields">
-    <ul class="identifier-source-priority-list">
+    <ul class="identifier-source-priority-list" data-sort-container>
       {{#each identifierSourcePriority}}
         <li
-          class="identifier-source-priority-row"
+          class="identifier-source-priority-row draggable"
           data-identifier-priority-row
           data-identifier-priority-label="{{ label }}"
           data-identifier-priority-collection="{{ collection }}"
@@ -34,11 +34,11 @@
               {{makeIcon "ms-arrow-drop-down" "solid"}}
             </button>
           </div>
-          <label class="identifier-source-priority-label">
+          <span class="identifier-source-priority-label">
             <i class="{{ icon }}"></i>
             {{ label }}
             <span class="hint">({{ collection }})</span>
-          </label>
+          </span>
         </li>
       {{/each}}
     </ul>

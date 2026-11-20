@@ -36,7 +36,7 @@ declare global {
             inherit?: boolean;
           };
           /** CSS selectors */
-          selectors?: { drag?: string | null, drop?: string | null };
+          selectors?: { drag?: string | null, drop?: string | null, sort?: string };
           /** Style customization */
           style?: {
             /** Class to apply to the drop target if styled */

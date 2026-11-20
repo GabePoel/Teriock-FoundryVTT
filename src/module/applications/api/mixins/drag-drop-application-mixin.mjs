@@ -22,7 +22,7 @@ export default function DragDropApplicationMixin(Base) {
         dragDrop: {
           bind: { dragEnter: true, dragLeave: true, dragOver: true, dragStart: true, drop: true },
           dropBehavior: { child: false, effect: "none", inherit: false },
-          selectors: { drag: ".draggable", drop: null },
+          selectors: { drag: ".draggable", drop: null, sort: "[data-uuid]" },
           style: {
             dropTargetClass: "teriock-drop-target",
             maximizeOnDragEnter: false,
@@ -68,6 +68,12 @@ export default function DragDropApplicationMixin(Base) {
       return game.settings.get("teriock", "minimizeApplicationsOnDragStart")
         && this.options.teriock.dragDrop.style.minimizeOnDragStart && this.hasFrame && !this.isDetached;
     }
+
+    /**
+     * The entry being sorted, along with where it started.
+     * @type {{ element: HTMLElement, next: Element|null, parent: HTMLElement }|null}
+     */
+    _sortSource = null;
 
     /**
      * Return a cached copy of a DragDrop instance.
@@ -131,11 +137,20 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
+     * Checks if entries can be sorted.
+     * @returns {boolean}
+     */
+    _canSort() {
+      return true;
+    }
+
+    /**
      * What a drop onto this application would do.
      * @param {DragEvent} _event
      * @returns {Teriock.Application.DropEffect}
      */
     _dropEffect(_event) {
+      if (this._sortSource) { return this._sortSource.element.isConnected ? "move" : "none"; }
       return this.options.teriock.dragDrop.dropBehavior.effect;
     }
 
@@ -159,6 +174,13 @@ export default function DragDropApplicationMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onDragEnd(_event) {
+      // A drag that didn't sort just puts the entry back where it started.
+      if (this._sortSource) {
+        const { element, next, parent } = this._sortSource;
+        element.classList.remove("teriock-sort-placeholder");
+        if (!next || next.parentElement === parent) { parent.insertBefore(element, next); }
+        this._sortSource = null;
+      }
       this.#dragIsInApplication = false;
       this.#minimizeOnDragLeave = false;
       this.bringToFront();
@@ -232,12 +254,38 @@ export default function DragDropApplicationMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onDragOver(event) {
-      event.dataTransfer.dropEffect = this._fieldDropTarget(event) ? "copy" : this._dropEffect(event);
+      const field = this._fieldDropTarget(event);
+      event.dataTransfer.dropEffect = field ? "copy" : this._dropEffect(event);
       if (this.options.teriock.dragDrop.style.styleDropTarget) {
-        const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event)
+        const marked = !field && event.dataTransfer.dropEffect !== "none"
           && DragDrop.implementation.dragStartApplication !== this;
         this._dropTargetElement?.classList.toggle(this.options.teriock.dragDrop.style.dropTargetClass, marked);
       }
+      const source = this._sortSource?.element;
+      if (!source || field) { return; }
+      const { sort } = this.options.teriock.dragDrop.selectors;
+      const hit = event.target.closest?.(`[data-sort-container], [data-sort-container] > :is(${sort})`);
+      if (hit === source) { return; }
+      const element = hit?.hasAttribute("data-sort-container") ? null : hit;
+      const container = element?.parentElement ?? hit ?? source.parentElement;
+      if (source.contains(container)) { return; }
+      const group = container.dataset.sortGroup;
+      if (container !== source.parentElement && (!group || group !== source.parentElement.dataset.sortGroup)) {
+        return;
+      }
+      if (!element) {
+        const entries = Array.from(container.querySelectorAll(`:scope > :is(${sort})`)).filter(el => el !== source);
+        if (!entries.length) { container.prepend(source); }
+        else if (event.clientY < entries[0].getBoundingClientRect().top) { entries[0].before(source); }
+        else if (event.clientY > entries.at(-1).getBoundingClientRect().bottom) { entries.at(-1).after(source); }
+        return;
+      }
+      const rect = element.getBoundingClientRect();
+      const { height } = source.getBoundingClientRect();
+      const follows = source.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING;
+      const before = event.clientY < (follows ? rect.bottom - height : rect.top + height);
+      if ((before ? element.previousElementSibling : element.nextElementSibling) === source) { return; }
+      element[before ? "before" : "after"](source);
     }
 
     /**
@@ -265,6 +313,15 @@ export default function DragDropApplicationMixin(Base) {
           : { type: foundry.utils.parseUuid(uuid)?.type, uuid };
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
       }
+      const handle = event.currentTarget;
+      const element = handle?.closest?.(`[data-sort-container] > :is(${this.options.teriock.dragDrop.selectors.sort})`);
+      if (!element || !this._canSort() || (element !== handle && element.dataset.uuid !== handle.dataset.uuid)) {
+        return;
+      }
+      this._sortSource = { element, next: element.nextElementSibling, parent: element.parentElement };
+      setTimeout(() => {
+        if (this._sortSource?.element === element) { element.classList.add("teriock-sort-placeholder"); }
+      });
     }
 
     /**
@@ -273,10 +330,20 @@ export default function DragDropApplicationMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onDrop(event) {
+      const sortSource = this._sortSource;
+      this._sortSource = null;
+      sortSource?.element.classList.remove("teriock-sort-placeholder");
       this.#wasMinimizedBeforeDragEnter = false;
       this.#dragIsInApplication = false;
       this.#tabsBeforeDrag.clear();
       DragDrop.implementation.leaveApplication(this);
+      if (sortSource) {
+        const { element, next, parent } = sortSource;
+        if (!element.isConnected || (element.parentElement === parent && element.nextElementSibling === next)) {
+          return;
+        }
+        return this._onSortDrop(sortSource);
+      }
       if (this.options.teriock.dragDrop.dropBehavior.inherit) { return super._onDrop?.(event); }
     }
 
@@ -294,6 +361,13 @@ export default function DragDropApplicationMixin(Base) {
       await super._onRender(context, options);
       this._dragDrop.bind(this.element);
     }
+
+    /**
+     * Handles an entry being sorted to where it was dropped.
+     * @param {{ element: HTMLElement, next: Element|null, parent: HTMLElement }} _sortSource
+     * @returns {Promise<void>}
+     */
+    async _onSortDrop(_sortSource) {}
 
     /**
      * Reveal the tab a dragged document would be dropped into.
