@@ -454,11 +454,11 @@ Hooks.once("teriock.identifiersInit", () => {
     ...rc.sorcery,
     ...rc.species,
   };
-  const namespaced = (labels, prefix, key) =>
+  const namespaced = (labels, prefix) =>
     Object.fromEntries(
       Object.entries(labels).map((
         [k, name],
-      ) => [`${prefix}.${k}`, _loc(`TERIOCK.ROLL_CONTEXT.Namespace.${key}`, { name })]),
+      ) => [`${prefix}.${k}`, _loc(TERIOCK.CONST.ROLL_DATA_NAMESPACES[prefix], { name })]),
     );
   // Local qualifiers see a single candidate's local data
   Object.assign(rc.child, effectLabels, itemLabels);
@@ -466,17 +466,17 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.assign(
     rc.execution,
     rc.actor,
-    namespaced({ ...effectLabels, ...itemLabels }, "exec", "exec"),
-    namespaced(rc.ability, "ability", "ability"),
-    namespaced(rc.armament, "armament", "armament"),
-    namespaced(rc.armament, "ammunition", "ammunition"),
+    namespaced({ ...effectLabels, ...itemLabels }, "exec"),
+    namespaced(rc.ability, "ability"),
+    namespaced(rc.armament, "armament"),
+    namespaced(rc.armament, "ammunition"),
   );
   // Document formulas may run in an execution or against the document's own nearest effect and item
   Object.assign(
     rc.document,
     rc.execution,
-    namespaced(effectLabels, "this.effect", "thisEffect"),
-    namespaced(itemLabels, "this.item", "thisItem"),
+    namespaced(effectLabels, "this.effect"),
+    namespaced(itemLabels, "this.item"),
   );
   // Mechanic formulas may also run from a fired trigger
   Object.assign(rc.trigger, rc.document);

@@ -7,7 +7,6 @@
       data-disable="false"
       placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
       type="search"
-      value="{{ query }}"
     />
     {{infoIcon
       ""
@@ -16,18 +15,20 @@
         tooltipUuid=TERIOCK.CONST.ROLL_DATA_PAGE_UUID)
     }}
   </div>
-  <div class="roll-data-table-container scrollable">
+  <div class="roll-data-table-container">
     <table class="roll-data-table">
       <thead>
         <tr>
           <th>{{localize "TERIOCK.COMMON.Key"}}</th>
+          <th>{{localize "TERIOCK.COMMON.Description"}}</th>
           <th>{{localize "TERIOCK.COMMON.Value"}}</th>
         </tr>
       </thead>
       <tbody>
         {{#each rollData as |entry|}}
-          <tr data-key="@{{ entry.key }}">
+          <tr data-description="{{ entry.description }}" data-key="@{{ entry.key }}">
             <td>{{{ entry.code }}}</td>
+            <td>{{ entry.description }}</td>
             <td>{{ entry.value }}</td>
           </tr>
         {{/each}}

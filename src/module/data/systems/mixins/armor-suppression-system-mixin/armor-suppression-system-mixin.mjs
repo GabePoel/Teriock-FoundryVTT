@@ -1,4 +1,4 @@
-import { asInf } from "../../../../utils/_module.mjs";
+import { asInf, safeInf } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -76,7 +76,7 @@ export default function ArmorSuppressionSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { "av.max": this.maxAv });
+      return Object.assign(super.getLocalRollData(), { "av.max": safeInf(this.maxAv) });
     }
 
     /** @inheritDoc */

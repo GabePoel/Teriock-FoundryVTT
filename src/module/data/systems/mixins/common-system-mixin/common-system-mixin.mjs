@@ -215,8 +215,6 @@ export default function CommonSystemMixin(Base) {
           [`parent.type.${parentType}`]: 1,
         });
       }
-      const actor = this.actor;
-      if (actor) { Object.assign(rollData, actor.system.getScalingRollData()); }
       return Object.assign(super.getLocalRollData(), rollData);
     }
 

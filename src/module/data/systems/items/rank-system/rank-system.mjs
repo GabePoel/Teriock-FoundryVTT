@@ -1,5 +1,5 @@
 import { DocumentSelector, selectDocument } from "../../../../applications/dialogs/_module.mjs";
-import { getName, mergeMetadata, mixClasses, resolveDocuments, safeInf } from "../../../../utils/_module.mjs";
+import { getName, mergeMetadata, mixClasses, resolveDocuments } from "../../../../utils/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import {
   ArmorSuppressionSystemMixin,
@@ -248,7 +248,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = { ...super.getLocalRollData(), "av.max": safeInf(this.maxAv), number: this.number };
+    const data = { ...super.getLocalRollData(), number: this.number };
     if (this.archetype) { data[`archetype.${this.archetype}`] = 1; }
     if (this.class) { data[`class.${this.class}`] = 1; }
     return data;

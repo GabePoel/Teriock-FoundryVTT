@@ -88,7 +88,8 @@ export default function HackStatApplicationMixin(Base) {
      */
     _prepareBar(key, system) {
       const config = TERIOCK.CONFIG.stat[key];
-      const data = system[key] ?? { max: 0, morganti: 0, temp: 0, value: 0 };
+      const data = system[key] ?? { max: 0, min: 0, morganti: 0, temp: 0, value: 0 };
+      const source = system._source[key] ?? data;
       const morganti = data.morganti ?? 0;
       let text = `${data.value} / ${data.max + morganti}`;
       if (data.temp) { text += ` + ${data.temp}`; }
@@ -106,7 +107,7 @@ export default function HackStatApplicationMixin(Base) {
           temp: config.bar.temp ? `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.temp` : null,
         },
         paths: { morganti: `system.${key}.morganti`, temp: `system.${key}.temp`, value: `system.${key}.value` },
-        source: system._source[key] ?? data,
+        source: { ...source, value: Math.clamp(source.value, data.min, data.max) },
         text,
       };
     }
@@ -167,9 +168,12 @@ export default function HackStatApplicationMixin(Base) {
     /** @inheritDoc */
     _preSyncPartState(partId, newElement, priorElement, state) {
       super._preSyncPartState(partId, newElement, priorElement, state);
-      state.activeBars = {};
-      for (const overlay of priorElement.querySelectorAll(".actor-bar-overlay:is(:hover, :focus-within)")) {
-        state.activeBars[overlay.dataset.bar] = overlay.matches(":hover");
+      state.activeBars = [];
+      for (const prior of priorElement.querySelectorAll(".actor-bar-overlay:is(:hover, :focus-within, .active)")) {
+        const overlay = newElement.querySelector(`.actor-bar-overlay[data-bar="${prior.dataset.bar}"]`);
+        if (!overlay) { continue; }
+        overlay.classList.add("active");
+        state.activeBars.push([overlay, prior.matches(":hover, .active")]);
       }
     }
 
@@ -187,14 +191,8 @@ export default function HackStatApplicationMixin(Base) {
 
     /** @inheritDoc */
     _syncPartState(partId, newElement, priorElement, state) {
-      const overlays = Object.entries(state.activeBars ?? {}).map(([bar, hovered]) => {
-        const overlay = newElement.querySelector(`.actor-bar-overlay[data-bar="${bar}"]`);
-        overlay?.classList.add("active");
-        return [overlay, hovered];
-      });
       super._syncPartState(partId, newElement, priorElement, state);
-      for (const [overlay, hovered] of overlays) {
-        if (!overlay) { continue; }
+      for (const [overlay, hovered] of state.activeBars ?? []) {
         if (hovered) {
           overlay.addEventListener("pointerleave", () => overlay.classList.remove("active"), { once: true });
         } else { overlay.classList.remove("active"); }

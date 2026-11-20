@@ -92,25 +92,15 @@ export default function ActorScalingPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       Object.assign(rollData, {
-        ...this.getScalingRollData(),
-        ...this.#getRankRollData(),
-        ...this.#getSpeciesRollData(),
-      });
-      return rollData;
-    }
-
-    /**
-     * Get base roll data.
-     * @returns {object}
-     */
-    getScalingRollData() {
-      return {
         br: this.scaling.br,
         f: this.scaling.f,
         lvl: this.scaling.lvl,
         p: this.scaling.p,
         scale: this.scaling.scale,
-      };
+        ...this.#getRankRollData(),
+        ...this.#getSpeciesRollData(),
+      });
+      return rollData;
     }
 
     /** @inheritDoc */
