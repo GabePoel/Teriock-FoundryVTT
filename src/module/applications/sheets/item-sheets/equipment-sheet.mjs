@@ -1,5 +1,3 @@
-import { FormulaField } from "../../../data/fields/_module.mjs";
-import { secondaryFormat } from "../../../helpers/localization.mjs";
 import { mixClasses } from "../../../utils/_module.mjs";
 import { InventoryManagementSheetMixin } from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
@@ -20,27 +18,6 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
     "teriock/sheets/items/equipment/ammunition-bar",
     "teriock/sheets/items/equipment/storage-bar",
   ];
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const sourceLong = this.document.system.range.long.clone();
-    return Object.assign(await super._prepareContext(options), {
-      range: {
-        data: this.document.system.range.long.unitType === "finite"
-          ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
-            reverse: true,
-            secondFilter: FormulaField.exists,
-          })
-          : this.document.system.range.long.label,
-        source: sourceLong.unitType === "finite"
-          ? secondaryFormat(sourceLong.raw, this.document.system._source.range.short.raw, {
-            reverse: true,
-            secondFilter: FormulaField.exists,
-          })
-          : sourceLong.label,
-      },
-    });
-  }
 
   /** @inheritDoc */
   _validateDropEditable(options) {

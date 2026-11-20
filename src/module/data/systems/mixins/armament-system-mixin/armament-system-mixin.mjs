@@ -105,7 +105,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayTag[]}
      */
     get _armamentTags() {
-      return [...this._propertyTags, ...this._rangeTags];
+      return [...this._propertyTags, ...this._rangeTags, this.rangeTag].filter(Boolean);
     }
 
     /** @returns {Teriock.Panels.PanelBar} */
@@ -115,7 +115,7 @@ export default function ArmamentSystemMixin(Base) {
         label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
         wrappers: [
           this.piercing.label,
-          ...this._damageWrappers,
+          this.damageTag,
           FormulaField.exists(this.hitBonus)
             ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", { value: this.hitBonus })
             : "",
@@ -124,12 +124,6 @@ export default function ArmamentSystemMixin(Base) {
             : "",
         ],
       };
-    }
-
-    /** @returns {string[]} */
-    get _damageWrappers() {
-      if (!this.hasAttack) { return []; }
-      return [secondaryFormat(this.damage.base, this.damage.twoHanded, { secondFilter: FormulaField.exists })];
     }
 
     /** @returns {Teriock.Panels.PanelBar} */
@@ -270,11 +264,23 @@ export default function ArmamentSystemMixin(Base) {
       return tags;
     }
 
+    /**
+     * Formatted damage.
+     * @returns {string}
+     */
+    get damageTag() {
+      if (!this.hasAttack) { return ""; }
+      const value = secondaryFormat(this.damage.base, this.damage.twoHanded, { secondFilter: FormulaField.exists });
+      const types = ["damage", "drain"].filter(c => this.commands.has(c))
+        .map(c => _loc(`TERIOCK.SYSTEMS.Armament.PANELS.${c}`));
+      return [value, types.join("/")].filterJoin(" ");
+    }
+
     /** @inheritDoc */
     get embedParts() {
       const parts = super.embedParts;
       return Object.assign(parts, {
-        text: dotJoin([...this._damageWrappers, ...this._defenseBar.wrappers, parts.text]),
+        text: dotJoin([this.damageTag, ...this._defenseBar.wrappers, parts.text]),
       });
     }
 
@@ -313,6 +319,21 @@ export default function ArmamentSystemMixin(Base) {
      */
     get onUseAbilities() {
       return this.parent.previewedTypes.ability.filter(a => a.system.grantUse);
+    }
+
+    /**
+     * Formatted range.
+     * @returns {string}
+     */
+    get rangeTag() {
+      if (!this.range.ranged) { return ""; }
+      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", {
+        number: secondaryFormat(this.range.long.raw, this.range.short.raw, {
+          reverse: true,
+          secondFilter: FormulaField.exists,
+        }),
+        unit: this.range.long.symbol,
+      });
     }
 
     /**
