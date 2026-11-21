@@ -112,3 +112,7 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
     return obj;
   }
 }
+
+Hooks.once("teriock.identifiersInit", () => {
+  for (const t of game.tables) { t.results.forEach(r => r.prepareIdentifiersData()); }
+});

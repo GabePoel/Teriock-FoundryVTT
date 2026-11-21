@@ -126,7 +126,6 @@ export default class TeriockManager {
     this.identifiers.initializing.then(async () => {
       this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities"))?.children.documentsByType.ability
         ?? [];
-      for (const t of game.tables) { t.results.forEach(r => r.prepareIdentifiersData()); }
       for (const a of this.actorsNeedingBasicAbilities) { a.resetChildMaps(); }
       this.actorsNeedingBasicAbilities.clear();
       Hooks.call("teriock.identifiersInit");
