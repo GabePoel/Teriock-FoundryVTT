@@ -5,7 +5,7 @@ import { TeriockTextEditor } from "../_module.mjs";
  * @category Identifiers
  */
 const identifierEnricher = {
-  format: { aliases: ["Identifier", "I"], hasConfig: false, hasMultipleArguments: false, type: "link" },
+  format: { aliases: ["Identifier"], hasConfig: false, hasMultipleArguments: false, type: "link" },
   process: async (inputs) => {
     await game.teriock.identifiers.initializing;
     const identifier = inputs.arguments[0];

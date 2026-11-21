@@ -2,7 +2,7 @@ import { TeriockTextEditor } from "../_module.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const wikiEnricher = {
-  format: { aliases: ["Wiki", "L"], hasConfig: false, hasMultipleArguments: false, type: "link" },
+  format: { aliases: ["Wiki"], hasConfig: false, hasMultipleArguments: false, type: "link" },
   process: async (inputs) => {
     const pageName = inputs.arguments[0];
     return TeriockTextEditor.createAnchor({
