@@ -4,7 +4,7 @@ import { dotJoin, getName, makeIcon, mergeMetadata, mixClasses, objectMap } from
 import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import { ArmamentRangeUnitModel, documentSettingsModels } from "../../../models/_module.mjs";
+import { ArmamentRangeUnitModel, ArmamentReachUnitModel, documentSettingsModels } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -61,7 +61,7 @@ export default function ArmamentSystemMixin(Base) {
         equipmentClasses: slugSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         range: new MultiChangeField({
           long: new UnitField(ArmamentRangeUnitModel),
-          reach: new UnitField(ArmamentRangeUnitModel, { initial: () => ({ unit: "ft" }) }),
+          reach: new UnitField(ArmamentReachUnitModel),
           short: new UnitField(ArmamentRangeUnitModel),
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
@@ -425,12 +425,12 @@ export default function ArmamentSystemMixin(Base) {
         bv: this.bv.value,
         dmg: this.damage.base || 0,
         "dmg.2h": this.damage.twoHanded || 0,
-        melee: Number(this.isMelee),
         range: this.range.long.rollValue,
         "range.long": this.range.long.rollValue,
+        "range.melee": Number(this.isMelee),
+        "range.ranged": Number(this.isRanged),
         "range.reach": this.range.reach.rollValue,
         "range.short": this.range.short.rollValue,
-        ranged: Number(this.isRanged),
         "spell-turning": Number(this.spellTurning),
         vitals: Number(this.vitals),
       });

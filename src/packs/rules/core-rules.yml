@@ -175,8 +175,9 @@ pages:
         meet whatever conditions are specified for the given @Identifier[power:basic-abilities]{basic
         ability}.</p><p>Regardless of where it comes from, each ability has the same underlying
         structure.</p><h2>Executor</h2><p>@Embed[core:executor description
-        inline]</p><h2>Target</h2><p>@Embed[core:targets description inline]</p><h2>Range</h2><p>@Embed[core:range
-        description inline]</p><h2>Delivery</h2><p>@Embed[core:deliveries description inline]</p><h3>Other Delivery
+        inline]</p><h2>Target</h2><p>@Embed[core:targets description
+        inline]</p><h2>Range</h2><p>@Embed[core:ability-range description
+        inline]</p><h2>Delivery</h2><p>@Embed[core:deliveries description inline]</p><h3>Other Delivery
         Modifiers</h3><p>Some Abilities are <i>always</i> @Identifier[keyword:armor-voiding]{AV0} or
         @Identifier[keyword:unblockable]{UB}. When this is the case, it's mentioned within the Delivery.</p><h3>Delivery
         Packages</h3><p>@Embed[core:delivery-packages description inline]</p><h2>Execution or Casting Time</h2><p>Each
@@ -258,10 +259,10 @@ pages:
         @Identifier[core:attack-interaction]{attack} where an -3 isn't stated. Your attack penalty resets to 0 at the
         end of each @Identifier[core:turns]{turn} (not just your own).</p><h2>Types of Attacks</h2><p>A <b>ranged</b>
         @Identifier[core:attack-interaction]{attack} is one that has a @Identifier[core:missile-delivery]{missile
-        delivery} or that is @Identifier[core:deliveries]{delivered} with a @Identifier[property:ranged]{ranged}
-        @Identifier[property:ranged]{item} that its @Identifier[keyword:using]{user} is no longer
-        @Identifier[keyword:bearing]{bearing}. A <b>melee</b> @Identifier[core:attack-interaction]{attack} is one that
-        is not @Identifier[keyword:ranged]{ranged}.</p><p><img class="interaction-routine"
+        delivery} or that is @Identifier[core:deliveries]{delivered} with a @Identifier[core:armament-range]{ranged
+        armament} that its @Identifier[keyword:using]{user} is no longer @Identifier[keyword:bearing]{bearing}. A
+        <b>melee</b> @Identifier[core:attack-interaction]{attack} is one that is not
+        @Identifier[keyword:ranged]{ranged}.</p><p><img class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"></p>
     type: rule
   - _id: armorClass000000
@@ -663,7 +664,7 @@ pages:
     type: rule
   - _id: damage0000000000
     _key: "!journal.pages!core000000000000.damage0000000000"
-    category: 6jXziMgNy9vbnbml
+    category: 8s2pFnT8H0cMEP6P
     name: Damage
     system:
       img: icons/creatures/abilities/stinger-spine-horn-blood.webp
@@ -1803,11 +1804,12 @@ pages:
         @Wiki[Category:Armaments]{item} that mediates them. Instead, these @Pack[teriock.abilities]{abilities} may
         correspond to a @Identifier[ability:fire-ball]{ball of fire}, a @Identifier[ability:lightning-ray]{bolt of
         lightning}, a @Identifier[ability:wind-shuriken]{gust of wind}, or some other phenomenon. Missile
-        @Identifier[core:attack-interaction]{attacks} have @Identifier[core:disadvantage]{disadvantage} on targets that
-        have their @Identifier[core:executor]{executor} within melee range. Missile sourced
-        @Pack[teriock.abilities]{abilities} also requite that the creature executing them have an open hand.</p><aside
-        class="notification info theme-dark"><p>A creature with @Identifier[ability:staff-touch]{Staff Touch} wielding a
-        @Identifier[property:magelore]{magelore item} in their hand, counts as having that hand open.</p></aside>
+        @Identifier[core:attack-interaction]{attacks} have @Identifier[core:disadvantage]{disadvantage} against a target
+        if their @Identifier[core:executor]{executor} is within that target's @Identifier[core:size]{reach}. Missile
+        sourced @Pack[teriock.abilities]{abilities} also require that the creature executing them have an open
+        hand.</p><aside class="notification info theme-dark"><p>A creature with @Identifier[ability:staff-touch]{Staff
+        Touch} wielding a @Identifier[property:magelore]{magelore item} in their hand, counts as having that hand
+        open.</p></aside>
     type: rule
   - _id: longRest00000000
     _key: "!journal.pages!core000000000000.longRest00000000"
@@ -2284,21 +2286,42 @@ pages:
   - _id: range00000000000
     _key: "!journal.pages!core000000000000.range00000000000"
     category: r4tTcH7lBCwTvDHQ
+    flags:
+      teriock:
+        hiddenSubpage: true
     name: Range
     system:
-      img: systems/teriock/src/assets/thumbnails/core/range.webp
+      img: icons/skills/ranged/arrow-flying-white-blue.webp
       slug: range
     text:
       content: >-
-        <p>Each @Pack[teriock.abilities]{ability} has some <b>range</b> over which it can be used. If it is a
-        @Identifier[core:missile-delivery]{missile}, @Identifier[core:sight-delivery]{sight}, or @Wiki[Category:Area of
-        effect abilities]{area of effect ability}, then the range is specified by the @Wiki[Category:Ranged
-        abilities]{ability} itself. For @Identifier[core:item-delivery]{item delivery abilities}, the range is
-        determined by the @Wiki[Category:Armaments]{item} that is being used. If the @Wiki[Category:Armaments]{item} is
-        melee, then it's the @Wiki[Category:Armaments]{item's} range plus your @Identifier[core:size]{reach}. This
-        includes @Identifier[core:hand-delivery]{hand} and @Identifier[core:bite-delivery]{bite delivery abilities}. If
-        it's @Identifier[property:ranged]{ranged}, then it's just the @Identifier[property:ranged]{range} of the
-        @Identifier[property:ranged]{item}.</p>
+        <h2>Armament Range</h2><p>An armament with a range can hit @Identifier[core:targets]{targets} at a distance when
+        used in a <b>ranged</b> @Identifier[core:attack-interaction]{attack}. Armaments that can do this have a range in
+        parentheses after specifying if it requires @Identifier[property:ammunition]{ammunition} or if is
+        @Identifier[property:thrown]{thrown}. The range lists two numbers. The first is the item's normal range in feet,
+        and the second indicates the item's long range. When attacking a @Identifier[core:targets]{target} beyond normal
+        range, you have @Identifier[core:disadvantage]{disadvantage} on the @Identifier[core:attack-interaction]{attack
+        roll}. You can't attack a @Identifier[core:targets]{target} beyond the item's long range. In some cases, the
+        @Identifier[core:game-master]{GM} may allow a character to throw something that doesn't have a specified range.
+        The long and short ranges are up to the @Identifier[core:game-master]{GM} but are 10 / 20 ft by
+        default.</p><p>Armaments can also have a <b>reach</b>. This means they can be used to make
+        @Identifier[keyword:melee]{melee} @Identifier[core:attack-interaction]{attack} at creatures that are within
+        their @Identifier[keyword:using]{user's} @Identifier[core:size]{reach} plus the specified reach value. Most
+        armaments with a reach have a reach of 0, but some long
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} have a greater reach. An armament with no
+        reach can't typically be used to make @Identifier[keyword:melee]{melee}
+        @Identifier[core:attack-interaction]{attacks}, but a @Identifier[core:game-master]{GM} may allow it on occasion
+        at their discretion.</p><h2>Ability Range</h2><p>Each @Pack[teriock.abilities]{ability} has some <b>range</b>
+        over which it can be used. If it is a @Identifier[core:missile-delivery]{missile},
+        @Identifier[core:sight-delivery]{sight}, or @Wiki[Category:Area of effect abilities]{area of effect ability},
+        then the range is specified by the @Wiki[Category:Ranged abilities]{ability} itself. For
+        @Identifier[core:item-delivery]{item delivery abilities}, the range is determined by the
+        @Wiki[Category:Armaments]{armament} that is being used. For a @Identifier[keyword:melee]{melee} attack, it's the
+        @Wiki[Category:Armaments]{armament's} @Identifier[core:armament-range]{reach} plus your
+        @Identifier[core:size]{reach}. This includes @Identifier[core:hand-delivery]{hand} and
+        @Identifier[core:bite-delivery]{bite delivery abilities}. For a @Identifier[keyword:ranged]{ranged} attack, it's
+        the @Wiki[Category:Armaments]{armament's} @Identifier[core:armament-range]{long or short range}. Some armaments
+        such as @Identifier[equipment:spear]{spears} may be used in both cases.</p>
     type: rule
   - _id: reactiveManeuver
     _key: "!journal.pages!core000000000000.reactiveManeuver"
@@ -2719,7 +2742,54 @@ pages:
         also get SB by using @Identifier[ability:aim]{Aim}. If an @Identifier[core:attack-interaction]{attack} would
         have SB from multiple sources, it still only gets a +@Identifier[core:proficiency-bonus]{P} bonus to hit.
         However, SB stacks with other bonuses, such as those granted by @Identifier[core:proficiency-bonus]{proficiency}
-        or @Identifier[keyword:armor-voiding]{AV0}.</p>
+        or @Identifier[keyword:armor-voiding]{AV0}.</p><table><tbody><tr><th>Style </th><th>When it grants SB
+        </th><th>What gets it </th></tr><tr><td>@Identifier[style:blunt-force]{Blunt Force}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} with a @Wiki[Category:Knockout effects]{knockout
+        effect}. </td><td></td></tr><tr><td>@Identifier[style:charging]{Charging}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature you moved at least 5 feet towards this
+        @Identifier[core:turns]{turn}. </td><td></td></tr><tr><td>@Identifier[style:gladiator]{Gladiator}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a @Identifier[condition:prone]{prone},
+        @Identifier[condition:snared]{snared}, @Identifier[condition:frightened]{frightened},
+        @Identifier[condition:hacked]{hacked}, or @Identifier[condition:goaded]{goaded} creature.
+        </td><td></td></tr><tr><td>@Identifier[style:great-kenjutsu]{Great Kenjutsu}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature smaller than you on another creature's
+        @Identifier[core:turns]{turn}. </td><td></td></tr><tr><td>@Identifier[style:great-swordsman]{Great Swordsman}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature smaller than you for the first time on your
+        @Identifier[core:turns]{turn}. </td><td></td></tr><tr><td>@Identifier[style:javelinier]{Javelinier}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} with a @Identifier[property:thrown]{thrown}
+        @Identifier[core:attack-interaction]{attack}.
+        </td><td></td></tr><tr><td>@Identifier[style:juttejutsu]{Juttejutsu}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature you've
+        @Identifier[core:block-interaction]{blocked} since the end of your last @Identifier[core:turns]{turn}.
+        </td><td></td></tr><tr><td>@Identifier[style:kenjutsu]{Kenjutsu}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on another creature's @Identifier[core:turns]{turn}.
+        </td><td></td></tr><tr><td>@Identifier[style:knife]{Knife}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on your @Identifier[core:turns]{turn} while
+        @Identifier[condition:hidden]{hidden}. </td><td></td></tr><tr><td>@Identifier[style:kunai]{Kunai}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} if this was sheathed at the start of your
+        @Identifier[core:turns]{turn}. </td><td></td></tr><tr><td>@Identifier[style:phalanx]{Phalanx}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature if you have an ally using a
+        @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield} directly between you and your target.
+        </td><td></td></tr><tr><td>@Identifier[style:quickshot]{Quickshot}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on your @Identifier[core:turns]{turn} if you had three
+        actions remaining prior to making this @Identifier[core:attack-interaction]{attack}.
+        </td><td></td></tr><tr><td>@Identifier[style:savage]{Savage}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a @Identifier[condition:prone]{prone},
+        @Identifier[condition:snared]{snared}, @Identifier[condition:frightened]{frightened},
+        @Identifier[condition:suffocating]{suffocating}, or @Identifier[condition:immobilized]{immobilized} creature.
+        </td><td></td></tr><tr><td>@Identifier[style:shurikenjutsu]{Shurikenjutsu}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on another creature's @Identifier[core:turns]{turn}
+        while @Identifier[condition:hidden]{hidden}. </td><td></td></tr><tr><td>@Identifier[style:sniper]{Sniper}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on your @Identifier[core:turns]{turn} if you have not
+        @Identifier[ability:move]{moved} since the end of your last @Identifier[core:turns]{turn} and will have no
+        actions remaining after this @Identifier[core:attack-interaction]{attack}.
+        </td><td></td></tr><tr><td>@Identifier[style:swordsman]{Swordsman}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} for the first time on your
+        @Identifier[core:turns]{turn}. </td><td></td></tr><tr><td>@Identifier[style:trident]{Trident}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} from or into the water.
+        </td><td></td></tr><tr><td>@Identifier[style:wraparound]{Wraparound}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature with a
+        @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}. </td><td></td></tr></tbody></table>
     type: rule
   - _id: targets000000000
     _key: "!journal.pages!core000000000000.targets000000000"
@@ -3262,24 +3332,24 @@ pages:
         in "[[gp]]" (which stands for "gold pieces" or "gold piece equivalent"). But this does not mean everything is
         bought and sold using gold @Identifier[equipment:coin]{coins}. There are numerous currencies that all have
         different [[gp]] values.</p><h2>Currencies</h2><table><tbody><tr><th>Currency </th><th>Symbol </th><th>Value
-        </th><th>Weight </th><th>Type </th></tr><tr><td>Copper </td><td>CP </td><td>[[gp 0.01]] </td><td>0.02 lb.
+        </th><th>Weight </th><th>Type </th></tr><tr><td>Copper </td><td>CP </td><td>[[gp 0.01]] </td><td>0.02 lb
         </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Silver </td><td>SP </td><td>[[gp 0.1]]
-        </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Gold </td><td>GP </td><td>[[gp
-        1]] </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Ent Tear Amber </td><td>EA
-        </td><td>[[gp 5]] </td><td>0.05 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Fire
-        Eye Ruby </td><td>FR </td><td>[[gp 10]] </td><td>0.05 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
-        </td></tr><tr><td>Pixie Plum Amethyst </td><td>PA </td><td>[[gp 20]] </td><td>0.1 lb.
+        </td><td>0.02 lb </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Gold </td><td>GP </td><td>[[gp 1]]
+        </td><td>0.02 lb </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Ent Tear Amber </td><td>EA
+        </td><td>[[gp 5]] </td><td>0.05 lb </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Fire Eye
+        Ruby </td><td>FR </td><td>[[gp 10]] </td><td>0.05 lb </td><td>@Identifier[equipment:gemstone]{Gemstone}
+        </td></tr><tr><td>Pixie Plum Amethyst </td><td>PA </td><td>[[gp 20]] </td><td>0.1 lb
         </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Snow Diamond </td><td>SD </td><td>[[gp 50]]
-        </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Dragon Emerald </td><td>DE
-        </td><td>[[gp 100]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Moon
-        Opal </td><td>MO </td><td>[[gp 500]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
-        </td></tr><tr><td>Magus Quartz </td><td>MQ </td><td>[[gp 1000]] </td><td>0.2 lb.
+        </td><td>0.2 lb </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Dragon Emerald </td><td>DE
+        </td><td>[[gp 100]] </td><td>0.2 lb </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Moon
+        Opal </td><td>MO </td><td>[[gp 500]] </td><td>0.2 lb </td><td>@Identifier[equipment:gemstone]{Gemstone}
+        </td></tr><tr><td>Magus Quartz </td><td>MQ </td><td>[[gp 1000]] </td><td>0.2 lb
         </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Heartstone Ruby </td><td>HR </td><td>[[gp
-        5000]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
-        </td></tr></tbody></table><h2>Property Prices</h2><p>Many types of @Pack[teriock.equipment]{equipment} have a
-        listed price. This does not mean that every piece of @Pack[teriock.equipment]{equipment} of that type costs that
-        much. Rather, it is a baseline price for the most basic form of that @Pack[teriock.equipment]{equipment} without
-        any additional @Pack[teriock.properties]{properties} or @Pack[teriock.abilities]{abilities}. Sometimes
+        5000]] </td><td>0.2 lb </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr></tbody></table><h2>Property
+        Prices</h2><p>Many types of @Pack[teriock.equipment]{equipment} have a listed price. This does not mean that
+        every piece of @Pack[teriock.equipment]{equipment} of that type costs that much. Rather, it is a baseline price
+        for the most basic form of that @Pack[teriock.equipment]{equipment} without any additional
+        @Pack[teriock.properties]{properties} or @Pack[teriock.abilities]{abilities}. Sometimes
         @Pack[teriock.equipment]{equipment} with additional @Pack[teriock.properties]{properties} are available for
         purchase at @Identifier[core:game-master]{GM} discretion. These typically multiply that type of equipment's base
         price by some amount as listed below. Although a piece of @Pack[teriock.equipment]{equipment} may
@@ -3707,4 +3777,72 @@ pages:
         @Identifier[tradecraft:herbalist]{herbalists}. Unlikely most @Identifier[property:magic]{passively magic items},
         these can only be used once and are consumed in the process. Nevertheless, they serve an essential role in many
         adventurers' toolkits and are widely used in places where other items are less effective or convenient.</p>
+    type: rule
+  - _id: abilityRange0000
+    _key: "!journal.pages!core000000000000.abilityRange0000"
+    category: r4tTcH7lBCwTvDHQ
+    name: Ability Range
+    system:
+      img: icons/skills/ranged/projectile-spiral-gray.webp
+      slug: ability-range
+    text:
+      content: >-
+        <p>Each @Pack[teriock.abilities]{ability} has some <b>range</b> over which it can be used. If it is a
+        @Identifier[core:missile-delivery]{missile}, @Identifier[core:sight-delivery]{sight}, or @Wiki[Category:Area of
+        effect abilities]{area of effect ability}, then the range is specified by the @Wiki[Category:Ranged
+        abilities]{ability} itself. For @Identifier[core:item-delivery]{item delivery abilities}, the range is
+        determined by the @Wiki[Category:Armaments]{armament} that is being used. For a
+        @Identifier[keyword:melee]{melee} attack, it's the @Wiki[Category:Armaments]{armament's}
+        @Identifier[core:armament-range]{reach} plus your @Identifier[core:size]{reach}. This includes
+        @Identifier[core:hand-delivery]{hand} and @Identifier[core:bite-delivery]{bite delivery abilities}. For a
+        @Identifier[keyword:ranged]{ranged} attack, it's the @Wiki[Category:Armaments]{armament's}
+        @Identifier[core:armament-range]{long or short range}. Some armaments such as
+        @Identifier[equipment:spear]{spears} may be used in both cases.</p>
+    type: rule
+  - _id: armamentRange000
+    _key: "!journal.pages!core000000000000.armamentRange000"
+    category: 8s2pFnT8H0cMEP6P
+    name: Armament Range
+    system:
+      img: systems/teriock/src/assets/thumbnails/core/armament-range.webp
+      slug: armament-range
+    text:
+      content: >-
+        <p>An armament with a range can hit @Identifier[core:targets]{targets} at a distance when used in a
+        <b>ranged</b> @Identifier[core:attack-interaction]{attack}. Armaments that can do this have a
+        @Identifier[core:range]{range} in parentheses after specifying if it requires
+        @Identifier[property:ammunition]{ammunition} or if is @Identifier[property:thrown]{thrown}. The
+        @Identifier[core:range]{range} lists two numbers. The first is the item's normal @Identifier[core:range]{range}
+        in feet, and the second indicates the item's long range. When attacking a @Identifier[core:targets]{target}
+        beyond normal @Identifier[core:range]{range}, you have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a @Identifier[core:targets]{target} beyond
+        the item's long @Identifier[core:range]{range}. In some cases, the @Identifier[core:game-master]{GM} may allow a
+        character to throw something that doesn't have a specified range. The long and short ranges are up to the
+        @Identifier[core:game-master]{GM} but are 10 / 20 ft by default.</p><p>Armaments can also have a <b>reach</b>.
+        This means they can be used to make @Identifier[keyword:melee]{melee}
+        @Identifier[core:attack-interaction]{attack} at creatures that are within their
+        @Identifier[keyword:using]{user's} @Identifier[core:size]{reach} plus the specified reach value. Most armaments
+        with a reach have a reach of 0, but some long
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} have a greater reach. An armament with no
+        reach can't typically be used to make @Identifier[keyword:melee]{melee}
+        @Identifier[core:attack-interaction]{attacks}, but a @Identifier[core:game-master]{GM} may allow it on occasion
+        at their discretion.</p>
+    type: rule
+  - _id: armamentReach000
+    _key: "!journal.pages!core000000000000.armamentReach000"
+    category: 8s2pFnT8H0cMEP6P
+    name: Armament Reach
+    system:
+      img: systems/teriock/src/assets/thumbnails/core/armament-reach.webp
+      slug: armament-reach
+    text:
+      content: >-
+        <p>Armaments can have a <b>reach</b>. This means they can be used to make @Identifier[keyword:melee]{melee}
+        @Identifier[core:attack-interaction]{attack} at creatures that are within their
+        @Identifier[keyword:using]{user's} @Identifier[core:size]{reach} plus the specified reach value. Most armaments
+        with a reach have a reach of 0, but some long
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} have a greater reach. An armament with no
+        reach can't typically be used to make @Identifier[keyword:melee]{melee}
+        @Identifier[core:attack-interaction]{attacks}, but a @Identifier[core:game-master]{GM} may allow it on occasion
+        at their discretion.</p>
     type: rule

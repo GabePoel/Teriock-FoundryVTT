@@ -258,6 +258,13 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/reach.webp
     name: Reach
     system:
+      automations:
+        - _id: WFCcbxLlaCCP16sZ
+          key: system.range.reach.raw
+          qualifier: and(@property.weapon, @range.melee)
+          target: armament
+          type: childChange
+          value: "5"
       competence:
         raw: 1
       delivery: self
@@ -269,7 +276,7 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>The @Identifier[core:range]{range} of your melee
+          <p>The @Identifier[core:armament-range]{reach} of your @Identifier[keyword:melee]{melee}
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} and
           @Identifier[core:attack-interaction]{attacks} increases by 5 feet.</p>
       powerSources:

@@ -1,4 +1,4 @@
-import { ArmamentRangeUnitModel, DefenseModel } from "../../../models/_module.mjs";
+import { ArmamentRangeUnitModel, ArmamentReachUnitModel, DefenseModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -27,7 +27,7 @@ declare global {
         /** <schema> Long range (this is the default range) */
         long: ArmamentRangeUnitModel;
         /** <schema> Reach added to the user's reach for melee attacks */
-        reach: ArmamentRangeUnitModel;
+        reach: ArmamentReachUnitModel;
         /** <schema> Short range */
         short: ArmamentRangeUnitModel;
       };
