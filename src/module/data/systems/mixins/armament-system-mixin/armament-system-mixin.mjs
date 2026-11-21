@@ -4,7 +4,7 @@ import { dotJoin, getName, makeIcon, mergeMetadata, mixClasses, objectMap } from
 import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import { documentSettingsModels, RangeUnitModel } from "../../../models/_module.mjs";
+import { ArmamentRangeUnitModel, documentSettingsModels } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -60,10 +60,9 @@ export default function ArmamentSystemMixin(Base) {
         }, { multiChangePaths: ["base", "twoHanded"] }),
         equipmentClasses: slugSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         range: new MultiChangeField({
-          long: new UnitField(RangeUnitModel),
-          melee: new fields.BooleanField({ initial: true }),
-          ranged: new fields.BooleanField({ initial: false }),
-          short: new UnitField(RangeUnitModel),
+          long: new UnitField(ArmamentRangeUnitModel),
+          reach: new UnitField(ArmamentRangeUnitModel, { initial: () => ({ unit: "ft" }) }),
+          short: new UnitField(ArmamentRangeUnitModel),
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),
@@ -81,6 +80,19 @@ export default function ArmamentSystemMixin(Base) {
         styleDescription: initialText(),
         vitals: new fields.BooleanField(),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      const range = source.range;
+      if (range && !("reach" in range) && (range.melee === false || range.long?.unit === "self")) {
+        range.reach = { unit: "none" };
+      }
+      if (range) {
+        delete range.melee;
+        delete range.ranged;
+      }
+      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */
@@ -105,7 +117,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayTag[]}
      */
     get _armamentTags() {
-      return [...this._propertyTags, ...this._rangeTags, this.rangeTag].filter(Boolean);
+      return [...this._propertyTags, ...this._rangeTags];
     }
 
     /** @returns {Teriock.Panels.PanelBar} */
@@ -177,15 +189,6 @@ export default function ArmamentSystemMixin(Base) {
           update: { "system.hitBonus": "1" },
         });
       }
-      if (this.range.ranged && !FormulaField.exists(this.range.long.raw)) {
-        options.push({
-          group: "combat",
-          id: "range",
-          label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
-          subgroup: "offense",
-          update: { "system.range.long.raw": "5" },
-        });
-      }
       return options;
     }
 
@@ -248,20 +251,9 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayTag[]}
      */
     get _rangeTags() {
-      const tags = [];
-      if (this.range.melee && this.range.long.unitType !== "zero") {
-        tags.push({
-          label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
-          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-        });
-      }
-      if (this.range.ranged) {
-        tags.push({
-          label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
-          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-        });
-      }
-      return tags;
+      return [this.meleeTag, this.rangedTag].filter(Boolean).map(label => {
+        return { label, tooltip: "TERIOCK.SYSTEMS.Armament.FIELDS.range.label" };
+      });
     }
 
     /**
@@ -299,9 +291,25 @@ export default function ArmamentSystemMixin(Base) {
       return FormulaField.exists(this.damage.twoHanded) && (this.damage.twoHanded !== this.damage.base);
     }
 
+    /**
+     * Whether this can make melee attacks.
+     * @returns {boolean}
+     */
+    get isMelee() {
+      return this.range.reach.unitType !== "zero";
+    }
+
     /** @inheritDoc */
     get isPassive() {
       return false;
+    }
+
+    /**
+     * Whether this can make ranged attacks.
+     * @returns {boolean}
+     */
+    get isRanged() {
+      return this.range.long.unitType !== "zero";
     }
 
     /**
@@ -313,6 +321,24 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /**
+     * Formatted melee reach.
+     * @returns {string}
+     */
+    get meleeTag() {
+      if (!this.isMelee) { return ""; }
+      const reach = this.range.reach;
+      return [
+        _loc("TERIOCK.SYSTEMS.Armament.PANELS.melee"),
+        reach.unitType === "finite" && FormulaField.exists(reach.raw)
+          ? _loc("TERIOCK.MODELS.BaseUnit.FORMAT", {
+            number: Number.isNumeric(reach.raw) ? Number(reach.raw).signedString() : reach.raw,
+            unit: _loc(reach.symbol),
+          })
+          : "",
+      ].filterJoin(" ");
+    }
+
+    /**
      * The abilities that activate on use.
      * @returns {TeriockActiveEffect<"ability">[]}
      */
@@ -321,17 +347,26 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /**
+     * Formatted ranged range.
+     * @returns {string}
+     */
+    get rangedTag() {
+      if (!this.isRanged) { return ""; }
+      return [_loc("TERIOCK.SYSTEMS.Armament.PANELS.ranged"), this.rangeTag].filterJoin(" ");
+    }
+
+    /**
      * Formatted range.
      * @returns {string}
      */
     get rangeTag() {
-      if (!this.range.ranged) { return ""; }
+      const long = this.range.long;
+      if (long.unitType === "zero") { return ""; }
+      if (long.unitType === "infinite") { return long.label; }
+      if (!FormulaField.exists(long.raw)) { return ""; }
       return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", {
-        number: secondaryFormat(this.range.long.raw, this.range.short.raw, {
-          reverse: true,
-          secondFilter: FormulaField.exists,
-        }),
-        unit: this.range.long.symbol,
+        number: secondaryFormat(long.raw, this.range.short.raw, { reverse: true, secondFilter: FormulaField.exists }),
+        unit: _loc(long.symbol),
       });
     }
 
@@ -390,11 +425,12 @@ export default function ArmamentSystemMixin(Base) {
         bv: this.bv.value,
         dmg: this.damage.base || 0,
         "dmg.2h": this.damage.twoHanded || 0,
+        melee: Number(this.isMelee),
         range: this.range.long.rollValue,
         "range.long": this.range.long.rollValue,
-        "range.melee": Number(this.range.melee),
-        "range.ranged": Number(this.range.ranged),
+        "range.reach": this.range.reach.rollValue,
         "range.short": this.range.short.rollValue,
+        ranged: Number(this.isRanged),
         "spell-turning": Number(this.spellTurning),
         vitals: Number(this.vitals),
       });
@@ -427,10 +463,6 @@ export default function ArmamentSystemMixin(Base) {
       if (this.kind === "magic") { this.damage.types.add("magic"); }
       this.damage.base = FormulaField.addTypes(this.damage.base, this.damage.types);
       this.damage.twoHanded = FormulaField.addTypes(this.damage.twoHanded, this.damage.types);
-
-      // Range
-      if (this.range.long.unitType === "zero") { this.range.melee = true; }
-      this.range.ranged = this.range.long.unitType !== "zero";
     }
 
     /** @inheritDoc */

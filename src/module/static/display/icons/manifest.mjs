@@ -29,6 +29,7 @@ export default {
     bv: "ms-shield",
     hitBonus: "ms-expand-circle-up",
     load: "ms-azm",
+    reach: "ms-arrow-range",
   },
   attribute: {
     int: "ms-neurology",

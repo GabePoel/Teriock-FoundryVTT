@@ -32,6 +32,7 @@ const groups = {
   damage: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
   defense: "TERIOCK.TERMS.ChangeGroups.defense",
   offense: "TERIOCK.TERMS.ChangeGroups.offense",
+  range: "TERIOCK.SYSTEMS.Armament.FIELDS.range.label",
 };
 
 /** @type {Record<string, Teriock.Config.ChildChangePathEntry>} */
@@ -76,7 +77,7 @@ const paths = {
   },
   "system.damage.*": {
     group: "damage",
-    label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.alt",
+    label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.all",
     targets: ["armament"],
     types: typeSubsets.harm,
   },
@@ -103,6 +104,30 @@ const paths = {
     label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
     targets: ["ability", "armament"],
     types: typeSubsets.simple,
+  },
+  "system.range.*.raw": {
+    group: "range",
+    label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.all",
+    targets: ["armament"],
+    types: typeSubsets.formula,
+  },
+  "system.range.long.raw": {
+    group: "range",
+    label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.label",
+    targets: ["armament"],
+    types: typeSubsets.formula,
+  },
+  "system.range.reach.raw": {
+    group: "range",
+    label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.reach.label",
+    targets: ["armament"],
+    types: typeSubsets.formula,
+  },
+  "system.range.short.raw": {
+    group: "range",
+    label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
+    targets: ["armament"],
+    types: typeSubsets.formula,
   },
   "system.spellTurning": {
     group: "defense",

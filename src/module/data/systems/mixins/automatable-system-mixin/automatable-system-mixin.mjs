@@ -49,10 +49,17 @@ export default function AutomatableSystemMixin(Base) {
           source.transformationLevel ||= ["minor", "full", "greater"].indexOf(a.level) + 1;
           delete a.level;
         }
-        if (a?.type === "changes") {
-          for (const c of a.changes ?? []) {
+        // TODO: Remove this when rules changes are fully committed
+        if (a?.type === "changes" && Array.isArray(a.changes)) {
+          a.changes = a.changes.filter(c => c?.key !== "system.range.ranged");
+          for (const c of a.changes) {
             if (c.phase === "derived") { c.phase = "main"; }
             else if (c.phase === "special") { c.phase = "final"; }
+            if (c.key === "system.range.melee") {
+              Object.assign(c, { key: "system.range.reach.unit", type: "override", value: "none" });
+            } else if (c.key === "system.range.long.raw" && c.type === "upgrade") {
+              Object.assign(c, { key: "system.range.reach.raw", value: "5" });
+            }
           }
         }
       }

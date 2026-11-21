@@ -19,4 +19,10 @@ export default class RangeUnitModel extends LengthUnitModel {
       label: "TERIOCK.MODELS.Range.UNITS.self.label",
     }];
   }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (source.unit === "contact") { source.unit = "melee"; }
+    return super.migrateData(source, options);
+  }
 }

@@ -12,31 +12,46 @@ export default class ArmamentSheet extends ChildSheet {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const sourceLong = this.document.system.range.long.clone();
+    const system = this.document.system;
+    const long = system.range.long;
+    const sourceLong = long.clone();
+    const reach = system.range.reach;
+    const sourceReach = reach.clone();
     return Object.assign(await super._prepareContext(options), {
       damage: {
-        data: secondaryFormat(this.document.system.damage.base || "0", this.document.system.damage.twoHanded, {
+        data: secondaryFormat(system.damage.base || "0", system.damage.twoHanded, {
           secondFilter: FormulaField.exists,
         }),
-        source: secondaryFormat(
-          this.document.system._source.damage.base || "0",
-          this.document.system._source.damage.twoHanded,
-          { secondFilter: FormulaField.exists },
-        ),
+        source: secondaryFormat(system._source.damage.base || "0", system._source.damage.twoHanded, {
+          secondFilter: FormulaField.exists,
+        }),
       },
       range: {
-        data: this.document.system.range.long.unitType === "finite"
-          ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
+        data: long.unitType !== "finite"
+          ? long.label
+          : FormulaField.exists(long.raw)
+          ? secondaryFormat(long.raw, system.range.short.raw, { reverse: true, secondFilter: FormulaField.exists })
+          : "",
+        source: sourceLong.unitType !== "finite"
+          ? sourceLong.label
+          : FormulaField.exists(sourceLong.raw)
+          ? secondaryFormat(sourceLong.raw, system._source.range.short.raw, {
             reverse: true,
             secondFilter: FormulaField.exists,
           })
-          : this.document.system.range.long.label,
-        source: sourceLong.unitType === "finite"
-          ? secondaryFormat(sourceLong.raw, this.document.system._source.range.short.raw, {
-            reverse: true,
-            secondFilter: FormulaField.exists,
-          })
-          : sourceLong.label,
+          : "",
+      },
+      reach: {
+        data: reach.unitType !== "finite"
+          ? reach.label
+          : Number.isNumeric(reach.raw)
+          ? Number(reach.raw).signedString()
+          : reach.raw,
+        source: sourceReach.unitType !== "finite"
+          ? sourceReach.label
+          : Number.isNumeric(sourceReach.raw)
+          ? Number(sourceReach.raw).signedString()
+          : sourceReach.raw,
       },
     });
   }

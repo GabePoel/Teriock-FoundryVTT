@@ -1,4 +1,4 @@
-import { DefenseModel, RangeUnitModel } from "../../../models/_module.mjs";
+import { ArmamentRangeUnitModel, DefenseModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -22,16 +22,14 @@ declare global {
       flaws: string;
       /** <schema> The commands this deals */
       commands: Set<Teriock.Keys.Command>;
-      /** <schema> Range (ft) (if ranged) */
+      /** <schema> Range */
       range: {
         /** <schema> Long range (this is the default range) */
-        long: RangeUnitModel;
-        /** <schema> Is the armament mêlée? */
-        melee: boolean;
-        /** <schema> Is the armament ranged? */
-        ranged: boolean;
+        long: ArmamentRangeUnitModel;
+        /** <schema> Reach added to the user's reach for melee attacks */
+        reach: ArmamentRangeUnitModel;
         /** <schema> Short range */
-        short: RangeUnitModel;
+        short: ArmamentRangeUnitModel;
       };
       /** <schema> Per-document behavior and display settings */
       settings: Teriock.Models.DocumentSettingsModelInstance<"armament">;
