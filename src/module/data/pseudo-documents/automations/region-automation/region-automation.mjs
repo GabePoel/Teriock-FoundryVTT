@@ -1,6 +1,6 @@
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { localSelectionSchema, terrainSchema } from "../../../fields/tools/builders.mjs";
-import { SuppressionModel } from "../../../models/_module.mjs";
+import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import { createElement, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { localSelectionSchema } from "../../../fields/tools/builders.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { SelectionAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -33,12 +33,8 @@ export default class RegionAutomation
   static defineSchema() {
     return Object.assign(super.defineSchema(), localSelectionSchema(), {
       applyDocuments: new fields.BooleanField({ initial: false }),
+      behaviors: new fields.ArrayField(new fields.ObjectField()),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
-      difficultTerrain: new fields.BooleanField({ initial: false }),
-      setSuppression: new fields.BooleanField({ initial: false }),
-      setTerrain: new fields.BooleanField({ initial: false }),
-      suppression: new fields.EmbeddedDataField(SuppressionModel),
-      terrain: new fields.SchemaField(terrainSchema()),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
           Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
@@ -49,14 +45,21 @@ export default class RegionAutomation
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @todo Delete this
+   */
   static migrateData(source, options) {
-    foundry.abstract.Document._addDataFieldMigration(
-      source,
-      "terrain.difficultTerrain",
-      "difficultTerrain",
-      d => Boolean(d.setTerrain && d.terrain?.difficultTerrain),
-    );
+    foundry.abstract.Document._addDataFieldMigration(source, "setTerrain", "behaviors", d => {
+      if (!d.setTerrain) { return []; }
+      const { difficultTerrain, ...terrain } = d.terrain ?? {};
+      return [
+        { name: _loc("TYPES.RegionBehavior.terrain"), system: terrain, type: "terrain" },
+        ...(difficultTerrain
+          ? [{ name: _loc("TYPES.RegionBehavior.difficultTerrain"), type: "difficultTerrain" }]
+          : []),
+      ];
+    });
     return super.migrateData(source, options);
   }
 
@@ -66,12 +69,6 @@ export default class RegionAutomation
       ...super._formPaths,
       "visibility",
       "deleteOnTurnChange",
-      "hr",
-      "difficultTerrain",
-      "setTerrain",
-      ...(this.setTerrain ? ["terrain.terrainMode", "terrain.terrains"] : []),
-      "setSuppression",
-      ...(this.setSuppression ? this.suppression._formPaths.map(p => `suppression.${p}`) : []),
       "hr",
       "applyDocuments",
       ...(this.applyDocuments ? this._selectionPaths : []),
@@ -107,9 +104,26 @@ export default class RegionAutomation
   }
 
   /** @inheritDoc */
-  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "suppression.qualifier") { inputConfig.context = "child"; }
-    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  async getEditor(config = {}) {
+    const editor = await super.getEditor(config);
+    const editable = this.getNearestDocument()?.sheet?.isEditable;
+    const html = await TeriockTextEditor.renderTemplate("templates/scene/parts/region-behaviors.hbs", {
+      behaviors: this.behaviors.map((b, i) => ({
+        canDelete: editable,
+        canUpdate: editable,
+        disabled: b.disabled,
+        id: i,
+        name: b.name,
+        typeIcon: CONFIG.RegionBehavior.typeIcons[b.type] || "fa-regular fa-notdef",
+        typeLabel: _loc(CONFIG.RegionBehavior.typeLabels[b.type]),
+      })),
+      canCreateBehavior: editable,
+      tab: { cssClass: "active", group: "regionBehaviors", id: "behaviors" },
+    });
+    const container = createElement("div", { className: "region-config teriock-full-width" });
+    container.append(foundry.utils.parseHTML(html));
+    editor.append(document.createElement("hr"), container);
+    return editor;
   }
 
   /** @inheritDoc */
@@ -123,24 +137,7 @@ export default class RegionAutomation
       }),
       ...this.data,
     });
-    data.behaviors ??= [];
-    if (this.difficultTerrain) {
-      data.behaviors.push({ name: _loc("TYPES.RegionBehavior.difficultTerrain"), type: "difficultTerrain" });
-    }
-    if (this.setTerrain) {
-      data.behaviors.push({
-        name: _loc("TYPES.RegionBehavior.terrain"),
-        system: { ...this.terrain, terrains: this.terrain.terrains.toObject() },
-        type: "terrain",
-      });
-    }
-    if (this.setSuppression) {
-      data.behaviors.push({
-        name: _loc("TYPES.RegionBehavior.suppress"),
-        system: { suppression: this.suppression.toObject() },
-        type: "suppress",
-      });
-    }
+    data.behaviors = [...(data.behaviors ?? []), ...foundry.utils.deepClone(this.behaviors)];
     return data;
   }
 }

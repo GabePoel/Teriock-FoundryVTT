@@ -11,4 +11,5 @@ export * as page from "./page-sheets/_module.mjs";
 export { default as TeriockRollTableSheet } from "./roll-table-sheet.mjs";
 export { default as TeriockSceneConfig } from "./scene-config.mjs";
 export { default as TeriockTableResultConfig } from "./table-result-config.mjs";
+export { default as TemporaryBehaviorConfig } from "./temporary-behavior-config.mjs";
 export * as utility from "./utility-sheets/_module.mjs";

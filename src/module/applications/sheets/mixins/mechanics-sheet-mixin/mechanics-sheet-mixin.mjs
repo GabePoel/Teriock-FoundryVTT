@@ -16,6 +16,7 @@ export default function MechanicsSheetMixin(Base) {
    * @mixes MechanicsSheetChangesPart
    * @mixes MechanicsSheetChoicesPart
    * @mixes MechanicsSheetConstructionNodesPart
+   * @mixes MechanicsSheetRegionBehaviorsPart
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
@@ -25,6 +26,7 @@ export default function MechanicsSheetMixin(Base) {
       parts.MechanicsSheetChangesPart,
       parts.MechanicsSheetChoicesPart,
       parts.MechanicsSheetConstructionNodesPart,
+      parts.MechanicsSheetRegionBehaviorsPart,
     )
   {
     /**
