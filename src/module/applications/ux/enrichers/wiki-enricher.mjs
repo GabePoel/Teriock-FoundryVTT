@@ -12,7 +12,7 @@ const wikiEnricher = {
         target: "_blank",
       },
       dataset: { tooltip: pageName.replace(":", ": ") },
-      name: inputs.label ?? pageName.split(":")[1],
+      name: inputs.label ?? pageName.split(":").at(-1),
     });
   },
 };

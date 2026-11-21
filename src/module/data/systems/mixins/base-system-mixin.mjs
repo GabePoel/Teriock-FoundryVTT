@@ -231,7 +231,7 @@ export default function BaseSystemMixin(Base) {
         if (!value) { return; }
         const text = this.metadata.tags.blocks ? `@Embed[${this.parent.uuid} path=${f.path} inline]` : value;
         const gm = Boolean(schema?.options.gm || (schema?.options.secret && this.hasSecrets));
-        return { classes: f.classes, gm, text, title: f.label || schema.label };
+        return { classes: f.classes, gm, text, title: f.label || schema?.label };
       }).filter(Boolean);
     }
 

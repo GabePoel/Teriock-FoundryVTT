@@ -29,10 +29,12 @@ export default function PlayableActorSheetAvatarImagePart(Base) {
      */
     static async #onToggleRing() {
       if (this.document.token) {
-        await this.document.token.update({ "ring.enabled": !this.document.token.ring.enabled });
+        await this.document.token.update({ "ring.enabled": !this.document.token._source.ring.enabled });
         await this.render();
       } else {
-        await this.document.update({ "prototypeToken.ring.enabled": !this.document.prototypeToken.ring.enabled });
+        await this.document.update({
+          "prototypeToken.ring.enabled": !this.document._source.prototypeToken.ring.enabled,
+        });
       }
     }
 

@@ -174,8 +174,8 @@ function currencyField(options = {}) {
 async function increaseDebt(_worldTime, dt) {
   if (!game.user.isActiveGM) { return; }
   const operations = [];
-  const { hoursPerDay, minutesPerHour, secondsPerMinute } = game.time.calendar.days;
-  const daysElapsed = dt / (hoursPerDay * minutesPerHour * secondsPerMinute);
+  const secondsPerDay = game.time.days.secondsPerMinute * game.time.days.minutesPerHour * game.time.days.hoursPerDay;
+  const daysElapsed = dt / secondsPerDay;
   for (const actor of game.actors.relevant) {
     if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
       const newDebt = actor.system.money.debt * Math.pow(1 + actor.system.interestRate / 100, daysElapsed);
