@@ -94,10 +94,10 @@ export default function ActorConditionsPart(Base) {
     }
 
     /** @inheritDoc */
-    async postUpdate() {
-      await super.postUpdate();
+    async postUpdate(userId) {
+      await super.postUpdate(userId);
       const changedStatuses = this.#consumeChangedStatuses();
-      if (changedStatuses.size) {
+      if (changedStatuses.size && this.parent.checkEditor(userId)) {
         await BaseExpiration.massExpire([this.parent], StatusExpiration.metadata.type, { changedStatuses });
       }
     }

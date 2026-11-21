@@ -34,13 +34,13 @@ export default function ChildDocumentMixin(Base) {
     /** @inheritDoc */
     _onCreate(data, options, userId) {
       super._onCreate(data, options, userId);
-      if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
+      this.actor?.system.postUpdate(userId);
     }
 
     /** @inheritDoc */
     _onDelete(options, userId) {
       super._onDelete(options, userId);
-      if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
+      this.actor?.system.postUpdate(userId);
     }
 
     /** @inheritDoc */

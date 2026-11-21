@@ -16,9 +16,10 @@ export default class AbstractActorSystem extends mixClasses(TypeDataModel, BaseS
 
   /**
    * Performs post-update operations for the actor.
+   * @param {ID<TeriockUser>} _userId - The user who made the change.
    * @returns {Promise<void>}
    */
-  async postUpdate() {}
+  async postUpdate(_userId) {}
 
   /** @inheritDoc */
   prepareCleanupData() {

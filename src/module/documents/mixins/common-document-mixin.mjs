@@ -264,10 +264,8 @@ export default function CommonDocumentMixin(Base) {
     /** @inheritDoc */
     _onUpdate(changed, options, userId) {
       super._onUpdate(changed, options, userId);
-      if (this.checkEditor(userId)) {
-        if (this.actor) { this.actor.system.postUpdate(); }
-        this._onUpdateDocument();
-      }
+      this.actor?.system.postUpdate(userId);
+      if (this.checkEditor(userId)) { this._onUpdateDocument(); }
     }
 
     /** @inheritDoc */
