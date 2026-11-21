@@ -173,6 +173,7 @@ function cleanEntry(doc) {
         for (const m of Object.values(doc.system[key])) {
           delete m.sort;
           for (const n of Object.values(m.constructionNodes ?? {})) { delete n.sort; }
+          for (const b of m.behaviors ?? []) { delete b._stats; }
         }
         const sorted = sortMechanics(doc.system[key]);
         if (sorted) { doc.system[key] = sorted; }
