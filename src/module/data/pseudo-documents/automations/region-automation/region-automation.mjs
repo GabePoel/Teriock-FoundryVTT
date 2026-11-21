@@ -45,24 +45,6 @@ export default class RegionAutomation
     });
   }
 
-  /**
-   * @inheritDoc
-   * @todo Delete this
-   */
-  static migrateData(source, options) {
-    foundry.abstract.Document._addDataFieldMigration(source, "setTerrain", "behaviors", d => {
-      if (!d.setTerrain) { return []; }
-      const { difficultTerrain, ...terrain } = d.terrain ?? {};
-      return [
-        { name: _loc("TYPES.RegionBehavior.terrain"), system: terrain, type: "terrain" },
-        ...(difficultTerrain
-          ? [{ name: _loc("TYPES.RegionBehavior.difficultTerrain"), type: "difficultTerrain" }]
-          : []),
-      ];
-    });
-    return super.migrateData(source, options);
-  }
-
   /** @inheritDoc */
   get _formPaths() {
     return [

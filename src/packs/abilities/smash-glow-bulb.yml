@@ -6,23 +6,20 @@ system:
   automations:
     - _id: b7dNhAhOaKZhPAx6
       attachToToken: false
-      data: |-
-        {
-          "behaviors": [
-            {
-              "name": "Glow Bulb Area Effect",
-              "system": {
-                "mode": 1,
-                "modifier": 1
-              },
-              "type": "adjustDarknessLevel"
-            }
-          ]
-        }
+      behaviors:
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Adjust Darkness Level
+          system:
+            mode: 1
+            modifier: 1
+          type: adjustDarknessLevel
       deleteOnTurnChange: false
       expandWithToken: false
       interactInExecution: true
-      overrideData: true
       radius: "@exec.expansion.range"
       restriction:
         enabled: true

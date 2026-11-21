@@ -13,15 +13,21 @@ system:
         raw: "@h"
         unit: day
       type: duration
-    - _id: UFyGuFVBP9a4cKMY
-      type: heal
     - _id: cMzgi2M35jzsi8Uh
-      applyDocuments: true
       attachToToken: false
+      behaviors:
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Apply Active Effect
+          system:
+            effects:
+              - Compendium.teriock.templateEffects.ActiveEffect.M3rNOU2krVpp8zl6
+          type: applyActiveEffect
       deleteOnTurnChange: false
       expandWithToken: false
-      globalIdentifiers:
-        - consequence:circle-of-healing-area-effect
       radius: "30"
       restriction:
         enabled: true

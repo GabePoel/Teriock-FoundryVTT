@@ -14,55 +14,63 @@ system:
         unit: day
       type: duration
     - _id: Iqqb2wxXiTR3uaxQ
-      applyDocuments: true
       attachToToken: false
-      data: |-
-        {
-          "behaviors": [
-            {
-              "name": "Light Zone Area Effect",
-              "system": {
-                "mode": 1,
-                "modifier": 1
-              },
-              "type": "adjustDarknessLevel"
-            }
-          ]
-        }
+      behaviors:
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Apply Active Effect
+          system:
+            effects:
+              - Compendium.teriock.templateEffects.ActiveEffect.b5eeLlEeJoZ6JA4k
+          type: applyActiveEffect
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Adjust Darkness Level
+          system:
+            mode: 1
+            modifier: 1
+          type: adjustDarknessLevel
       deleteOnTurnChange: false
       display:
         label: Place Light Zone
       expandWithToken: false
-      globalIdentifiers:
-        - consequence:zone-of-light-or-darkness-light-area-effect
-      overrideData: true
       radius: "30"
       restriction:
         enabled: true
       type: region
     - _id: vocYU6HJVV7YKixD
-      applyDocuments: true
       attachToToken: false
-      data: |-
-        {
-          "behaviors": [
-            {
-              "name": "Dark Zone Area Effect",
-              "system": {
-                "mode": 2,
-                "modifier": 1
-              },
-              "type": "adjustDarknessLevel"
-            }
-          ]
-        }
+      behaviors:
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Apply Active Effect
+          system:
+            effects:
+              - Compendium.teriock.templateEffects.ActiveEffect.8xD3CJ2hBpcyol1T
+          type: applyActiveEffect
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Adjust Darkness Level
+          system:
+            mode: 2
+            modifier: 1
+          type: adjustDarknessLevel
       deleteOnTurnChange: false
       display:
         label: Place Dark Zone
       expandWithToken: false
-      globalIdentifiers:
-        - consequence:zone-of-light-or-darkness-dark-area-effect
-      overrideData: true
       radius: "30"
       restriction:
         enabled: true

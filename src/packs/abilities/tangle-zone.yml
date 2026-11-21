@@ -16,18 +16,30 @@ system:
         unit: day
       type: duration
     - _id: kIuEh8irSpHGyM6y
-      applyDocuments: true
       attachToToken: false
+      behaviors:
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Apply Active Effect
+          system:
+            effects:
+              - Compendium.teriock.templateEffects.ActiveEffect.gOm9iSKwjeq7QwTX
+          type: applyActiveEffect
+        - _stats:
+            coreVersion: "14.370"
+            systemId: teriock
+            systemVersion: 0.15.137
+          disabled: false
+          name: Difficult Terrain
+          type: difficultTerrain
       deleteOnTurnChange: false
       expandWithToken: false
-      globalIdentifiers:
-        - consequence:tangle-zone-area-effect
       radius: "30"
       restriction:
         enabled: true
-      setTerrain: true
-      terrain:
-        difficultTerrain: true
       type: region
   costs:
     primary:
