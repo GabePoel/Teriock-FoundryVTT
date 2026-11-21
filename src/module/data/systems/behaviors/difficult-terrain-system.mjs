@@ -29,7 +29,8 @@ export default class DifficultTerrainSystem extends BaseBehaviorSystem {
   });
 
   /** @inheritDoc */
-  _getTerrainEffects(_token, _segment, _options) {
+  _getTerrainEffects(token, _segment, _options) {
+    if (!this.behavior.checkQualifier(token)) { return []; }
     return [{ name: "difficultTerrain" }];
   }
 }

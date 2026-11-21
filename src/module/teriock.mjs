@@ -255,6 +255,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
 
   // Region Behavior
+  CONFIG.RegionBehavior.documentClass = documents.TeriockRegionBehavior;
   registerSubtypes(data.systems.behaviors, foundry.abstract.TypeDataModel);
 
   // Roll Table
@@ -350,6 +351,9 @@ foundry.helpers.Hooks.once("init", function() {
 
   // Level
   rs(d.TeriockLevel, s.TeriockLevelConfig, "Level");
+
+  // Region Behavior
+  rs(d.TeriockRegionBehavior, s.TeriockRegionBehaviorConfig, "RegionBehavior");
 
   // Roll Table
   rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");

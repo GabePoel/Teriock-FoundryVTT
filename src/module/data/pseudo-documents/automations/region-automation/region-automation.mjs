@@ -96,7 +96,7 @@ export default class RegionAutomation
         disabled: b.disabled,
         id: i,
         name: b.name,
-        typeIcon: CONFIG.RegionBehavior.typeIcons[b.type] || "fa-regular fa-notdef",
+        typeIcon: CONFIG.RegionBehavior.typeIcons[b.type] || "fas fa-notdef",
         typeLabel: _loc(CONFIG.RegionBehavior.typeLabels[b.type]),
       })),
       canCreateBehavior: editable,
@@ -110,7 +110,8 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async getRegionData(options = { execution: null, rollData: {} }) {
-    const data = foundry.utils.mergeObject(await super.getRegionData(options), {
+    return foundry.utils.mergeObject(await super.getRegionData(options), {
+      behaviors: foundry.utils.deepClone(this.behaviors),
       displayMeasurements: false,
       flags: { teriock: { targetRegion: false } },
       highlightMode: "shapes",
@@ -119,7 +120,5 @@ export default class RegionAutomation
       }),
       ...this.data,
     });
-    data.behaviors = [...(data.behaviors ?? []), ...foundry.utils.deepClone(this.behaviors)];
-    return data;
   }
 }

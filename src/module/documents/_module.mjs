@@ -16,6 +16,7 @@ export { default as TeriockJournalEntry } from "./journal-entry/journal-entry.mj
 export { default as TeriockLevel } from "./level/level.mjs";
 export { default as TeriockMacro } from "./macro/macro.mjs";
 export * as mixins from "./mixins/_module.mjs";
+export { default as TeriockRegionBehavior } from "./region-behavior/region-behavior.mjs";
 export { default as TeriockRegionDocument } from "./region-document/region-document.mjs";
 export { default as TeriockRollTable } from "./roll-table/roll-table.mjs";
 export { default as TeriockScene } from "./scene/scene.mjs";

@@ -62,8 +62,8 @@ export default function ActorMovementPart(Base) {
         };
       }
       return {
-        difficultTerrain: tokens.some(t => t.difficultTerrain),
-        suppressBehaviors: new Set(tokens.flatMap(t => t.suppressBehaviors)),
+        difficultTerrain: tokens.some(t => t.isInDifficultTerrain),
+        suppressBehaviors: new Set(tokens.flatMap(t => t.getQualifiedBehaviors("suppress"))),
         terrains: new Set(tokens.flatMap(t => Array.from(t.terrains))),
       };
     }
@@ -90,15 +90,22 @@ export default function ActorMovementPart(Base) {
      * @category Terrain
      */
     checkSurroundings() {
+      const cache = this.parent._cache;
+      if (cache.checkingSurroundings) { return; }
       const { difficultTerrain, suppressBehaviors, terrains } = this.#getTokenSurroundings();
       if (
-        difficultTerrain === Boolean(this.parent._cache.difficultTerrain)
-        && suppressBehaviors.equals(this.parent._cache.suppressBehaviors ?? new Set())
-        && terrains.equals(this.parent._cache.terrains ?? new Set())
+        difficultTerrain === Boolean(cache.difficultTerrain)
+        && suppressBehaviors.equals(cache.suppressBehaviors ?? new Set())
+        && terrains.equals(cache.terrains ?? new Set())
       ) {
         return;
       }
-      this.parent.reset();
+      cache.checkingSurroundings = true;
+      try {
+        this.parent.reset();
+      } finally {
+        cache.checkingSurroundings = false;
+      }
       this.parent.render();
     }
 

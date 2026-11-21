@@ -53,8 +53,19 @@ export default class ApplyActiveEffectSystem
   }
 }
 
+// Make sure that identifiers are ready.
 Hooks.once("teriock.identifiersInit", () => {
   for (const s of game.scenes) {
     for (const r of s.regions) { r.behaviors.forEach(b => b.system.prepareIdentifiersData?.()); }
   }
+});
+
+// If a behavior is updated to give different active effects it shouldn't dump them on an unqualified actor.
+// This is kind of hacky and only needed because we use qualifiers to filter tokens.
+Hooks.on("preCreateActiveEffect", effect => {
+  if (!effect.origin?.includes(".RegionBehavior.")) { return; }
+  const behavior = fromUuidSync(effect.origin);
+  if (behavior?.type !== "applyActiveEffect") { return; }
+  const token = Array.from(behavior.region?.tokens ?? []).find(t => t.actor === effect.actor);
+  if (!behavior.checkQualifier(token)) { return false; }
 });

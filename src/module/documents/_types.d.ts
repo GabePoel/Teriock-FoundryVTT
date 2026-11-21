@@ -38,12 +38,16 @@ declare global {
      * Store of lazily-computed values cached on an actor.
      */
     export type ActorCache = DocumentCache & {
+      /** Whether a reset from checking surroundings is ongoing. */
+      checkingSurroundings?: boolean;
       /** Whether the actor's token was last in difficult terrain. */
       difficultTerrain?: boolean;
       /** Hiding score the actor's tokens were last refreshed with. */
       hiding?: number;
       /** Perceiving score the actor's tokens were last refreshed with. */
       perceiving?: number;
+      /** Roll data from the last completed data prep. */
+      rollData?: object;
       /** Previously-prepared statuses. This is retained so status expirations can find what changed. */
       statuses?: Set<Teriock.Keys.Condition>;
       /** Previously-prepared token suppress behaviors. This is retained so suppress regions can find what changed. */

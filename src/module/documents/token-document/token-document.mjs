@@ -74,15 +74,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
-   * Whether this is in difficult terrain.
-   * @returns {boolean}
-   * @category Terrain
-   */
-  get difficultTerrain() {
-    return this.regions?.some(r => r.behaviors.documentsByType.difficultTerrain.some(b => b.active)) ?? false;
-  }
-
-  /**
    * The image that should be used to represent this token.
    * @returns {string}
    */
@@ -115,6 +106,15 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
+   * Whether this is in difficult terrain.
+   * @returns {boolean}
+   * @category Terrain
+   */
+  get isInDifficultTerrain() {
+    return this.getQualifiedBehaviors("difficultTerrain").length > 0;
+  }
+
+  /**
    * The token that summoned this one.
    * @returns {TeriockTokenDocument|null}
    */
@@ -136,14 +136,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
-   * Suppress behaviors that apply to this.
-   * @returns {RegionBehavior[]}
-   */
-  get suppressBehaviors() {
-    return Array.from(this.regions ?? [], r => r.behaviors.documentsByType.suppress.filter(b => b.active)).flat();
-  }
-
-  /**
    * The types of terrain this is in.
    * @returns {Set<Teriock.Keys.Terrain>}
    * @category Terrain
@@ -153,10 +145,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     const layers = [
       [this.parent],
       [this.parent?.levels.get(this.level)],
-      ...Array.from(
-        this.regions ?? [],
-        r => r.behaviors.documentsByType.terrain.filter(b => b.active).map(b => b.system),
-      ),
+      ...Array.from(this.regions ?? [], r => r.getQualifiedBehaviors("terrain", this).map(b => b.system)),
     ];
     for (const layer of layers) {
       let subtracted = new Set();
@@ -197,6 +186,15 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.actorLink) { this.actor?.system.checkSurroundings?.(); }
+  }
+
+  /**
+   * @inheritDoc
+   * @category Terrain
+   */
+  _onDeltaMaterialized() {
+    super._onDeltaMaterialized();
+    this.actor?.system.checkSurroundings?.();
   }
 
   /** @inheritDoc */
@@ -262,6 +260,25 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       for (const summon of remainingTokens) { allTokens.add(summon); }
     }
     return [...allTokens];
+  }
+
+  /**
+   * Behaviors that apply to this token.
+   * @param {string} type
+   * @returns {TeriockRegionBehavior[]}
+   */
+  getQualifiedBehaviors(type) {
+    return Array.from(this.regions ?? [], r => r.getQualifiedBehaviors(type, this)).flat();
+  }
+
+  /**
+   * Return a data object which defines data against dice rolls can be evaluated.
+   * @returns {object}
+   */
+  getRollData() {
+    // Both the lazy delta check and cache usage are to stop infinite loops.
+    if (this.isLazyDelta) { return {}; }
+    return this.actor?._cache.rollData ?? {};
   }
 
   /** @inheritDoc */

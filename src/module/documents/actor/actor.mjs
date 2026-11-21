@@ -379,6 +379,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   prepareData() {
     const wasDefeated = this.statuses.has(CONFIG.specialStatusEffects.DEFEATED);
     super.prepareData();
+    this._cache.rollData = this.getRollData();
+    this.system.checkSurroundings?.();
     if (!game.ready || this.statuses.has(CONFIG.specialStatusEffects.DEFEATED) === wasDefeated) { return; }
     // Let CombatantGroups pass their place in the turn order to a different member.
     // The reason we have this is because of the setting to skip defeated combatants meaning all the members of a

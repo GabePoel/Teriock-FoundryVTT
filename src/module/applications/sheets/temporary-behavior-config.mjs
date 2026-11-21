@@ -1,9 +1,9 @@
-const { RegionBehaviorConfig } = foundry.applications.sheets;
+import TeriockRegionBehaviorConfig from "./region-behavior-config.mjs";
 
 /**
  * Edits a region behavior that isn't embedded in a region.
  */
-export default class TemporaryBehaviorConfig extends RegionBehaviorConfig {
+export default class TemporaryBehaviorConfig extends TeriockRegionBehaviorConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = { viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE };
 
