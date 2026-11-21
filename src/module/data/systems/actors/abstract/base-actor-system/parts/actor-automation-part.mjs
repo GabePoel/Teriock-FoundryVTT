@@ -36,21 +36,25 @@ export default function ActorAutomationPart(Base) {
     }
 
     /**
-     * Apply all suppress automations that force certain children of this document to be suppressed.
+     * Force children of this actor to be suppressed by suppress automations and behaviors.
      */
-    #applySuppressAutomations() {
-      const autos = this.automations.getTypeSync("suppress", { active: true, isPassive: true });
-      const identifiers = new Set(autos.map(a => a.identifier));
+    #applySuppressions() {
+      const suppressions = [
+        ...this.automations.getTypeSync("suppress", { active: true, isPassive: true }).map(a => a.suppression),
+        ...Array.from(this.parent._cache.suppressBehaviors ?? [], b => b.system.suppression),
+      ];
+      if (!suppressions.length) { return; }
       for (const c of this.parent.modifiable?.contents ?? []) {
-        if (identifiers.has(c.identifier)) { c.system.forceSuppressed = true; }
+        if (suppressions.some(s => s.suppresses(c))) { c.system.forceSuppressed = true; }
       }
     }
 
     /**
-     * Apply competence and suppress automations to embedded children during document preparation.
+     * Apply competence automations, suppress automations, and suppress behaviors to embedded children during document
+     * preparation.
      */
     prepareChildAutomations() {
-      this.#applySuppressAutomations();
+      this.#applySuppressions();
       this.#applyCompetenceAutomations();
     }
   }

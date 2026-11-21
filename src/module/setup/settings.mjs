@@ -480,7 +480,7 @@ export function registerSettings() {
         ui.world?.render();
         const actors = new Set([...game.actors, ...(canvas.scene?.tokens.map(t => t.actor) ?? [])]);
         for (const actor of actors) {
-          actor?.system.checkTerrains?.();
+          actor?.system.checkSurroundings?.();
         }
       },
     },

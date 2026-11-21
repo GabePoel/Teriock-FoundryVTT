@@ -5,6 +5,7 @@ import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs"
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ * @import RegionBehavior from "@client/documents/region-behavior.mjs";
  */
 
 const { fields } = foundry.data;
@@ -46,16 +47,23 @@ export default function ActorMovementPart(Base) {
     }
 
     /**
-     * The types of terrain this actor's tokens are in.
-     * @returns {{ difficultTerrain: boolean, terrains: Set<Teriock.Keys.Terrain> }}
+     * The stuff from regions and scenes this actor's tokens are in.
+     * @returns {{ difficultTerrain: boolean, suppressBehaviors: Set<RegionBehavior>, terrains: Set<Teriock.Keys.Terrain> }}
      * @remarks This might differ from the actor's terrains because changes could modify it.
      * @category Terrain
      */
-    #getTokenTerrains() {
+    #getTokenSurroundings() {
       const tokens = this.#getTokens();
-      if (!tokens.length) { return { difficultTerrain: false, terrains: game.settings.get("teriock", "terrains") }; }
+      if (!tokens.length) {
+        return {
+          difficultTerrain: false,
+          suppressBehaviors: new Set(),
+          terrains: game.settings.get("teriock", "terrains"),
+        };
+      }
       return {
         difficultTerrain: tokens.some(t => t.difficultTerrain),
+        suppressBehaviors: new Set(tokens.flatMap(t => t.suppressBehaviors)),
         terrains: new Set(tokens.flatMap(t => Array.from(t.terrains))),
       };
     }
@@ -78,13 +86,14 @@ export default function ActorMovementPart(Base) {
     }
 
     /**
-     * Check if token terrains have changed and reset if needed.
+     * Check if token surroundings have changed and reset if needed.
      * @category Terrain
      */
-    checkTerrains() {
-      const { difficultTerrain, terrains } = this.#getTokenTerrains();
+    checkSurroundings() {
+      const { difficultTerrain, suppressBehaviors, terrains } = this.#getTokenSurroundings();
       if (
         difficultTerrain === Boolean(this.parent._cache.difficultTerrain)
+        && suppressBehaviors.equals(this.parent._cache.suppressBehaviors ?? new Set())
         && terrains.equals(this.parent._cache.terrains ?? new Set())
       ) {
         return;
@@ -134,8 +143,8 @@ export default function ActorMovementPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
-      const { difficultTerrain, terrains } = this.#getTokenTerrains();
-      Object.assign(this.parent._cache, { difficultTerrain, terrains });
+      const { difficultTerrain, suppressBehaviors, terrains } = this.#getTokenSurroundings();
+      Object.assign(this.parent._cache, { difficultTerrain, suppressBehaviors, terrains });
       this.difficultTerrain = difficultTerrain;
       this.terrains = this.terrains.union(terrains);
     }
@@ -182,13 +191,13 @@ function speedField(initial, label) {
 }
 
 /**
- * Make sure linked actors have the correct terrains when the scene changes or the canvas loads.
+ * Make sure linked actors have the correct surroundings when the scene changes or the canvas loads.
  * @see {canvasReady}
  * @category Terrain
  */
-function checkSceneTerrains() {
-  const actors = new Set(game.actors.filter(a => a._cache.terrains?.size));
+function checkSceneSurroundings() {
+  const actors = new Set(game.actors.filter(a => a._cache.terrains?.size || a._cache.suppressBehaviors?.size));
   for (const token of canvas.scene?.tokens ?? []) { if (token.actor) { actors.add(token.actor); } }
-  for (const actor of actors) { actor.system.checkTerrains?.(); }
+  for (const actor of actors) { actor.system.checkSurroundings?.(); }
 }
-Hooks.on("canvasReady", checkSceneTerrains);
+Hooks.on("canvasReady", checkSceneSurroundings);

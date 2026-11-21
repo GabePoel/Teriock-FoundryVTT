@@ -460,15 +460,11 @@ export function terrainsField(options = {}) {
 
 /**
  * Schema fields for changing terrains.
- * @returns {Record<"difficultTerrain" | "terrainMode" | "terrains", BooleanField | SetField | StringField>}
+ * @returns {Record<"terrainMode" | "terrains", SetField | StringField>}
  * @category Terrain
  */
 export function terrainSchema() {
   return {
-    difficultTerrain: new BooleanField({
-      hint: _sloc("TERIOCK.SCHEMA.DifficultTerrain.hint"),
-      label: _sloc("TERIOCK.SCHEMA.DifficultTerrain.label"),
-    }),
     terrainMode: new StringField({
       choices: objectMap(TERIOCK.CONFIG.terrain.modes, m => m.label, { localize: true }),
       hint: _sloc("TERIOCK.SCHEMA.TerrainMode.hint"),

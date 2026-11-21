@@ -1,3 +1,4 @@
+import RegionBehavior from "@client/documents/region-behavior.mjs";
 import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
 
 declare global {
@@ -45,6 +46,8 @@ declare global {
       perceiving?: number;
       /** Previously-prepared statuses. This is retained so status expirations can find what changed. */
       statuses?: Set<Teriock.Keys.Condition>;
+      /** Previously-prepared token suppress behaviors. This is retained so suppress regions can find what changed. */
+      suppressBehaviors?: Set<RegionBehavior>;
       /** Previously-prepared token terrains. This is retained so terrain regions can find what changed. */
       terrains?: Set<Teriock.Keys.Terrain>;
     };

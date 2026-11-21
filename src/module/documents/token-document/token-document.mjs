@@ -6,6 +6,7 @@ const { TokenDocument } = foundry.documents;
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ * @import RegionBehavior from "@client/documents/region-behavior.mjs";
  */
 
 /**
@@ -78,8 +79,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    * @category Terrain
    */
   get difficultTerrain() {
-    return this.regions?.some(r => r.behaviors.some(b => b.type === "terrain" && b.active && b.system.difficultTerrain))
-      ?? false;
+    return this.regions?.some(r => r.behaviors.documentsByType.difficultTerrain.some(b => b.active)) ?? false;
   }
 
   /**
@@ -136,6 +136,14 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
+   * Suppress behaviors that apply to this.
+   * @returns {RegionBehavior[]}
+   */
+  get suppressBehaviors() {
+    return Array.from(this.regions ?? [], r => r.behaviors.documentsByType.suppress.filter(b => b.active)).flat();
+  }
+
+  /**
    * The types of terrain this is in.
    * @returns {Set<Teriock.Keys.Terrain>}
    * @category Terrain
@@ -179,7 +187,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    this.actor?.system.checkTerrains?.();
+    this.actor?.system.checkSurroundings?.();
   }
 
   /**
@@ -188,7 +196,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (this.actorLink) { this.actor?.system.checkTerrains?.(); }
+    if (this.actorLink) { this.actor?.system.checkSurroundings?.(); }
   }
 
   /** @inheritDoc */
@@ -204,7 +212,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     if ("movementAction" in changed) { this.actor?.render(); }
     if (["actorId", "actorLink", "level"].some(k => k in changed)) {
       for (const actor of new Set([game.actors.get(options.previousActorId), this.actor, this.baseActor])) {
-        actor?.system.checkTerrains?.();
+        actor?.system.checkSurroundings?.();
       }
     }
   }

@@ -14,4 +14,12 @@ export default class BaseBehaviorSystem extends mixClasses(RegionBehaviorType, B
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { documentName: "RegionBehavior", type: "base" });
+
+  /**
+   * Check the surroundings of a token that entered or exited this region.
+   * @param {RegionEvent} event
+   */
+  static async _onTokenChange(event) {
+    event.data.token.actor?.system.checkSurroundings?.();
+  }
 }

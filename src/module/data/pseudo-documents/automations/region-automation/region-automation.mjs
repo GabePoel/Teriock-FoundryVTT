@@ -1,5 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { localSelectionSchema, terrainSchema } from "../../../fields/tools/builders.mjs";
+import { SuppressionModel } from "../../../models/_module.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { SelectionAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -33,7 +34,10 @@ export default class RegionAutomation
     return Object.assign(super.defineSchema(), localSelectionSchema(), {
       applyDocuments: new fields.BooleanField({ initial: false }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      difficultTerrain: new fields.BooleanField({ initial: false }),
+      setSuppression: new fields.BooleanField({ initial: false }),
       setTerrain: new fields.BooleanField({ initial: false }),
+      suppression: new fields.EmbeddedDataField(SuppressionModel),
       terrain: new fields.SchemaField(terrainSchema()),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
@@ -46,14 +50,28 @@ export default class RegionAutomation
   }
 
   /** @inheritDoc */
+  static migrateData(source, options) {
+    foundry.abstract.Document._addDataFieldMigration(
+      source,
+      "terrain.difficultTerrain",
+      "difficultTerrain",
+      d => Boolean(d.setTerrain && d.terrain?.difficultTerrain),
+    );
+    return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,
       "visibility",
       "deleteOnTurnChange",
       "hr",
+      "difficultTerrain",
       "setTerrain",
-      ...(this.setTerrain ? ["terrain.difficultTerrain", "terrain.terrainMode", "terrain.terrains"] : []),
+      ...(this.setTerrain ? ["terrain.terrainMode", "terrain.terrains"] : []),
+      "setSuppression",
+      ...(this.setSuppression ? this.suppression._formPaths.map(p => `suppression.${p}`) : []),
       "hr",
       "applyDocuments",
       ...(this.applyDocuments ? this._selectionPaths : []),
@@ -89,6 +107,12 @@ export default class RegionAutomation
   }
 
   /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "suppression.qualifier") { inputConfig.context = "child"; }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
+
+  /** @inheritDoc */
   async getRegionData(options = { execution: null, rollData: {} }) {
     const data = foundry.utils.mergeObject(await super.getRegionData(options), {
       displayMeasurements: false,
@@ -99,12 +123,22 @@ export default class RegionAutomation
       }),
       ...this.data,
     });
+    data.behaviors ??= [];
+    if (this.difficultTerrain) {
+      data.behaviors.push({ name: _loc("TYPES.RegionBehavior.difficultTerrain"), type: "difficultTerrain" });
+    }
     if (this.setTerrain) {
-      data.behaviors ??= [];
       data.behaviors.push({
         name: _loc("TYPES.RegionBehavior.terrain"),
         system: { ...this.terrain, terrains: this.terrain.terrains.toObject() },
         type: "terrain",
+      });
+    }
+    if (this.setSuppression) {
+      data.behaviors.push({
+        name: _loc("TYPES.RegionBehavior.suppress"),
+        system: { suppression: this.suppression.toObject() },
+        type: "suppress",
       });
     }
     return data;

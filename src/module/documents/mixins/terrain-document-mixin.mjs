@@ -31,7 +31,7 @@ export default function TerrainDocumentMixin(Base) {
     _onUpdate(changed, options, userId) {
       const result = super._onUpdate(changed, options, userId);
       if (foundry.utils.hasProperty(changed, "flags.teriock")) {
-        for (const token of this.tokens) { token.actor?.system.checkTerrains?.(); }
+        for (const token of this.tokens) { token.actor?.system.checkSurroundings?.(); }
       }
       return result;
     }
