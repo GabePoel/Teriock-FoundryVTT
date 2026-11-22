@@ -128,6 +128,7 @@ export default {
     mount: "ms-chess-knight",
     npc: "ms-person-apron",
     pact: "ms-signature",
+    party: "ms-diversity-2",
     pc: "ms-person",
     power: "ms-person-celebrate",
     property: "ms-orbit",

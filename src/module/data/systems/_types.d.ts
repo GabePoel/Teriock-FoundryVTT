@@ -3,6 +3,7 @@ import {
   EnvironmentSystem,
   InventorySystem,
   NonPlayerCharacterSystem,
+  PartySystem,
   PlayerCharacterSystem,
 } from "./actors/_module.mjs";
 import { BaseCardSystem, StoneSystem } from "./cards/_module.mjs";
@@ -71,6 +72,7 @@ declare global {
     inventory: InventorySystem;
     npc: NonPlayerCharacterSystem;
     pc: PlayerCharacterSystem;
+    party: PartySystem;
   }
 
   export interface CardSystemMap {
