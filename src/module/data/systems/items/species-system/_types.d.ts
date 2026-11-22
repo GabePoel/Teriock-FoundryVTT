@@ -6,8 +6,6 @@ declare module "./species-system.mjs" {
     attributeIncrease: string;
     /** <schema> Battle rating */
     br: number;
-    /** <schema> Families */
-    families: Set<Teriock.Keys.Family>;
     /** <schema> Innate ranks */
     innateRanks: string;
     /** <schema> Lifespan constraints */
@@ -24,10 +22,6 @@ declare module "./species-system.mjs" {
       /** <schema> Enabled */
       enabled: boolean;
     };
-    /** <schema> Traits */
-    traits: Set<Teriock.Keys.Trait>;
-    /** <schema> Undead level */
-    undeadLevel: Teriock.Keys.UndeadLevel;
   }
 }
 

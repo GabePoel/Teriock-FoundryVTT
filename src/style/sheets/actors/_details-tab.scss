@@ -84,8 +84,27 @@
     width: 100%;
   }
 
-  .details-terrain {
+  .details-terrain,
+  .details-tag {
     @include mixins.tag-style;
+  }
+
+  .details-taxonomy {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    width: 100%;
+  }
+
+  .details-taxonomy-edit {
+    @include mixins.button-reset;
+    color: var(--color-text-subtle);
+    margin-left: auto;
+
+    &:hover:not(:disabled) {
+      color: var(--color-text-primary);
+    }
   }
 }
 

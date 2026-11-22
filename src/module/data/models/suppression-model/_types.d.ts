@@ -4,6 +4,8 @@ declare module "./suppression-model.mjs" {
     effectTypes: Set<Teriock.Keys.Effect>;
     /** <schema> Elements to suppress */
     elements: Set<Teriock.Keys.Element>;
+    /** <schema> Species families to suppress */
+    families: Set<Teriock.Keys.Family>;
     /** <schema> Identifiers of children to suppress */
     identifiers: Set<Identifier>;
     /** <schema> Kinds to suppress */
@@ -14,6 +16,8 @@ declare module "./suppression-model.mjs" {
     qualifier: Teriock.System.FormulaString;
     /** <schema> Species traits to suppress */
     traits: Set<Teriock.Keys.Trait>;
+    /** <schema> Undead levels to suppress */
+    undeadLevels: Set<Teriock.Keys.UndeadLevel>;
   }
 }
 

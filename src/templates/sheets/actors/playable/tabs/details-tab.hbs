@@ -78,12 +78,9 @@
           </div>
           {{#if terrains.length}}
             <div class="teriock-block-display-divider"></div>
-            <div
-              class="details-terrains thelp"
-              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.terrains.tooltip"}}'
-            >
+            <div class="details-terrains">
               {{#each terrains as |terrain|}}
-                <span class="details-terrain">
+                <span class="details-terrain thelp" data-tooltip="TERIOCK.SHEETS.Actor.TABS.Details.terrains.label">
                   {{ terrain.label }}
                 </span>
               {{/each}}
@@ -240,6 +237,27 @@
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
+          </div>
+          <div class="teriock-block-display-divider"></div>
+          <div class="details-taxonomy">
+            {{#each taxonomy as |tag|}}
+              <span class="details-tag thelp" data-tooltip="{{ tag.tooltip }}">{{ tag.label }}</span>
+            {{else}}
+              <span class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.taxonomy.empty"}}</span>
+            {{/each}}
+            {{!-- prettier-ignore --}}
+            <button
+              id="{{ appId }}-taxonomy"
+              class="details-taxonomy-edit"
+              type="button"
+              data-action="updatePaths"
+              data-icon="{{ TERIOCK.DISPLAY.icons.manifest.species.traits }}"
+              data-paths="system.traits system.families system.undeadLevel"
+              data-tooltip="TERIOCK.SHEETS.Actor.TABS.Details.taxonomy.edit"
+              {{disabled (not editable)}}
+            >
+              {{makeIcon TERIOCK.DISPLAY.icons.manifest.ui.edit "button"}}
+            </button>
           </div>
         {{/unless}}
       </div>

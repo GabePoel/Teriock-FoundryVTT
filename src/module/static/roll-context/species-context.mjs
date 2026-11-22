@@ -21,7 +21,7 @@ const speciesContext = {
   "size.enabled": "TERIOCK.ROLL_CONTEXT.Species.sizeEnabled",
   "size.max": "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label",
   "size.min": "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label",
-  undead: "TERIOCK.SYSTEMS.Species.FIELDS.undeadLevel.label",
+  undead: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.undeadLevel.label",
 };
 
 export default speciesContext;

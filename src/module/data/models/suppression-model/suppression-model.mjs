@@ -20,6 +20,7 @@ export default class SuppressionModel extends BaseDataModel {
     return {
       effectTypes: slugSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
       elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
+      families: slugSetField(TERIOCK.CONFIG.species.families),
       identifiers: new IdentifierSetField(),
       kinds: new fields.SetField(
         new fields.StringField({ choices: objectMap(kinds, k => k.label, { localize: true }) }),
@@ -27,12 +28,25 @@ export default class SuppressionModel extends BaseDataModel {
       powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
       qualifier: qualifierField(),
       traits: slugSetField(TERIOCK.CONFIG.species.traits),
+      undeadLevels: new fields.SetField(
+        new fields.NumberField({ choices: TERIOCK.CONFIG.species.undeadLevels, integer: true }),
+      ),
     };
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["identifiers", "powerSources", "elements", "effectTypes", "traits", "kinds", "qualifier"];
+    return [
+      "identifiers",
+      "powerSources",
+      "elements",
+      "effectTypes",
+      "traits",
+      "families",
+      "undeadLevels",
+      "kinds",
+      "qualifier",
+    ];
   }
 
   /**
@@ -43,10 +57,11 @@ export default class SuppressionModel extends BaseDataModel {
   suppresses(child) {
     const system = child.system;
     return this.identifiers.has(child.identifier)
-      || ["effectTypes", "elements", "powerSources", "traits"].some(k =>
+      || ["effectTypes", "elements", "families", "powerSources", "traits"].some(k =>
         system[k] instanceof Set && !this[k].isDisjointFrom(system[k])
       )
       || this.kinds.has(system.kind)
+      || this.undeadLevels.has(system.undeadLevel)
       || BaseRoll.qualify(this.qualifier, () => system.getLocalRollData());
   }
 }

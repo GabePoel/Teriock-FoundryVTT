@@ -22,6 +22,7 @@ export { default as PriceSystemMixin } from "./price-system-mixin/price-system-m
 export { default as RefreshSystemMixin } from "./refresh-system-mixin.mjs";
 export { default as RevealableSystemMixin } from "./revealable-system-mixin/revealable-system-mixin.mjs";
 export { default as StattedSystemMixin } from "./statted-system-mixin/statted-system-mixin.mjs";
+export { default as TaxonomySystemMixin } from "./taxonomy-system-mixin/taxonomy-system-mixin.mjs";
 export { default as UncommonSystemMixin } from "./uncommon-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";
 export { default as WrappedBehaviorSystemMixin } from "./wrapped-behavior-system-mixin.mjs";

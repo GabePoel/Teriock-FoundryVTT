@@ -1,5 +1,6 @@
 import { dotJoin, mergeMetadata, mixClasses } from "../../../../../utils/_module.mjs";
 import { documentSettingsModels } from "../../../../models/settings-models/_module.mjs";
+import { TaxonomySystemMixin } from "../../../mixins/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -9,6 +10,7 @@ const { fields } = foundry.data;
  * Base actor data model.
  * @extends {AbstractActorSystem}
  * @implements {Teriock.Models.BaseActorSystemData}
+ * @mixes TaxonomySystem
  * @mixes ActorAffinitiesPart
  * @mixes ActorAttributesPart
  * @mixes ActorAutomationPart
@@ -33,6 +35,7 @@ const { fields } = foundry.data;
 export default class BaseActorSystem
   extends mixClasses(
     AbstractActorSystem,
+    TaxonomySystemMixin,
     parts.ActorStatsPart,
     parts.ActorConditionsPart,
     parts.ActorAutomationPart,

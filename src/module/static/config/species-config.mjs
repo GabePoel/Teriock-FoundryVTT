@@ -6,10 +6,10 @@ export default {
   traits: wikiIndexToConfig("trait", "TERIOCK.TERMS.Traits"),
   undeadLevels: {
     0: "COMMON.None",
-    1: "TERIOCK.SYSTEMS.Species.UNDEAD_LEVELS.partial",
-    2: "TERIOCK.SYSTEMS.Species.UNDEAD_LEVELS.minor",
-    3: "TERIOCK.SYSTEMS.Species.UNDEAD_LEVELS.full",
-    4: "TERIOCK.SYSTEMS.Species.UNDEAD_LEVELS.greater",
+    1: "TERIOCK.SYSTEMS.Taxonomy.UNDEAD_LEVELS.partial",
+    2: "TERIOCK.SYSTEMS.Taxonomy.UNDEAD_LEVELS.minor",
+    3: "TERIOCK.SYSTEMS.Taxonomy.UNDEAD_LEVELS.full",
+    4: "TERIOCK.SYSTEMS.Taxonomy.UNDEAD_LEVELS.greater",
   },
 };
 

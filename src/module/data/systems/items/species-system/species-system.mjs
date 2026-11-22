@@ -2,7 +2,6 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf } from "../../../../utils/_module.mjs";
-import { levelField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import {
@@ -10,6 +9,7 @@ import {
   CompetenceDisplaySystemMixin,
   MetaphysicsSystemMixin,
   StattedSystemMixin,
+  TaxonomySystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
@@ -34,6 +34,7 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * @mixes WikiSystem
  * @mixes CompetenceDisplaySystem
  * @mixes MetaphysicsSystem
+ * @mixes TaxonomySystem
  * @mixes StattedSystem
  * @mixes SpeciesPanelPart
  * @mixes SpeciesMorphPart
@@ -45,6 +46,7 @@ export default class SpeciesSystem
     WikiSystemMixin,
     CompetenceDisplaySystemMixin,
     MetaphysicsSystemMixin,
+    TaxonomySystemMixin,
     StattedSystemMixin,
     SpeciesPanelPart,
     SpeciesMorphPart,
@@ -69,7 +71,6 @@ export default class SpeciesSystem
     return Object.assign(super.defineSchema(), {
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
-      families: slugSetField(TERIOCK.CONFIG.species.families),
       innateRanks: new fields.HTMLField(),
       lifespan: new fields.SchemaField({
         adulthood: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
@@ -90,8 +91,6 @@ export default class SpeciesSystem
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
       }),
-      traits: slugSetField(TERIOCK.CONFIG.species.traits),
-      undeadLevel: levelField(TERIOCK.CONFIG.species.undeadLevels),
     });
   }
 
@@ -144,60 +143,14 @@ export default class SpeciesSystem
   }
 
   /** @inheritDoc */
-  get _displayInputs() {
-    return [
-      ...super._displayInputs,
-      "system.traits",
-      ...(this.traits.has("undead") ? ["system.undeadLevel"] : []),
-      "system.families",
-    ];
-  }
-
-  /** @inheritDoc */
-  get _displayTags() {
-    return [...super._displayTags, ...this._traitTags, ...this._familyTags];
-  }
-
-  /** @inheritDoc */
   get _displayToggles() {
     return ["system.lifespan.enabled", "system.size.enabled", ...super._displayToggles];
-  }
-
-  /**
-   * Family tags.
-   * @returns {Teriock.Display.DisplayTag[]}
-   */
-  get _familyTags() {
-    return Array.from(this.families).map(f => {
-      return {
-        label: TERIOCK.CONFIG.species.families[f]?.label,
-        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.families.label",
-      };
-    });
-  }
-
-  /**
-   * Trait tags.
-   * @returns {Teriock.Display.DisplayTag[]}
-   */
-  get _traitTags() {
-    return [
-      ...Array.from(this.traits).map(t => {
-        return { label: TERIOCK.CONFIG.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
-      }),
-      ...(this.undeadLevel
-        ? [{
-          label: TERIOCK.CONFIG.species.undeadLevels[this.undeadLevel],
-          tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.undeadLevel.label",
-        }]
-        : []),
-    ];
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([...Panel.simplifyTags([...this._traitTags, ...this._familyTags]), parts.text]);
+    parts.text = dotJoin([...Panel.simplifyTags(this._taxonomyTags), parts.text]);
     parts.subtitle = _loc("TYPES.Item.species");
     return parts;
   }
@@ -240,10 +193,7 @@ export default class SpeciesSystem
       "size.enabled": Number(this.size.enabled),
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
-      undead: this.undeadLevel,
     });
-    for (const family of this.families) { data[`family.${family}`] = 1; }
-    for (const trait of this.traits) { data[`trait.${trait}`] = 1; }
     return data;
   }
 

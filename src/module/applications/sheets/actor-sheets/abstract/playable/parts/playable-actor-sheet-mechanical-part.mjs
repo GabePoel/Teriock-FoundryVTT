@@ -190,6 +190,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
         Array.from(this.document.system.activeSpeedAdjustments, k => [k, true]),
       );
       context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain.terrains[t]);
+      context.taxonomy = this.document.system._taxonomyTags.map(t => ({ ...t, tooltip: _loc(t.tooltip) }));
       const sourceWeight = this.document.system.weight.self.clone();
       context.weight = {
         data: this.document.system.weight.self.tag,

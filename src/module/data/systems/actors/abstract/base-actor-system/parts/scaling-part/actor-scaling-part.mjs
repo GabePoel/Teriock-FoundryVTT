@@ -66,7 +66,7 @@ export default function ActorScalingPart(Base) {
      */
     #getRankRollData() {
       const data = {};
-      const ranks = this.parent.previewedTypes.rank;
+      const ranks = this.parent.previewedTypes.rank.filter(r => r.active);
       for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
         data[`ranks.class.${c}`] = ranks.filter(r => r.system.class === c).length;
       }
@@ -81,14 +81,23 @@ export default function ActorScalingPart(Base) {
      * @returns {object}
      */
     #getSpeciesRollData() {
-      const data = { undead: 0 };
-      for (const s of this.parent.previewedTypes.species.filter(s => s.active)) {
-        data[`species.${s.system.slug}`] = 1;
-        for (const f of s.system.families) { data[`family.${f}`] = 1; }
-        for (const t of s.system.traits) { data[`trait.${t}`] = 1; }
-        data.undead = Math.max(data.undead, s.system.undeadLevel);
-      }
+      const data = {};
+      for (const s of this.parent.previewedTypes.species.filter(s => s.active)) { data[`species.${s.system.slug}`] = 1; }
       return data;
+    }
+
+    /**
+     * Includes the taxonomy of active species.
+     * @inheritDoc
+     */
+    get taxonomy() {
+      const species = this.parent.previewedTypes.species.filter(s => s.active).map(s => s.system);
+      const { families, traits, undeadLevel } = super.taxonomy;
+      return {
+        families: species.reduce((set, s) => set.union(s.families), families),
+        traits: species.reduce((set, s) => set.union(s.traits), traits),
+        undeadLevel: Math.max(undeadLevel, ...species.map(s => s.undeadLevel)),
+      };
     }
 
     /** @inheritDoc */
