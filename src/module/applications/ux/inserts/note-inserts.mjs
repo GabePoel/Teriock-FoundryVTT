@@ -1,6 +1,7 @@
 /**
  * @import { ProseMirrorDropDownConfig } from "@common/prosemirror/_types.mjs";
  * @import ProseMirrorMenu from "@common/prosemirror/menu.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /** @type {ProseMirrorInsert} */
@@ -22,7 +23,7 @@ export default noteInserts;
  * Move note inserts to the top of the format menu.
  * @param {ProseMirrorMenu} _menu
  * @param {Record<string, ProseMirrorDropDownConfig>} menus
- * @see {getProseMirrorMenuDropDowns}
+ * @see {@link hookEvents.getProseMirrorMenuDropDowns}
  */
 function moveNoteInsertsMenu(_menu, menus) {
   const entries = menus.format?.entries ?? [];

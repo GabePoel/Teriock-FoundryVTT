@@ -56,3 +56,16 @@ export default class ArmamentSheet extends ChildSheet {
     });
   }
 }
+
+/**
+ * Re-render sheets to show updated imbuement durations.
+ * @see {@link hookEvents.updateWorldTime}
+ */
+async function updateRegionDurations() {
+  for (const app of foundry.applications.instances.values()) {
+    if (app instanceof ArmamentSheet && app.document.previewedTypes.imbuement.length) {
+      app.render();
+    }
+  }
+}
+Hooks.on("updateWorldTime", updateRegionDurations);

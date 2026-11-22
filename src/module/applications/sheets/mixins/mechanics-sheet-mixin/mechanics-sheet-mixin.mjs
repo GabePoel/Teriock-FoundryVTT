@@ -5,6 +5,7 @@ import * as parts from "./parts/_module.mjs";
 /**
  * @import { ApplicationConfiguration, ApplicationRenderOptions, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  * @import { Collection } from "@common/utils/_module.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
@@ -309,7 +310,7 @@ export default function MechanicsSheetMixin(Base) {
  * @param {HTMLElement} _element
  * @param {object} _context
  * @param {ApplicationRenderOptions} options
- * @see {renderMechanicsSheet}
+ * @see {@link hookEvents.renderApplicationV2}
  */
 function addMechanicDebugListener(application, _element, _context, options) {
   if (!options.isFirstRender) { return; }

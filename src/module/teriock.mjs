@@ -352,6 +352,9 @@ foundry.helpers.Hooks.once("init", function() {
   // Level
   rs(d.TeriockLevel, s.TeriockLevelConfig, "Level");
 
+  // Region
+  rs(d.TeriockRegionDocument, s.TeriockRegionConfig, "Region");
+
   // Region Behavior
   rs(d.TeriockRegionBehavior, s.TeriockRegionBehaviorConfig, "RegionBehavior");
 

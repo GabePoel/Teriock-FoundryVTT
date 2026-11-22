@@ -3,6 +3,10 @@ import { findBestDocument, fromIdentifier, makeIcon, makeIconClass, toId } from 
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
+/**
+ * @import * as hookEvents from "@client/hooks.mjs";
+ */
+
 const { Hotbar } = foundry.applications.ui;
 
 /** @inheritDoc */
@@ -163,7 +167,7 @@ export default class TeriockHotbar extends Hotbar {
  * @param {object} data
  * @param {string} slot
  * @returns {false|void}
- * @see {hotbarDrop}
+ * @see {@link hookEvents.hotbarDrop}
  */
 function createChildHotbarDropMacro(hotbar, data, slot) {
   const cls = foundry.utils.getDocumentClass(data.type);

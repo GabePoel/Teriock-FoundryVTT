@@ -16,6 +16,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 /**
  * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
@@ -107,3 +108,14 @@ export default class ApplicableEffectSheet
     super._replaceHTML(result, content, options);
   }
 }
+
+/**
+ * Re-render sheets to show updated durations.
+ * @see {@link hookEvents.updateWorldTime}
+ */
+async function updateRegionDurations() {
+  for (const app of foundry.applications.instances.values()) {
+    if (app instanceof ApplicableEffectSheet) { app.render({ parts: ["duration"] }); }
+  }
+}
+Hooks.on("updateWorldTime", updateRegionDurations);

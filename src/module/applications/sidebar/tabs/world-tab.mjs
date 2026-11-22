@@ -13,6 +13,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
@@ -335,7 +336,7 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
 /**
  * Re-render the world settings so new actors can be marked as relevant.
  * @param {TeriockActor} actor
- * @see {createActor}
+ * @see {@link hookEvents.createDocument}
  */
 function renderRelevantActors(actor) {
   if (game.user.isGM && !actor.pack) { ui.world?.render({ parts: ["settings"] }); }
@@ -345,7 +346,7 @@ Hooks.on("createActor", renderRelevantActors);
 /**
  * Remove a deleted actor from the relevant actors setting.
  * @param {TeriockActor} actor
- * @see {deleteActor}
+ * @see {@link hookEvents.deleteDocument}
  */
 function cleanRelevantActors(actor) {
   const relevant = game.settings.get("teriock", "relevantActors");
@@ -357,7 +358,7 @@ Hooks.on("deleteActor", cleanRelevantActors);
 
 /**
  * Refresh the time displayed in the world tab.
- * @see {updateWorldTime}
+ * @see {@link hookEvents.updateWorldTime}
  */
 function renderWorldTime() {
   ui.world?.render({ parts: ["header"] });

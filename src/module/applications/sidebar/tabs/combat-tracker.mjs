@@ -2,6 +2,10 @@ import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { makeIconClass, mixClasses, toClass } from "../../../utils/_module.mjs";
 import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 
+/**
+ * @import * as hookEvents from "@client/hooks.mjs";
+ */
+
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 
 /**
@@ -530,7 +534,7 @@ export default class TeriockCombatTracker
 /**
  * Expand newly created CombatantGroups in the tracker.
  * @param {TeriockCombatantGroup} group
- * @see {createCombatantGroup}
+ * @see {@link hookEvents.createDocument}
  * @category Groups
  */
 function expandCreatedGroup(group) {
@@ -543,7 +547,7 @@ Hooks.on("createCombatantGroup", expandCreatedGroup);
 /**
  * @param {TeriockToken} token
  * @param {boolean} controlled
- * @see {controlToken}
+ * @see {@link hookEvents.controlObject}
  * @category Groups
  */
 function markCombatantsControlled(token, controlled) {

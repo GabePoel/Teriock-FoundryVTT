@@ -9,6 +9,7 @@ export { default as TeriockLevelConfig } from "./level-config.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export * as page from "./page-sheets/_module.mjs";
 export { default as TeriockRegionBehaviorConfig } from "./region-behavior-config.mjs";
+export { default as TeriockRegionConfig } from "./region-config.mjs";
 export { default as TeriockRollTableSheet } from "./roll-table-sheet.mjs";
 export { default as TeriockSceneConfig } from "./scene-config.mjs";
 export { default as TeriockTableResultConfig } from "./table-result-config.mjs";

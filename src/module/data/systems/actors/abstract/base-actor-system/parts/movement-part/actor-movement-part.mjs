@@ -6,6 +6,7 @@ import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs"
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  * @import RegionBehavior from "@client/documents/region-behavior.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 const { fields } = foundry.data;
@@ -199,7 +200,7 @@ function speedField(initial, label) {
 
 /**
  * Make sure linked actors have the correct surroundings when the scene changes or the canvas loads.
- * @see {canvasReady}
+ * @see {@link hookEvents.canvasReady}
  * @category Terrain
  */
 function checkSceneSurroundings() {

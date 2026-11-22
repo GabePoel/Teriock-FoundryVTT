@@ -1,6 +1,9 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createElement, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { FormulaField, UnitField } from "../../../fields/_module.mjs";
 import { localSelectionSchema } from "../../../fields/tools/builders.mjs";
+import { EffectDurationUnitModel, RegionDurationUnitModel } from "../../../models/unit-models/_module.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { SelectionAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -24,7 +27,11 @@ export default class RegionAutomation
   )
 {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Region"];
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.Duration",
+    "TERIOCK.AUTOMATIONS.Region",
+  ];
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "region" });
@@ -35,6 +42,8 @@ export default class RegionAutomation
       applyDocuments: new fields.BooleanField({ initial: false }),
       behaviors: new fields.ArrayField(new fields.ObjectField()),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      duration: new UnitField(EffectDurationUnitModel),
+      substitution: new FormulaField({ initial: "@base + @new" }),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
           Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
@@ -45,12 +54,28 @@ export default class RegionAutomation
     });
   }
 
+  /**
+   * Get the duration for a region this creates.
+   * @param {object} rollData
+   * @returns {Promise<number|undefined>}
+   */
+  async #getDuration(rollData) {
+    const document = this.getNearestDocument();
+    const base = document?.system?.duration?.formula ?? document?.duration?.secondsRemaining ?? "0";
+    const newFormula = await BaseRoll.getValue(this.duration.formula, rollData);
+    const formula = BaseRoll.replaceFormulaData(this.substitution, { base, new: newFormula });
+    const seconds = await BaseRoll.getValue(formula, rollData);
+    return seconds < TERIOCK.CONST.INF / 10 ? seconds : undefined;
+  }
+
   /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,
       "visibility",
       "deleteOnTurnChange",
+      "duration",
+      "substitution",
       "hr",
       "applyDocuments",
       ...(this.applyDocuments ? this._selectionPaths : []),
@@ -102,10 +127,16 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async getRegionData(options = { execution: null, rollData: {} }) {
+    const seconds = await this.#getDuration(options.rollData ?? options.execution?.getRollData() ?? {});
     return foundry.utils.mergeObject(await super.getRegionData(options), {
       behaviors: foundry.utils.deepClone(this.behaviors),
       displayMeasurements: false,
-      flags: { teriock: { targetRegion: false } },
+      flags: {
+        teriock: {
+          ...(Number.isFinite(seconds) ? { duration: RegionDurationUnitModel.castNumber(seconds) } : {}),
+          targetRegion: false,
+        },
+      },
       highlightMode: "shapes",
       name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
         name: options.execution?.source.name ?? this.getNearestDocument().name,

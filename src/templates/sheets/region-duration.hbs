@@ -1,0 +1,29 @@
+<section
+  class="
+    tab
+    {{#if tab.active}}
+      active
+    {{/if}}
+  "
+  data-group="{{ tab.group }}"
+  data-tab="{{ tab.id }}"
+>
+  {{#if start}}
+    <div class="form-group">
+      <span class="label">{{localize "EFFECT.FIELDS.start.time.label"}}</span>
+      <div class="form-fields">{{ start }}</div>
+    </div>
+  {{/if}}
+  {{#if remaining}}
+    <div class="form-group">
+      <span class="label">{{localize "TERIOCK.SHEETS.Region.FIELDS.remaining.label"}}</span>
+      <div class="form-fields">{{ remaining }}</div>
+    </div>
+  {{/if}}
+  {{formGroup
+    durationField
+    name="flags.teriock.duration"
+    rootId=rootId
+    value=durationValue
+  }}
+</section>

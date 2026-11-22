@@ -3,6 +3,7 @@ import { batchWrite, objectMap } from "../../../../../../../utils/_module.mjs";
 /**
  * @import { NumberFieldOptions } from "@common/data/_types.mjs";
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 const { fields } = foundry.data;
@@ -169,7 +170,7 @@ function currencyField(options = {}) {
  * Increase debt for all relevant actors.
  * @param {number} _worldTime
  * @param {number} dt
- * @see {updateWorldTime}
+ * @see {@link hookEvents.updateWorldTime}
  */
 async function increaseDebt(_worldTime, dt) {
   if (!game.user.isActiveGM) { return; }
