@@ -27,7 +27,9 @@ export default class DurationAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["duration", "substitution", ...super._formPaths];
+    const paths = ["duration"];
+    if (this.duration.unitType === "finite") { paths.push("substitution"); }
+    return [...paths, ...super._formPaths];
   }
 
   /** @inheritDoc */
@@ -42,11 +44,15 @@ export default class DurationAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   async modifyExecutionEffectData(execution, data) {
-    await super.modifyExecutionEffectData(execution, data);
-    const inf = TERIOCK.CONST.INF;
-    const base = foundry.utils.getProperty(data, "duration.seconds") ?? inf;
-    const formula = BaseRoll.replaceFormulaData(this.substitution, { base, new: this.#seconds });
-    const seconds = await BaseRoll.getValue(formula, execution.getRollData());
-    foundry.utils.setProperty(data, "duration.seconds", seconds >= inf / 10 ? undefined : seconds);
+    if (this.duration.unitType === "finite") {
+      await super.modifyExecutionEffectData(execution, data);
+      const inf = TERIOCK.CONST.INF;
+      const base = foundry.utils.getProperty(data, "duration.seconds") ?? inf;
+      const formula = BaseRoll.replaceFormulaData(this.substitution, { base, new: this.#seconds });
+      const seconds = await BaseRoll.getValue(formula, execution.getRollData());
+      foundry.utils.setProperty(data, "duration.seconds", seconds >= inf / 10 ? undefined : seconds);
+    } else {
+      foundry.utils.setProperty(data, "duration.seconds", undefined);
+    }
   }
 }

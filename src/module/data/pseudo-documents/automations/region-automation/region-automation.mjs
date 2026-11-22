@@ -60,6 +60,7 @@ export default class RegionAutomation
    * @returns {Promise<number|undefined>}
    */
   async #getDuration(rollData) {
+    if (this.deleteOnTurnChange || this.duration.unitType !== "finite") { return undefined; }
     const document = this.getNearestDocument();
     const base = document?.system?.duration?.formula ?? document?.duration?.secondsRemaining ?? "0";
     const newFormula = await BaseRoll.getValue(this.duration.formula, rollData);
@@ -68,20 +69,35 @@ export default class RegionAutomation
     return seconds < TERIOCK.CONST.INF / 10 ? seconds : undefined;
   }
 
+  /**
+   * Paths relating to duration.
+   * @returns {string[]}
+   */
+  get _durationPaths() {
+    const paths = ["deleteOnTurnChange"];
+    if (this.deleteOnTurnChange) { return paths; }
+    paths.push("duration");
+    if (this.duration.unitType === "finite") { paths.push("substitution"); }
+    return paths;
+  }
+
   /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,
-      "visibility",
-      "deleteOnTurnChange",
-      "duration",
-      "substitution",
+      "hr",
+      ...this._durationPaths,
       "hr",
       "applyDocuments",
       ...(this.applyDocuments ? this._selectionPaths : []),
       "hr",
       ...this._overrideDataPaths,
     ];
+  }
+
+  /** @inheritDoc */
+  get _restrictionPaths() {
+    return [...super._restrictionPaths, "visibility"];
   }
 
   /** @inheritDoc */
