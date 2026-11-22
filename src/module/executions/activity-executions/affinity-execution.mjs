@@ -75,4 +75,12 @@ export default class AffinityExecution extends BaseExecution {
       TERIOCK.CONFIG.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
     );
   }
+
+  /** @inheritDoc */
+  async _postExecute() {
+    const yes = await super._postExecute();
+    if (yes === false) { return yes; }
+
+    this.fireTrigger(this.type);
+  }
 }

@@ -241,11 +241,13 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
-   * The actors in this combat.
+   * The actors that aren't skipped in this combat.
    * @returns {TeriockActor[]}
    */
   get actors() {
-    return [...new Set(this.combatants.map(c => c.actor).filter(Boolean))];
+    let combatants = this.combatants;
+    if (this.settings.skipDefeated) { combatants = combatants.filter(c => !c.isDefeated); }
+    return [...new Set(combatants.map(c => c.actor).filter(Boolean))];
   }
 
   /** @inheritDoc */
@@ -292,6 +294,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   async _onEndRound(context) {
     await super._onEndRound(context);
     if (context.round > 0) { this.#refreshCombatExpirations(null, "round", "end"); }
+    for (const actor of this.actors) { actor.fireTrigger("roundEnd"); }
   }
 
   /** @inheritDoc */
@@ -301,6 +304,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       this.#refreshCombatExpirations(member.actor, "turn", "end");
       member.actor?.fireTrigger("turnEnd");
     }
+    for (const actor of this.actors) { actor.fireTrigger("anyTurnEnd"); }
     await this.#triggerMemberRegionEvents(CONST.REGION_EVENTS.TOKEN_TURN_END, context, combatant);
   }
 
@@ -317,6 +321,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     await super._onStartRound(context);
     if (context.round === 1 && !this.previous.round) { this._onStartCombat(); }
     this.#refreshCombatExpirations(null, "round", "start");
+    for (const actor of this.actors) { actor.fireTrigger("roundStart"); }
   }
 
   /** @inheritDoc */
@@ -330,6 +335,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       member.actor?.fireTrigger("turnStart");
       this.#refreshCombatExpirations(member.actor, "action", "start");
     }
+    for (const actor of this.actors) { actor.fireTrigger("anyTurnStart"); }
     await this.#triggerMemberRegionEvents(CONST.REGION_EVENTS.TOKEN_TURN_START, context, combatant);
   }
 

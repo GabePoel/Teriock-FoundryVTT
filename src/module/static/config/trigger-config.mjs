@@ -1,5 +1,6 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { objectMap } from "../../utils/_module.mjs";
+import affinityConfig from "./affinity-config.mjs";
 import commandConfig from "./command-config.mjs";
 
 /** @category Triggers */
@@ -19,6 +20,11 @@ const triggerConfig = {
     },
     label: "TERIOCK.TRIGGERS.Activity.label",
   },
+  affinity: {
+    alwaysAvailable: true,
+    choices: objectMap(affinityConfig.types, c => c.label),
+    label: "DOCUMENT.Affinity",
+  },
   attunable: {
     choices: {
       attune: "TERIOCK.TRIGGERS.Attunable.choices.attune",
@@ -31,8 +37,12 @@ const triggerConfig = {
   combat: {
     alwaysAvailable: true,
     choices: {
+      anyTurnEnd: "TERIOCK.TRIGGERS.Combat.choices.anyTurnEnd",
+      anyTurnStart: "TERIOCK.TRIGGERS.Combat.choices.anyTurnStart",
       combatEnd: "TERIOCK.TRIGGERS.Combat.choices.combatEnd",
       combatStart: "TERIOCK.TRIGGERS.Combat.choices.combatStart",
+      roundEnd: "TERIOCK.TRIGGERS.Combat.choices.roundEnd",
+      roundStart: "TERIOCK.TRIGGERS.Combat.choices.roundStart",
       turnEnd: "TERIOCK.TRIGGERS.Combat.choices.turnEnd",
       turnStart: "TERIOCK.TRIGGERS.Combat.choices.turnStart",
     },
@@ -76,16 +86,6 @@ const triggerConfig = {
     label: "TYPES.Item.mount",
     self: true,
   },
-  protection: {
-    alwaysAvailable: true,
-    choices: {
-      hexproof: "TERIOCK.ROLLS.Hexproof.button",
-      hexseal: "TERIOCK.ROLLS.Hexseal.button",
-      immune: "TERIOCK.ROLLS.Immune.button",
-      resist: "TERIOCK.ROLLS.Resist.button",
-    },
-    label: "TERIOCK.TRIGGERS.Protection.label",
-  },
   time: {
     alwaysAvailable: true,
     choices: {
@@ -100,15 +100,9 @@ const triggerConfig = {
   },
 };
 
-preLocalizeObject("CONFIG.trigger", { keys: ["label"] });
-preLocalizeObject("CONFIG.trigger.activity.choices");
-preLocalizeObject("CONFIG.trigger.attunable.choices");
-preLocalizeObject("CONFIG.trigger.combat.choices");
-preLocalizeObject("CONFIG.trigger.consequence.choices");
-preLocalizeObject("CONFIG.trigger.equipment.choices");
-preLocalizeObject("CONFIG.trigger.command.choices");
-preLocalizeObject("CONFIG.trigger.mount.choices");
-preLocalizeObject("CONFIG.trigger.protection.choices");
-preLocalizeObject("CONFIG.trigger.time.choices");
+preLocalizeObject("CONFIG.trigger", { keys: ["label"], sort: true });
+for (const k of Object.keys(triggerConfig)) {
+  preLocalizeObject(`CONFIG.trigger.${k}.choices`, { sort: true });
+}
 
 export default triggerConfig;
