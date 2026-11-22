@@ -64,25 +64,17 @@ export default class RegionAutomation
     return this.applyDocuments && super.hasSelection;
   }
 
-  /**
-   * The activation that places this Automation's region.
-   * @param {Teriock.Automations.GetActivationsOptions} [options]
-   * @param {Teriock.Select.DocumentSelectionConfig} [selectionConfig] - Config for Documents the region should apply.
-   * @returns {Promise<RegionActivation>}
-   */
-  async _buildRegionActivation(options = {}, selectionConfig = {}) {
-    return new RegionActivation({
-      ...selectionConfig,
-      attachToToken: this.attachToToken,
-      data: await this.getRegionData(options),
-    });
-  }
-
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
     const selection = this.hasSelection ? await this._resolveSelection(options) : { config: {} };
     if (!selection) { return []; }
-    return [await this._buildRegionActivation(options, selection.config)];
+    return [
+      new RegionActivation({
+        ...selection.config,
+        attachToToken: this.attachToToken,
+        data: await this.getRegionData(options),
+      }),
+    ];
   }
 
   /** @inheritDoc */
