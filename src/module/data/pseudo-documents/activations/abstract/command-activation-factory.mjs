@@ -41,6 +41,16 @@ export default function CommandActivationFactory(key) {
     }
 
     /** @inheritDoc */
+    get onlyArmaments() {
+      return Boolean(TERIOCK.CONFIG.command[key].armaments);
+    }
+
+    /** @inheritDoc */
+    get onlyPlayable() {
+      return Boolean(TERIOCK.CONFIG.command[key].playable);
+    }
+
+    /** @inheritDoc */
     get selectedActors() {
       return TERIOCK.CONFIG.command[key].shared ? game.actors.rollers : super.selectedActors;
     }

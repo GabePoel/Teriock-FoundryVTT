@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
-import { BaseActorSystem } from "./abstract/_module.mjs";
+import { PlayableActorSystem } from "./abstract/_module.mjs";
 
 /**
  * Creature-specific actor data model.
@@ -9,10 +9,10 @@ import { BaseActorSystem } from "./abstract/_module.mjs";
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  *
- * @extends {BaseActorSystem}
+ * @extends {PlayableActorSystem}
  * @mixes WikiSystem
  */
-export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSystemMixin) {
+export default class CreatureSystem extends mixClasses(PlayableActorSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.creature,

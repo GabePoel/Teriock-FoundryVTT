@@ -1,10 +1,10 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import { CharacterActorSystem } from "./abstract/_module.mjs";
+import { PlayableActorSystem } from "./abstract/_module.mjs";
 
 /**
  * Player character actor data model.
  */
-export default class PlayerCharacterSystem extends CharacterActorSystem {
+export default class PlayerCharacterSystem extends PlayableActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     defaultChildIdentifiers: [...super.metadata.defaultChildIdentifiers, "resource:agency-spark"],

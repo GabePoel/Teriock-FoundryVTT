@@ -29,11 +29,33 @@ export default class BaseActivation extends BasePseudoDocument {
   #tokens;
 
   /**
+   * Whether an actor is valid.
+   * @param {TeriockActor} actor
+   * @returns {boolean}
+   */
+  #checkValidActor(actor) {
+    let valid = true;
+    if (this.onlyPlayable) { valid &&= actor.system.metadata.playable; }
+    if (this.onlyArmaments) { valid &&= actor.system.metadata.childTypes.has("equipment"); }
+    return valid;
+  }
+
+  /**
+   * Filter to only the valid actors.
+   * @param {TeriockActor[]} actors
+   * @returns {TeriockActor[]}
+   */
+  #filterActors(actors) {
+    return actors.filter(a => this.#checkValidActor(a));
+  }
+
+  /**
    * @inheritDoc
    * @returns {TeriockActor|null}
    */
   get actor() {
-    return this.getNearestDocument()?.speakerActor ?? null;
+    const actor = this.getNearestDocument()?.speakerActor;
+    return actor && this.#checkValidActor(actor) ? actor : null;
   }
 
   /**
@@ -41,7 +63,7 @@ export default class BaseActivation extends BasePseudoDocument {
    * @returns {TeriockActor[]}
    */
   get actors() {
-    return this.#actors ?? this.selectedActors;
+    return this.#filterActors(this.#actors ?? this.selectedActors);
   }
 
   /**
@@ -82,11 +104,25 @@ export default class BaseActivation extends BasePseudoDocument {
   }
 
   /**
+   * Whether to restrict to Actors that can have armaments only.
+   */
+  get onlyArmaments() {
+    return false;
+  }
+
+  /**
+   * Whether to restrict to playable Actors only.
+   */
+  get onlyPlayable() {
+    return false;
+  }
+
+  /**
    * Currently selected actors.
    * @returns {TeriockActor[]}
    */
   get selectedActors() {
-    return game.actors.selected;
+    return this.#filterActors(game.actors.selected);
   }
 
   /**
@@ -102,7 +138,7 @@ export default class BaseActivation extends BasePseudoDocument {
    * @returns {(TeriockActor|null)[]}
    */
   get targetedActors() {
-    return this.targetedTokens.map(t => t.actor).filter(Boolean);
+    return this.#filterActors(this.targetedTokens.map(t => t.actor).filter(Boolean));
   }
 
   /**

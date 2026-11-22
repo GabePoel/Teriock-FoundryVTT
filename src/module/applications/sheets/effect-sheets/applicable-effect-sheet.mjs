@@ -1,4 +1,4 @@
-import { makeIconClass, mixClasses, omit } from "../../../utils/_module.mjs";
+import { createElement, makeIconClass, mixClasses, omit } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";
 import {
@@ -106,6 +106,36 @@ export default class ApplicableEffectSheet
   _replaceHTML(result, content, options) {
     if (this.#editorForms) { result.details?.append(this.#editorForms); }
     super._replaceHTML(result, content, options);
+    for (const [part, tips] of Object.entries(this.getTips())) {
+      if (result[part] && tips.length) {
+        const container = createElement("ul", { className: "notification-container" });
+        for (const tip of tips) {
+          const li = createElement("li", { className: `notification ${tip.level ?? "info"}` });
+          li.append(createElement("span", { innerText: _loc(tip.message) }));
+          container.append(li);
+        }
+        result[part].prepend(container);
+      }
+    }
+    console.log(result, content, options);
+  }
+
+  /**
+   * Tips that will appear on certain tabs.
+   * @returns {object[]}
+   */
+  getTips() {
+    const out = {
+      changes: [{ message: "TERIOCK.SHEETS.ApplicableEffect.TIPS.changes" }],
+      duration: [{ message: "TERIOCK.SHEETS.ApplicableEffect.TIPS.duration" }],
+    };
+    if (
+      !this.document.actor
+      && new Set(this.document.system.metadata.childTypes).intersection(new Set(Item.implementation.TYPES)).size
+    ) {
+      out.children = [{ level: "warning", message: "TERIOCK.SHEETS.ApplicableEffect.TIPS.noItems" }];
+    }
+    return out;
   }
 }
 

@@ -9,7 +9,7 @@ import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
  * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  */
-export default class CharacterActorSystem extends BaseActorSystem {
+export default class PlayableActorSystem extends BaseActorSystem {
   /**
    * @inheritDoc
    * @type {Teriock.Metadata.CharacterActorSystemMetadata}

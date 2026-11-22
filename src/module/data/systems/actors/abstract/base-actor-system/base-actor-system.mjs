@@ -6,6 +6,9 @@ import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
+// TODO: Simplify the base actor system and move a bunch of this stuff over to playable actors
+// TODO: Inventories, environments(?), and future hypothetical party actors don't need all these parts
+
 /**
  * Base actor data model.
  * @extends {AbstractActorSystem}
@@ -61,7 +64,10 @@ export default class BaseActorSystem
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseActor"];
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Teriock.Metadata.ActorSystemMetadata}
+   */
   static metadata = mergeMetadata(super.metadata, {
     associationTypes: [
       "backstory",
@@ -101,6 +107,7 @@ export default class BaseActorSystem
       "species",
     ],
     documentName: "Actor",
+    playable: true,
     preserveOnRefresh: ["effects", "items", ...super.metadata.preserveOnRefresh],
   });
 

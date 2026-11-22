@@ -1,10 +1,10 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import { CharacterActorSystem } from "./abstract/_module.mjs";
+import { PlayableActorSystem } from "./abstract/_module.mjs";
 
 /**
  * Non-player character actor data model.
  */
-export default class NonPlayerCharacterSystem extends CharacterActorSystem {
+export default class NonPlayerCharacterSystem extends PlayableActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.npc,

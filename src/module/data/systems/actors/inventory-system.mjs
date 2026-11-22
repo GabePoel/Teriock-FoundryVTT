@@ -8,6 +8,7 @@ export default class InventorySystem extends BaseActorSystem {
     childTypes: ["base", "consequence", "equipment"],
     icon: TERIOCK.DISPLAY.icons.manifest.document.inventory,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.inventory,
+    playable: false,
     type: "inventory",
   });
 

@@ -53,6 +53,16 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
       || _loc(this.constructor.typeLabel);
   }
 
+  /** @inheritDoc */
+  get onlyArmaments() {
+    return Boolean(TERIOCK.CONFIG.command[this.command].armaments);
+  }
+
+  /** @inheritDoc */
+  get onlyPlayable() {
+    return Boolean(TERIOCK.CONFIG.command[this.command].playable);
+  }
+
   get tooltip() {
     const tooltip = TERIOCK.CONFIG.command[this.command]?.numeric?.tooltip;
     if (typeof this.#amount !== "number" || !tooltip) { return ""; }

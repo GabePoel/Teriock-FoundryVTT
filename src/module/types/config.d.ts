@@ -125,6 +125,8 @@ declare global {
       aliases?: string[];
       /** Explicit arguments that are always assumed to be passed along when this is run in chat (order matters) */
       args?: string[];
+      /** Whether to restrict to Actors that can have armaments only */
+      armaments?: boolean;
       /** Whether this should be bunched with other common commands in one Automation */
       common?: boolean;
       /** Icon that represents this command */
@@ -137,6 +139,8 @@ declare global {
       numeric?: CommandNumericEntry;
       /** Write operations for one Actor */
       operations?: CommandOperation;
+      /** Whether to restrict to playable Actors only */
+      playable?: boolean;
       /** The command to run instead or the operations that reverse this one */
       reverse?: string | CommandOperation;
       /** Whether this shared group rolls and only certain actors should roll */

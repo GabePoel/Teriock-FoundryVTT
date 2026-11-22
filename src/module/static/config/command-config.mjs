@@ -162,6 +162,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Damage.take",
       tooltip: "TERIOCK.COMMANDS.Damage.tooltip",
     },
+    playable: true,
     reverse: "healing",
     slug: "damage",
     trigger: true,
@@ -179,6 +180,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Drain.take",
       tooltip: "TERIOCK.COMMANDS.Drain.tooltip",
     },
+    playable: true,
     reverse: "revitalizing",
     slug: "drain",
     trigger: true,
@@ -193,6 +195,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Wither.take",
       tooltip: "TERIOCK.COMMANDS.Wither.tooltip",
     },
+    playable: true,
     slug: "wither",
     trigger: true,
     operations: (actor, { amount }) => buildBarOperations(actor, "lp", amount),
@@ -209,6 +212,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Healing.take",
       tooltip: "TERIOCK.COMMANDS.Healing.tooltip",
     },
+    playable: true,
     reverse: "damage",
     slug: "healing",
     trigger: true,
@@ -224,6 +228,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Revitalizing.take",
       tooltip: "TERIOCK.COMMANDS.Revitalizing.tooltip",
     },
+    playable: true,
     reverse: "drain",
     slug: "revitalizing",
     trigger: true,
@@ -240,6 +245,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.GainTempHp.take",
       tooltip: "TERIOCK.COMMANDS.GainTempHp.tooltip",
     },
+    playable: true,
     slug: "gain-temp-hp",
     trigger: true,
     operations: (
@@ -261,6 +267,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.GainTempMp.take",
       tooltip: "TERIOCK.COMMANDS.GainTempMp.tooltip",
     },
+    playable: true,
     slug: "gain-temp-mp",
     trigger: true,
     operations: (
@@ -283,6 +290,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.SetTempHp.take",
       tooltip: "TERIOCK.COMMANDS.SetTempHp.tooltip",
     },
+    playable: true,
     slug: "set-temp-hp",
     trigger: true,
     operations: (actor, { amount }) => [buildUpdateOperation(actor, { "system.hp.temp": amount })],
@@ -299,6 +307,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.SetTempMp.take",
       tooltip: "TERIOCK.COMMANDS.SetTempMp.tooltip",
     },
+    playable: true,
     slug: "set-temp-mp",
     trigger: true,
     operations: (actor, { amount }) => [buildUpdateOperation(actor, { "system.mp.temp": amount })],
@@ -315,6 +324,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Hide.take",
       tooltip: "TERIOCK.COMMANDS.Hide.tooltip",
     },
+    playable: true,
     slug: "hide",
     trigger: true,
     operations: (actor, { amount }) => [buildUpdateOperation(actor, { "system.detection.hiding": amount })],
@@ -330,6 +340,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Perceive.take",
       tooltip: "TERIOCK.COMMANDS.Perceive.tooltip",
     },
+    playable: true,
     slug: "perceive",
     trigger: true,
     operations: (actor, { amount }) => [buildUpdateOperation(actor, { "system.detection.perceiving": amount })],
@@ -337,6 +348,7 @@ const commandConfig = {
   },
 
   earn: {
+    armaments: true,
     icon: icons.manifest.stat.gp,
     label: "TERIOCK.COMMANDS.Earn.label",
     numeric: {
@@ -367,6 +379,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Kill.take",
       tooltip: "TERIOCK.COMMANDS.Kill.tooltip",
     },
+    playable: true,
     slug: "kill",
     trigger: true,
     operations: async (actor, { amount }) =>
@@ -374,6 +387,7 @@ const commandConfig = {
     reverse: actor => buildStatusOperations(actor, { delete: ["dead"] }),
   },
   pay: {
+    armaments: true,
     icon: icons.manifest.stat.gp,
     label: "TERIOCK.COMMANDS.Pay.label",
     numeric: {
@@ -404,6 +418,7 @@ const commandConfig = {
       take: "TERIOCK.COMMANDS.Sleep.take",
       tooltip: "TERIOCK.COMMANDS.Sleep.tooltip",
     },
+    playable: true,
     slug: "sleep",
     trigger: true,
     operations: async (actor, { amount }) =>
@@ -430,11 +445,13 @@ const commandConfig = {
     execute: each((a, { armamentId, ...o }) => a.system.rollAttack({ ...o, armament: a.items.get(armamentId) })),
     icon: icons.manifest.interaction.attack,
     label: "TERIOCK.COMMANDS.Attack.label",
+    playable: true,
     reverse: "attack",
     shared: true,
     slug: "attack",
   },
   attune: {
+    armaments: true,
     common: true,
     execute: select("attune", d => !d.system.isAttuned, "TERIOCK.SYSTEMS.Attunable.MENU.attune", [
       "equipment",
@@ -449,10 +466,11 @@ const commandConfig = {
     common: true,
     icon: icons.manifest.effect.awaken,
     label: "TERIOCK.EFFECTS.Common.awaken",
+    playable: true,
     slug: "awaken",
     trigger: true,
     operations: async actor => {
-      if (!actor.statuses.has("unconscious") || actor.statuses.has("dead")) { return []; }
+      if (!actor.statuses.has("unconscious") || actor.statuses.has("dead")) {return [];}
       const operations = await buildStatusOperations(actor, { delete: ["asleep", "unconscious"] });
       if (actor.system.hp.value <= 0) { operations.push(buildUpdateOperation(actor, { "system.hp.value": 1 })); }
       return operations;
@@ -465,12 +483,14 @@ const commandConfig = {
     }),
     icon: icons.manifest.execution.deathBag,
     label: "TERIOCK.EFFECTS.Common.bag",
+    playable: true,
     slug: "bag",
   },
   cover: {
     args: ["amount"],
     icon: icons.manifest.cover.full,
     label: "TERIOCK.COMMANDS.Cover.label",
+    playable: true,
     reverse: "uncover",
     slug: "cover",
     operations: (actor, { amount = 1 }) => {
@@ -479,6 +499,7 @@ const commandConfig = {
     },
   },
   dampen: {
+    armaments: true,
     common: true,
     execute: select("dampen", e => !e.system.dampened, "TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
     icon: icons.manifest.equipment.dampen,
@@ -488,6 +509,7 @@ const commandConfig = {
   },
   dawn: { icon: icons.manifest.time.dawn, label: "TERIOCK.TRIGGERS.Time.choices.dawn", slug: "dawn", trigger: true },
   deattune: {
+    armaments: true,
     common: true,
     execute: select("deattune", d => d.system.isAttuned, "TERIOCK.SYSTEMS.Attunable.MENU.deattune", [
       "equipment",
@@ -499,6 +521,7 @@ const commandConfig = {
     slug: "deattune",
   },
   destroy: {
+    armaments: true,
     common: true,
     execute: select("destroy", e => !e.system.destroyed, "TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
     icon: icons.manifest.break.destroy,
@@ -515,6 +538,7 @@ const commandConfig = {
     }),
     icon: icons.manifest.execution.elderSorcery,
     label: "TERIOCK.EFFECTS.Common.elderSorcery",
+    playable: true,
     slug: "elder-sorcery",
   },
   fall: {
@@ -523,6 +547,7 @@ const commandConfig = {
     icon: icons.manifest.execution.fall,
     label: "TERIOCK.EFFECTS.Common.fall",
     noActor: true,
+    playable: true,
     slug: "fall",
     execute: (actors, { distance, water }) =>
       teriock.executions.activity.FallExecution.create({ distance, water }, { actor: actors[0] ?? null }),
@@ -532,6 +557,7 @@ const commandConfig = {
     execute: each(async (a, o) => {
       await a.system.attributes[o.attribute ?? "mov"].use({ ...o });
     }),
+    playable: true,
     reverse: "feat",
     shared: true,
     slug: "feat",
@@ -541,6 +567,7 @@ const commandConfig = {
       : _loc("TERIOCK.ROLLS.Feat.label"),
   },
   glue: {
+    armaments: true,
     common: true,
     execute: select("glue", e => !e.system.glued, "TERIOCK.SYSTEMS.Equipment.MENU.glue"),
     icon: icons.manifest.equipment.glue,
@@ -550,6 +577,7 @@ const commandConfig = {
   },
   hack: {
     args: ["part", "amount"],
+    playable: true,
     reverse: "unhack",
     slug: "hack",
     trigger: true,
@@ -570,6 +598,7 @@ const commandConfig = {
     execute: each((a, o) => teriock.applications.dialogs.HealManager.create(a, o)),
     icon: icons.manifest.effect.heal,
     label: "TERIOCK.EFFECTS.Common.heal",
+    playable: true,
     slug: "heal",
     trigger: true,
   },
@@ -598,6 +627,7 @@ const commandConfig = {
     },
   },
   identify: {
+    armaments: true,
     common: true,
     execute: select("identify", e => !e.system.identification.identified, "TERIOCK.SYSTEMS.Equipment.MENU.identify"),
     icon: icons.manifest.equipment.identify,
@@ -613,6 +643,7 @@ const commandConfig = {
     slug: "long-rest",
   },
   readMagic: {
+    armaments: true,
     common: true,
     execute: select("readMagic", e => !e.system.identification.read, "TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
     icon: icons.manifest.equipment.readMagic,
@@ -620,6 +651,7 @@ const commandConfig = {
     slug: "read-magic",
   },
   reforge: {
+    armaments: true,
     common: true,
     execute: select("reforge", e => e.system.destroyed, "TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
     icon: icons.manifest.break.reforge,
@@ -643,6 +675,7 @@ const commandConfig = {
     },
   },
   repair: {
+    armaments: true,
     common: true,
     execute: select("repair", e => e.system.shattered, "TERIOCK.SYSTEMS.Equipment.MENU.repair"),
     icon: icons.manifest.break.repair,
@@ -653,6 +686,7 @@ const commandConfig = {
   reset: {
     icon: icons.manifest.ui.reset,
     label: "TERIOCK.COMMANDS.Reset.label",
+    playable: true,
     slug: "reset",
     operations: async (actor, options) => {
       const docData = {};
@@ -693,6 +727,7 @@ const commandConfig = {
       if (config.hook && execution.message) { await a.fireTrigger(config.hook); }
     }),
     icon: icons.manifest.effect.resist,
+    playable: true,
     reverse: "resist",
     shared: true,
     slug: "resist",
@@ -702,6 +737,7 @@ const commandConfig = {
     execute: each((a, o) => teriock.applications.dialogs.RevitalizeManager.create(a, o)),
     icon: icons.manifest.effect.revitalize,
     label: "TERIOCK.EFFECTS.Common.revitalize",
+    playable: true,
     slug: "revitalize",
     trigger: true,
   },
@@ -709,6 +745,7 @@ const commandConfig = {
     common: true,
     icon: icons.manifest.effect.revive,
     label: "TERIOCK.EFFECTS.Common.revive",
+    playable: true,
     slug: "revive",
     trigger: true,
     operations: async actor => {
@@ -734,6 +771,7 @@ const commandConfig = {
     trigger: true,
   },
   shatter: {
+    armaments: true,
     common: true,
     execute: select("shatter", e => !e.system.shattered, "TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
     icon: icons.manifest.break.shatter,
@@ -783,6 +821,7 @@ const commandConfig = {
     }),
     icon: icons.manifest.effect.dealDamage,
     label: "TERIOCK.EFFECTS.Common.standardDamage",
+    playable: true,
     reverse: "standardDamage",
     slug: "standard-damage",
   },
@@ -810,6 +849,7 @@ const commandConfig = {
     execute: each(async (a, o) => {
       await a.system.tradecrafts[o.tradecraft ?? "artist"].use({ ...o });
     }),
+    playable: true,
     reverse: "tradecraft",
     shared: true,
     slug: "tradecraft",
@@ -822,6 +862,7 @@ const commandConfig = {
     args: ["amount"],
     icon: icons.manifest.cover.half,
     label: "TERIOCK.COMMANDS.Uncover.label",
+    playable: true,
     reverse: "cover",
     slug: "uncover",
     operations: (actor, { amount = 1 }) => {
@@ -830,6 +871,7 @@ const commandConfig = {
     },
   },
   undampen: {
+    armaments: true,
     common: true,
     execute: select("undampen", e => e.system.dampened, "TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
     icon: icons.manifest.equipment.undampen,
@@ -838,6 +880,7 @@ const commandConfig = {
     slug: "undampen",
   },
   unglue: {
+    armaments: true,
     common: true,
     execute: select("unglue", e => e.system.glued, "TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
     icon: icons.manifest.equipment.unglue,
@@ -847,6 +890,7 @@ const commandConfig = {
   },
   unhack: {
     args: ["part", "amount"],
+    playable: true,
     reverse: "hack",
     slug: "unhack",
     trigger: true,

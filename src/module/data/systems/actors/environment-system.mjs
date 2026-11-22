@@ -21,6 +21,7 @@ export default class EnvironmentSystem extends BaseActorSystem {
     ),
     icon: TERIOCK.DISPLAY.icons.manifest.document.environment,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.environment,
+    playable: false,
     type: "environment",
   });
 

@@ -88,7 +88,9 @@ declare global {
       importable: boolean;
     };
 
-    export type CharacterActorSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: Identifier[] };
+    export type ActorSystemMetadata = CommonSystemMetadata & { playable: boolean };
+
+    export type CharacterActorSystemMetadata = ActorSystemMetadata & { defaultChildIdentifiers: Identifier[] };
 
     export type ChildSystemMetadata = CommonSystemMetadata & {
       initialKind: string;
