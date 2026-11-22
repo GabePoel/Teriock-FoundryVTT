@@ -4,6 +4,8 @@ import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields, LightData } = foundry.data;
 
+// TODO: There is probably a way to not have to redefine LightData without breaking things
+
 /**
  * Modified light data that allows for blank type and color values so live updating works.
  * @inheritDoc

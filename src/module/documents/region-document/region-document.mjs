@@ -8,6 +8,8 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { RegionDocument } = foundry.documents;
 
+// TODO: Full Expiration support maybe possibly someday
+
 /**
  * @extends {RegionDocument}
  * @mixes BaseDocument

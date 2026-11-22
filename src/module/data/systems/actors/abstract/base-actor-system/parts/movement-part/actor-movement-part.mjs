@@ -11,6 +11,8 @@ import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs"
 
 const { fields } = foundry.data;
 
+// TODO: Should terrain stuff be in the tokens part?
+
 /**
  * Actor data model that handles movement.
  *

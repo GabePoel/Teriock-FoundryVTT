@@ -9,7 +9,7 @@ const { DocumentIdField } = foundry.data.fields;
 
 /**
  * Blatantly stolen from D&D 5E with some extra bells and whistles added.
- * A mirror of ForeignDocumentField that references a Document embedded within this Document.
+ * A mirror of ForeignDocumentField that references a Document embedded in the same embed hierarchy as this Document.
  */
 export default class LocalDocumentField extends DocumentIdField {
   /** @inheritDoc */

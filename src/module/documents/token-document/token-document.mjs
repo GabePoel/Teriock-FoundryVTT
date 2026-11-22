@@ -274,6 +274,8 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   /**
    * Return a data object which defines data against dice rolls can be evaluated.
    * @returns {object}
+   * @remarks An empty object signifies that this has no actor roll data to be considered and should imply that this
+   * always qualifies.
    */
   getRollData() {
     // Both the lazy delta check and cache usage are to stop infinite loops.
@@ -285,6 +287,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   prepareEmbeddedDocuments() {
     if (this.isLazyDelta) { return; }
     super.prepareEmbeddedDocuments();
+    // TODO: Should setup phase also be applied or just main?
     this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase);
   }
 }

@@ -5,6 +5,8 @@ import { CommandManager } from "./interaction/_module.mjs";
  * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
  */
 
+// TODO: Checking things by running them through here is goofy and it should probably be utils helpers or something
+
 /**
  * Singleton class that manages Teriock-specific states and functionality.
  */

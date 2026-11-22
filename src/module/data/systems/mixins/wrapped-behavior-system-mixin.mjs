@@ -5,6 +5,8 @@ import { BaseSystemMixin, UncommonSystemMixin } from "./_module.mjs";
  * @import { RegionBehaviorType } from "@client/data/region-behaviors/_module.mjs";
  */
 
+// TODO: Move to some abstract behavior folder to match other data models
+
 /**
  * Mixin for systems that wrap a core region behavior type.
  * @template {MixinBase<typeof RegionBehaviorType>} T

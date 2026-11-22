@@ -8,6 +8,8 @@ const { ActiveEffect } = foundry.documents;
  * @import { MultiChangeField } from "../../data/fields/_module.mjs";
  */
 
+// TODO: Make duration-based expiration look/work like expiring from an Expiration does
+
 /**
  * The Teriock ActiveEffect implementation.
  * @extends {ActiveEffect}
@@ -98,6 +100,7 @@ export default class TeriockActiveEffect
     const yes = await super._preDeleteOperation(documents, operation, user);
     if (yes === false) { return false; }
 
+    // TODO: This CONFIG guard isn't really needed and should be removed when the expiration todo is finally dealt with
     if (CONFIG.ActiveEffect.expiryAction !== "delete") { return; }
     const collection = documents[0]?.collection;
     const effects = operation.ids.map(id => collection?.get(id)).filter(e => e?.metadata.tags.applicable);

@@ -382,7 +382,11 @@ export default class IdentifiersRegistry {
    * @returns {Promise<void>}
    */
   async trackCompendiums() {
-    await Promise.all(game.packs.map(p => this.trackCompendium(p)));
+    await teriock.utils.progressBar(
+      game.packs.contents,
+      _loc("TERIOCK.OPERATIONS.loadingIdentifiers"),
+      p => this.trackCompendium(p),
+    );
   }
 
   /**

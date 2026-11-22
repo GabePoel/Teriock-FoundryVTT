@@ -4,8 +4,11 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
  * @import { CalendarConfigDays } from "@client/data/_types.mjs";
  */
 
-/** @returns {CalendarConfigDays|undefined} */
-const days = () => game?.time?.calendar?.days;
+// TODO: Custom calendar data
+// TODO: Rename units to match Foundry's active effect duration units
+
+/** @returns {CalendarConfigDays|null} */
+const days = () => game?.time?.calendar?.days ?? null;
 
 /** @enum {Teriock.Config.UnitEntry} */
 // no sort

@@ -11,6 +11,8 @@ const { SearchFilter } = foundry.applications.ux;
  * @import { DataSchema } from "@common/abstract/_types.mjs";
  */
 
+// TODO: Move previews to top module directory or move executions down because both are the same type of non-persisted
+
 /**
  * Previews are used for sorting and filtering documents in sheets and are never stored to the database.
  * @todo Have each group be a DocumentCollection instead of an array and use normal search and SearchFilter handling.

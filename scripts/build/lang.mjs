@@ -173,6 +173,6 @@ mergeObjects(
   weight,
 );
 
-// Write then rename so Foundry's hot reload never reads a partially written file.
+// Write and then rename after so Foundry's hot reload never deals with a partially written file.
 await fs.promises.writeFile(`${DST}.tmp`, JSON.stringify(sortObject(LANG), null, 2), "utf-8");
 await fs.promises.rename(`${DST}.tmp`, DST);
