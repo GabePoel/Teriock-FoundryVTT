@@ -11,7 +11,7 @@ export default class TeriockSceneConfig extends SceneConfig {
   _replaceHTML(result, content, options) {
     const { terrainMode, terrains } = terrainSchema();
     const fieldset = document.createElement("fieldset");
-    fieldset.innerHTML = `<legend>${_loc("TERIOCK.SCHEMA.Terrains.label")}</legend>`;
+    fieldset.innerHTML = `<legend>${_loc("TERIOCK.COMMON.Terrain")}</legend>`;
     fieldset.append(
       terrains.toFormGroup({ rootId: this.id }, {
         name: "flags.teriock.terrains",

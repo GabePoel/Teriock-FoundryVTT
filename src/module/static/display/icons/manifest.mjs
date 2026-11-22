@@ -443,7 +443,7 @@ export default {
     system: "ms-dashboard-2-gear",
     tabLeft: "ms-keyboard-double-arrow-left",
     tabRight: "ms-double-arrow",
-    terrain: "ms-terrain",
+    terrain: "ms-landscape-2",
     time: "ms-nest-clock-farsight-analog",
     toggle: "ms-toggle-on",
     tooltip: "ms-tooltip",
