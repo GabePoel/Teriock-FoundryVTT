@@ -80,6 +80,8 @@ declare global {
       tags: SystemMetadataTags;
     };
 
+    export type BehaviorSystemMetadata = SystemMetadata & { unqualifiedEvents: string[] };
+
     export type CommonSystemMetadata = SystemMetadata & {
       associationTypes?: Teriock.Documents.ChildType[];
       childTypes: Teriock.Documents.ChildType[];

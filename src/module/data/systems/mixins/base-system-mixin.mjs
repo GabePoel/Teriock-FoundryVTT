@@ -18,9 +18,6 @@ export default function BaseSystemMixin(Base) {
    * @mixin
    */
   class BaseSystem extends mixClasses(Base, AbstractDataMixin, AccessDataMixin) {
-    /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [];
-
     /**
      * @inheritDoc
      * @type {Teriock.Metadata.SystemMetadata}

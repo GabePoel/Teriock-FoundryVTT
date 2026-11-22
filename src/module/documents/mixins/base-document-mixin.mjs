@@ -35,7 +35,7 @@ export default function BaseDocumentMixin(Base) {
     });
 
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.DOCUMENTS.Base"];
 
     /**
      * Mutate an operation that's being conducted as the GM.

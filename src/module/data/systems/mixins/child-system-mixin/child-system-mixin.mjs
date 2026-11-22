@@ -36,7 +36,7 @@ export default function ChildSystemMixin(Base) {
     )
   {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Child"];
 
     /**
      * @inheritDoc

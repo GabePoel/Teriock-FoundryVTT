@@ -24,3 +24,4 @@ export { default as RevealableSystemMixin } from "./revealable-system-mixin/reve
 export { default as StattedSystemMixin } from "./statted-system-mixin/statted-system-mixin.mjs";
 export { default as UncommonSystemMixin } from "./uncommon-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";
+export { default as WrappedBehaviorSystemMixin } from "./wrapped-behavior-system-mixin.mjs";

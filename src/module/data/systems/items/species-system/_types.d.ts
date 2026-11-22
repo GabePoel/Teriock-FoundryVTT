@@ -6,6 +6,8 @@ declare module "./species-system.mjs" {
     attributeIncrease: string;
     /** <schema> Battle rating */
     br: number;
+    /** <schema> Families */
+    families: Set<Teriock.Keys.Family>;
     /** <schema> Innate ranks */
     innateRanks: string;
     /** <schema> Lifespan constraints */

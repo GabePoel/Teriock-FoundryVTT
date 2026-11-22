@@ -10,6 +10,7 @@ const { fields } = foundry.data;
  * An automation which creates a region that targets all the tokens within it.
  */
 export default class TargetAutomation extends BaseAutomation {
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.AUTOMATIONS.Target",

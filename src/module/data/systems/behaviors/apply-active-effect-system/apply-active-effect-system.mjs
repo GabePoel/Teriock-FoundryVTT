@@ -1,23 +1,20 @@
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { IdentifierSetField } from "../../../fields/_module.mjs";
-import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
+import { WrappedBehaviorSystemMixin } from "../../mixins/_module.mjs";
 
 const { ApplyActiveEffectRegionBehaviorType } = foundry.data.regionBehaviors;
 
 /**
  * @inheritDoc
  * @extends {ApplyActiveEffectRegionBehaviorType}
- * @mixes BaseSystem
- * @mixes UncommonSystem
+ * @mixes WrappedBehaviorSystem
  */
-export default class ApplyActiveEffectSystem
-  extends mixClasses(ApplyActiveEffectRegionBehaviorType, BaseSystemMixin, UncommonSystemMixin)
-{
+export default class ApplyActiveEffectSystem extends WrappedBehaviorSystemMixin(ApplyActiveEffectRegionBehaviorType) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = ApplyActiveEffectRegionBehaviorType.LOCALIZATION_PREFIXES;
-
-  /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { documentName: "RegionBehavior", type: "applyActiveEffect" });
+  static metadata = mergeMetadata(super.metadata, {
+    type: "applyActiveEffect",
+    unqualifiedEvents: [CONST.REGION_EVENTS.TOKEN_EXIT],
+  });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -28,12 +25,6 @@ export default class ApplyActiveEffectSystem
         types: ActiveEffect.implementation.TYPES.filter(t => t !== "base"),
       }),
     });
-  }
-
-  /** @inheritDoc */
-  static registerModel() {
-    // This is overridden so that we can keep the default hint/label/icon.
-    CONFIG.RegionBehavior.dataModels[this.metadata.type] = this;
   }
 
   /** @inheritDoc */

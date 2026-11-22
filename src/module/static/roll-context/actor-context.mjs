@@ -144,6 +144,12 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(game.teriock.identifiers.getNames("species", { permission: "LIMITED" })).forEach(([k, name]) => {
     Object.assign(actorContext, { [`species.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.species", { name }) });
   });
+  Object.entries(TERIOCK.CONFIG.species.families).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`family.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.family", { name: v.label }) });
+  });
+  Object.entries(TERIOCK.CONFIG.species.traits).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`trait.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.trait", { name: v.label }) });
+  });
   Object.entries(TERIOCK.CONFIG.actor.senses).forEach(([k, v]) => {
     Object.assign(actorContext, { [`sense.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.sense", { name: v.label }) });
   });

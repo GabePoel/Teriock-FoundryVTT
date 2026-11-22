@@ -4,12 +4,6 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { RegionBehavior } = foundry.documents;
 
-const END_EVENTS = new Set([
-  CONST.REGION_EVENTS.TOKEN_ANIMATE_OUT,
-  CONST.REGION_EVENTS.TOKEN_EXIT,
-  CONST.REGION_EVENTS.TOKEN_MOVE_OUT,
-]);
-
 /**
  * @extends {RegionBehavior}
  * @mixes BaseDocument
@@ -25,7 +19,9 @@ export default class TeriockRegionBehavior extends mixClasses(RegionBehavior, Ba
 
   /** @inheritDoc */
   async _handleRegionEvent(event) {
-    if (event.data.token && !END_EVENTS.has(event.name) && !this.checkQualifier(event.data.token)) { return; }
+    const token = event.data.token;
+    const unqualifiedEvents = this.system.constructor.metadata?.unqualifiedEvents ?? [];
+    if (token && !unqualifiedEvents.includes(event.name) && !this.checkQualifier(token)) { return; }
     await super._handleRegionEvent(event);
   }
 

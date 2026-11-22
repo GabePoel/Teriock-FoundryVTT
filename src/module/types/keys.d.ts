@@ -63,6 +63,7 @@ declare global {
     export type Property = keyof typeof CONFIG.wiki.index.property;
 
     // Species Keys
+    export type Family = keyof typeof CONFIG.wiki.index.family;
     export type Trait = keyof typeof CONFIG.wiki.index.trait;
 
     // Kind Keys

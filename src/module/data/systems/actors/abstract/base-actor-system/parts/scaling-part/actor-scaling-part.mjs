@@ -84,6 +84,8 @@ export default function ActorScalingPart(Base) {
       const data = {};
       for (const s of this.parent.previewedTypes.species.filter(s => s.active)) {
         data[`species.${s.system.slug}`] = 1;
+        for (const f of s.system.families) { data[`family.${f}`] = 1; }
+        for (const t of s.system.traits) { data[`trait.${t}`] = 1; }
       }
       return data;
     }

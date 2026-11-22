@@ -120,9 +120,10 @@ Object.assign(terms.TERIOCK.TERMS, {
   EffectTypes: wikiKeys(index.effect, true),
   Elements: wikiKeys(index.element),
   EquipmentClasses: wikiKeys(index.classification, true),
+  Families: Object.fromEntries(Object.keys(index.family).map(k => [toCamelCase(k), toTitleCase(k)])),
   PowerSources: wikiKeys(index.source),
   Tradecrafts: wikiKeys(index.tradecraft),
-  Traits: wikiKeys(index.trait),
+  Traits: wikiKeys(index.trait, true),
 });
 
 mergeObjects(

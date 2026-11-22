@@ -30,6 +30,9 @@ Hooks.once("teriock.metaphysicsContextInit", () => {
   Object.assign(speciesContext, metaphysicsContext);
 });
 Hooks.once("teriock.identifiersInit", () => {
+  Object.entries(TERIOCK.CONFIG.species.families).forEach(([k, v]) => {
+    speciesContext[`family.${k}`] = v.label;
+  });
   Object.entries(TERIOCK.CONFIG.species.traits).forEach(([k, v]) => {
     speciesContext[`trait.${k}`] = v.label;
   });

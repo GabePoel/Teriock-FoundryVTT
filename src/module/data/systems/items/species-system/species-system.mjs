@@ -69,6 +69,7 @@ export default class SpeciesSystem
     return Object.assign(super.defineSchema(), {
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
+      families: slugSetField(TERIOCK.CONFIG.species.families),
       innateRanks: new fields.HTMLField(),
       lifespan: new fields.SchemaField({
         adulthood: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
@@ -143,17 +144,30 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get _displayInputs() {
-    return [...super._displayInputs, "system.traits"];
+    return [...super._displayInputs, "system.traits", "system.families"];
   }
 
   /** @inheritDoc */
   get _displayTags() {
-    return [...super._displayTags, ...this._traitTags];
+    return [...super._displayTags, ...this._traitTags, ...this._familyTags];
   }
 
   /** @inheritDoc */
   get _displayToggles() {
     return ["system.lifespan.enabled", "system.size.enabled", ...super._displayToggles];
+  }
+
+  /**
+   * Family tags.
+   * @returns {Teriock.Display.DisplayTag[]}
+   */
+  get _familyTags() {
+    return Array.from(this.families).map(f => {
+      return {
+        label: TERIOCK.CONFIG.species.families[f]?.label,
+        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.families.label",
+      };
+    });
   }
 
   /**
@@ -169,7 +183,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([...Panel.simplifyTags(this._traitTags), parts.text]);
+    parts.text = dotJoin([...Panel.simplifyTags([...this._traitTags, ...this._familyTags]), parts.text]);
     parts.subtitle = _loc("TYPES.Item.species");
     return parts;
   }
@@ -213,6 +227,7 @@ export default class SpeciesSystem
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
     });
+    for (const family of this.families) { data[`family.${family}`] = 1; }
     for (const trait of this.traits) { data[`trait.${trait}`] = 1; }
     return data;
   }

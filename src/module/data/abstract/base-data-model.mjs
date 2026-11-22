@@ -15,9 +15,6 @@ const { DataModel } = foundry.abstract;
  * @mixes AccessData
  */
 export default class BaseDataModel extends mixClasses(DataModel, AbstractDataMixin, AccessDataMixin) {
-  /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [];
-
   /**
    * @inheritDoc
    * @returns {DataSchema}

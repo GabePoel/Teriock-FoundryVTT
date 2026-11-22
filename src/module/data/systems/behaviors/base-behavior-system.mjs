@@ -12,8 +12,15 @@ export default class BaseBehaviorSystem extends mixClasses(RegionBehaviorType, B
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "BEHAVIOR.TYPES.base"];
 
-  /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { documentName: "RegionBehavior", type: "base" });
+  /**
+   * @inheritDoc
+   * @type {Teriock.Metadata.BehaviorSystemMetadata}
+   */
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "RegionBehavior",
+    type: "base",
+    unqualifiedEvents: [CONST.REGION_EVENTS.TOKEN_EXIT],
+  });
 
   /**
    * Check the surroundings of a token that entered or exited this region.

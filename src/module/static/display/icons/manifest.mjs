@@ -301,6 +301,7 @@ export default {
   species: {
     adulthood: "ms-account-child-invert",
     br: "ms-rubric",
+    families: "ms-family-history",
     lifespan: "ms-elderly",
     maxSize: "ms-vertical-align-top",
     minSize: "ms-vertical-align-bottom",

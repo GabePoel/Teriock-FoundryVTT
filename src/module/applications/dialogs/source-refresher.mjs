@@ -10,7 +10,8 @@ const { BooleanField } = foundry.data.fields;
  */
 
 class RefreshOptions extends BaseDataModel {
-  static LOCALIZATION_PREFIXES = ["TERIOCK.DIALOGS.SourceRefresh"];
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.DIALOGS.SourceRefresh"];
 
   /** @inheritDoc */
   static defineSchema() {
