@@ -26,7 +26,16 @@ export default class BaseBehaviorSystem extends mixClasses(RegionBehaviorType, B
    * Check the surroundings of a token that entered or exited this region.
    * @param {RegionEvent} event
    */
-  static async _onTokenChange(event) {
+  static async _onTokenEvent(event) {
     event.data.token.actor?.system.checkSurroundings?.();
+  }
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (!("system" in changed) && !foundry.utils.hasProperty(changed, "flags.teriock.qualifier")) { return; }
+    for (const a of new Set(Array.from(this.region.tokens).map(t => t.actor).filter(Boolean))) {
+      a.system.checkSurroundings?.();
+    }
   }
 }

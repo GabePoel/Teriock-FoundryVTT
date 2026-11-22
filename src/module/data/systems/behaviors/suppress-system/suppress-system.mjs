@@ -7,8 +7,8 @@ const { fields } = foundry.data;
 export default class SuppressSystem extends BaseBehaviorSystem {
   /** @inheritDoc */
   static events = {
-    [CONST.REGION_EVENTS.TOKEN_ENTER]: this._onTokenChange,
-    [CONST.REGION_EVENTS.TOKEN_EXIT]: this._onTokenChange,
+    [CONST.REGION_EVENTS.TOKEN_ENTER]: this._onTokenEvent,
+    [CONST.REGION_EVENTS.TOKEN_EXIT]: this._onTokenEvent,
   };
 
   /** @inheritDoc */
@@ -20,15 +20,5 @@ export default class SuppressSystem extends BaseBehaviorSystem {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), { suppression: new fields.EmbeddedDataField(SuppressionModel) });
-  }
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if (!("system" in changed)) { return; }
-    for (const actor of new Set(Array.from(this.region.tokens, t => t.actor).filter(Boolean))) {
-      actor.reset();
-      actor.render();
-    }
   }
 }

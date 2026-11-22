@@ -74,6 +74,15 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
+   * Whether this is in difficult terrain.
+   * @returns {boolean}
+   * @category Terrain
+   */
+  get difficultTerrain() {
+    return this.getQualifiedBehaviors("difficultTerrain").length > 0;
+  }
+
+  /**
    * The image that should be used to represent this token.
    * @returns {string}
    */
@@ -103,15 +112,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     if (this.ring.subject.texture) { return this.ring.subject.texture; }
     // Fall back to default.
     return CONST.DEFAULT_TOKEN;
-  }
-
-  /**
-   * Whether this is in difficult terrain.
-   * @returns {boolean}
-   * @category Terrain
-   */
-  get isInDifficultTerrain() {
-    return this.getQualifiedBehaviors("difficultTerrain").length > 0;
   }
 
   /**

@@ -6,8 +6,8 @@ import BaseBehaviorSystem from "../base-behavior-system.mjs";
 export default class TerrainSystem extends BaseBehaviorSystem {
   /** @inheritDoc */
   static events = {
-    [CONST.REGION_EVENTS.TOKEN_ENTER]: this._onTokenChange,
-    [CONST.REGION_EVENTS.TOKEN_EXIT]: this._onTokenChange,
+    [CONST.REGION_EVENTS.TOKEN_ENTER]: this._onTokenEvent,
+    [CONST.REGION_EVENTS.TOKEN_EXIT]: this._onTokenEvent,
   };
 
   /** @inheritDoc */
@@ -16,12 +16,5 @@ export default class TerrainSystem extends BaseBehaviorSystem {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), terrainSchema());
-  }
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if (!("system" in changed)) { return; }
-    for (const token of this.region.tokens) { token.actor?.system.checkSurroundings?.(); }
   }
 }

@@ -5,20 +5,19 @@ const { RegionBehaviorConfig } = foundry.applications.sheets;
 /** @inheritDoc */
 export default class TeriockRegionBehaviorConfig extends RegionBehaviorConfig {
   /** @inheritDoc */
-  _replaceHTML(result, content, options) {
-    const field = qualifierField({
-      hint: _loc("TERIOCK.SCHEMA.BehaviorQualifier.hint"),
-      initial: "1",
-      label: _loc("TERIOCK.SCHEMA.BehaviorQualifier.label"),
-      placeholder: "1",
-    });
-    result.form?.querySelector(".form-group:has([name='disabled'])")?.after(
-      field.toFormGroup({ rootId: this.id }, {
-        name: "flags.teriock.qualifier",
-        rootId: this.id,
-        value: this.document.getFlag("teriock", "qualifier"),
-      }),
-    );
-    super._replaceHTML(result, content, options);
+  _getFields() {
+    const fieldsets = super._getFields();
+    const statusFieldset = fieldsets.find(f => f.legend === "BEHAVIOR.SECTIONS.status");
+    if (statusFieldset) {
+      const field = qualifierField({
+        hint: _loc("TERIOCK.SCHEMA.BehaviorQualifier.hint"),
+        initial: "1",
+        label: _loc("TERIOCK.SCHEMA.BehaviorQualifier.label"),
+        placeholder: "1",
+      });
+      field.name = "flags.teriock.qualifier";
+      statusFieldset.fields.push({ field, value: this.document.getFlag("teriock", "qualifier") });
+    }
+    return fieldsets;
   }
 }

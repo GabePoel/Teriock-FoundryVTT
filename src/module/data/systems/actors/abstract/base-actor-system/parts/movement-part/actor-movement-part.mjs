@@ -62,7 +62,7 @@ export default function ActorMovementPart(Base) {
         };
       }
       return {
-        difficultTerrain: tokens.some(t => t.isInDifficultTerrain),
+        difficultTerrain: tokens.some(t => t.difficultTerrain),
         suppressBehaviors: new Set(tokens.flatMap(t => t.getQualifiedBehaviors("suppress"))),
         terrains: new Set(tokens.flatMap(t => Array.from(t.terrains))),
       };
