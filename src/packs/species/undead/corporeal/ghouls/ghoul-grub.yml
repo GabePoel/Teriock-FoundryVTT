@@ -77,6 +77,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
     name: Full Undead
     system:
+      automations:
+        - _id: uHiJx3PztlH7ye4V
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -579,6 +595,9 @@ system:
     <p>These creatures are believed to been created by
     @UUID[Compendium.teriock.tables.RollTable.c602ce7a824494c1]{demon}-@UUID[Compendium.teriock.tables.RollTable.f2c29b199c990ab7]{fae}
     crossbreeds.</p>
+  families:
+    - ghoul
+    - infernal-faespawn
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/ghoul-grub.webp
     ring: true
@@ -595,4 +614,5 @@ system:
     - animal
     - monstrous
     - undead
+  undeadLevel: 3
 type: species

@@ -93,6 +93,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
         name: Full Undead
         system:
+          automations:
+            - _id: uHiJx3PztlH7ye4V
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -615,6 +631,8 @@ items:
         <p>Believed to be a terrifying form of @Identifier[creature:zombie]{zombie}, ghouls are a mystery. Extremely
         loathsome. How they devour everything around and never get full is unknown some believe them cursed by deities
         to forever walk the earth trying to get full.</p>
+      families:
+        - ghoul
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/plague-ghoul.webp
         ring: true
@@ -626,8 +644,10 @@ items:
         hp:
           formula: 2d8
       traits:
+        - corporeal
         - partial-humanoid
         - undead
+      undeadLevel: 3
     type: species
   - _id: OV9Ln09gGrNnXUmd
     _key: "!actors.items!fc547c9afdc4a9b6.OV9Ln09gGrNnXUmd"

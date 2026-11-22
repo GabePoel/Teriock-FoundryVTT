@@ -381,6 +381,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
         name: Minor Undead
         system:
+          automations:
+            - _id: QkuLvl8GF9niWn6u
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -842,6 +858,8 @@ items:
         scraps left behind by other creatures. They rarely eat alone and can often be seen swarming over the corpses of
         some poor individuals that found their way into the Mists. [[lookup name]]s are believed to always be malicious,
         cruel, and deeply evil.</p>
+      families:
+        - crab
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/tide-drifter.webp
         ring: true
@@ -860,6 +878,7 @@ items:
         - animal
         - aquatic
         - undead
+      undeadLevel: 2
     type: species
   - _id: Qe6djDsnl2y3dQ5q
     _key: "!actors.items!f3e1f905803a4f31.Qe6djDsnl2y3dQ5q"

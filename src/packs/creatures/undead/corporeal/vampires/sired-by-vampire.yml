@@ -92,6 +92,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/partial-undead.webp
         name: Partial Undead
         system:
+          automations:
+            - _id: AGoGvSReOaQBeyvm
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "1"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -240,6 +256,8 @@ items:
       description: <p>Running water is painful to these creatures.</p>
       effectTypes:
         - disease
+      families:
+        - vampire
       instructions: >-
         <p>This does not describe all of a creature's @Pack[teriock.abilities]{abilities}. It should always be paired
         with another @Pack[teriock.creatures]{creature type} which it modifies.</p>
@@ -258,7 +276,9 @@ items:
         mp:
           disabled: true
       traits:
+        - corporeal
         - undead
+      undeadLevel: 1
     type: species
   - _id: yvI14sRRCeX5Y6pg
     _key: "!actors.items!9168673883a5dcc0.yvI14sRRCeX5Y6pg"

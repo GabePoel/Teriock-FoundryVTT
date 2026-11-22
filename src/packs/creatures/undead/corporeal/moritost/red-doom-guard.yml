@@ -231,6 +231,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
         name: Greater Undead
         system:
+          automations:
+            - _id: fp0NW4IOnlIglvcp
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "4"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -633,6 +649,8 @@ items:
       description: >-
         <p>Used as elite guards as key units in wars, these rare creatures are simple yet effective. Doom guards are
         widely feared and hated for being extremely hard to destroy.</p>
+      families:
+        - moritost
       innateRanks: >-
         <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:veteran]{Veteran}. Innately
         @Pack[teriock.classes]{rank} 1 @Identifier[class:flame-mage]{Flame Mage}.</p>
@@ -652,7 +670,9 @@ items:
           formula: 2d8
       traits:
         - construct
+        - corporeal
         - undead
+      undeadLevel: 4
     type: species
   - _id: 380dac2710b593e9
     _key: "!actors.items!dd82c49b923ee750.380dac2710b593e9"

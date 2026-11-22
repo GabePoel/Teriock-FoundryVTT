@@ -146,6 +146,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
     name: Greater Undead
     system:
+      automations:
+        - _id: fp0NW4IOnlIglvcp
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "4"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -873,6 +889,8 @@ system:
     are notoriously difficult to control, power hungry, sadistic, and evil.</p>
   elements:
     - storm
+  families:
+    - demon
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5 @Identifier[class:storm-mage]{Storm Mage}.</p>
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/storm-demon.webp
@@ -894,4 +912,5 @@ system:
     - outsider
     - partial-humanoid
     - undead
+  undeadLevel: 4
 type: species

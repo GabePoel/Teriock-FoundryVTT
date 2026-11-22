@@ -303,6 +303,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
         name: Minor Undead
         system:
+          automations:
+            - _id: QkuLvl8GF9niWn6u
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -647,7 +663,9 @@ items:
         hp:
           formula: 2d6
       traits:
+        - spectral
         - undead
+      undeadLevel: 2
     type: species
   - _id: qLkzswy0180WztdM
     _key: "!actors.items!7bd9a75a1618ca30.qLkzswy0180WztdM"

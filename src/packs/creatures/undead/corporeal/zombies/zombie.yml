@@ -44,6 +44,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
         name: Minor Undead
         system:
+          automations:
+            - _id: QkuLvl8GF9niWn6u
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -408,6 +424,8 @@ items:
         <p>Common creatures found in use by @Identifier[class:necromancer]{Necromancers} everywhere, [[lookup name
         style=lc]]s are one of the easiest @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} to create
         and are a staple of @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} armies.</p>
+      families:
+        - zombie
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/zombie.webp
         ring: true
@@ -421,7 +439,9 @@ items:
         mp:
           formula: 1d2
       traits:
+        - corporeal
         - undead
+      undeadLevel: 2
     type: species
   - _id: ydzNjEwSg4nN43bV
     _key: "!actors.items!b3708edf8c3c5c9f.ydzNjEwSg4nN43bV"

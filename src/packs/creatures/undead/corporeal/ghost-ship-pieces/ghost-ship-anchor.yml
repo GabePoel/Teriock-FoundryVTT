@@ -399,6 +399,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/partial-undead.webp
         name: Partial Undead
         system:
+          automations:
+            - _id: AGoGvSReOaQBeyvm
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "1"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -654,6 +670,7 @@ items:
       traits:
         - construct
         - undead
+      undeadLevel: 1
     type: species
   - _id: de310714Ry3GrqtC
     _key: "!actors.items!c1ad0317d984cbef.de310714Ry3GrqtC"
@@ -669,7 +686,6 @@ items:
           but can still be used to make a @Identifier[ability:basic-attack]{Basic Attack}.</p>
         img: systems/teriock/src/assets/thumbnails/property/bashing.webp
         name: Bashing
-        showIcon: 0
         system:
           applyIfDampened: true
           applyIfDeattuned: true

@@ -349,6 +349,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/partial-undead.webp
         name: Partial Undead
         system:
+          automations:
+            - _id: AGoGvSReOaQBeyvm
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "1"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -743,6 +759,7 @@ items:
       traits:
         - construct
         - undead
+      undeadLevel: 1
     type: species
   - _id: OnKgf59A07uGUlkh
     _key: "!actors.items!1de4d2621aca6827.OnKgf59A07uGUlkh"

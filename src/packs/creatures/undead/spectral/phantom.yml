@@ -127,6 +127,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
         name: Minor Undead
         system:
+          automations:
+            - _id: QkuLvl8GF9niWn6u
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -468,7 +484,9 @@ items:
         - magical
       slug: phantom
       traits:
+        - spectral
         - undead
+      undeadLevel: 2
     type: species
   - _id: WkGkFD909oFQcoy3
     _key: "!actors.items!438ffe9733df9ec2.WkGkFD909oFQcoy3"

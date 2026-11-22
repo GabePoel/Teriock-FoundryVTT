@@ -166,6 +166,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
         name: Full Undead
         system:
+          automations:
+            - _id: uHiJx3PztlH7ye4V
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -994,7 +1010,9 @@ items:
         hp:
           formula: 1d8
       traits:
+        - spectral
         - undead
+      undeadLevel: 2
     type: species
   - _id: 78M5VTz2luiw3UxG
     _key: "!actors.items!2422d369680746df.78M5VTz2luiw3UxG"

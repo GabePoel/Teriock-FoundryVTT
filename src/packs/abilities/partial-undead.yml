@@ -3,6 +3,22 @@ _key: "!effects!d855ff1ebb086f7f"
 img: systems/teriock/src/assets/thumbnails/ability/partial-undead.webp
 name: Partial Undead
 system:
+  automations:
+    - _id: AGoGvSReOaQBeyvm
+      changes:
+        - applyIfSuppressed: false
+          key: system.traits
+          phase: main
+          target: Actor
+          type: add
+          value: undead
+        - applyIfSuppressed: false
+          key: system.undeadLevel
+          phase: main
+          target: Actor
+          type: upgrade
+          value: "1"
+      type: changes
   delivery: self
   duration:
     unit: passive

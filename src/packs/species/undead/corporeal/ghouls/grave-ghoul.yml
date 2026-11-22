@@ -164,6 +164,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
     name: Minor Undead
     system:
+      automations:
+        - _id: QkuLvl8GF9niWn6u
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -494,6 +510,8 @@ system:
     <p>Believed to be a terrifying form of @Identifier[creature:zombie]{zombie}, ghouls are a mystery. Extremely
     loathsome. How they devour everything around and never get full is unknown some believe them cursed by deities to
     forever walk the earth trying to get full.</p>
+  families:
+    - ghoul
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/grave-ghoul.webp
     ring: true
@@ -505,6 +523,8 @@ system:
     hp:
       formula: 2d8
   traits:
+    - corporeal
     - partial-humanoid
     - undead
+  undeadLevel: 2
 type: species

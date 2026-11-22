@@ -116,6 +116,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
         name: Full Undead
         system:
+          automations:
+            - _id: uHiJx3PztlH7ye4V
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -927,6 +943,8 @@ items:
       description: >-
         <p>Mummies are often guardians of sanctified areas and may have additional
         @Identifier[keyword:blessing]{blessings} on them.</p>
+      families:
+        - mummy
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:nature-mage]{Nature Mage}.</p>
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/clay-mummy.webp
@@ -940,8 +958,10 @@ items:
         hp:
           formula: 2d10
       traits:
+        - corporeal
         - partial-humanoid
         - undead
+      undeadLevel: 3
     type: species
   - _id: 4a095aaed0254ec3
     _key: "!actors.items!813aea698d40aedf.4a095aaed0254ec3"

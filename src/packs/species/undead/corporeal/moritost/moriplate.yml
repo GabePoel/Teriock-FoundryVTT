@@ -58,6 +58,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
     name: Full Undead
     system:
+      automations:
+        - _id: uHiJx3PztlH7ye4V
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -484,6 +500,8 @@ system:
   description: >-
     <p>Armor that has been haunted, possibly by its former wearer, [[lookup name style=lc]] are durable and dangerous
     foes.</p>
+  families:
+    - moritost
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/moriplate.webp
     ring: true
@@ -498,5 +516,7 @@ system:
       formula: 2d8
   traits:
     - construct
+    - corporeal
     - undead
+  undeadLevel: 3
 type: species

@@ -49,6 +49,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
     name: Full Undead
     system:
+      automations:
+        - _id: uHiJx3PztlH7ye4V
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -560,5 +576,8 @@ system:
     - magical
   slug: crypt-sentinel
   traits:
+    - skeletal
+    - spectral
     - undead
+  undeadLevel: 3
 type: species

@@ -225,6 +225,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
         name: Greater Undead
         system:
+          automations:
+            - _id: fp0NW4IOnlIglvcp
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "4"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -653,6 +669,8 @@ items:
         <p>Usually used as military commanders or guardians, these dangerous creatures are believed to be a form of
         haunt or haunted armor that is created when a @Identifier[class:duelist]{Duelist} is killed in a particular
         way.</p>
+      families:
+        - moritost
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:duelist]{Duelist}.</p>
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/minor-cemerai.webp
@@ -666,7 +684,9 @@ items:
           formula: 2d10
       traits:
         - construct
+        - corporeal
         - undead
+      undeadLevel: 4
     type: species
   - _id: 380dac2710b593e9
     _key: "!actors.items!be05bfbe51cda474.380dac2710b593e9"

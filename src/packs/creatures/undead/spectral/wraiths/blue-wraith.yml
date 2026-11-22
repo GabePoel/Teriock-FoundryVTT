@@ -167,6 +167,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
         name: Greater Undead
         system:
+          automations:
+            - _id: fp0NW4IOnlIglvcp
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "4"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -641,6 +657,8 @@ items:
         <p>Blue transparent @Wiki[Category:Humanoid creatures]{humanoids} with red glowing eyes, long claws, and black
         strands of darkness blowing around them.</p>
       br: 26
+      families:
+        - wraith
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/blue-wraith.webp
         ring: true
@@ -654,7 +672,9 @@ items:
         mp:
           formula: 2d10
       traits:
+        - spectral
         - undead
+      undeadLevel: 4
     type: species
   - _id: uxW6hjea4upm903K
     _key: "!actors.items!b53b0b4c488fa6f8.uxW6hjea4upm903K"

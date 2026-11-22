@@ -66,6 +66,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/minor-undead.webp
     name: Minor Undead
     system:
+      automations:
+        - _id: QkuLvl8GF9niWn6u
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -187,6 +203,9 @@ effects:
         - _id: 7400b41f20d9f100
           behaviors:
             - disabled: false
+              flags:
+                teriock:
+                  qualifier: "@family.zombie"
               name: Apply Active Effect
               system:
                 identifiers:
@@ -441,6 +460,8 @@ system:
   description: >-
     <p>Zombie lords augment @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{zombie} hordes and make even the
     most basic undead become a threat.</p>
+  families:
+    - zombie
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/zombie-lord.webp
     ring: true
@@ -454,5 +475,7 @@ system:
     mp:
       formula: 1d8
   traits:
+    - corporeal
     - undead
+  undeadLevel: 2
 type: species

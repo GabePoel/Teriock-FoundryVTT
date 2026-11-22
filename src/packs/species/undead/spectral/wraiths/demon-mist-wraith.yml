@@ -447,6 +447,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
     name: Greater Undead
     system:
+      automations:
+        - _id: fp0NW4IOnlIglvcp
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "4"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -1041,6 +1057,8 @@ system:
     [[lookup name style=lc]] variant as well.</p>
   effectTypes:
     - displacement
+  families:
+    - wraith
   innateRanks: >-
     <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:knight]{Knight}. Innately @Pack[teriock.classes]{rank}
     2 @Identifier[class:necromancer]{Necromancer}. Innately @Pack[teriock.classes]{rank} 2
@@ -1060,5 +1078,7 @@ system:
       formula: 2d10
   traits:
     - infernal
+    - spectral
     - undead
+  undeadLevel: 4
 type: species

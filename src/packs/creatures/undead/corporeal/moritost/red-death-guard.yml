@@ -195,6 +195,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/full-undead.webp
         name: Full Undead
         system:
+          automations:
+            - _id: uHiJx3PztlH7ye4V
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -698,6 +714,8 @@ items:
       description: >-
         <p>Used as elite guards as key units in wars, these rare creatures are simple yet effective. Death guards are
         widely feared and hated for being extremely hard to destroy.</p>
+      families:
+        - moritost
       innateRanks: >-
         <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:veteran]{Veteran}. Innately
         @Pack[teriock.classes]{rank} 1 @Identifier[class:flame-mage]{Flame Mage}.</p>
@@ -715,7 +733,9 @@ items:
           formula: 2d8
       traits:
         - construct
+        - corporeal
         - undead
+      undeadLevel: 3
     type: species
   - _id: 380dac2710b593e9
     _key: "!actors.items!2e0b5999d264c96b.380dac2710b593e9"

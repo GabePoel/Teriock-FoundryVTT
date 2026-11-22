@@ -250,6 +250,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
         name: Greater Undead
         system:
+          automations:
+            - _id: fp0NW4IOnlIglvcp
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "4"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -897,6 +913,8 @@ items:
       br: 20
       effectTypes:
         - morganti
+      families:
+        - wraith
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/morganti-wraith.webp
         ring: true
@@ -908,7 +926,9 @@ items:
         hp:
           formula: 4d10
       traits:
+        - spectral
         - undead
+      undeadLevel: 4
     type: species
   - _id: cj23vL3BKRhEmvME
     _key: "!actors.items!b1c33155f61cf279.cj23vL3BKRhEmvME"

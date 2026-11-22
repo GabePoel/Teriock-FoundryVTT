@@ -66,6 +66,22 @@ effects:
     img: systems/teriock/src/assets/thumbnails/ability/greater-undead.webp
     name: Greater Undead
     system:
+      automations:
+        - _id: fp0NW4IOnlIglvcp
+          changes:
+            - applyIfSuppressed: false
+              key: system.traits
+              phase: main
+              target: Actor
+              type: add
+              value: undead
+            - applyIfSuppressed: false
+              key: system.undeadLevel
+              phase: main
+              target: Actor
+              type: upgrade
+              value: "4"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -217,6 +233,9 @@ effects:
         - _id: 7400b41f20d9f100
           behaviors:
             - disabled: false
+              flags:
+                teriock:
+                  qualifier: "@family.zombie"
               name: Apply Active Effect
               system:
                 identifiers:
@@ -510,6 +529,8 @@ system:
   description: >-
     <p>These strange creatures move with the shuffling gate of a @Identifier[creature:zombie]{zombie} and are sometimes
     fatally mistaken for one.</p>
+  families:
+    - zombie
   morph:
     img: systems/teriock/src/assets/thumbnails/creature/shambler.webp
     ring: true
@@ -523,5 +544,7 @@ system:
     mp:
       formula: 1d6
   traits:
+    - corporeal
     - undead
+  undeadLevel: 4
 type: species

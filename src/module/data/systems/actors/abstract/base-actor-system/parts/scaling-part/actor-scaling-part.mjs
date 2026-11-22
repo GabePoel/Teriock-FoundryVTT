@@ -82,7 +82,9 @@ export default function ActorScalingPart(Base) {
      */
     #getSpeciesRollData() {
       const data = {};
-      for (const s of this.parent.previewedTypes.species.filter(s => s.active)) { data[`species.${s.system.slug}`] = 1; }
+      for (const s of this.parent.previewedTypes.species.filter(s => s.active)) {
+        data[`species.${s.system.slug}`] = 1;
+      }
       return data;
     }
 

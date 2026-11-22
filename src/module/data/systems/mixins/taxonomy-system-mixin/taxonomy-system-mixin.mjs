@@ -45,20 +45,26 @@ export default function TaxonomySystemMixin(Base) {
     get _taxonomyTags() {
       const { families, traits, undeadLevel } = this.taxonomy;
       return [
-        ...Array.from(traits, t => ({
-          label: TERIOCK.CONFIG.species.traits[t]?.label,
-          tooltip: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.traits.label",
-        })),
+        ...Array.from(
+          traits,
+          t => ({
+            label: TERIOCK.CONFIG.species.traits[t]?.label,
+            tooltip: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.traits.label",
+          }),
+        ),
         ...(undeadLevel
           ? [{
             label: TERIOCK.CONFIG.species.undeadLevels[undeadLevel],
             tooltip: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.undeadLevel.label",
           }]
           : []),
-        ...Array.from(families, f => ({
-          label: TERIOCK.CONFIG.species.families[f]?.label,
-          tooltip: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.families.label",
-        })),
+        ...Array.from(
+          families,
+          f => ({
+            label: TERIOCK.CONFIG.species.families[f]?.label,
+            tooltip: "TERIOCK.SYSTEMS.Taxonomy.FIELDS.families.label",
+          }),
+        ),
       ];
     }
 

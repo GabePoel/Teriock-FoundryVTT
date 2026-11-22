@@ -210,6 +210,22 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/partial-undead.webp
         name: Partial Undead
         system:
+          automations:
+            - _id: AGoGvSReOaQBeyvm
+              changes:
+                - applyIfSuppressed: false
+                  key: system.traits
+                  phase: main
+                  target: Actor
+                  type: add
+                  value: undead
+                - applyIfSuppressed: false
+                  key: system.undeadLevel
+                  phase: main
+                  target: Actor
+                  type: upgrade
+                  value: "1"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -310,6 +326,8 @@ items:
       description: >-
         <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and
         are easily fooled. In combat, they prefer to attack in large numbers.</p>
+      families:
+        - goblin
       morph:
         img: systems/teriock/src/assets/thumbnails/creature/bone-goblin.webp
         ring: true
@@ -327,6 +345,7 @@ items:
       traits:
         - humanoid
         - undead
+      undeadLevel: 1
     type: species
   - _id: hEIEeiwxANycXS9N
     _key: "!actors.items!ce0a0c2774b85b16.hEIEeiwxANycXS9N"
