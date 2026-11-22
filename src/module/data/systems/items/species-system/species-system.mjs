@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf } from "../../../../utils/_module.mjs";
-import { slugSetField } from "../../../fields/tools/builders.mjs";
+import { levelField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import {
@@ -91,6 +91,7 @@ export default class SpeciesSystem
         }),
       }),
       traits: slugSetField(TERIOCK.CONFIG.species.traits),
+      undeadLevel: levelField(TERIOCK.CONFIG.species.undeadLevels),
     });
   }
 
@@ -144,7 +145,12 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get _displayInputs() {
-    return [...super._displayInputs, "system.traits", "system.families"];
+    return [
+      ...super._displayInputs,
+      "system.traits",
+      ...(this.traits.has("undead") ? ["system.undeadLevel"] : []),
+      "system.families",
+    ];
   }
 
   /** @inheritDoc */
@@ -175,9 +181,17 @@ export default class SpeciesSystem
    * @returns {Teriock.Display.DisplayTag[]}
    */
   get _traitTags() {
-    return Array.from(this.traits).map(t => {
-      return { label: TERIOCK.CONFIG.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
-    });
+    return [
+      ...Array.from(this.traits).map(t => {
+        return { label: TERIOCK.CONFIG.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
+      }),
+      ...(this.undeadLevel
+        ? [{
+          label: TERIOCK.CONFIG.species.undeadLevels[this.undeadLevel],
+          tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.undeadLevel.label",
+        }]
+        : []),
+    ];
   }
 
   /** @inheritDoc */
@@ -226,6 +240,7 @@ export default class SpeciesSystem
       "size.enabled": Number(this.size.enabled),
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
+      undead: this.undeadLevel,
     });
     for (const family of this.families) { data[`family.${family}`] = 1; }
     for (const trait of this.traits) { data[`trait.${trait}`] = 1; }

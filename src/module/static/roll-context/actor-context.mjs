@@ -39,6 +39,7 @@ const actorContext = {
   size: "TERIOCK.SHEETS.Actor.TABS.Details.size.label",
   "size.reach": "TERIOCK.ROLL_CONTEXT.Actor.reach",
   speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
+  undead: "TERIOCK.SYSTEMS.Species.FIELDS.undeadLevel.label",
   weight: "TERIOCK.SYSTEMS.BaseActor.FIELDS.weight.label",
 
   carry: "TERIOCK.ROLL_CONTEXT.Actor.carried",

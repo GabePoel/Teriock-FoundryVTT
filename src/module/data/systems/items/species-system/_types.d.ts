@@ -26,6 +26,8 @@ declare module "./species-system.mjs" {
     };
     /** <schema> Traits */
     traits: Set<Teriock.Keys.Trait>;
+    /** <schema> Undead level */
+    undeadLevel: Teriock.Keys.UndeadLevel;
   }
 }
 

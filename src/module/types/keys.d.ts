@@ -65,6 +65,7 @@ declare global {
     // Species Keys
     export type Family = keyof typeof CONFIG.wiki.index.family;
     export type Trait = keyof typeof CONFIG.wiki.index.trait;
+    export type UndeadLevel = keyof typeof CONFIG.species.undeadLevels;
 
     // Kind Keys
     export type Kind = keyof typeof CONFIG.kind.default;

@@ -123,7 +123,12 @@ Object.assign(terms.TERIOCK.TERMS, {
   Families: Object.fromEntries(Object.keys(index.family).map(k => [toCamelCase(k), toTitleCase(k)])),
   PowerSources: wikiKeys(index.source),
   Tradecrafts: wikiKeys(index.tradecraft),
-  Traits: wikiKeys(index.trait, true),
+  Traits: {
+    ...wikiKeys(index.trait, true),
+    corporeal: "Corporeal",
+    skeletal: "Skeletal",
+    spectral: "Spectral",
+  },
 });
 
 mergeObjects(
