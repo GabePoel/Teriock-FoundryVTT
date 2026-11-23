@@ -33,7 +33,7 @@ export default class DocumentDialog extends mixClasses(TeriockDocumentSheet, Tem
 
   /** @inheritDoc */
   _getHeaderControls() {
-    return super._getHeaderControls().filter(c => !["configureOwnership", "configureSheet"].includes(c.action))
+    return super._getHeaderControls().filter(c => !["configureOwnership", "configureSheet"].includes(c.action));
   }
 
   /** @inheritDoc */

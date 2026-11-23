@@ -67,7 +67,7 @@ export default function WikiSystemMixin(Base) {
  * @see {getHeaderControlsApplicationV2}
  */
 function addWikiOpenToHeader(application, controls) {
-  if (!application.window.header|| !foundry.utils.getProperty(application, "options.teriock.wiki")) { return; }
+  if (!application.window.header || !foundry.utils.getProperty(application, "options.teriock.wiki")) { return; }
   if (application.document.system?.metadata?.tags?.wiki && application.document.system.isOnWiki) {
     controls.push({
       action: "wikiOpenThis",
