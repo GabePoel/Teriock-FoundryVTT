@@ -5,9 +5,9 @@ declare global {
   namespace Teriock.Previews {
     /** A raw group definition for a preview. This is made by {@link PreviewGroupBuilder} before any arrangement. */
     export type PreviewGroup = {
-      /** The entries in a preview group. */
+      /** Entries in a preview group. */
       docs: Teriock.Embeds.Embeddable[];
-      /** The "no results" label for the group. */
+      /** The group's "no results" label. */
       empty: string;
       /** Whether the group is hidden entirely when it has no documents. */
       optional?: boolean;
@@ -25,15 +25,15 @@ declare global {
 
     /** A group that's ready to render after arrangement (filtering/sorting/search). */
     export type RenderedPreviewGroup = {
-      /** The arranged cards, in DOM order. */
+      /** Sorted entries in a preview group. */
       docs: Teriock.Previews.RenderedPreviewEntry[];
-      /** The "no results" label for the group. */
+      /** The group's "no results" label. */
       empty: string;
-      /** Whether the group's entries can be sorted by dragging. */
+      /** Whether the group's entries can be rearranged by dragging. */
       sortable: boolean;
     };
 
-    /** Transient collapse open-states for a preview's block/sort/filter menus. */
+    /** Preview's current menu states. */
     export type PreviewToggles = { block: boolean, filter: boolean, sort: boolean };
 
     /**
@@ -47,11 +47,11 @@ declare global {
       label?: string;
       /** The child type selected by default. Defaults to the first of `types`. */
       type?: Teriock.Documents.ChildType;
-      /** The child types offered by the create dialog, or a resolver called with the app instance. */
+      /** The child types offered by the create dialog. Defaults to the preview's `types`. */
       types?: ((app: TeriockDocumentSheet) => Teriock.Documents.ChildType[]) | Teriock.Documents.ChildType[];
     };
 
-    /** The add button state resolved for a render, attached to the preview model and consumed by the template. */
+    /** The add button render context. */
     export type PreviewAddButtonContext = {
       /** The child type selected by default */
       dataType: Teriock.Documents.ChildType | null;
@@ -61,19 +61,20 @@ declare global {
       tooltip: string;
     };
 
-    /** Configuration for a single preview on a sheet: a map entry of preview id to `{ model?, data?, groups, addButton? }`. */
+    /** Configuration for a single preview. */
     export type PreviewConfig = {
-      /** The add button for the preview. Omit for previews whose children are not manually created. */
+      /** The add button for previews with custom children. */
       addButton?: Teriock.Previews.PreviewAddButton;
-      /** A source patch applied to the model via `updateSource` (e.g. display defaults). */
+      /** Data passed into the preview model. */
       data?: object;
-      /** Builds the preview's groups from the document. */
+      /** A handler that builds the preview's groups from the document. */
       groups: Teriock.Previews.PreviewGroupBuilder;
       /**
-       * The preview model class, or a resolver called with the app instance that returns one. Defaults to the type's
-       * configured preview model, then {@link BasePreviewModel}.
+       * The preview model class.
        */
       model?: typeof BasePreviewModel;
+      /** The document types this preview displays. */
+      types?: Teriock.Documents.ChildType[];
     };
   }
 }

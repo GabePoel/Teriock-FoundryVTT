@@ -207,7 +207,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
-    if ("movementAction" in changed) { this.actor?.render(); }
+    if ("movementAction" in changed) { this.actor?.render(false, { parts: ["details"] }); }
     if (["actorId", "actorLink", "level"].some(k => k in changed)) {
       for (const actor of new Set([game.actors.get(options.previousActorId), this.actor, this.baseActor])) {
         actor?.system.checkSurroundings?.();

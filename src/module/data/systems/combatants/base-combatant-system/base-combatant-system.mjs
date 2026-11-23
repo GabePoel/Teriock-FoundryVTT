@@ -66,19 +66,19 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    this.actor?.render();
+    this.actor?.render(false, { parts: ["sidebar"] });
   }
 
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    this.actor?.render();
+    this.actor?.render(false, { parts: ["sidebar"] });
   }
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    if ("system" in changed) { this.actor?.render(); }
+    if ("system" in changed) { this.actor?.render(false, { parts: ["sidebar"] }); }
   }
 
   /** @inheritDoc */

@@ -1,5 +1,9 @@
 <section class="actor-tab tab {{ tab.cssClass }}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
-  {{#if @root/tabHeaders}}<h1>{{localize tab.label}}</h1>{{/if}}
+  {{#if @root/tabHeaders}}
+    <h1>
+      {{localize tab.label}}
+    </h1>
+  {{/if}}
   <div class="actor-tab-page">
     <div class="teriock-block-display">
       {{> "teriock/ui/preview"
@@ -22,10 +26,10 @@
             data-action="toggleCondition"
             data-condition="{{{ key }}}"
             data-tooltip='
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Effects.toggle" name=condition.name state=(ifThen
+              {{localize "TERIOCK.SHEETS.Actor.Effects.toggle" name=condition.name state=(ifThen
               (lookup ../conditions key)
-              (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
-              (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
+              (localize "TERIOCK.SHEETS.Actor.Effects.off")
+              (localize "TERIOCK.SHEETS.Actor.Effects.on"))}}
             '
           >
             {{infoIcon (concat "condition:" condition.system.slug)}}

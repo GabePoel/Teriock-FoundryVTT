@@ -1,5 +1,9 @@
 <section class="actor-tab details-tab tab {{ tab.cssClass }}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
-  {{#if @root/tabHeaders}}<h1>{{localize tab.label}}</h1>{{/if}}
+  {{#if @root/tabHeaders}}
+    <h1>
+      {{localize tab.label}}
+    </h1>
+  {{/if}}
   <div class="actor-tab-page">
     <div class="tgrid g2 details-columns">
       {{#unless environment}}
@@ -9,7 +13,7 @@
             noTable=true
           }}
           <div class="actor-stat">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.movementSpeed.label"}}</div>
             {{formHover
               document
               cssClass="actor-stat-value updatable"
@@ -35,7 +39,7 @@
                     data-action="setMovementAction"
                     data-movement-action="{{ config.movementAction }}"
                   {{/if}}
-                  data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.active"}}'
+                  data-tooltip='{{localize "TERIOCK.SHEETS.Actor.Details.movementSpeed.active"}}'
                   data-tooltip-direction="LEFT"
                 >
                   {{{ config.label }}}
@@ -80,7 +84,7 @@
             <div class="teriock-block-display-divider"></div>
             <div class="details-terrains">
               {{#each terrains as |terrain|}}
-                <span class="details-terrain thelp" data-tooltip="TERIOCK.SHEETS.Actor.TABS.Details.terrains.label">
+                <span class="details-terrain thelp" data-tooltip="TERIOCK.SHEETS.Actor.Details.terrains.label">
                   {{ terrain.label }}
                 </span>
               {{/each}}
@@ -90,8 +94,8 @@
         <div class="details-right-column">
           <div class="teriock-block-display details-senses">
             <div class="details-list">
-              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
-              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.sense.label"}}</div>
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.sense.range"}}</div>
               {{#each TERIOCK.CONFIG.actor.senses as |config key|}}
                 {{#unless config.hidden}}
                   <div>
@@ -124,7 +128,7 @@
             {{infoIcon "condition:hidden"}}
             <div class="actor-stats">
               <div class="actor-stat">
-                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
+                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.hiding.label"}}</div>
                 {{formHover
                   document
                   cssClass="actor-stat-value updatable"
@@ -136,7 +140,7 @@
                 }}
               </div>
               <div class="actor-stat">
-                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
+                <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.perceiving.label"}}</div>
                 {{formHover
                   document
                   cssClass="actor-stat-value updatable"
@@ -155,7 +159,7 @@
               noTable=true
             }}
             <div class="actor-stat">
-              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.curses.label"}}</div>
               <div class="actor-stat-value details-fraction">
                 {{formHover
                   document
@@ -187,7 +191,7 @@
             noTable=true
           }}
           <div class="actor-stat">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.size.label"}}</div>
             {{formHover
               document
               cssClass="actor-stat-value updatable"
@@ -199,15 +203,15 @@
             }}
           </div>
           <div class="actor-stat">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.category"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.size.category"}}</div>
             <div class="actor-stat-value">{{localize system.size.label}}</div>
           </div>
           <div class="actor-stat">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.space"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.size.space"}}</div>
             <div class="actor-stat-value">{{ sizeDetails.space }}</div>
           </div>
           <div class="actor-stat">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.size.reach"}}</div>
             <div class="actor-stat-value">{{{ sizeDetails.reach }}}</div>
           </div>
         </div>
@@ -219,7 +223,7 @@
               noTable=true
             }}
             <div class="actor-stat">
-              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.weight.label"}}</div>
               {{formHover
                 document
                 cssClass="actor-stat-value updatable"
@@ -231,10 +235,10 @@
               }}
             </div>
             <div class="actor-stat">
-              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.total"}}</div>
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.weight.total"}}</div>
               <div class="actor-stat-value">
                 {{{ system.weight.value }}}
-                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                {{localize "TERIOCK.SHEETS.Actor.Details.weight.unit"}}
               </div>
             </div>
           </div>
@@ -246,7 +250,7 @@
               </span>
             {{else}}
               <span class="tsubtle">
-                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.taxonomy.empty"}}
+                {{localize "TERIOCK.SHEETS.Actor.Details.taxonomy.empty"}}
               </span>
             {{/each}}
             {{!-- prettier-ignore --}}
@@ -257,7 +261,7 @@
               data-action="updatePaths"
               data-icon="{{ TERIOCK.DISPLAY.icons.manifest.species.traits }}"
               data-paths="system.traits system.families system.undeadLevel"
-              data-tooltip="TERIOCK.SHEETS.Actor.TABS.Details.taxonomy.edit"
+              data-tooltip="TERIOCK.SHEETS.Actor.Details.taxonomy.edit"
               {{disabled (not editable)}}
             >
               {{makeIcon TERIOCK.DISPLAY.icons.manifest.ui.edit "button"}}

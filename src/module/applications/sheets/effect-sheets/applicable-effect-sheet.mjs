@@ -52,11 +52,15 @@ export default class ApplicableEffectSheet
     window: { resizable: true },
   };
 
-  /** @type {Record<string, HandlebarsTemplatePart>} */
+  /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
   static PARTS = {
     ...omit(super.PARTS, ["footer"]),
     header: { template: "teriock/sheets/shared/top" },
-    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
+    children: {
+      scrollable: [""],
+      template: "teriock/sheets/effects/consequence/children-tab",
+      teriock: { previews: ["children"] },
+    },
     mechanics: {
       scrollable: [""],
       template: "teriock/sheets/effects/consequence/mechanics-tab",

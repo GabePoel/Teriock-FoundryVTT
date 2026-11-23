@@ -1,9 +1,12 @@
+export { default as PlayableActorSheetAbilitiesPart } from "./playable-actor-sheet-abilities-part.mjs";
 export { default as PlayableActorSheetAffinitiesPart } from "./playable-actor-sheet-affinities-part.mjs";
-export { default as PlayableActorSheetAvatarImagePart } from "./playable-actor-sheet-avatar-image-part.mjs";
-export { default as PlayableActorSheetCombatPart } from "./playable-actor-sheet-combat-part.mjs";
-export { default as PlayableActorSheetMechanicalPart } from "./playable-actor-sheet-mechanical-part.mjs";
-export { default as PlayableActorSheetRollingPart } from "./playable-actor-sheet-rolling-part.mjs";
-export { default as PlayableActorSheetSectionsPart } from "./playable-actor-sheet-sections-part.mjs";
+export { default as PlayableActorSheetClassesPart } from "./playable-actor-sheet-classes-part.mjs";
+export { default as PlayableActorSheetDetailsPart } from "./playable-actor-sheet-details-part.mjs";
+export { default as PlayableActorSheetEffectsPart } from "./playable-actor-sheet-effects-part.mjs";
+export { default as PlayableActorSheetInventoryPart } from "./playable-actor-sheet-inventory-part.mjs";
+export { default as PlayableActorSheetPowersPart } from "./playable-actor-sheet-powers-part.mjs";
+export { default as PlayableActorSheetResourcesPart } from "./playable-actor-sheet-resources-part.mjs";
 export { default as PlayableActorSheetSidebarPart } from "./playable-actor-sheet-sidebar-part.mjs";
+export { default as PlayableActorSheetSorceryPart } from "./playable-actor-sheet-sorcery-part.mjs";
 export { default as PlayableActorSheetTabsPart } from "./playable-actor-sheet-tabs-part.mjs";
 export { default as PlayableActorSheetTradecraftsPart } from "./playable-actor-sheet-tradecrafts-part.mjs";

@@ -191,7 +191,7 @@ export default class BaseAffinity
   get typeLabel() {
     const label = _loc(this._typeConfig?.label ?? "");
     if (!this._typeConfig?.stacking) { return label; }
-    return _loc("TERIOCK.SHEETS.Actor.TABS.Affinities.stackingLabel", { amount: this.amount, label });
+    return _loc("TERIOCK.SHEETS.Actor.Affinities.stackingLabel", { amount: this.amount, label });
   }
 
   /**

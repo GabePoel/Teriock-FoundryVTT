@@ -115,13 +115,14 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /**
    * Get the render context for a preview's add button.
-   * @param {Teriock.Previews.PreviewAddButton} [add]
+   * @param {Teriock.Previews.PreviewConfig} config
    * @param {TeriockDocumentSheet} app - The sheet the preview belongs to.
    * @returns {Teriock.Previews.PreviewAddButtonContext | null}
    */
-  static resolveAddButton(add, app) {
+  static resolveAddButton({ addButton: add, types: shown }, app) {
     if (!add) { return null; }
-    const resolved = typeof add.types === "function" ? add.types(app) : add.types;
+    const shouldShow = add.types ?? shown;
+    const resolved = typeof shouldShow === "function" ? shouldShow(app) : shouldShow;
     const { childTypes } = app.document.system;
     const types = (resolved ?? (add.type ? [add.type] : []))?.filter(t => t && (!childTypes || childTypes.includes(t)))
       ?? [];

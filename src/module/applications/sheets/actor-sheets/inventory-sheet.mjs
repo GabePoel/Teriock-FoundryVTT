@@ -26,20 +26,21 @@ export default class InventorySheet extends BaseActorSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { classes: ["inventory-sheet"], position: { height: 600, width: 525 } };
 
-  /** @type {Record<string, HandlebarsTemplatePart>} */
+  /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
   static PARTS = {
     header: { template: "teriock/sheets/shared/header" },
-    inventory: { template: "teriock/sheets/actors/parts/inventory" },
+    inventory: { template: "teriock/sheets/actors/parts/inventory", teriock: { previews: ["inventory"] } },
     notes: { template: "teriock/sheets/actors/parts/notes" },
   };
 
   /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
   static PREVIEWS = {
     inventory: {
-      addButton: { type: "equipment" },
+      addButton: {},
       data: { display: { size: "small" } },
       groups: this.#previewGroupEquipment,
       model: EquipmentPreviewModel,
+      types: ["equipment"],
     },
   };
 }

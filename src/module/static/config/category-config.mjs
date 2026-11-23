@@ -25,7 +25,7 @@ const categoryConfig = {
   },
   species: { imgCategory: "creature", label: "TYPES.Item.species", suggestions: "registry" },
   style: { label: "TYPES.JournalEntryPage.style", suggestions: "registry" },
-  tradecraft: { label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title", suggestions: "registry" },
+  tradecraft: { label: "TERIOCK.SHEETS.Actor.TABS.tradecrafts", suggestions: "registry" },
 
   other: { format: "none", label: "TERIOCK.COMMON.Other", suggestions: "none" },
 };

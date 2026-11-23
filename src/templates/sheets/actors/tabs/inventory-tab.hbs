@@ -1,5 +1,9 @@
 <section class="actor-tab tab {{ tab.cssClass }}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
-  {{#if @root/tabHeaders}}<h1>{{localize tab.label}}</h1>{{/if}}
+  {{#if @root/tabHeaders}}
+    <h1>
+      {{localize tab.label}}
+    </h1>
+  {{/if}}
   <div class="actor-tab-page">
     {{#unless environment}}
       <div class="teriock-block-display carrying-display">
@@ -7,7 +11,7 @@
           "core:carrying-capacity"
           noTable=true
         }}
-        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.title"}}</div>
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.title"}}</div>
         <div class="carrying-bar" data-level="{{ carrying.level }}">
           <div class="carrying-bar-fill" style="width: {{ carrying.fill }}%"></div>
           <div
@@ -32,10 +36,10 @@
         </div>
         <div class="carrying-labels">
           <div class="carrying-label">
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.label"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.label"}}</div>
             <div class="carrying-value">
               {{{ system.weight.carried }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+              {{localize "TERIOCK.SHEETS.Actor.Details.weight.unit"}}
             </div>
           </div>
           <div
@@ -45,15 +49,15 @@
                 exceeded
               {{/if}}
             "
-            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.lightCapacity"}}'
+            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.lightCapacity"}}'
             data-tooltip-direction="DOWN"
             data-tooltip-class=""
             style="--position: {{ carrying.light }}%"
           >
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.light"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.light"}}</div>
             <div class="carrying-value">
               {{{ system.carryingCapacity.light }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+              {{localize "TERIOCK.SHEETS.Actor.Details.weight.unit"}}
             </div>
           </div>
           <div
@@ -63,15 +67,15 @@
                 exceeded
               {{/if}}
             "
-            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavyCapacity"}}'
+            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.heavyCapacity"}}'
             data-tooltip-direction="DOWN"
             data-tooltip-class=""
             style="--position: {{ carrying.heavy }}%"
           >
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavy"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.heavy"}}</div>
             <div class="carrying-value">
               {{{ system.carryingCapacity.heavy }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+              {{localize "TERIOCK.SHEETS.Actor.Details.weight.unit"}}
             </div>
           </div>
           <div
@@ -81,14 +85,14 @@
                 exceeded
               {{/if}}
             "
-            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.maxCapacity"}}'
+            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.maxCapacity"}}'
             data-tooltip-direction="DOWN"
             data-tooltip-class=""
           >
-            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.max"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Inventory.carrying.max"}}</div>
             <div class="carrying-value">
               {{{ system.carryingCapacity.max }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+              {{localize "TERIOCK.SHEETS.Actor.Details.weight.unit"}}
             </div>
           </div>
         </div>

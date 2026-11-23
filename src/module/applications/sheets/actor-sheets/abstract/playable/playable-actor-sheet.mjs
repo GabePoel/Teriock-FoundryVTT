@@ -1,57 +1,162 @@
-import { mixClasses } from "../../../../../utils/_module.mjs";
+import { InventorySystem } from "../../../../../data/systems/actors/_module.mjs";
+import {
+  AbilitySystem,
+  ConditionSystem,
+  FluencySystem,
+  ResourceSystem,
+} from "../../../../../data/systems/effects/_module.mjs";
+import { PowerSystem, RankSystem, SorcerySystem } from "../../../../../data/systems/items/_module.mjs";
+import { consolidateWriteOperations, makeIconClass, mixClasses } from "../../../../../utils/_module.mjs";
+import { DocumentSelector } from "../../../../dialogs/_module.mjs";
 import BaseActorSheet from "../base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
- * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
- * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
  * Playable actor sheet.
  * @extends {BaseActorSheet}
- * @mixes PlayableActorSheetAvatarImagePart
- * @mixes PlayableActorSheetCombatPart
- * @mixes PlayableActorSheetMechanicalPart
- * @mixes PlayableActorSheetSectionsPart
- * @mixes PlayableActorSheetAffinitiesPart
- * @mixes PlayableActorSheetRollingPart
  * @mixes PlayableActorSheetSidebarPart
- * @mixes PlayableActorSheetTabsPart
  * @mixes PlayableActorSheetTradecraftsPart
+ * @mixes PlayableActorSheetAbilitiesPart
+ * @mixes PlayableActorSheetInventoryPart
+ * @mixes PlayableActorSheetClassesPart
+ * @mixes PlayableActorSheetPowersPart
+ * @mixes PlayableActorSheetResourcesPart
+ * @mixes PlayableActorSheetEffectsPart
+ * @mixes PlayableActorSheetAffinitiesPart
+ * @mixes PlayableActorSheetSorceryPart
+ * @mixes PlayableActorSheetDetailsPart
+ * @mixes PlayableActorSheetTabsPart
  */
 export default class TeriockPlayableActorSheet
   extends mixClasses(
     BaseActorSheet,
-    parts.PlayableActorSheetAvatarImagePart,
-    parts.PlayableActorSheetCombatPart,
-    parts.PlayableActorSheetMechanicalPart,
-    parts.PlayableActorSheetSectionsPart,
-    parts.PlayableActorSheetAffinitiesPart,
-    parts.PlayableActorSheetRollingPart,
     parts.PlayableActorSheetSidebarPart,
-    parts.PlayableActorSheetTabsPart,
     parts.PlayableActorSheetTradecraftsPart,
+    parts.PlayableActorSheetAbilitiesPart,
+    parts.PlayableActorSheetInventoryPart,
+    parts.PlayableActorSheetClassesPart,
+    parts.PlayableActorSheetPowersPart,
+    parts.PlayableActorSheetResourcesPart,
+    parts.PlayableActorSheetEffectsPart,
+    parts.PlayableActorSheetAffinitiesPart,
+    parts.PlayableActorSheetSorceryPart,
+    parts.PlayableActorSheetDetailsPart,
+    parts.PlayableActorSheetTabsPart,
   )
 {
-  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { position: { height: 600, width: 800 } };
+  /**
+   * Pull from the Death Bag.
+   * @returns {Promise<void>}
+   */
+  static async #onDeathBagPull() {
+    if (!this.isEditable) { return; }
+    await this.actor.run("bag");
+  }
 
-  /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = {
-    sidebar: { scrollable: [".actor-sidebar"], template: "teriock/sheets/actors/parts/sidebar" },
-    tradecrafts: { scrollable: [""], template: "teriock/sheets/actors/tabs/tradecrafts-tab" },
-    abilities: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
-    inventory: { scrollable: [""], template: "teriock/sheets/actors/tabs/inventory-tab" },
-    classes: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
-    powers: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
-    resources: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
-    effects: { scrollable: [""], template: "teriock/sheets/actors/tabs/effects-tab" },
-    affinities: { scrollable: [""], template: "teriock/sheets/actors/tabs/affinities-tab" },
-    sorcery: { scrollable: [""], template: "teriock/sheets/actors/tabs/sorcery-tab" },
-    details: { scrollable: [""], template: "teriock/sheets/actors/tabs/details-tab" },
-    tabs: { template: "teriock/ui/vertical-tabs" },
+  /**
+   * Take a long rest.
+   * @returns {Promise<void>}
+   */
+  static async #onTakeLongRest() {
+    if (!this.isEditable) { return; }
+    await this.actor.run("longRest");
+  }
+
+  /**
+   * Take a short rest.
+   * @returns {Promise<void>}
+   */
+  static async #onTakeShortRest() {
+    if (!this.isEditable) { return; }
+    await this.actor.run("shortRest");
+  }
+
+  /**
+   * Toggle Documents to be enabled or disabled.
+   * @param {PointerEvent} _event
+   * @param {HTMLElement} target
+   * @returns {Promise<void>}
+   */
+  static async #onToggleDocs(_event, target) {
+    if (!game.teriock.checkEditable(this)) { return; }
+    const docs = foundry.utils.getProperty(this.document, target.dataset.path) ?? [];
+    const enabled = await DocumentSelector.selectMulti(docs, {
+      checked: docs.filter(d => !d.disabled).map(r => r.uuid),
+    });
+    if (!enabled) { return; }
+    const freeOps = docs.filter(d => d.metadata.disabledPath).map(d => {
+      return {
+        action: "update",
+        documentName: d.documentName,
+        pack: d.pack,
+        parent: d.parent,
+        updates: [{ _id: d.id, [d.metadata.disabledPath]: !enabled.includes(d) }],
+      };
+    });
+    await foundry.documents.modifyBatch(consolidateWriteOperations(freeOps));
+  }
+
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      deathBagPull: this.#onDeathBagPull,
+      takeLongRest: this.#onTakeLongRest,
+      takeShortRest: this.#onTakeShortRest,
+      toggleDocs: this.#onToggleDocs,
+    },
+    position: { height: 600, width: 800 },
+    window: {
+      controls: [{
+        action: "deathBagPull",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.deathBag, "contextMenu"),
+        label: "TERIOCK.SHEETS.Actor.ACTIONS.DeathBagPull.label",
+        ownership: "OWNER",
+        visible() {
+          return this.isEditable;
+        },
+      }, {
+        action: "takeLongRest",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.longRest, "contextMenu"),
+        label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
+        ownership: "OWNER",
+        visible() {
+          return this.isEditable;
+        },
+      }, {
+        action: "takeShortRest",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.shortRest, "contextMenu"),
+        label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
+        ownership: "OWNER",
+        visible() {
+          return this.isEditable;
+        },
+      }],
+    },
+  };
+
+  /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
+  static TABS = {
+    primary: {
+      initial: "tradecrafts",
+      labelPrefix: "TERIOCK.SHEETS.Actor.TABS",
+      tabs: [
+        { icon: FluencySystem.metadata.icon, id: "tradecrafts" },
+        { icon: AbilitySystem.metadata.icon, id: "abilities" },
+        { icon: InventorySystem.metadata.icon, id: "inventory" },
+        { icon: RankSystem.metadata.icon, id: "classes" },
+        { icon: PowerSystem.metadata.icon, id: "powers" },
+        { icon: ResourceSystem.metadata.icon, id: "resources" },
+        { icon: ConditionSystem.metadata.icon, id: "effects" },
+        { icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity, id: "affinities" },
+        { icon: SorcerySystem.metadata.icon, id: "sorcery" },
+        { icon: TERIOCK.DISPLAY.icons.manifest.ui.details, id: "details" },
+      ],
+    },
   };
 
   /** @inheritDoc */
@@ -65,14 +170,9 @@ export default class TeriockPlayableActorSheet
     }
   }
 
-  /**
-   * @inheritDoc
-   * @category Sorcery
-   */
+  /** @inheritDoc */
   async _prepareContext(options = {}) {
-    return Object.assign(await super._prepareContext(options), {
-      allWords: (await this.document.system.getAllWords()).renderHTML({ searchKey: this.id }),
-    });
+    return Object.assign(await super._prepareContext(options), { environment: this.document.type === "environment" });
   }
 }
 
@@ -80,11 +180,9 @@ export default class TeriockPlayableActorSheet
  * Re-render sheets to show updated effect durations.
  * @see {@link hookEvents.updateWorldTime}
  */
-async function updateRegionDurations() {
+async function refreshEffectDurations() {
   for (const app of foundry.applications.instances.values()) {
-    if (app instanceof TeriockPlayableActorSheet && app.tabGroups?.primary === "effects") {
-      app.render();
-    }
+    if (app instanceof TeriockPlayableActorSheet) { app.render({ parts: ["effects"] }); }
   }
 }
-Hooks.on("updateWorldTime", updateRegionDurations);
+Hooks.on("updateWorldTime", refreshEffectDurations);

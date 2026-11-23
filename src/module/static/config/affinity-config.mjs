@@ -18,15 +18,15 @@ export default {
   ],
   // no sort
   groups: {
-    immunities: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.immunities", types: ["hexseal", "immunity"] },
+    immunities: { label: "TERIOCK.SHEETS.Actor.Affinities.GROUPS.immunities", types: ["hexseal", "immunity"] },
     resistances: {
-      label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.resistances",
+      label: "TERIOCK.SHEETS.Actor.Affinities.GROUPS.resistances",
       types: ["hexproof", "resistance", "vulnerability"],
     },
-    boosts: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.boosts", types: ["takeDeboost", "takeBoost"] },
-    bindings: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.bindings", types: ["binding"] },
+    boosts: { label: "TERIOCK.SHEETS.Actor.Affinities.GROUPS.boosts", types: ["takeDeboost", "takeBoost"] },
+    bindings: { label: "TERIOCK.SHEETS.Actor.Affinities.GROUPS.bindings", types: ["binding"] },
     capabilities: {
-      label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.capabilities",
+      label: "TERIOCK.SHEETS.Actor.Affinities.GROUPS.capabilities",
       types: ["adeptitude", "ineptitude", "incapability"],
     },
   },

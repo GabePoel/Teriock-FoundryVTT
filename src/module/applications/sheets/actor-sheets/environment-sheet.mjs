@@ -14,14 +14,15 @@ const OMITTED_SECTIONS = ["classes", "sorcery", "tradecrafts"];
  * @property {TeriockActor<"environment">} document
  */
 export default class EnvironmentSheet extends PlayableActorSheet {
-  /** @type {Record<string, HandlebarsTemplatePart>} */
+  /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
   static PARTS = omit(super.PARTS, OMITTED_SECTIONS);
-
-  /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
-  static PREVIEWS = omit(super.PREVIEWS, OMITTED_SECTIONS);
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
   static TABS = {
-    primary: { initial: "abilities", tabs: super.TABS.primary.tabs.filter(tab => !OMITTED_SECTIONS.includes(tab.id)) },
+    primary: {
+      ...super.TABS.primary,
+      initial: "abilities",
+      tabs: super.TABS.primary.tabs.filter(tab => !OMITTED_SECTIONS.includes(tab.id)),
+    },
   };
 }

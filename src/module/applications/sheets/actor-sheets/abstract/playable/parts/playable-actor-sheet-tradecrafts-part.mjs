@@ -1,5 +1,8 @@
+import * as previews from "../../../../../../data/models/preview-models/_module.mjs";
+
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
  */
 
 /**
@@ -19,12 +22,45 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
       await this.actor.run("tradecraft", { event, tradecraft: target.dataset.tradecraft });
     }
 
+    /**
+     * @this {PlayableActorSheetTradecraftsPart}
+     * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
+     */
+    static async #previewGroupFluency() {
+      return [{
+        docs: this.document.previewed.getTypeSync("fluency"),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.fluency.plural").toLocaleLowerCase(game.i18n.lang),
+      }];
+    }
+
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { actions: { rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft } } };
 
+    /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
+    static PARTS = {
+      ...super.PARTS,
+      tradecrafts: {
+        scrollable: [""],
+        template: "teriock/sheets/actors/tabs/tradecrafts-tab",
+        teriock: { previews: ["tradecrafts"] },
+      },
+    };
+
+    /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
+    static PREVIEWS = {
+      ...super.PREVIEWS,
+      tradecrafts: {
+        addButton: {},
+        groups: this.#previewGroupFluency,
+        model: previews.FluencyPreviewModel,
+        types: ["fluency"],
+      },
+    };
+
     /** @inheritDoc */
-    async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
+    async _preparePartContext(partId, context, options) {
+      context = await super._preparePartContext(partId, context, options);
+      if (partId !== "tradecrafts") { return context; }
 
       /**
        * Builds a field entry with its tradecrafts nested underneath it.
@@ -61,7 +97,7 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
 
       // Update score tooltips if more scores amounts defined.
       const scoreLabel = score =>
-        _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.clamp(score ?? 0, -3, 4)}`);
+        _loc(`TERIOCK.SHEETS.Actor.Tradecrafts.score.levels.${Math.clamp(score ?? 0, -3, 4)}`);
       const competenceIconClass = level =>
         TERIOCK.CONFIG.competence.levels[Math.clamp(level ?? 0, 0, 2)].simpleIconClass;
       context.tradecraftDisplay = Object.fromEntries(

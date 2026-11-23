@@ -39,9 +39,13 @@ export default function DisplaySheetMixin(Base) {
         .render(true);
     }
 
-    /** @type {Record<string, HandlebarsTemplatePart>} */
+    /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
     static CONTENT_PARTS = {
-      content: { template: "teriock/sheets/shared/content", templates: ["templates/generic/tab-navigation.hbs"] },
+      content: {
+        template: "teriock/sheets/shared/content",
+        templates: ["templates/generic/tab-navigation.hbs"],
+        teriock: { previews: ["children"] },
+      },
     };
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -58,7 +62,7 @@ export default function DisplaySheetMixin(Base) {
       menu: { template: "teriock/sheets/shared/menu", templates: ["templates/generic/tab-navigation.hbs"] },
     };
 
-    /** @type {Record<string, HandlebarsTemplatePart>} */
+    /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
     static DISPLAY_PARTS = { ...this.HEADER_PARTS, ...this.MENU_PARTS, ...this.CONTENT_PARTS };
 
     /**

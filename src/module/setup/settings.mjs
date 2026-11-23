@@ -183,7 +183,10 @@ function getMenuSettings() {
                 initial: "tradecrafts",
                 nullable: false,
                 required: true,
-                choices: () => Object.fromEntries(PlayableActorSheet.SECTIONS.map(({ id, label }) => [id, label])),
+                choices: () => {
+                  const { labelPrefix, tabs } = PlayableActorSheet.TABS.primary;
+                  return Object.fromEntries(tabs.map(({ id }) => [id, `${labelPrefix}.${id}`]));
+                },
               }),
             },
             floatingTabs: {

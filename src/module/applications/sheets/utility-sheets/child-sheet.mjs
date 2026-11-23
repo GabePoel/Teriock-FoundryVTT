@@ -46,6 +46,6 @@ export default class ChildSheet
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { actions: { openSource: this.#onOpenSource } };
 
-  /** @type {Record<string, HandlebarsTemplatePart>} */
+  /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
   static PARTS = { ...this.DISPLAY_PARTS };
 }

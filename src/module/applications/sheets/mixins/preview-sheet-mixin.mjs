@@ -43,7 +43,7 @@ export default function PreviewSheetMixin(Base) {
     static DEFAULT_OPTIONS = { actions: { openIdentifier: this._onOpenIdentifier } };
 
     /**
-     * The preview configuration for this sheet.
+     * Previews that this sheet's parts can render, keyed by preview id.
      * @type {Record<string, Teriock.Previews.PreviewConfig>}
      */
     static PREVIEWS = {
@@ -71,41 +71,36 @@ export default function PreviewSheetMixin(Base) {
       }
     }
 
-    constructor(...args) {
-      super(...args);
-      for (const [id, config] of Object.entries(this.constructor.PREVIEWS)) {
-        this.#previews[id] = BasePreviewModel.create(id, config, this);
-      }
-    }
-
     /** @type {Record<string, BasePreviewModel>} */
     #previews = {};
 
     /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
+    _attachPartListeners(partId, htmlElement, options) {
+      super._attachPartListeners(partId, htmlElement, options);
+      htmlElement.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
         this.document.fetchFromUuid(el.dataset.uuid).then(doc => doc?.attachEmbedListeners?.(el));
       });
-      for (const preview of Object.values(this.#previews)) { preview.bind(this.element); }
+      for (const id of this.constructor.PARTS[partId]?.teriock?.previews ?? []) {
+        this.#previews[id].bind(htmlElement);
+      }
     }
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      await this._preparePreviewContext();
-      return Object.assign(context, { previews: this.#previews });
+      return Object.assign(await super._prepareContext(options), { previews: this.#previews });
     }
 
-    /**
-     * Refresh each preview.
-     * @returns {Promise<void>}
-     */
-    async _preparePreviewContext() {
-      for (const [id, config] of Object.entries(this.constructor.PREVIEWS)) {
-        this.#previews[id].add = BasePreviewModel.resolveAddButton(config.addButton, this);
+    /** @inheritDoc */
+    async _preparePartContext(partId, context, options) {
+      context = await super._preparePartContext(partId, context, options);
+      for (const id of this.constructor.PARTS[partId]?.teriock?.previews ?? []) {
+        const config = this.constructor.PREVIEWS[id];
+        if (!config) { throw new Error(`Preview "${id}" is not registered in ${this.constructor.name}.PREVIEWS.`); }
+        this.#previews[id] ??= BasePreviewModel.create(id, config, this);
+        this.#previews[id].add = BasePreviewModel.resolveAddButton(config, this);
         this.#previews[id].groups = await config.groups.call(this);
       }
+      return context;
     }
 
     /** @inheritDoc */

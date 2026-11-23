@@ -43,8 +43,7 @@ export default class BaseActorSheet
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
       enrichedNotes: await this._enrich(this.document.system.notes)
-        ?? `<p>${_loc("TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder")}</p>`,
-      enrichedStyleDescription: await this._enrich(this.document.system.wielding.attacker?.system?.styleDescription),
+        ?? `<p>${_loc("TERIOCK.SHEETS.Actor.Details.notes.placeholder")}</p>`,
       tabHeaders: foundry.utils.getProperty(this, "options.teriock.tabHeaders"),
     });
   }
