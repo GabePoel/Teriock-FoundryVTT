@@ -63,7 +63,7 @@ export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, 
       options.keepId = true;
     }
 
-    if (data.disabled === true) { return false; }
+    if (!checkData(data)) { return false; }
   }
 
   /** @inheritDoc */
@@ -71,7 +71,7 @@ export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, 
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) { return false; }
 
-    if (changes.disabled === true) { return false; }
+    if (!checkData(changes)) { return false; }
   }
 
   /** @inheritDoc */
@@ -99,4 +99,15 @@ export default class ConditionSystem extends mixClasses(ApplicableEffectSystem, 
     super.prepareBaseData();
     this.parent.disabled = false;
   }
+}
+
+/**
+ * Check if some condition data is valid. Conditions cannot be disabled or have durations.
+ * @param {object} data
+ * @returns {boolean}
+ */
+function checkData(data) {
+  if (data.disabled) { return false; }
+  if (typeof foundry.utils.getProperty(data, "duration.value") === "number") { return false; }
+  return !foundry.utils.getProperty(data, "duration.expiry");
 }

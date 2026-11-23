@@ -1,3 +1,4 @@
+import { omit } from "../../../utils/object.mjs";
 import DependeeSheet from "./dependee-sheet.mjs";
 
 /**
@@ -6,11 +7,26 @@ import DependeeSheet from "./dependee-sheet.mjs";
  * @property {TeriockActiveEffect<"condition">} document
  */
 export default class ConditionSheet extends DependeeSheet {
+  /** @type {Record<string, HandlebarsTemplatePart & Teriock.Sheet._TemplatePart>} */
+  static PARTS = omit(super.PARTS, ["duration"]);
+
+  /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
+  static TABS = {
+    ...super.TABS,
+    sheet: { ...super.TABS.sheet, tabs: super.TABS.sheet.tabs.filter(t => t.id !== "duration") },
+  };
+
   /** @inheritDoc */
   _canRender(options) {
     // Prevent normal sheet rendering for known conditions.
     return !(this.document.isStatus && game.settings.get("teriock", "openConditionsAsJournalEntryPages"))
       && super._canRender(options);
+  }
+
+  /** @inheritDoc */
+  _replaceHTML(result, content, options) {
+    result.details.querySelectorAll(".form-group:has([name='disabled'])").forEach(el => el.remove());
+    super._replaceHTML(result, content, options);
   }
 
   /** @inheritDoc */

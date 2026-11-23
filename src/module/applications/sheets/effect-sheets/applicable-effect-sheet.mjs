@@ -121,7 +121,6 @@ export default class ApplicableEffectSheet
         result[part].prepend(container);
       }
     }
-    console.log(result, content, options);
   }
 
   /**
