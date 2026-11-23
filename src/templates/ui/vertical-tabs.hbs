@@ -1,9 +1,14 @@
 <nav class="teriock-vertical-tabs tabs">
   {{#each tabs as |tab|}}
-    <div data-tooltip="{{ tab.label }}">
+    <div
+      {{#if (or tab.label tab.tooltip)}}
+        data-tooltip="{{#if tab.tooltip}}{{ tab.tooltip }}{{else}}{{ tab.label }}{{/if}}"
+      {{/if}}
+    >
+      {{!-- TODO: Should these be <a> elements like the default tab-navigation.hbs? --}}
       {{!-- prettier-ignore --}}
       <button
-        id='{{concat @root/appId "-" tab.id}}'
+        id='{{concat @root/appId "-" tab.group "-" tab.id}}'
         class="teriock-vertical-tab {{ tab.cssClass }}"
         type="button"
         data-action="tab"
@@ -11,7 +16,7 @@
         data-group="{{ tab.group }}"
         data-tab="{{ tab.id }}"
       >
-        {{makeIcon tab.icon "light"}}
+        {{#if tab.icon}}<i class="{{tab.icon}}" inert></i>{{/if}}
       </button>
     </div>
   {{/each}}
