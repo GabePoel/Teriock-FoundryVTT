@@ -152,6 +152,7 @@ foundry.helpers.Hooks.once("init", function() {
     visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
   CONFIG.Canvas.layers.lighting.layerClass = canvas.layers.TeriockLightingLayer;
+  CONFIG.Canvas.layers.regions.layerClass = canvas.layers.TeriockRegionLayer;
   CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TeriockTokenLayer;
 
   // Configure Documents
@@ -252,7 +253,6 @@ foundry.helpers.Hooks.once("init", function() {
 
   // Region
   CONFIG.Region.documentClass = documents.TeriockRegionDocument;
-  CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
 
   // Region Behavior
   CONFIG.RegionBehavior.documentClass = documents.TeriockRegionBehavior;
