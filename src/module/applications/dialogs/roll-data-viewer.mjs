@@ -107,7 +107,10 @@ export default class RollDataViewer extends DocumentDialog {
  * @see {getHeaderControlsApplicationV2}
  */
 function addRollDataViewerToHeader(application, controls) {
-  if (!application.window.header || typeof application.document.getRollData !== "function") { return; }
+  if (
+    !application.window.header || typeof application.document.getRollData !== "function"
+    || !foundry.utils.getProperty(application, "options.teriock.rollData")
+  ) { return; }
   controls.push({
     action: "viewRollData",
     icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.formula, "contextMenu"),

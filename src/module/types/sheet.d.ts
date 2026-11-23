@@ -22,7 +22,7 @@ declare global {
     export type _TemplatePart = { teriock?: { previews?: string[] } };
 
     export type _SheetConfiguration = Teriock.Application._ApplicationConfiguration & {
-      teriock?: { autoIcon?: boolean };
+      teriock?: { autoIcon?: boolean, embedEntries?: boolean, rollData?: boolean, wiki?: boolean };
     };
 
     export type _ActorSheetConfiguration = _SheetConfiguration & { teriock?: { tabHeaders: boolean } };

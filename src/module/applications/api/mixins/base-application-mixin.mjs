@@ -81,7 +81,16 @@ export default function BaseApplicationMixin(Base) {
      */
     static async create(...args) {
       const app = new this(...args);
-      await app.render(true);
+      let parentApp;
+      // TODO: More careful options handling in one object ideally
+      for (const a of args) { parentApp ??= a.parentApp; }
+      if (parentApp) {
+        await parentApp.renderChild(app);
+        app.setPosition({
+          height: Math.min(app.position.height, parentApp.position.height),
+          width: Math.min(app.position.width, parentApp.position.width),
+        });
+      } else { await app.render(true); }
       return app;
     }
 

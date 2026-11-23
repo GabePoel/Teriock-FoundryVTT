@@ -3,6 +3,7 @@ import * as updaters from "../../dialogs/updaters/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  */
 
 /**
@@ -20,11 +21,11 @@ export default function FieldsSheetMixin(Base) {
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @this {FieldsSheet}
+     * @this {DocumentSheetV2}
      */
     static async #onOpenUpdater(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
-      await updaters[target.dataset.updater]?.create({ document: this.document });
+      await updaters[target.dataset.updater]?.create({ document: this.document, parentApp: this });
     }
 
     /**
@@ -32,7 +33,7 @@ export default function FieldsSheetMixin(Base) {
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @this {FieldsSheet}
+     * @this {DocumentSheetV2}
      */
     static async #onUpdatePaths(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
@@ -40,6 +41,7 @@ export default function FieldsSheetMixin(Base) {
       if (!paths?.length) { return; }
       await updaters.BaseUpdater.create({
         document: this.document,
+        parentApp: this,
         paths,
         window: { icon: makeIconClass(target.dataset.icon, "title"), title: target.dataset.title },
       });

@@ -145,7 +145,10 @@ export default function EmbeddableDataMixin(Base) {
 function addEmbedContextMenuEntriesToHeader(application, controls) {
   if (!application.window.header) { return; }
   const document = application.document;
-  if (typeof document.getEmbedContextMenuEntries !== "function") { return; }
+  if (
+    typeof document.getEmbedContextMenuEntries !== "function"
+    || !foundry.utils.getProperty(application, "options.teriock.embedEntries")
+  ) { return; }
   const entries = document.getEmbedContextMenuEntries(document);
   const { PanelSheet } = teriock.applications.sheets.utility;
   controls.push(

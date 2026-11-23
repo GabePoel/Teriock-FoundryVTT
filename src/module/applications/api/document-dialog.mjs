@@ -13,7 +13,7 @@ import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
  */
 export default class DocumentDialog extends mixClasses(TeriockDocumentSheet, TemporaryApplicationMixin) {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { teriock: { autoIcon: false } };
+  static DEFAULT_OPTIONS = { teriock: { autoIcon: false, embedEntries: false, rollData: false, wiki: false } };
 
   /**
    * A prefix to use in sheet titles.
@@ -32,9 +32,14 @@ export default class DocumentDialog extends mixClasses(TeriockDocumentSheet, Tem
   }
 
   /** @inheritDoc */
+  _getHeaderControls() {
+    return super._getHeaderControls().filter(c => !["configureOwnership", "configureSheet"].includes(c.action))
+  }
+
+  /** @inheritDoc */
   async _renderFrame(options = {}) {
     const frame = await super._renderFrame(options);
-    this.window.header.querySelectorAll("button:not([data-action='close'])").forEach(el => el.remove());
+    this.window.header.querySelectorAll("button[data-action='copyUuid']").forEach(el => el.remove());
     return frame;
   }
 }

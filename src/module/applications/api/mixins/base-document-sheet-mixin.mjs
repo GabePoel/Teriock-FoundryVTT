@@ -21,7 +21,13 @@ export default function BaseDocumentSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       classes: ["teriock-sheet"],
-      teriock: { autoIcon: true, dragDrop: { style: { maximizeOnDragEnter: true, minimizeOnDragStart: true } } },
+      teriock: {
+        autoIcon: true,
+        dragDrop: { style: { maximizeOnDragEnter: true, minimizeOnDragStart: true } },
+        embedEntries: true,
+        rollData: true,
+        wiki: true,
+      },
     };
 
     /** @inheritDoc */

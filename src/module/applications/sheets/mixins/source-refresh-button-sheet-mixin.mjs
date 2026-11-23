@@ -33,7 +33,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onSourceRefresh() {
-      await SourceRefresher.create({ document: this.document });
+      await SourceRefresher.create({ document: this.document, parentApp: this });
     }
   }
 
