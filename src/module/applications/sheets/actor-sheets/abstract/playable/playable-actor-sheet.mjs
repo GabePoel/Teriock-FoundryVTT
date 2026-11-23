@@ -13,7 +13,6 @@ import * as parts from "./parts/_module.mjs";
  * @extends {BaseActorSheet}
  * @mixes PlayableActorSheetAvatarImagePart
  * @mixes PlayableActorSheetCombatPart
- * @mixes PlayableActorSheetDocumentCreationPart
  * @mixes PlayableActorSheetMechanicalPart
  * @mixes PlayableActorSheetSectionsPart
  * @mixes PlayableActorSheetAffinitiesPart
@@ -27,7 +26,6 @@ export default class TeriockPlayableActorSheet
     BaseActorSheet,
     parts.PlayableActorSheetAvatarImagePart,
     parts.PlayableActorSheetCombatPart,
-    parts.PlayableActorSheetDocumentCreationPart,
     parts.PlayableActorSheetMechanicalPart,
     parts.PlayableActorSheetSectionsPart,
     parts.PlayableActorSheetAffinitiesPart,
@@ -42,7 +40,18 @@ export default class TeriockPlayableActorSheet
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    all: { scrollable: [".actor-sidebar", ".actor-tab-content"], template: "teriock/sheets/actors/playable/playable" },
+    sidebar: { scrollable: [".actor-sidebar"], template: "teriock/sheets/actors/parts/sidebar" },
+    tradecrafts: { scrollable: [""], template: "teriock/sheets/actors/tabs/tradecrafts-tab" },
+    abilities: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
+    inventory: { scrollable: [""], template: "teriock/sheets/actors/tabs/inventory-tab" },
+    classes: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
+    powers: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
+    resources: { scrollable: [""], template: "teriock/sheets/actors/tabs/generic-tab" },
+    effects: { scrollable: [""], template: "teriock/sheets/actors/tabs/effects-tab" },
+    affinities: { scrollable: [""], template: "teriock/sheets/actors/tabs/affinities-tab" },
+    sorcery: { scrollable: [""], template: "teriock/sheets/actors/tabs/sorcery-tab" },
+    details: { scrollable: [""], template: "teriock/sheets/actors/tabs/details-tab" },
+    tabs: { template: "teriock/ui/vertical-tabs" },
   };
 
   /** @inheritDoc */

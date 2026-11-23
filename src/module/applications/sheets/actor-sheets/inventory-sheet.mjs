@@ -24,14 +24,18 @@ export default class InventorySheet extends BaseActorSheet {
   }
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { position: { height: 600, width: 525 } };
+  static DEFAULT_OPTIONS = { classes: ["inventory-sheet"], position: { height: 600, width: 525 } };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { all: { scrollable: [".actor-tab-content"], template: "teriock/sheets/actors/inventory/inventory" } };
+  static PARTS = {
+    header: { template: "teriock/sheets/shared/header" },
+    inventory: { template: "teriock/sheets/actors/parts/inventory" },
+    notes: { template: "teriock/sheets/actors/parts/notes" },
+  };
 
   /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
   static PREVIEWS = {
-    equipment: {
+    inventory: {
       addButton: { type: "equipment" },
       data: { display: { size: "small" } },
       groups: this.#previewGroupEquipment,

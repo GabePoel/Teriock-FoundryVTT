@@ -1,0 +1,151 @@
+@use "../mixins" as mixins;
+
+.teriock-vertical-tabs {
+  border: none;
+  display: block;
+  left: 100%;
+  line-height: normal;
+  overflow: hidden;
+  padding-block: 4px;
+  padding-right: 8px;
+  position: absolute;
+
+  > div {
+    height: 2.75em;
+    margin-block: 0.25em;
+    width: 2.5em;
+  }
+}
+
+.teriock-vertical-tab {
+  @include mixins.centralize;
+  background: var(--color-cool-5);
+  border: 1px solid var(--color-cool-4);
+  border-left: 1px solid var(--color-border);
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  color: var(--color-text-selection);
+  cursor: default;
+  height: 2.75em;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-shadow: none;
+  transition: all 0.2s ease-in-out;
+  width: 2em;
+
+  // Add gradient layer
+  &::before {
+    background: linear-gradient(to right, var(--color-cool-5), var(--color-cool-4));
+    content: "";
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+
+  // Keep content above gradient
+  i {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    border: 1px solid var(--color-cool-3);
+    border-left: 1px solid var(--color-border);
+    color: white;
+    cursor: pointer;
+    width: 2.5em;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    border: 1px solid var(--color-cool-3);
+    border-left: 1px solid var(--color-border);
+    color: white;
+    outline: none;
+    width: 2.5em;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    border: 1px solid var(--color-warm-2);
+    border-left: 1px dashed var(--color-border);
+    color: white;
+    outline: none;
+    width: 2.5em;
+  }
+
+  &:active {
+    border: 1px solid var(--color-warm-1);
+    border-left: 1px solid var(--color-border);
+    color: white;
+    width: 2.5em;
+
+    i {
+      opacity: 1;
+    }
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.detached .teriock-vertical-tabs,
+.teriock-docked-tabs .teriock-vertical-tabs {
+  align-items: center;
+  background-color: var(--color-header-background);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 0.5em;
+  justify-content: start;
+  padding: 0.5em;
+  position: static;
+  width: calc(34px + 0.5em);
+
+  > div {
+    height: 1.75em;
+    width: 1.75em;
+  }
+
+  .teriock-vertical-tab {
+    background: none;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: var(--font-size-14);
+    height: 1.75em;
+    margin: 0;
+    width: 1.75em;
+
+    &::before {
+      display: none;
+    }
+
+    i {
+      z-index: 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &.active {
+      background: var(--color-warm-2);
+      box-shadow: none;
+      outline: none;
+    }
+  }
+}

@@ -31,11 +31,12 @@ export default class BaseActorSheet
     InventoryManagementSheetMixin,
   )
 {
-  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._ActorSheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     classes: ["unpadded", "actor"],
     form: { submitOnChange: true },
-    teriock: { startLocked: false },
+    teriock: { startLocked: false, tabHeaders: true },
+    window: { contentClasses: ["actor-window"] },
   };
 
   /** @inheritDoc */
@@ -44,6 +45,14 @@ export default class BaseActorSheet
       enrichedNotes: await this._enrich(this.document.system.notes)
         ?? `<p>${_loc("TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder")}</p>`,
       enrichedStyleDescription: await this._enrich(this.document.system.wielding.attacker?.system?.styleDescription),
+      tabHeaders: foundry.utils.getProperty(this, "options.teriock.tabHeaders"),
     });
+  }
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    context.tab = context.tabs?.[partId];
+    return context;
   }
 }

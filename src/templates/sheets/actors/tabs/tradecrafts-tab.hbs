@@ -1,17 +1,17 @@
-<section class="actor-tab tradecrafts tab {{ tabClass }}" data-group="primary" data-tab="tradecrafts">
-  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title"}}</h1>
+<section class="actor-tab tab {{ tab.cssClass }}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+  <h1>{{localize tab.label}}</h1>
   <div class="actor-tab-page">
     <div class="teriock-block-display">
       {{infoIcon "core:tradecrafts"}}
       <div class="tradecraft-panels tgrid g2" data-tooltip-direction="LEFT">
         {{#each tradecraftFields as |field index|}}
-          {{> "teriock/sheets/actors/playable/parts/tradecrafts-field"
+          {{> "teriock/sheets/actors/parts/tradecrafts-field"
             field=field
             index=index
           }}
         {{/each}}
         {{#each prestigeFields as |field index|}}
-          {{> "teriock/sheets/actors/playable/parts/tradecrafts-field"
+          {{> "teriock/sheets/actors/parts/tradecrafts-field"
             field=field
             index=index
           }}

@@ -186,11 +186,11 @@ function getMenuSettings() {
                 choices: () => Object.fromEntries(PlayableActorSheet.SECTIONS.map(({ id, label }) => [id, label])),
               }),
             },
-            floatingActorTabs: {
+            floatingTabs: {
               default: true,
               scope: "client",
               type: Boolean,
-              onChange: () => game.teriock.render({ actors: true }),
+              onChange: value => document.body.classList.toggle("teriock-docked-tabs", !value),
             },
             highlightEditableValues: {
               default: true,

@@ -7,404 +7,177 @@
 @use "./stats";
 @use "./status-box";
 
-.inventory-sheet {
-  overflow: auto;
-
-  .actor-tab.inventory {
-    padding-top: 0 !important;
-  }
-}
-
-.actor-tabber {
-  @include mixins.centralize;
-  background: var(--color-cool-5);
-  border: 1px solid var(--color-cool-4);
-  border-left: 1px solid var(--color-border);
-  border-radius: 0 6px 6px 0;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-  color: var(--color-text-selection);
-  cursor: default;
-  height: 2.75em;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  text-align: center;
-  transition: all 0.2s ease-in-out;
-  width: 2em;
-
-  // Add gradient layer
-  &::before {
-    background: linear-gradient(to right, var(--color-cool-5), var(--color-cool-4));
-    content: "";
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-  }
-
-  // Keep content above gradient
-  i {
-    position: relative;
-    z-index: 1;
-  }
-
-  &:hover {
-    border: 1px solid var(--color-cool-3);
-    border-left: 1px solid var(--color-border);
-    color: white;
-    cursor: pointer;
-    width: 2.5em;
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:focus,
-  &:focus-visible {
-    border: 1px solid var(--color-cool-3);
-    border-left: 1px solid var(--color-border);
-    color: white;
-    outline: none;
-
-    &:not(.actor-sidebar-tabber) {
-      width: 2.5em;
-    }
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-    border: 1px solid var(--color-warm-2);
-    border-left: 1px dashed var(--color-border);
-    color: white;
-    width: 2.5em;
-  }
-
-  &:active {
-    border: 1px solid var(--color-warm-1);
-    border-left: 1px solid var(--color-border);
-    color: white;
-    width: 2.5em;
-
-    i {
-      opacity: 1;
-    }
-
-    &::before {
-      opacity: 1;
-    }
-  }
-}
-
-.actor-tabbers {
-  left: 100%;
-  overflow: hidden;
-  padding-block: 4px;
-  padding-right: 8px;
-  position: absolute;
-}
-
-.actor-tabber-container {
-  margin-block: 0.25em;
-}
-
-.actor-tabber-background {
-  border-bottom-right-radius: 6px;
-  flex: none;
-  overflow: visible;
-  position: relative;
-  width: 0;
-
-  .actor-tabber-tooltip-container {
-    height: 2.75em;
-    overflow: visible;
-    position: relative;
-    width: 2.5em;
-
-    > .actor-tabber {
-      left: 0;
-      position: absolute;
-      top: 0;
-    }
-  }
-
-  .actor-tabber {
-    &:focus,
-    &:focus-visible,
-    &.active {
-      outline: none;
-    }
-  }
-
-  .actor-tabber-container {
-    display: flex;
-  }
-}
-
-.detached,
-.no-floating-tabs {
-  .actor-tabber-background {
-    background-color: var(--color-header-background);
-    border-left: 1px solid var(--color-border);
-    display: block;
-    flex: none;
-    height: 100%;
-    width: calc(34px + 0.5em);
-
-    .actor-tabbers {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-      left: unset;
-      padding: 0.5em;
-      right: 0;
-      width: calc(34px + 0.5em);
-
-      .actor-tabber {
-        background: none;
-        border: none;
-        border-radius: 4px;
-        border-right-width: 0;
-        box-shadow: none;
-        font-size: var(--font-size-14);
-        height: 1.75em;
-        margin: 0;
-        position: static;
-        width: 1.75em;
-
-        &::before {
-          display: none;
-        }
-
-        i {
-          z-index: 0;
-        }
-
-        &:hover,
-        &:focus,
-        &:focus-visible,
-        &.active {
-          background: var(--color-warm-2);
-          box-shadow: none;
-          outline: none;
-        }
-
-        &::before {
-          background: none;
-          border: none;
-        }
-      }
-
-      .actor-tabber-tooltip-container {
-        height: 1.75em;
-        width: 1.75em;
-      }
-    }
-  }
+.inventory-sheet .window-content > .actor-tab-page {
+  padding: 0 1em 1em;
 }
 
 .actor-window {
-  display: flex;
-  flex-direction: row;
-  height: calc(100% - 36px);
-  max-height: calc(100% - 36px);
+  .actor-shortbox {
+    @include mixins.centralize;
+    flex-direction: column;
+    width: 100%;
 
-  .actor-page {
-    container-type: inline-size;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    height: 100%;
-    max-height: 100%;
-    min-width: 0;
-    overflow: hidden;
-    position: relative;
-
-    .actor-shortbox {
-      @include mixins.centralize;
-      flex-direction: column;
-      width: 100%;
-
-      .actor-shortbox-value {
-        background-color: transparent;
-        border: none;
-        color: var(--color-text);
-        font-size: 1.5em;
-        text-align: center;
-      }
-
-      .actor-shortbox-label {
-        @include mixins.text-subtle;
-        background-color: transparent;
-        border: none;
-        font-size: 1em;
-        text-align: center;
-      }
+    .actor-shortbox-value {
+      background-color: transparent;
+      border: none;
+      color: var(--color-text);
+      font-size: 1.5em;
+      text-align: center;
     }
 
-    .actor-sidebar {
-      background: var(--color-cool-5);
-      --color-border: var(--color-light-4);
-      border-bottom-left-radius: 4px;
-      border-right: 1px solid var(--color-cool-4);
+    .actor-shortbox-label {
+      @include mixins.text-subtle;
+      background-color: transparent;
+      border: none;
+      font-size: 1em;
+      text-align: center;
+    }
+  }
+
+  .actor-sidebar {
+    background: var(--color-cool-5);
+    --color-border: var(--color-light-4);
+    border-bottom-left-radius: 4px;
+    border-right: 1px solid var(--color-cool-4);
+    color: var(--color-light-3);
+    height: 100%;
+    max-width: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    --color-text: var(--color-light-3);
+    --input-text-color: var(--color-light-3);
+    --color-text-primary: var(--color-light-3);
+    --color-text-subtle: var(--color-light-5);
+    position: relative;
+    transition: max-width 250ms, box-shadow 250ms;
+    width: 500px;
+    z-index: 1;
+
+    .actor-sidebar-container {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      gap: 1em;
+      min-height: 0;
+      opacity: 1;
+      overflow: hidden;
+      padding: 15px;
+      transition: 250ms;
+      width: 250px;
+    }
+
+    input {
       color: var(--color-light-3);
+    }
+
+    @container (max-width: 775px) {
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
       height: 100%;
-      max-width: 250px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      --color-text: var(--color-light-3);
-      --input-text-color: var(--color-light-3);
-      --color-text-primary: var(--color-light-3);
-      --color-text-subtle: var(--color-light-5);
-      transition: max-width 250ms, box-shadow 250ms;
-      width: 500px;
-      z-index: 1;
+      left: 0;
+      position: absolute;
+    }
+    &.collapsed {
+      border-width: 0;
+      box-shadow: none;
+      max-width: 0;
 
       .actor-sidebar-container {
-        display: flex;
-        flex: 1 1 auto;
-        flex-direction: column;
-        gap: 1em;
-        min-height: 0;
-        opacity: 1;
-        overflow: hidden;
-        padding: 15px;
-        transition: 250ms;
-        width: 250px;
-      }
-
-      input {
-        color: var(--color-light-3);
-      }
-
-      @container (max-width: 775px) {
-        box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-        height: 100%;
-        left: 0;
-        position: absolute;
-      }
-      &.collapsed {
-        border-width: 0;
-        box-shadow: none;
-        max-width: 0;
-
-        .actor-sidebar-container {
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
-
-      .defense-box-main,
-      .attack-box-main {
-        border-bottom: 1px dotted var(--color-text-subtle);
-        margin-bottom: 0.5em;
-        padding-bottom: 0.5em;
-      }
-
-      .ch-battle-box {
-        @include mixins.centralize;
-        flex-direction: column;
-        padding: 0;
-        width: 100%;
-
-        .defense-box,
-        .attack-box {
-          display: flex;
-          flex-direction: column;
-          padding: 0.5em;
-          width: 100%;
-        }
-
-        .defense-box {
-          border-bottom: 1px solid var(--color-border);
-        }
-
-        .actor-fighting-style-label {
-          margin-top: 0.5em;
-        }
-      }
-
-      .actor-fighting-style-summary {
-        :first-child {
-          margin-top: 0;
-        }
-
-        :last-child {
-          margin-bottom: 0;
-        }
+        opacity: 0;
+        visibility: hidden;
       }
     }
 
-    .actor-sidebar-tabber-container {
-      left: 249px;
-      position: absolute;
-      transition: 250ms;
-      z-index: 1;
-
-      .actor-tabbers {
-        overflow: visible;
-      }
-
-      .actor-tabber-tooltip-container {
-        height: 2.75em;
-        overflow: visible;
-        position: relative;
-        width: 2.5em;
-
-        > .actor-tabber {
-          left: 0;
-          position: absolute;
-          top: 0;
-        }
-      }
-
-      .actor-sidebar-tabber {
-        border-left: none !important;
-      }
-
-      .sidebar-tabber-icon {
-        display: flex;
-        transition: 250ms;
-      }
-
-      &.collapsed {
-        left: 0;
-
-        .sidebar-tabber-icon {
-          transform: scaleX(-1);
-        }
-
-        .collapsed-icon {
-          display: flex;
-        }
-      }
+    .defense-box-main,
+    .attack-box-main {
+      border-bottom: 1px dotted var(--color-text-subtle);
+      margin-bottom: 0.5em;
+      padding-bottom: 0.5em;
     }
 
-    .actor-tab-content {
-      align-items: center;
-      display: flex;
+    .ch-battle-box {
+      @include mixins.centralize;
       flex-direction: column;
-      max-height: 100%;
-      overflow-y: auto;
+      padding: 0;
       width: 100%;
 
-      .actor-tab {
-        align-items: center;
+      .defense-box,
+      .attack-box {
         display: flex;
         flex-direction: column;
-        padding: 1em;
+        padding: 0.5em;
         width: 100%;
-
-        &.tab:not(.active) {
-          display: none;
-        }
       }
+
+      .defense-box {
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .actor-fighting-style-label {
+        margin-top: 0.5em;
+      }
+    }
+
+    .actor-fighting-style-summary {
+      :first-child {
+        margin-top: 0;
+      }
+
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .actor-sidebar-tabber-container {
+    left: 249px;
+    position: absolute;
+    top: calc(4px + 0.25em);
+    transition: 250ms;
+    width: 2.5em;
+    z-index: 1;
+
+    .actor-sidebar-tabber {
+      border-left: none !important;
+
+      &:is(:focus, :focus-visible):not(:hover, :active) {
+        width: 2em;
+      }
+    }
+
+    .sidebar-tabber-icon {
+      display: flex;
+      transition: 250ms;
+    }
+
+    &.collapsed {
+      left: 0;
+
+      .sidebar-tabber-icon {
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  .actor-sidebar-part {
+    display: contents;
+  }
+
+  > .actor-tab {
+    max-height: 100%;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .actor-tab {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    width: 100%;
+
+    &.tab:not(.active) {
+      display: none;
     }
   }
 }

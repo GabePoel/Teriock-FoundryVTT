@@ -132,6 +132,13 @@ export default function BaseApplicationMixin(Base) {
       }
     }
 
+    /** Point vertical tab tooltips away from the screen edge. */
+    #applyVerticalTabsDirection() {
+      for (const el of this.element.querySelectorAll(".teriock-vertical-tabs")) {
+        el.dataset.tooltipDirection = this.isDetached ? "LEFT" : "RIGHT";
+      }
+    }
+
     /**
      * Pause a click on an element with both `data-action` and `data-double`.
      * @param {PointerEvent} event
@@ -258,6 +265,21 @@ export default function BaseApplicationMixin(Base) {
         ?? htmlElement.closest(".collapsible[data-collapsible-id]")?.dataset.collapsibleId ?? null;
     }
 
+    /** @inheritDoc */
+    _onAttach(from, to) {
+      super._onAttach(from, to);
+      this.#applyVerticalTabsDirection();
+    }
+
+    /** @inheritDoc */
+    _onDetach(from, to) {
+      super._onDetach(from, to);
+      this.#applyVerticalTabsDirection();
+      // Resize application to deal with space caused by vertical tabs floating outside it.
+      if (!this.options.window.resizable || this.window.windowId !== this.id) { return; }
+      this.setPosition({ height: to.documentElement.clientHeight, width: to.documentElement.clientWidth });
+    }
+
     /**
      * A generic event handler for double-clicks which can be extended by subclasses.
      * Handlers defined in {@link Teriock.Application._ApplicationConfiguration.doubles} are called first.
@@ -280,6 +302,7 @@ export default function BaseApplicationMixin(Base) {
         el.disabled = el.dataset.disable === "true";
         if (el.tagName === "IMG") { el.classList.toggle("disabled", el.disabled); }
       });
+      this.#applyVerticalTabsDirection();
       this._syncSpinnerAnimations();
     }
 

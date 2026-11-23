@@ -1,5 +1,5 @@
-<section class="actor-tab notes tab details-tab {{ tabClass }}" data-group="primary" data-tab="details">
-  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Details.title"}}</h1>
+<section class="actor-tab details-tab tab {{ tab.cssClass }}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+  {{#if @root/tabHeaders}}<h1>{{localize tab.label}}</h1>{{/if}}
   <div class="actor-tab-page">
     <div class="tgrid g2 details-columns">
       {{#unless environment}}
@@ -266,13 +266,6 @@
         {{/unless}}
       </div>
     </div>
-    <div class="teriock-block-display actor-notes-content">
-      {{formInput
-        systemFields.notes
-        enriched=enrichedNotes
-        toggled=true
-        value=system._source.notes
-      }}
-    </div>
+    {{> "teriock/sheets/actors/parts/notes"}}
   </div>
 </section>

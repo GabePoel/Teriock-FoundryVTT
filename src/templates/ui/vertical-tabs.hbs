@@ -1,0 +1,18 @@
+<nav class="teriock-vertical-tabs tabs">
+  {{#each tabs as |tab|}}
+    <div data-tooltip="{{ tab.label }}">
+      {{!-- prettier-ignore --}}
+      <button
+        id='{{concat @root/appId "-" tab.id}}'
+        class="teriock-vertical-tab {{ tab.cssClass }}"
+        type="button"
+        data-action="tab"
+        data-disable="false"
+        data-group="{{ tab.group }}"
+        data-tab="{{ tab.id }}"
+      >
+        {{makeIcon tab.icon "light"}}
+      </button>
+    </div>
+  {{/each}}
+</nav>

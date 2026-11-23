@@ -314,8 +314,9 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockActiveEffect, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActiveEffect.TYPES });
 
   // Actor
+  rs(d.TeriockActor, sa.EnvironmentSheet, "Environment", { types: ["environment"] });
   rs(d.TeriockActor, sa.InventorySheet, "Inventory", { types: ["inventory"] });
-  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "environment", "npc", "pc"] });
+  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "npc", "pc"] });
   rs(d.TeriockActor, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActor.TYPES });
 
   // Ambient Light
@@ -499,6 +500,7 @@ Hooks.once("ready", () => {
     "teriock-no-editable-highlights",
     !game.settings.get("teriock", "highlightEditableValues"),
   );
+  document.body.classList.toggle("teriock-docked-tabs", !game.settings.get("teriock", "floatingTabs"));
 
   // Registry Initialization
   // -----------------------
