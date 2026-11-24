@@ -74,8 +74,9 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
     if (type === "mod") { return mod; }
     const formula = FormulaField.sum(mod, bonus, circumstance);
     if (type === "formula" || !die) { return formula; }
+    if (!Number.isInteger(edge)) { edge = 0 };
     const suffix = edge > 0 ? "kh1" : edge < 0 ? "kl1" : "";
-    const number = edge !== 0 ? "2" : "1";
+    const number = Math.abs(edge) + 1;
     const dieFormula = `${number}${die}${suffix}`;
     return FormulaField.add(dieFormula, formula);
   }
