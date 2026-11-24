@@ -58,8 +58,8 @@ export default function ThresholdExecutionMixin(Base) {
         action: "confirm",
         default: this.edge < 0,
         icon: "fa-dice-d20",
-        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
-        name: "disadvantage",
+        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.bane",
+        name: "bane",
         type: "button",
         callback: () => this.updateSource({ edge: -1 }),
       }, {
@@ -73,8 +73,8 @@ export default function ThresholdExecutionMixin(Base) {
         action: "confirm",
         default: this.edge > 0,
         icon: "fa-dice-d20",
-        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
-        name: "advantage",
+        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.boon",
+        name: "boon",
         type: "button",
         callback: () => this.updateSource({ edge: 1 }),
       }];

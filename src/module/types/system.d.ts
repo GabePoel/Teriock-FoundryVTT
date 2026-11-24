@@ -1,7 +1,7 @@
 import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_module.mjs";
 import BaseExecution from "../executions/abstract/base-execution/base-execution.mjs";
 import { AbilityExecution, ArmamentExecution } from "../executions/child-executions/_module.mjs";
-import tc from "../static/config/trigger-config.mjs";
+import triggerConfig from "../static/config/trigger-config.mjs";
 
 declare global {
   export namespace Teriock.System {
@@ -40,24 +40,24 @@ declare global {
       knownSubs?: Set<UUID>;
     } & _Operation;
 
-    export type ActivityTrigger = keyof typeof tc.activity.choices;
-    export type AttunableTrigger = keyof typeof tc.attunable.choices;
-    export type CombatTrigger = keyof typeof tc.combat.choices;
-    export type ConsequenceTrigger = keyof typeof tc.consequence.choices;
-    export type EquipmentTrigger = keyof typeof tc.equipment.choices;
-    export type CommandTrigger = keyof typeof tc.command.choices;
-    export type MountTrigger = keyof typeof tc.mount.choices;
-    export type ProtectionTrigger = keyof typeof tc.protection.choices;
-    export type TimeTrigger = keyof typeof tc.time.choices;
+    export type ActivityTrigger = keyof typeof triggerConfig.activity.choices;
+    export type AttunableTrigger = keyof typeof triggerConfig.attunable.choices;
+    export type CombatTrigger = keyof typeof triggerConfig.combat.choices;
+    export type ConsequenceTrigger = keyof typeof triggerConfig.consequence.choices;
+    export type EquipmentTrigger = keyof typeof triggerConfig.equipment.choices;
+    export type CommandTrigger = keyof typeof triggerConfig.command.choices;
+    export type MountTrigger = keyof typeof triggerConfig.mount.choices;
+    export type AffinityTrigger = keyof typeof triggerConfig.affinity.choices;
+    export type TimeTrigger = keyof typeof triggerConfig.time.choices;
     export type Trigger =
       | ActivityTrigger
+      | AffinityTrigger
       | AttunableTrigger
       | CombatTrigger
       | CommandTrigger
       | ConsequenceTrigger
       | EquipmentTrigger
       | MountTrigger
-      | ProtectionTrigger
       | TimeTrigger;
 
     export type TriggerScope = Teriock.Command.MoneyExchangeOptions & {
@@ -112,10 +112,10 @@ declare global {
     export type PiercingLevel = 0 | 1 | 2;
 
     /**
-     * Something's edge level specifies if it has advantage or disadvantage.
-     * - `-1`: Disadvantage
-     * - `0`: Neither advantage nor disadvantage
-     * - `1`: Advantage
+     * Something's edge level specifies if it has a boon or bane.
+     * - `-1`: Bane
+     * - `0`: Neither boon nor bane
+     * - `1`: Boon
      */
     export type EdgeLevel = -1 | 0 | 1;
 

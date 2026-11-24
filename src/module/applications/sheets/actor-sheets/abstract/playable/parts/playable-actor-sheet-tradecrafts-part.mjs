@@ -13,7 +13,7 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
   /** @mixin */
   class PlayableActorSheetTradecraftsPart extends Base {
     /**
-     * Rolls a tradecraft check with optional advantage/disadvantage.
+     * Rolls a tradecraft check.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}

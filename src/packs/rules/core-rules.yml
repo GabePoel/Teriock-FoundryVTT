@@ -142,22 +142,6 @@ pages:
         actions}. These not only don't consume a creature's actions, but can be done at <i>any</i> time (even on other
         creatures' turns)! However, they cannot be used in reaction to other @Pack[teriock.abilities]{abilities}.</p>
     type: rule
-  - _id: advantage0000000
-    _key: "!journal.pages!core000000000000.advantage0000000"
-    category: 6jXziMgNy9vbnbml
-    name: Advantage
-    system:
-      img: systems/teriock/src/assets/thumbnails/core/advantage.webp
-      slug: advantage
-    text:
-      content: >-
-        <p>Sometimes an effect will specify that you have Advantage on an @Identifier[core:attack-interaction]{attack},
-        @Identifier[core:feat-interaction]{feat save}, @Identifier[keyword:resistance]{resistance save}, or some other
-        dice roll involving a single die. When this is the case, you roll that die twice and take the higher of the two
-        rolls. If multiple sources would grant you Advantage, you still only roll the die twice. If you have both
-        Advantage and @Identifier[core:disadvantage]{disadvantage}, then you roll normally. This is the case even if you
-        have different numbers of sources of Advantage and Disadvantage.</p>
-    type: rule
   - _id: abilities0000000
     _key: "!journal.pages!core000000000000.abilities0000000"
     category: r4tTcH7lBCwTvDHQ
@@ -854,23 +838,6 @@ pages:
         domain.</p><p>@Embed[Compendium.teriock.tables.RollTable.63d836072ece673b caption=false rollable]</p><h2>Domain
         Flaws</h2><p>It is also possible to have @Wiki[Category:Flaw abilities]{flaws} based on a deity's
         domain.</p><p>@Embed[Compendium.teriock.tables.RollTable.0bcc4c2aa42c9f6a caption=false rollable]</p>
-    type: rule
-  - _id: disadvantage0000
-    _key: "!journal.pages!core000000000000.disadvantage0000"
-    category: 6jXziMgNy9vbnbml
-    name: Disadvantage
-    system:
-      img: systems/teriock/src/assets/thumbnails/core/disadvantage.webp
-      slug: disadvantage
-    text:
-      content: >-
-        <p>Sometimes an effect will specify that you have Disadvantage on an
-        @Identifier[core:attack-interaction]{attack}, @Identifier[core:feat-interaction]{feat save},
-        @Identifier[keyword:resistance]{resistance save}, or some other dice roll involving a single die. When this is
-        the case, you roll that die twice and take the lower of the two rolls. If multiple sources would impose
-        Disadvantage, you still only roll the die twice. If you have both Disadvantage and
-        @Identifier[core:advantage]{advantage}, then you roll normally. This is the case even if you have different
-        numbers of sources of Disadvantage and Advantage.</p>
     type: rule
   - _id: effects000000000
     _key: "!journal.pages!core000000000000.effects000000000"
@@ -1804,8 +1771,8 @@ pages:
         @Wiki[Category:Armaments]{item} that mediates them. Instead, these @Pack[teriock.abilities]{abilities} may
         correspond to a @Identifier[ability:fire-ball]{ball of fire}, a @Identifier[ability:lightning-ray]{bolt of
         lightning}, a @Identifier[ability:wind-shuriken]{gust of wind}, or some other phenomenon. Missile
-        @Identifier[core:attack-interaction]{attacks} have @Identifier[core:disadvantage]{disadvantage} against a target
-        if their @Identifier[core:executor]{executor} is within that target's @Identifier[core:size]{reach}. Missile
+        @Identifier[core:attack-interaction]{attacks} have a @Identifier[core:boons-and-banes]{bane} against a target if
+        their @Identifier[core:executor]{executor} is within that target's @Identifier[core:size]{reach}. Missile
         sourced @Pack[teriock.abilities]{abilities} also require that the creature executing them have an open
         hand.</p><aside class="notification info theme-dark"><p>A creature with @Identifier[ability:staff-touch]{Staff
         Touch} wielding a @Identifier[property:magelore]{magelore item} in their hand, counts as having that hand
@@ -2300,7 +2267,7 @@ pages:
         parentheses after specifying if it requires @Identifier[property:ammunition]{ammunition} or if is
         @Identifier[property:thrown]{thrown}. The range lists two numbers. The first is the item's normal range in feet,
         and the second indicates the item's long range. When attacking a @Identifier[core:targets]{target} beyond normal
-        range, you have @Identifier[core:disadvantage]{disadvantage} on the @Identifier[core:attack-interaction]{attack
+        range, you have a @Identifier[core:boons-and-banes]{bane} on the @Identifier[core:attack-interaction]{attack
         roll}. You can't attack a @Identifier[core:targets]{target} beyond the item's long range. In some cases, the
         @Identifier[core:game-master]{GM} may allow a character to throw something that doesn't have a specified range.
         The long and short ranges are up to the @Identifier[core:game-master]{GM} but are 10 / 20 ft by
@@ -3580,14 +3547,13 @@ pages:
         <p>At the start of each game session, every player character gets one <b>spark of agency</b> (or
         "<b>spark</b>"). This can be spent at any time to re-roll an @Identifier[core:attack-interaction]{attack roll},
         @Identifier[core:feat-interaction]{feat save}, @Identifier[core:tradecrafts]{tradecraft check}, or
-        @Identifier[keyword:resistance]{resistance save}. This has @Identifier[core:advantage]{advantage} or
-        @Identifier[core:disadvantage]{disadvantage} in accordance with the original roll. Once re-rolled, the player
-        can select which of the two rolls they keep. Sparks of agency must be spent in the session they are given or
-        they are lost. The @Identifier[core:game-master]{GM} may choose to give award additional sparks at their
-        discretion as rewords for excellent role-playing, daring acts of bravery, or anything else they deem
-        appropriate. A character cannot have more than three sparks at any time. Finally, a player with at least one
-        spark can choose to spend all of their character's sparks to immediately @Identifier[keyword:awaken]{awaken} at
-        any time.</p>
+        @Identifier[keyword:resistance]{resistance save}. This has @Identifier[core:boons-and-banes]{boons} and
+        @Identifier[core:boons-and-banes]{banes} in accordance with the original roll. Once re-rolled, the player can
+        select which of the two rolls they keep. Sparks of agency must be spent in the session they are given or they
+        are lost. The @Identifier[core:game-master]{GM} may choose to give award additional sparks at their discretion
+        as rewords for excellent role-playing, daring acts of bravery, or anything else they deem appropriate. A
+        character cannot have more than three sparks at any time. Finally, a player with at least one spark can choose
+        to spend all of their character's sparks to immediately @Identifier[keyword:awaken]{awaken} at any time.</p>
     type: rule
   - _id: classes000000000
     _key: "!journal.pages!core000000000000.classes000000000"
@@ -3717,7 +3683,7 @@ pages:
         resolution of that roll has a -2 added to the rolled value in determining if it hits. If the original roll would
         @Identifier[core:attack-interaction]{go critical}, then <i>all</i> @Identifier[core:attack-interaction]{attacks}
         sharing the roll do as well. If any member of mob participating in the shared roll would have
-        @Identifier[core:advantage]{advantage} or @Identifier[core:disadvantage]{disadvantage} then they all do. This
+        @Identifier[core:boons-and-banes]{boons} or @Identifier[core:boons-and-banes]{banes} then they all do. This
         applies to both @Identifier[core:active-maneuvers]{active maneuvers} such as
         @Identifier[ability:basic-attack]{Basic Attack} and @Identifier[core:reactive-maneuvers]{reactive maneuvers}
         such as @Identifier[ability:opportunity-attack]{Opportunity Attack}.</p><p>If multiple members of the same mob
@@ -3814,7 +3780,7 @@ pages:
         @Identifier[property:ammunition]{ammunition} or if is @Identifier[property:thrown]{thrown}. The
         @Identifier[core:range]{range} lists two numbers. The first is the item's normal @Identifier[core:range]{range}
         in feet, and the second indicates the item's long range. When attacking a @Identifier[core:targets]{target}
-        beyond normal @Identifier[core:range]{range}, you have @Identifier[core:disadvantage]{disadvantage} on the
+        beyond normal @Identifier[core:range]{range}, you have a @Identifier[core:boons-and-banes]{bane} on the
         @Identifier[core:attack-interaction]{attack roll}. You can't attack a @Identifier[core:targets]{target} beyond
         the item's long @Identifier[core:range]{range}. In some cases, the @Identifier[core:game-master]{GM} may allow a
         character to throw something that doesn't have a specified range. The long and short ranges are up to the
@@ -3845,4 +3811,25 @@ pages:
         reach can't typically be used to make @Identifier[keyword:melee]{melee}
         @Identifier[core:attack-interaction]{attacks}, but a @Identifier[core:game-master]{GM} may allow it on occasion
         at their discretion.</p>
+    type: rule
+  - _id: boonsAndBanes000
+    _key: "!journal.pages!core000000000000.boonsAndBanes000"
+    category: 6jXziMgNy9vbnbml
+    name: Boons and Banes
+    system:
+      img: systems/teriock/src/assets/thumbnails/core/boons-and-banes.webp
+      slug: boons-and-banes
+    text:
+      content: >-
+        <p>Sometimes an effect will provide a <b>boon</b> or <b>bane</b> on an
+        @Identifier[core:attack-interaction]{attack}, @Identifier[core:feat-interaction]{feat save},
+        @Identifier[keyword:resistance]{resistance save}, or some other dice roll involving a single die. When this is
+        the case, you roll that die twice. If you had a boon, you take the higher of the two rolls. If you had a bane,
+        you take the lower. If multiple sources would grant you a boon or bane, you still only roll the die twice. If
+        you have both a boon and bane, then you roll normally. This is the case even if you have different numbers of
+        sources of boons or banes. In rare occasions, you may have such overwhelmingly positive support when doing
+        something that you can roll with a <b>double boon</b>. In this case you roll with <i>three</i> dice and take the
+        highest of the results. This does not come about just by stacking boons, but when there is some distinctly
+        stronger force assisting you. Similar circumstances exist for <b>double banes</b> where you roll three dice and
+        take the lowest.</p>
     type: rule

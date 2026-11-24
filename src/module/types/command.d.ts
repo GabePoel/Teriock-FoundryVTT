@@ -8,7 +8,7 @@ declare global {
     export type ThresholdOptions = Teriock.Execution.ThresholdExecutionOptions & {
       /** The comparison operation `c(roll, threshold)` */
       comparison?: Teriock.Keys.Comparison;
-      /** Positive for advantage, negative for disadvantage */
+      /** Positive for boon, negative for bane */
       edge?: Teriock.System.EdgeLevel;
     };
 
