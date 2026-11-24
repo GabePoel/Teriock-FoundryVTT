@@ -26,35 +26,29 @@
           </div>
           <div class="teriock-block-display-divider"></div>
           <div class="details-list">
-            {{#each TERIOCK.CONFIG.actor.movement as |config key|}}
-              {{#if (lookup @root/activeSpeedAdjustments key)}}
-                <div
-                  class="
+            {{#each speedAdjustments as |config key|}}
+              <div
+                class="
+                  details-label
+                  {{#if config.active}}
                     details-active
-                    {{#if config.movementAction}}
-                      thover
-                    {{/if}}
-                  "
-                  {{#if config.movementAction}}
-                    data-action="setMovementAction"
-                    data-movement-action="{{ config.movementAction }}"
                   {{/if}}
-                  data-tooltip='{{localize "TERIOCK.SHEETS.Actor.Details.movementSpeed.active"}}'
-                  data-tooltip-direction="LEFT"
-                >
-                  {{{ config.label }}}
-                </div>
-              {{else}}
-                <div
-                  {{#if config.movementAction}}
-                    class="thover"
-                    data-action="setMovementAction"
-                    data-movement-action="{{ config.movementAction }}"
+                  {{#if config.canSet}}
+                    thover
+                  {{else}}
+                    thelp
                   {{/if}}
-                >
-                  {{{ config.label }}}
-                </div>
-              {{/if}}
+                "
+                {{#if config.canSet}}
+                  data-action="setMovementAction"
+                  data-movement-action="{{ config.movementAction }}"
+                {{/if}}
+                data-tooltip="{{ config.tooltip }}"
+                data-tooltip-direction="LEFT"
+              >
+                <span class="tsubtle">{{makeIcon config.icon "light"}}</span>
+                {{{ config.label }}}
+              </div>
               <button
                 id="{{ @root/appId }}-speed-{{ key }}"
                 class='
@@ -64,7 +58,7 @@
                   @root/document
                   path=(concat
                   "system.speedAdjustments."
-                  key)}}
+                  k)}}
                 '
                 type="button"
                 data-action="updatePaths"
@@ -98,7 +92,8 @@
               <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.Details.sense.range"}}</div>
               {{#each TERIOCK.CONFIG.actor.senses as |config key|}}
                 {{#unless config.hidden}}
-                  <div>
+                  <div class="details-label">
+                    <span class="tsubtle">{{makeIcon config.icon "light"}}</span>
                     {{{ config.label }}}
                   </div>
                   <button

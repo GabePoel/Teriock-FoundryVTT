@@ -59,8 +59,21 @@ export default function PlayableActorSheetDetailsPart(Base) {
           ? null
           : _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.document.system._source.movementSpeed, unit }),
       };
-      context.activeSpeedAdjustments = Object.fromEntries(
-        Array.from(this.document.system.activeSpeedAdjustments, k => [k, true]),
+      const activeSpeedAdjustments = this.document.system.activeSpeedAdjustments;
+      const hasToken = Boolean(this.document.defaultToken);
+      context.speedAdjustments = Object.fromEntries(
+        Object.entries(TERIOCK.CONFIG.actor.movement).map(([k, v]) => {
+          return [k, {
+            active: hasToken && activeSpeedAdjustments.has(k),
+            canSet: hasToken && Boolean(v.movementAction),
+            icon: v.icon,
+            label: v.label,
+            movementAction: v.movementAction,
+            tooltip: _loc("TERIOCK.SHEETS.Actor.Details.movementSpeed.tooltip", {
+              name: _loc(CONFIG.Token.movement.actions[v.movementAction]?.label ?? "COMMON.No"),
+            }),
+          }];
+        }),
       );
       context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain.terrains[t]);
       context.taxonomy = this.document.system._taxonomyTags.map(t => ({ ...t, tooltip: _loc(t.tooltip) }));

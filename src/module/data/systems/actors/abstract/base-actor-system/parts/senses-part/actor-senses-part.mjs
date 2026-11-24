@@ -92,14 +92,14 @@ export default function ActorSensesPart(Base) {
 /**
  * Creates a number field for a specific sense.
  * @param {number} initial
- * @param {string} name
+ * @param {string} label
  * @returns {ExtendedNumberField}
  */
-function senseField(initial, name) {
+function senseField(initial, label) {
   return new fields.ExtendedNumberField({
     initial,
     integer: true,
-    label: name,
+    label: _loc("TERIOCK.SYSTEMS.BaseActor.FIELDS.senses.subLabel", { name: _loc(label) }),
     min: 0,
     required: true,
     units: "TERIOCK.LENGTH.ft.symbol",

@@ -55,16 +55,19 @@ elder-sorcery-words {
       background:
         linear-gradient(var(--table-header-bg-color), var(--table-header-bg-color)),
         var(--color-sticky-background);
-      border-bottom: 1px solid var(--table-header-border-color);
       position: sticky;
       top: 0;
       z-index: 1;
 
-      &:first-child {
-        border-right: 1px solid var(--table-header-border-color);
-        left: 0;
-        text-align: center;
-        z-index: 2;
+      &:not(:only-child) {
+        border-bottom: 1px solid var(--table-header-border-color);
+
+        &:first-child {
+          border-right: 1px solid var(--table-header-border-color);
+          left: 0;
+          text-align: center;
+          z-index: 2;
+        }
       }
     }
   }

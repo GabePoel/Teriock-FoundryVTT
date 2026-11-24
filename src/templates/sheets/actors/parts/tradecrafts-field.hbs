@@ -4,7 +4,7 @@
       {{localize "TERIOCK.SHEETS.Actor.Tradecrafts.competence.label"}}
       {{infoIcon "core:competence"}}
     </div>
-    <div class="tradecraft-panel-name field-panel-header gi3">
+    <div class="tradecraft-panel-title field-panel-header gi3">
       <span>{{ field.label }}</span>
     </div>
     <div class="tradecraft-panel-symbol field-panel-header">
@@ -52,7 +52,18 @@
           <i class='unselected {{path @root/tradecraftDisplay name "competenceIconClass"}}'></i>
           <i class='selected {{path @root/tradecraftDisplay name "sourceCompetenceIconClass"}}'></i>
         </button>
-        <button id="{{ @root/appId }}-tradecraft-{{ name }}-roll" class="tbutton tradecraft-panel-name thover gi3 draggable" type="button" data-action="rollTradecraft" data-disable="false" data-tradecraft="{{ name }}" data-uuid="{{lookup @root/tradecraftMacros name}}">{{ tradecraft.label }}</button>
+        {{!-- prettier-ignore --}}
+        <button
+          class="tbutton tradecraft-panel-name thover gi3 draggable"
+          data-action="rollTradecraft"
+          data-disable="false"
+          data-tradecraft="{{ name }}"
+          data-uuid="{{lookup @root/tradecraftMacros name}}"
+          id="{{ @root/appId }}-tradecraft-{{ name }}-roll"
+          type="button"
+        >
+          {{ tradecraft.label }}
+        </button>
         <button
           id="{{ @root/appId }}-tradecraft-{{ name }}-score"
           class='

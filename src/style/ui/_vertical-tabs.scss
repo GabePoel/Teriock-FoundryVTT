@@ -9,6 +9,7 @@
   padding-block: 4px;
   padding-right: 8px;
   position: absolute;
+  z-index: -2;
 
   > div {
     height: 2.75em;
@@ -100,6 +101,10 @@
       opacity: 1;
     }
   }
+
+  .mdi-pentagram {
+    margin-bottom: 1px;
+  }
 }
 
 .detached .teriock-vertical-tabs,
@@ -110,15 +115,21 @@
   display: flex;
   flex: none;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 12px;
   justify-content: start;
-  padding: 0.5em;
+  padding: 0.5rem;
   position: static;
-  width: calc(34px + 0.5em);
+  width: calc(var(--header-height) + 0.25rem);
+  z-index: unset;
 
   > div {
-    height: 1.75em;
-    width: 1.75em;
+    align-items: center;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 24px;
   }
 
   .teriock-vertical-tab {
@@ -127,9 +138,11 @@
     border-radius: 4px;
     box-shadow: none;
     font-size: var(--font-size-14);
-    height: 1.75em;
+    height: 24px;
     margin: 0;
-    width: 1.75em;
+    max-height: 24px;
+    min-height: 24px;
+    width: 24px;
 
     &::before {
       display: none;
@@ -146,6 +159,11 @@
       background: var(--color-warm-2);
       box-shadow: none;
       outline: none;
+    }
+
+    &:focus {
+      box-shadow: 0 0 4px var(--button-focus-outline-color);
+      outline: 1px solid var(--button-focus-outline-color);
     }
   }
 }

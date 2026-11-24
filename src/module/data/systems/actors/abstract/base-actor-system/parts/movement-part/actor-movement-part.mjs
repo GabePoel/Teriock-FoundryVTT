@@ -193,7 +193,7 @@ function speedField(initial, label) {
     choices: TERIOCK.CONFIG.actor.speedAdjustments,
     initial,
     integer: true,
-    label,
+    label: _loc("TERIOCK.SYSTEMS.BaseActor.FIELDS.speedAdjustments.subLabel", { name: _loc(label) }),
     max: 4,
     min: 0,
     step: 1,

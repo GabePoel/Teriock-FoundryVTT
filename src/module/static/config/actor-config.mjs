@@ -169,6 +169,6 @@ export default {
 
 preLocalizeObject("CONFIG.actor.movement", { key: "label" });
 preLocalizeObject("CONFIG.actor.scalingBases");
-preLocalizeObject("CONFIG.actor.senses", { key: "label" });
+preLocalizeObject("CONFIG.actor.senses", { key: "label", sort: true });
 preLocalizeObject("CONFIG.actor.sizes", { keys: ["label"] });
-preLocalizeObject("CONFIG.actor.speedAdjustments", { keys: ["label"] });
+preLocalizeObject("CONFIG.actor.speedAdjustments", { key: "label", sort: true });

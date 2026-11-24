@@ -165,7 +165,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    */
   get defaultToken() {
     if (this.token) { return this.token.object; }
-    return this.getActiveTokens()[0] ?? null;
+    return this.getActiveTokens(true, false)[0] ?? null;
   }
 
   /**

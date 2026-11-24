@@ -44,20 +44,16 @@ export default function BaseApplicationMixin(Base) {
 
     /**
      * Open the document corresponding to an info icon.
-     * @param {PointerEvent} _event
+     * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {BaseApplication}
      * @returns {Promise<void>}
      */
-    static async _onOpenInfo(_event, target) {
+    static async _onOpenInfo(event, target) {
       const uuid = target.dataset.tooltipUuid || game.teriock.identifiers.get(target.dataset.tooltipIdentifier);
       if (!uuid) { return; }
       const doc = await (this.document?.fetchFromUuid?.(uuid) ?? fromUuid(uuid));
-      if (doc?.documentName === "JournalEntryPage") {
-        await doc.parent.sheet?.render({ force: true, pageId: doc.id });
-      } else {
-        await doc?.sheet?.render({ force: true });
-      }
+      if (doc) { doc._onClickDocumentLink(event); }
     }
 
     /**
