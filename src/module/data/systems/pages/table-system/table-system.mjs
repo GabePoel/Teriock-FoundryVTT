@@ -14,7 +14,7 @@ export default class TableSystem extends mixClasses(TypeDataModel, BaseSystemMix
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "JournalEntryPage",
-    icon: TERIOCK.DISPLAY.icons.manifest.document.sorcery,
+    icon: TERIOCK.DISPLAY.icons.manifest.elderSorcery.words,
     type: "table",
   });
 

@@ -10,7 +10,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { useAbilities: new fields.BooleanField({ initial: true }) });
+    return Object.assign(super.defineSchema(), { useAbilities: new fields.BooleanField({ initial: false }) });
   }
 
   /** @type {TeriockActiveEffect<"ability">[]} */

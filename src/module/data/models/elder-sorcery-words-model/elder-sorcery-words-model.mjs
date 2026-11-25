@@ -142,7 +142,7 @@ export default class ElderSorceryWordsModel extends BaseDataModel {
       rows += group.rows.length;
     }
     const icons = {
-      add: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.add, "solid"),
+      add: makeIconClass(TERIOCK.DISPLAY.icons.manifest.elderSorcery.addWord, "solid"),
       delete: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.trash, "solid"),
     };
     return { columns, groups, icons };

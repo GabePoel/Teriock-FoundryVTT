@@ -10,7 +10,7 @@ export default class ElderSorceryWordsUpdater extends BaseUpdater {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     position: { width: 600 },
-    window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.sorcery, "title"), resizable: true },
+    window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.elderSorcery.words, "title"), resizable: true },
   };
 
   /** @inheritDoc */

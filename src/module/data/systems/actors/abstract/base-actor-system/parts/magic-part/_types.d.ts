@@ -4,7 +4,7 @@ declare global {
   namespace Teriock.Models {
     export interface ActorMagicPartData {
       /** <schema> <base> How many curses the {@link TeriockActor} has */
-      curses: Teriock.Fields.BarField;
+      curses: Teriock.Fields.OverBarField;
       /** <schema> Modifiers applied to Elder Sorcery creation */
       elderSorceryCreation: {
         bonuses: {
@@ -21,7 +21,7 @@ declare global {
         ratings: { castingCost: number, creationCost: number, incantation: number, intention: number };
       };
       /** <schema> <base> How many curses the {@link TeriockActor} has prepared */
-      rotators: Teriock.Fields.BarField;
+      rotators: Teriock.Fields.OverBarField;
       /** <schema> Elder Sorcery words the {@link TeriockActor} has learned individually */
       words: ElderSorceryWordsModel;
     }

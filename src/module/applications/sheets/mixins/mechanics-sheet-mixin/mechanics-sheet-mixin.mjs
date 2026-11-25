@@ -108,7 +108,16 @@ export default function MechanicsSheetMixin(Base) {
      */
     static async _onEditActiveQualifier(_event, target) {
       const mechanic = await fromUuid(target.dataset.uuid);
-      await mechanic?.editActiveQualifier();
+      if (!mechanic) { return; }
+      const editor = new foundry.applications.apps.FormulaEditor({
+        context: mechanic._inputContextKey,
+        formula: mechanic.activeQualifier,
+        window: { title: mechanic.getFieldForProperty("activeQualifier")?.label },
+      });
+      editor.addEventListener("close", async () => {
+        await mechanic.update({ activeQualifier: editor.formula });
+      });
+      await this.renderChild(editor);
     }
 
     /**

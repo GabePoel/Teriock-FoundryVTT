@@ -1,5 +1,5 @@
 import { pathSorterFactory } from "../../../../../../../utils/_module.mjs";
-import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
+import { initialBoolean, initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -266,10 +266,10 @@ function statField(options = {}) {
   };
   if (options.temp) {
     schema.causes = new fields.SchemaField({
-      criticallyWounded: new fields.BooleanField({ initial: true, persisted: false }),
-      dead: new fields.BooleanField({ initial: true, persisted: false }),
-      down: new fields.BooleanField({ initial: true, persisted: false }),
-      unconscious: new fields.BooleanField({ initial: true, persisted: false }),
+      criticallyWounded: new initialBoolean(),
+      dead: new initialBoolean(),
+      down: new initialBoolean(),
+      unconscious: new initialBoolean(),
     }, { persisted: false });
     schema.poolLimit = initialNumber();
     schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });

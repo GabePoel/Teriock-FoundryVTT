@@ -94,7 +94,7 @@ export default class HTMLElderSorceryWordsElement extends AbstractFormInputEleme
     content.append(container);
     const data = await TeriockDialog.input({
       content,
-      window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.add, "title"), title: `${prefix}.title` },
+      window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.elderSorcery.addWord, "title"), title: `${prefix}.title` },
     });
     const word = data?.word?.trim();
     if (!word || !Number.isInteger(data.op)) { return; }

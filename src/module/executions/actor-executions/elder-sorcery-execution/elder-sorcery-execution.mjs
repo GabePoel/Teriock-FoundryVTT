@@ -40,7 +40,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
     return [{
       action: "confirm",
       default: true,
-      icon: this.icon,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.dice,
       label: "TERIOCK.DIALOGS.ElderSorcery.BUTTONS.rollSpellCreation",
       name: "rollSpellCreation",
     }];

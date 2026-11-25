@@ -6,7 +6,15 @@
   {{/if}}
   <div class="actor-tab-page">
     {{#unless environment}}
-      <div class="teriock-block-display carrying-display">
+      <div
+        class="
+          teriock-block-display
+          carrying-display
+          {{#if (gte system.weight.carried system.carryingCapacity.max)}}
+            tred
+          {{/if}}
+        "
+      >
         {{infoIcon
           "core:carrying-capacity"
           noTable=true

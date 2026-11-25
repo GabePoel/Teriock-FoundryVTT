@@ -190,22 +190,6 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * Edit this pseudo-document's active qualifier.
-   * @returns {Promise<void>}
-   */
-  async editActiveQualifier() {
-    const editor = new foundry.applications.apps.FormulaEditor({
-      context: this._inputContextKey,
-      formula: this.activeQualifier,
-      window: { title: this.getFieldForProperty("activeQualifier")?.label },
-    });
-    editor.addEventListener("close", async () => {
-      await this.getNearestDocument()?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
-    });
-    await editor.render(true);
-  }
-
-  /**
    * The competence this uses, falling back to the competence of its document.
    * @param {Partial<Teriock.System.TriggerScope>} _scope
    * @returns {Teriock.System.CompetenceLevel|undefined}

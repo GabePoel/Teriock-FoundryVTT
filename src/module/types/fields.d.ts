@@ -73,6 +73,8 @@ declare global {
     };
 
     export type BarField = { max: number, min: number, value: number };
+
+    export type OverBarField = BarField & { over: boolean };
   }
 }
 

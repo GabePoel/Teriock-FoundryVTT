@@ -61,7 +61,6 @@ export default function ThresholdExecutionMixin(Base) {
         icon: "fas fa-minus",
         label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.DoubleBane.label",
         name: "double-bane",
-        tooltip: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.DoubleBane.tooltip",
         type: "button",
         callback: () => this.updateSource({ edge: -2 }),
       }, {
@@ -70,7 +69,6 @@ export default function ThresholdExecutionMixin(Base) {
         icon: "fas fa-minus",
         label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Bane.label",
         name: "bane",
-        tooltip: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Bane.tooltip",
         type: "button",
         callback: () => this.updateSource({ edge: -1 }),
       }, {
@@ -79,7 +77,6 @@ export default function ThresholdExecutionMixin(Base) {
         icon: "fas fa-dice-d20",
         label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Normal.label",
         name: "normal",
-        tooltip: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Normal.tooltip",
         callback: () => this.updateSource({ edge: 0 }),
       }, {
         action: "confirm",
@@ -87,7 +84,6 @@ export default function ThresholdExecutionMixin(Base) {
         icon: "fas fa-plus",
         label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Boon.label",
         name: "boon",
-        tooltip: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.Boon.tooltip",
         type: "button",
         callback: () => this.updateSource({ edge: 1 }),
       }, {
@@ -97,7 +93,6 @@ export default function ThresholdExecutionMixin(Base) {
         icon: "fas fa-plus",
         label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.DoubleBoon.label",
         name: "double-boon",
-        tooltip: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.DoubleBoon.tooltip",
         type: "button",
         callback: () => this.updateSource({ edge: 2 }),
       }];
