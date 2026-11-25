@@ -146,9 +146,9 @@ export default class ApplicableEffectSheet
  * Re-render sheets to show updated durations.
  * @see {@link hookEvents.updateWorldTime}
  */
-async function updateRegionDurations() {
-  for (const app of foundry.applications.instances.values()) {
-    if (app instanceof ApplicableEffectSheet) { app.render({ parts: ["duration"] }); }
+async function refreshEffectDurations() {
+  for (const app of ApplicableEffectSheet.instances()) {
+    if (app.document.isTemporary) { app.render({ parts: ["duration"] }); }
   }
 }
-Hooks.on("updateWorldTime", updateRegionDurations);
+Hooks.on("updateWorldTime", refreshEffectDurations);

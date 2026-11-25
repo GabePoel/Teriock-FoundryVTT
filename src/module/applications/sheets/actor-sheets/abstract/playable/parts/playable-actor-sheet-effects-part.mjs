@@ -3,6 +3,7 @@ import { toId } from "../../../../../../utils/_module.mjs";
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
@@ -97,3 +98,14 @@ export default function PlayableActorSheetEffectsPart(Base) {
 
   return PlayableActorSheetEffectsPart;
 }
+
+/**
+ * Re-render sheets to show updated effect durations.
+ * @see {@link hookEvents.updateWorldTime}
+ */
+async function refreshEffectDurations() {
+  for (const app of foundry.applications.sheets.ActorSheetV2.instances()) {
+    if (app.document.previewedTags.applicable.filter(a => a.isTemporary).length) { app.render({ parts: ["effects"] }); }
+  }
+}
+Hooks.on("updateWorldTime", refreshEffectDurations);

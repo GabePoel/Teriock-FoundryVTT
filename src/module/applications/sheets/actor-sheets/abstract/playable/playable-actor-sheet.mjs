@@ -13,7 +13,6 @@ import * as parts from "./parts/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
- * @import * as hookEvents from "@client/hooks.mjs";
  */
 
 /**
@@ -175,14 +174,3 @@ export default class TeriockPlayableActorSheet
     return Object.assign(await super._prepareContext(options), { environment: this.document.type === "environment" });
   }
 }
-
-/**
- * Re-render sheets to show updated effect durations.
- * @see {@link hookEvents.updateWorldTime}
- */
-async function refreshEffectDurations() {
-  for (const app of foundry.applications.instances.values()) {
-    if (app instanceof TeriockPlayableActorSheet) { app.render({ parts: ["effects"] }); }
-  }
-}
-Hooks.on("updateWorldTime", refreshEffectDurations);

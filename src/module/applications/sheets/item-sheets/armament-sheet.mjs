@@ -62,10 +62,8 @@ export default class ArmamentSheet extends ChildSheet {
  * @see {@link hookEvents.updateWorldTime}
  */
 async function refreshImbuementDurations() {
-  for (const app of foundry.applications.instances.values()) {
-    if (app instanceof ArmamentSheet && app.document.previewedTypes.imbuement.length) {
-      app.render();
-    }
+  for (const app of ArmamentSheet.instances()) {
+    if (app.document.previewedTypes.imbuement.filter(i => i.isTemporary).length) { app.render(); }
   }
 }
 Hooks.on("updateWorldTime", refreshImbuementDurations);
