@@ -6,6 +6,17 @@ img: systems/teriock/src/assets/thumbnails/ability/diving.webp
 name: Diving
 system:
   _sup: d95453884a713aab
+  automations:
+    - _id: dt3NrMkJ6kuVnJgB
+      changes:
+        - applyIfSuppressed: false
+          key: system.speedAdjustments.dive
+          phase: main
+          priority: 10
+          target: Actor
+          type: upgrade
+          value: "3"
+      type: changes
   delivery: self
   duration:
     unit: passive
@@ -14,7 +25,7 @@ system:
   interaction: manifest
   maneuver: passive
   overview:
-    base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
+    base: <p>You dive at @Identifier[core:movement-speed]{full speed}.</p>
     fluent: >-
       <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
       @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>

@@ -130,6 +130,13 @@ items:
                   target: Actor
                   type: override
                   value: "0"
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.dive
+                  phase: main
+                  priority: 0
+                  target: Actor
+                  type: override
+                  value: "0"
               type: changes
           competence:
             raw: 1
@@ -143,8 +150,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You have no @Identifier[core:movement-speed]{swim speed}. This overrides abilities such as
-              @Identifier[ability:swimming]{Swimming}.</p>
+              <p>You have no @Identifier[core:movement-speed]{swim speed} nor @Identifier[core:movement-speed]{dive
+              speed}. This overrides abilities such as @Identifier[ability:swimming]{Swimming} and
+              @Identifier[ability:diving]{Diving}.</p>
           powerSources:
             - martial
           range:

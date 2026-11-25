@@ -120,6 +120,17 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/diving.webp
         name: Diving
         system:
+          automations:
+            - _id: dt3NrMkJ6kuVnJgB
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.dive
+                  phase: main
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
           competence:
             raw: 1
           delivery: self
@@ -130,7 +141,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
+            base: <p>You dive at @Identifier[core:movement-speed]{full speed}.</p>
             fluent: >-
               <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
               @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
@@ -278,6 +289,13 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.dive
+                  phase: main
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
               type: changes
           competence:
             raw: 1
@@ -289,7 +307,9 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+            base: >-
+              <p>You swim at @Identifier[core:movement-speed]{full speed} and dive at
+              @Identifier[core:movement-speed]{half speed}.</p>
           powerSources:
             - martial
           range:
