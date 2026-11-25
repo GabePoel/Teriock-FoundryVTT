@@ -161,10 +161,7 @@ export default {
     sleep: "ms-hotel",
     wither: "ms-hourglass-disabled",
   },
-  elderSorcery: {
-    addWord: "ms-text-increase",
-    words: "ms-dictionary",
-  },
+  elderSorcery: { addWord: "ms-text-increase", words: "ms-dictionary" },
   equipment: {
     ammunition: "mdi-arrow-projectile-multiple",
     dampen: "ms-notifications-off",

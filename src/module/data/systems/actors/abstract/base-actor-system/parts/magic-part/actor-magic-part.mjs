@@ -68,7 +68,7 @@ export default function ActorMagicPart(Base) {
      */
     get rotatorDocuments() {
       return this.parent.previewedTypes.ability.filter(a =>
-        a.system.rotator && !a.isReference && (!a.parent || a.parent.type === "rank" || a.parent.metadata.tags.simple)
+        a.system.rotator && !a.isReference && (!a.parent || a.parent.system.rotators)
       );
     }
 

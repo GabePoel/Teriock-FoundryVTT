@@ -33,6 +33,7 @@ export default class BaseItemSystem
       description: new fields.HTMLField({ secret: true }),
       disabled: new fields.BooleanField(),
       flaws: new fields.HTMLField({ secret: true }),
+      rotators: new fields.BooleanField({ initial: true }),
     });
   }
 
@@ -43,7 +44,7 @@ export default class BaseItemSystem
 
   /** @inheritDoc */
   get _displayToggles() {
-    return [...super._displayToggles, "system.disabled"];
+    return [...super._displayToggles, "system.disabled", "system.rotators"];
   }
 
   /** @inheritDoc */

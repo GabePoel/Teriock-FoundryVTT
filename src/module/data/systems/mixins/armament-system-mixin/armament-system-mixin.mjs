@@ -64,6 +64,7 @@ export default function ArmamentSystemMixin(Base) {
           reach: new UnitField(ArmamentReachUnitModel),
           short: new UnitField(ArmamentRangeUnitModel),
         }, { multiChangePaths: ["long", "short"] }),
+        rotators: new fields.BooleanField({ initial: false }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),
         style: new SlugField({
