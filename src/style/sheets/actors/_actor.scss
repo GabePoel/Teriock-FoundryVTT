@@ -46,7 +46,7 @@
     overflow-y: auto;
     --color-text: var(--color-light-3);
     --input-text-color: var(--color-light-3);
-    --color-text-primary: var(--color-light-3);
+    --color-text-primary: var(--color-light-2);
     --color-text-subtle: var(--color-light-5);
     position: relative;
     transition: max-width 250ms, box-shadow 250ms;
@@ -290,8 +290,11 @@
 
     .tradecraft-panel-symbol {
       @include mixins.centralize;
-      color: var(--color-text-subtle);
       flex-direction: column;
+
+      &:not(:has(.tradecraft-score-input)) {
+        color: var(--color-text-subtle);
+      }
     }
   }
 }
@@ -542,4 +545,8 @@
   margin-top: 0.25em;
   padding: 0.25em 0.5em;
   width: 100%;
+}
+
+.actor-combatant-input {
+  color: var(--color-text-primary) !important;
 }

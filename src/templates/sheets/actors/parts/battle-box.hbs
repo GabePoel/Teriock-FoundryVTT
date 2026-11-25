@@ -5,7 +5,7 @@
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}} {{infoIcon "core:cover"}}</div>
         <button
           id="{{ @root/appId }}-cover"
-          class="actor-stat-value updatable"
+          class="actor-stat-value updatable tnormal"
           type="button"
           data-action="increaseCover"
           data-tooltip-class=""
@@ -39,7 +39,7 @@
         </div>
         <button
           id="{{ @root/appId }}-ac"
-          class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.ac"}}'
+          class='actor-stat-value affix updatable tnormal {{formClasses @root/document path="system.defense.ac"}}'
           type="button"
           data-action="updatePaths"
           data-icon="{{ TERIOCK.DISPLAY.icons.manifest.armament.av }}"
@@ -63,7 +63,7 @@
         </div>
         <button
           id="{{ @root/appId }}-bv"
-          class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.bv"}}'
+          class='actor-stat-value affix updatable tnormal {{formClasses @root/document path="system.defense.bv"}}'
           type="button"
           data-action="updatePaths"
           data-icon="{{ TERIOCK.DISPLAY.icons.manifest.armament.bv }}"
@@ -79,7 +79,10 @@
 
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.label"}}</div>
-        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'>
+        <div
+          class="actor-stat-value tnormal"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'
+        >
           {{{ system.defense.cc }}}
         </div>
       </div>
@@ -132,6 +135,7 @@
         class="
           actor-primary-blocker-select
           updatable
+          tnormal
           {{#if system.wielding.blocker.uuid}}
             draggable
           {{/if}}
@@ -165,7 +169,7 @@
           </div>
           {{numberInput
             actions
-            classes="actor-combatant-input actor-stat-value updatable"
+            classes="actor-combatant-input actor-stat-value updatable tnormal"
             dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
             id=(concat @root/appId "-combatant-actions")
             name="system.actions"
@@ -181,7 +185,7 @@
           </div>
           <button
             id="{{ @root/appId }}-reaction"
-            class="actor-stat-value updatable"
+            class="actor-stat-value updatable tnormal"
             type="button"
             data-action="toggleReaction"
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
@@ -198,7 +202,7 @@
           {{formInput
             combatantFields.attackPenalty
             value=attackPenalty
-            classes="actor-combatant-input actor-stat-value updatable"
+            classes="actor-combatant-input actor-stat-value updatable tnormal"
             dataset=(object
             action="resetAttackPenalty"
             tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
@@ -227,7 +231,7 @@
         </div>
         <button
           id="{{ @root/appId }}-piercing"
-          class="actor-stat-value updatable"
+          class="actor-stat-value updatable tnormal"
           type="button"
           data-action="updatePaths"
           data-icon="{{ TERIOCK.DISPLAY.icons.manifest.piercing.ub }}"
@@ -270,7 +274,7 @@
         </div>
         <button
           id="{{ @root/appId }}-sb"
-          class="actor-stat-value updatable"
+          class="actor-stat-value updatable tnormal"
           type="button"
           data-action="toggleSb"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
@@ -330,6 +334,7 @@
         class="
           actor-primary-attacker-select
           updatable
+          tnormal
           {{#if system.wielding.attacker.uuid}}
             draggable
           {{/if}}

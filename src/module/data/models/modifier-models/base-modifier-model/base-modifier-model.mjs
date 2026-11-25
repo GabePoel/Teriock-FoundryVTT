@@ -27,7 +27,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
    * @type {Teriock.Metadata.ModifierMetadata}
    */
   static metadata = mergeMetadata(super.metadata, {
-    initialBase: "",
+    initialBase: "0",
     initialDie: "d20",
     initialMultiplier: 1,
     initialScore: 0,
@@ -36,12 +36,19 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      base: rollableFormulaField({ deterministic: true, initial: this.metadata.initialBase }),
+      base: rollableFormulaField({
+        blank: false,
+        deterministic: true,
+        initial: this.metadata.initialBase,
+        placeholder: this.metadata.initialBase.toString(),
+        required: true,
+      }),
       bonus: rollableFormulaField(),
       score: new fields.NumberField({
         initial: this.metadata.initialScore,
         integer: true,
         nullable: false,
+        placeholder: this.metadata.initialScore.toString(),
         required: true,
       }),
     });
@@ -70,7 +77,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
     const scoreFormula = (!multiplier || !term) ? "" : FormulaField.multiply(term, multiplier.toString());
     const mod = format === "numbers"
       ? String(BaseRoll.minValue(base || "0", rollData) + multiplier * score + competence.value)
-      : FormulaField.sum(base, scoreFormula, competence.formula);
+      : FormulaField.sum(FormulaField.exists(base) ? base : "", scoreFormula, competence.formula);
     if (type === "mod") { return mod; }
     const formula = FormulaField.sum(mod, bonus, circumstance);
     if (type === "formula" || !die) { return formula; }

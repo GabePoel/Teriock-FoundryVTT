@@ -42,7 +42,7 @@ export default {
     dive: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "vertical",
       icon: icons.manifest.movement.dive,
-      initial: 0,
+      initial: 1,
       label: "TERIOCK.SHEETS.Actor.Details.movementSpeed.dive",
       movementAction: "swim",
       slug: "dive",
@@ -80,7 +80,7 @@ export default {
     swim: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "horizontal",
       icon: icons.manifest.movement.swim,
-      initial: 1,
+      initial: 2,
       label: "TERIOCK.SHEETS.Actor.Details.movementSpeed.swim",
       movementAction: "swim",
       slug: "swim",

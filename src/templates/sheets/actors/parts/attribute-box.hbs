@@ -55,6 +55,7 @@
             tcenter
             affix
             updatable
+            tnormal
             {{formClasses
             @root/document
             path=(concat
@@ -69,12 +70,10 @@
           data-title="{{ config.label }}"
         >
           <span class="unselected">
-            <span class="ch-attribute-input tcolored tcenter ttransparent">
-              {{{path @root/system.attributes name "score"}}}
-            </span>
+            <span class="ch-attribute-input tcenter ttransparent">{{{path @root/system.attributes name "score"}}}</span>
           </span>
           <span class="selected">
-            <span class="ch-attribute-input tcolored tcenter ttransparent">
+            <span class="ch-attribute-input tcenter ttransparent">
               {{#if (eq name "unp")}}
                 {{ @root/system.attributes.unp.score }}
               {{else}}
