@@ -36,21 +36,25 @@
       </div>
     {{/if}}
   {{/if}}
-  <section class="journal-page-content teriock-text-fields">
+  <section class="journal-page-content">
     {{#each displayFields}}
-      <aside class="teriock-sheet-section-container">
-        {{formGroup
-          schema
-          classes=(toClass classes)
-          dataset=(object disable="true")
-          disabled=true
-          enriched=enriched
-          label=label
-          value=value
-          rootId=@root/appId
-          toggled=true
-        }}
-      </aside>
+      {{#if classes}}
+        <aside class="teriock-sheet-section-container">
+          {{formGroup
+            schema
+            classes=(toClass classes)
+            dataset=(object disable="true")
+            disabled=true
+            enriched=enriched
+            label=label
+            value=value
+            rootId=@root/appId
+            toggled=true
+          }}
+        </aside>
+      {{else}}
+        {{{ enriched }}}
+      {{/if}}
     {{/each}}
   </section>
 </div>
