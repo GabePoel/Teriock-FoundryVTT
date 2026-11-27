@@ -1,9 +1,19 @@
 @use "../components/colors" as colors;
+@use "../mixins" as mixins;
 
 .notification.morganti {
   --icon-glyph: "\f54c";
   --background-color: color-mix(in srgb, #241f31, transparent 20%);
   --border-color: #77767b;
+}
+
+.notification.alternate {
+  &:before {
+    @include mixins.material-symbol;
+  }
+  --icon-glyph: "\f184";
+  --background-color: color-mix(in srgb, #63452c, transparent 20%);
+  --border-color: #cdab8f;
 }
 
 .teriock, .teriock-panel-block-text {
