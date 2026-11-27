@@ -1,0 +1,69 @@
+_id: 480cef62bacb571e
+_key: "!effects!480cef62bacb571e"
+img: systems/teriock/src/assets/thumbnails/ability/rise-and-shine.webp
+name: Rise and Shine
+showIcon: 0
+system:
+  automations:
+    - _id: 1gjl6v6D3TESJrqa
+      constructionNodes:
+        iz1V5xF0ePYmdLFr:
+          _id: iz1V5xF0ePYmdLFr
+          all: false
+          auto: true
+          competence:
+            raw: 0
+          globalIdentifiers:
+            - ability:berserker-healing-factor
+          multi: false
+          overrideData: false
+          random: false
+          type: base
+      type: addDocuments
+    - _id: JMan8Nnsc9Tz7Lc5
+      light:
+        animation:
+          type: sunburst
+        color: "#ffbf0f"
+        dim: 10
+      type: light
+    - _id: Xce6dkGL2UHWI8xD
+      data: |-
+        {
+          "warded": true
+        }
+      globalIdentifiers:
+        - ability:animate-dead
+      overrideData: true
+      type: useDocuments
+  delivery: self
+  duration:
+    raw: "1"
+    unit: minute
+  effectTypes:
+    - automatic
+    - reanimation
+  endCondition: <p>This effect ends if you @Identifier[condition:dead]{die}.</p>
+  executionTime:
+    base: r0
+  interaction: manifest
+  kind: special
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>@Identifier[keyword:warded]{Warded} @Identifier[ability:animate-dead]{Animate Dead} is cast on you by the
+      triggering sunlight. The sunlight continues to course through you, making you @Identifier[property:glowing]{glow}
+      (10 feet) and giving you @Identifier[ability:berserker-healing-factor]{Berserker Healing Factor}. The light you
+      emit does not count as sunlight for the purpose of effects that interact with it.</p>
+  powerSources:
+    - divine
+  range:
+    unit: self
+  requirements: <p>You are @Identifier[condition:dead]{dead}.</p>
+  slug: rise-and-shine
+  targets:
+    - self
+  trigger: >-
+    <p>Sunlight touches your @Identifier[condition:dead]{corpse}. This triggers automatically. You cannot choose to not
+    use it if you are able to.</p>
+type: ability

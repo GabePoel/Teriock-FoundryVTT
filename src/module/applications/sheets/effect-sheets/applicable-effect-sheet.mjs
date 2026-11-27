@@ -109,6 +109,9 @@ export default class ApplicableEffectSheet
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
     if (this.#editorForms) { result.details?.append(this.#editorForms); }
+    if (!Object.values(CONFIG.Item.dataModels).some(m => m.metadata.childTypes.includes(this.document.type))) {
+      result.details?.querySelector("[name='transfer']")?.closest(".form-group")?.remove();
+    }
     super._replaceHTML(result, content, options);
     for (const [part, tips] of Object.entries(this.getTips())) {
       if (result[part] && tips.length) {
